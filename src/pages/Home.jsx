@@ -55,10 +55,9 @@ export default function Home() {
               <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 drop-shadow-lg">
                 Life is sweeter with strawberries.
               </h1>
-              <p className="text-white/85 font-body text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
+              <p className="text-white/85 font-body text-lg md:text-xl mb-0 max-w-lg leading-relaxed">
                 Fresh strawberry cups, chocolate-covered berries, and creative desserts — made fresh daily with a whole lot of love 🍓
               </p>
-              <OrderButtons size="md" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -122,7 +121,6 @@ export default function Home() {
 
       {/* About Teaser */}
       <section className="bg-white relative overflow-hidden">
-        {/* Decorative dots */}
         <div className="absolute top-10 right-10 opacity-10 pointer-events-none">
           <div className="grid grid-cols-4 gap-3">
             {[...Array(16)].map((_, i) => (
@@ -131,44 +129,29 @@ export default function Home() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex justify-center"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <div className="w-24 h-24 rounded-full bg-secondary flex items-center justify-center mx-auto mb-6 border-2 border-border">
+              <span className="text-5xl">🍓</span>
+            </div>
+            <h2 className="font-display text-foreground text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight">
+              Always fresh, made with love, and a little bit extra.
+            </h2>
+            <p className="text-muted-foreground font-body text-lg mb-8 leading-relaxed">
+              That's the Strawberry Shop promise — and we mean it with every single cup.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 bg-primary text-white font-body font-bold text-base px-8 py-3.5 rounded-full hover:bg-primary/90 transition-all shadow-sm hover:shadow-md"
             >
-              <div className="w-full max-w-md aspect-[4/3] bg-secondary rounded-[40px_10px_40px_10px] flex items-center justify-center border-2 border-border shadow-inner overflow-hidden">
-                <div className="text-center p-8">
-                  <span className="text-7xl block mb-3">🍓</span>
-                  <p className="font-display text-primary text-xl">made with love</p>
-                  <p className="font-body text-muted-foreground text-sm mt-1">every single day</p>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="font-display text-primary/60 text-lg mb-1">hey there! 👋</p>
-              <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-4">our story</h2>
-              <p className="text-muted-foreground font-body text-lg leading-relaxed mb-4">
-                We're a small, local dessert shop dedicated to one thing: making fresh strawberries the star of every bite. From our signature house cream to hand-dipped Belgian chocolate, everything we make is crafted with love and meant to put a smile on your face.
-              </p>
-              <p className="text-muted-foreground font-body text-lg leading-relaxed mb-6">
-                Stop by, grab a cup, and taste what happens when fresh berries meet a whole lot of heart. 💕
-              </p>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 text-primary font-body font-bold hover:underline"
-              >
-                Read more about us <ArrowRight size={18} />
-              </Link>
-            </motion.div>
-          </div>
+              Our Story <ArrowRight size={18} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -180,14 +163,14 @@ export default function Home() {
             <p className="font-display text-primary/60 text-lg mb-1">💖 the love is real 💖</p>
             <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-4">what people are saying</h2>
             <div className="inline-flex items-center gap-3 bg-white rounded-full px-5 py-2.5 shadow-sm border border-border">
-              <span className="font-display text-primary text-3xl">4.9</span>
+              <span className="font-display text-primary text-3xl">5.0</span>
               <div className="text-left">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={14} className="fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-muted-foreground font-body text-xs">average rating ⭐</p>
+                <p className="text-muted-foreground font-body text-xs">12 reviews on Google ⭐</p>
               </div>
             </div>
           </div>
