@@ -27,7 +27,7 @@ export default function FAQAccordion() {
       <div key={faq.id || i} className="bg-white rounded-[24px_8px_24px_8px] border-2 border-border overflow-hidden">
           <button
           onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-          className="w-full flex items-center justify-between gap-4 p-5 text-left hidden">
+          className="w-full flex items-center justify-between gap-4 p-5 text-left">
           
             <span className="font-body font-bold text-foreground text-base">{faq.question}</span>
             <ChevronDown
