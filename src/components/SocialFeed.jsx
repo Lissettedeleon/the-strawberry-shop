@@ -32,22 +32,33 @@ export default function SocialFeed() {
 
   // Load TikTok embed script once
   useEffect(() => {
-    if (posts.some(p => p.platform === "TikTok")) {
-      const scriptId = "tiktok-embed-script";
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement("script");
-        script.id = scriptId;
-        script.src = "https://www.tiktok.com/embed.js";
-        script.async = true;
-        document.body.appendChild(script);
-      }
-    }
+  if (posts.some(p => p.platform === "TikTok")) {
+  const scriptId = "tiktok-embed-script";
+  if (!document.getElementById(scriptId)) {
+  const script = document.createElement("script");
+  script.id = scriptId;
+  script.src = "https://www.tiktok.com/embed.js";
+  script.async = true;
+  script.onload = () => { window.tiktokEmbed = true; };
+  document.body.appendChild(script);
+  }
+  }
   }, [posts]);
 
-  // Reprocess Instagram embeds when tab changes
+  // Reprocess embeds when tab or posts change
   useEffect(() => {
     if (activeTab === "Instagram" && window.instgrm) {
       window.instgrm.Embeds.process();
+    }
+    if (activeTab === "TikTok" && window.tiktokEmbed) {
+      try {
+        const tiktokEmbeds = document.querySelectorAll('.tiktok-embed');
+        tiktokEmbeds.forEach(el => {
+          if (el.getAttribute('data-video-id') && window.tiktokEmbed.load) {
+            window.tiktokEmbed.load(el);
+          }
+        });
+      } catch {}
     }
   }, [activeTab]);
 
@@ -132,6 +143,19 @@ export default function SocialFeed() {
           ) : (
             tiktokPosts.map(post => {
               const videoId = post.url.split("/video/")[1]?.split("?")[0];
+              if (!videoId) {
+                return (
+                  <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm text-center">
+                    <span className="text-4xl block mb-3">🎵</span>
+                    <p className="text-muted-foreground font-body text-sm">
+                      Check out our TikTok{" "}
+                      <a href={post.url} target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
+                        @thestrawberryshopp
+                      </a>
+                    </p>
+                  </div>
+                );
+              }
               return (
                 <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
                   <blockquote

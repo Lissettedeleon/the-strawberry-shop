@@ -68,7 +68,7 @@ export default function Home() {
             >
               <div className="w-full max-w-md aspect-square flex items-center justify-center">
                 <img
-                  src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/e4f84c221_image.png"
+                  src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/097a8a3d7_strawberry_shop_logo_white_outline_medium.png"
                   alt="The Strawberry Shop logo"
                   className="w-4/5 h-4/5 object-contain drop-shadow-2xl animate-bounce"
                   style={{ animationDuration: "2.5s" }}
@@ -192,6 +192,16 @@ export default function Home() {
             </div>
           </div>
           <ReviewCarousel />
+          <div className="text-center mt-8">
+            <a
+              href="https://search.google.com/local/writereview?placeid=ChIJ_____wAAAGQAAAAA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-primary font-body font-bold text-sm px-6 py-3 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md"
+            >
+              ⭐ Leave a Google Review
+            </a>
+          </div>
         </div>
       </section>
 
