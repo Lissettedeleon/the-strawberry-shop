@@ -1,0 +1,26 @@
+{
+  "name": "Announcement",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "Banner announcement text"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the banner is currently shown"
+    },
+    "link_url": {
+      "type": "string",
+      "description": "Optional link URL"
+    },
+    "link_text": {
+      "type": "string",
+      "description": "Optional link text"
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

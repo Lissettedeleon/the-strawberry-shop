@@ -1,0 +1,17 @@
+{
+  "name": "NewsletterSignup",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Subscriber email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Optional phone for SMS"
+    }
+  },
+  "required": [
+    "email"
+  ]
+}
