@@ -6,14 +6,14 @@ import WaveDivider from "@/components/WaveDivider";
 import FloatingDecor from "@/components/FloatingDecor";
 
 const hours = [
-  { days: "Monday", time: "11:00 AM – 8:00 PM" },
-  { days: "Tuesday", time: "11:00 AM – 8:00 PM" },
-  { days: "Wednesday", time: "11:00 AM – 8:00 PM" },
-  { days: "Thursday", time: "11:00 AM – 8:00 PM" },
-  { days: "Friday", time: "11:00 AM – 8:00 PM" },
-  { days: "Saturday", time: "11:00 AM – 8:00 PM" },
-  { days: "Sunday", time: "12:00 PM – 6:00 PM" },
-];
+{ days: "Monday", time: "11:00 AM – 8:00 PM" },
+{ days: "Tuesday", time: "11:00 AM – 8:00 PM" },
+{ days: "Wednesday", time: "11:00 AM – 8:00 PM" },
+{ days: "Thursday", time: "11:00 AM – 8:00 PM" },
+{ days: "Friday", time: "11:00 AM – 8:00 PM" },
+{ days: "Saturday", time: "11:00 AM – 8:00 PM" },
+{ days: "Sunday", time: "12:00 PM – 6:00 PM" }];
+
 
 export default function Location() {
   return (
@@ -26,8 +26,8 @@ export default function Location() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg"
-          >
+            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
+            
             find us
           </motion.h1>
           <p className="text-white/80 font-body text-lg">
@@ -52,8 +52,8 @@ export default function Location() {
                     href="https://www.google.com/maps/dir//7100+Foundry+Row,+Liberty+Township,+OH+45069"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-4 bg-primary text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors"
-                  >
+                    className="inline-block mt-4 bg-primary text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors">
+                    
                     Open in Google Maps 📍
                   </a>
                 </div>
@@ -65,8 +65,8 @@ export default function Location() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm"
-              >
+                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm">
+                
                 <h3 className="font-body font-bold text-lg text-foreground mb-3">
                   <span className="mr-2">📍</span>Address
                 </h3>
@@ -78,8 +78,8 @@ export default function Location() {
                   href="https://www.google.com/maps/dir//7100+Foundry+Row,+Liberty+Township,+OH+45069"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block mt-4 bg-primary text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm"
-                >
+                  className="inline-block mt-4 bg-primary text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm">
+                  
                   Get Directions 🚗
                 </a>
               </motion.div>
@@ -88,18 +88,18 @@ export default function Location() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm"
-              >
+                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm">
+                
                 <h3 className="font-body font-bold text-lg text-foreground mb-3">
                   <span className="mr-2">🕐</span>Hours
                 </h3>
                 <div className="space-y-2">
-                  {hours.map(h => (
-                    <div key={h.days} className="flex justify-between font-body text-sm">
+                  {hours.map((h) =>
+                  <div key={h.days} className="flex justify-between font-body text-sm">
                       <span className="text-foreground/70 font-medium">{h.days}</span>
                       <span className="text-foreground font-semibold">{h.time}</span>
                     </div>
-                  ))}
+                  )}
                 </div>
               </motion.div>
 
@@ -107,8 +107,8 @@ export default function Location() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm"
-              >
+                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm">
+                
                 <h3 className="font-body font-bold text-lg text-foreground mb-3">
                   <span className="mr-2">🚗</span>Parking
                 </h3>
@@ -125,36 +125,36 @@ export default function Location() {
 
       {/* Follow Us */}
       <section className="bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center hidden">
           <p className="font-display text-primary/60 text-lg mb-1">💖 stay connected 💖</p>
           <h2 className="font-display text-foreground text-3xl mb-8">follow us</h2>
           <div className="flex justify-center gap-6">
             {[
-              { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
-              { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
-              { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
-              { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
-              { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" },
-            ].map(s => (
-              <a
-                key={s.name}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-2 group"
-                aria-label={s.name}
-              >
-                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-primary/10 transition-all shadow-sm border-2 border-border group-hover:border-primary/30">
+            { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
+            { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
+            { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
+            { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
+            { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" }].
+            map((s) =>
+            <a
+              key={s.name}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-2 group"
+              aria-label={s.name}>
+              
+                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-primary/10 transition-all shadow-sm border-2 border-border group-hover:border-primary/30 hidden">
                   {s.icon}
                 </div>
                 <span className="font-body font-semibold text-xs text-muted-foreground group-hover:text-primary transition-colors">{s.name}</span>
               </a>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 }
