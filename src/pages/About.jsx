@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
+import FloatingDecor from "@/components/FloatingDecor";
 import { Heart, Leaf, Sparkles } from "lucide-react";
 
 export default function About() {
@@ -12,10 +13,7 @@ export default function About() {
       <Navbar />
 
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute text-4xl opacity-15 animate-bounce" style={{ top: "15%", right: "8%", animationDuration: "3s" }}>🍓</span>
-          <span className="absolute text-3xl opacity-10 animate-bounce" style={{ bottom: "20%", left: "5%", animationDuration: "4s", animationDelay: "0.5s" }}>💕</span>
-        </div>
+        <FloatingDecor />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -32,13 +30,7 @@ export default function About() {
       </section>
 
       <section style={{ backgroundColor: "#FFF0F3" }} className="relative overflow-hidden">
-        <div className="absolute top-10 right-10 opacity-8 pointer-events-none">
-          <div className="grid grid-cols-3 gap-4">
-            {[...Array(9)].map((_, i) => (
-              <div key={i} className="w-3 h-3 rounded-full bg-primary" />
-            ))}
-          </div>
-        </div>
+        <FloatingDecor />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <motion.div

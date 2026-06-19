@@ -1,0 +1,32 @@
+{
+  "name": "SocialPost",
+  "type": "object",
+  "properties": {
+    "platform": {
+      "type": "string",
+      "enum": [
+        "Instagram",
+        "TikTok"
+      ],
+      "description": "Platform"
+    },
+    "url": {
+      "type": "string",
+      "description": "Post or video share link"
+    },
+    "order": {
+      "type": "number",
+      "default": 0,
+      "description": "Display order"
+    },
+    "active": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show on site"
+    }
+  },
+  "required": [
+    "platform",
+    "url"
+  ]
+}

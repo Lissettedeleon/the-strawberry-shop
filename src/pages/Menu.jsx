@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import MenuItemCard from "@/components/MenuItemCard";
 import StickyMobileOrder from "@/components/StickyMobileOrder";
+import FloatingDecor from "@/components/FloatingDecor";
+import BrandedLoader from "@/components/BrandedLoader";
 import { motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 
@@ -59,11 +61,7 @@ export default function Menu() {
 
       {/* Header */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute text-3xl opacity-15 animate-bounce" style={{ top: "15%", left: "5%", animationDuration: "3s" }}>🍓</span>
-          <span className="absolute text-2xl opacity-10 animate-bounce" style={{ top: "40%", right: "10%", animationDuration: "3.5s", animationDelay: "0.5s" }}>🍫</span>
-          <span className="absolute text-4xl opacity-10 animate-bounce" style={{ bottom: "20%", right: "20%", animationDuration: "4s", animationDelay: "1s" }}>✨</span>
-        </div>
+        <FloatingDecor />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -133,13 +131,7 @@ export default function Menu() {
       <section style={{ backgroundColor: "#FFF0F3" }} className="pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {loading ? (
-            <div className="flex justify-center py-20">
-              <div className="flex items-center gap-2">
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0s" }}>🍓</span>
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0.2s" }}>🍓</span>
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0.4s" }}>🍓</span>
-              </div>
-            </div>
+            <BrandedLoader text="whipping up the menu..." />
           ) : activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ? (
             <div className="text-center text-muted-foreground font-body py-16">
               <span className="text-4xl block mb-3">🔍🍓</span>

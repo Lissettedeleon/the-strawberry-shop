@@ -1,113 +1,153 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
-import { Instagram, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
-
-const INSTAGRAM_URL = "https://www.instagram.com/thestrawberryshopp";
-const TIKTOK_URL = "https://www.tiktok.com/@thestrawberryshopp";
 
 export default function SocialFeed() {
-  const [photos, setPhotos] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("Instagram");
 
   useEffect(() => {
-    base44.entities.GalleryPhoto.filter({ is_active: true }, "sort_order", 6)
-      .then(setPhotos)
-      .catch(() => {});
+    base44.entities.SocialPost.filter({ active: true }, "order")
+      .then(setPosts)
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
+  // Load Instagram embed script once
+  useEffect(() => {
+    if (posts.some(p => p.platform === "Instagram")) {
+      const scriptId = "instagram-embed-script";
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement("script");
+        script.id = scriptId;
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        document.body.appendChild(script);
+      } else {
+        // Process new embeds if script already loaded
+        if (window.instgrm) window.instgrm.Embeds.process();
+      }
+    }
+  }, [posts]);
+
+  // Load TikTok embed script once
+  useEffect(() => {
+    if (posts.some(p => p.platform === "TikTok")) {
+      const scriptId = "tiktok-embed-script";
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement("script");
+        script.id = scriptId;
+        script.src = "https://www.tiktok.com/embed.js";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    }
+  }, [posts]);
+
+  // Reprocess Instagram embeds when tab changes
+  useEffect(() => {
+    if (activeTab === "Instagram" && window.instgrm) {
+      window.instgrm.Embeds.process();
+    }
+  }, [activeTab]);
+
+  const instagramPosts = posts.filter(p => p.platform === "Instagram");
+  const tiktokPosts = posts.filter(p => p.platform === "TikTok");
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-12">
+        <div className="flex items-center gap-2">
+          <span className="animate-bounce text-2xl">🍓</span>
+          <span className="animate-bounce text-2xl" style={{ animationDelay: "0.2s" }}>🍓</span>
+          <span className="animate-bounce text-2xl" style={{ animationDelay: "0.4s" }}>🍓</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Instagram */}
-      <div className="bg-white rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm">
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-2">
-            <Instagram size={22} className="text-primary" />
-            <span className="font-body font-bold text-foreground">@thestrawberryshopp</span>
-          </div>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-body font-bold text-primary hover:underline flex items-center gap-1"
-          >
-            Follow <ExternalLink size={12} />
-          </a>
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          {photos.slice(0, 6).map(photo => (
-            <a
-              key={photo.id}
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square rounded-xl overflow-hidden group"
-            >
-              <img
-                src={photo.image_url}
-                alt={photo.caption || "Instagram post"}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors flex items-center justify-center">
-                <Instagram size={20} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </a>
-          ))}
-        </div>
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block text-center mt-5 bg-secondary text-primary font-body font-bold text-sm py-3 rounded-full hover:bg-primary hover:text-white transition-colors"
+    <div>
+      {/* Tab Buttons */}
+      <div className="flex gap-2 mb-8 bg-secondary rounded-full p-1.5 w-fit mx-auto">
+        <button
+          onClick={() => setActiveTab("Instagram")}
+          className={`px-6 py-2.5 rounded-full font-body font-semibold text-sm transition-all ${
+            activeTab === "Instagram" ? "bg-primary text-white shadow-sm" : "text-foreground/60 hover:text-foreground"
+          }`}
         >
-          📸 See more on Instagram
-        </a>
+          📸 On Instagram
+        </button>
+        <button
+          onClick={() => setActiveTab("TikTok")}
+          className={`px-6 py-2.5 rounded-full font-body font-semibold text-sm transition-all ${
+            activeTab === "TikTok" ? "bg-primary text-white shadow-sm" : "text-foreground/60 hover:text-foreground"
+          }`}
+        >
+          🎵 On TikTok
+        </button>
       </div>
 
-      {/* TikTok */}
-      <div className="bg-white rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm flex flex-col">
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🎵</span>
-            <span className="font-body font-bold text-foreground">@thestrawberryshopp</span>
-          </div>
-          <a
-            href={TIKTOK_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-body font-bold text-primary hover:underline flex items-center gap-1"
-          >
-            Follow <ExternalLink size={12} />
-          </a>
+      {/* Instagram Feed */}
+      {activeTab === "Instagram" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {instagramPosts.length === 0 ? (
+            <div className="col-span-full text-center py-12 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
+              <span className="text-5xl block mb-3">📸</span>
+              <p className="text-muted-foreground font-body text-sm">
+                Instagram posts coming soon! Follow us{" "}
+                <a href="https://www.instagram.com/thestrawberryshopp" target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
+                  @thestrawberryshopp
+                </a>
+              </p>
+            </div>
+          ) : (
+            instagramPosts.map(post => (
+              <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
+                <blockquote
+                  className="instagram-media"
+                  data-instgrm-permalink={post.url}
+                  data-instgrm-version="14"
+                  style={{ background: "#FFF", border: 0, margin: 0, padding: 0, width: "100%" }}
+                />
+              </div>
+            ))
+          )}
         </div>
-        <a
-          href={TIKTOK_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 relative rounded-2xl overflow-hidden group min-h-[240px] flex items-center justify-center"
-          style={{ background: "linear-gradient(135deg, #E8193C 0%, #7A0A2A 100%)" }}
-        >
-          <div className="absolute inset-0 opacity-20">
-            {photos[0] && (
-              <img src={photos[0].image_url} alt="" className="w-full h-full object-cover" />
-            )}
-          </div>
-          <div className="relative text-center px-6">
-            <motion.span
-              className="text-6xl block mb-3"
-              animate={{ rotate: [0, -8, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
-            >
-              🍓
-            </motion.span>
-            <p className="font-display text-white text-2xl mb-1">watch us on TikTok</p>
-            <p className="font-body text-white/70 text-sm">Behind-the-scenes, new flavors & more</p>
-            <span className="inline-block mt-4 bg-white text-primary font-body font-bold text-sm px-6 py-2.5 rounded-full">
-              🎵 Watch now
-            </span>
-          </div>
-        </a>
-      </div>
+      )}
+
+      {/* TikTok Feed */}
+      {activeTab === "TikTok" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {tiktokPosts.length === 0 ? (
+            <div className="col-span-full text-center py-12 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
+              <span className="text-5xl block mb-3">🎵</span>
+              <p className="text-muted-foreground font-body text-sm">
+                TikTok videos coming soon! Follow us{" "}
+                <a href="https://www.tiktok.com/@thestrawberryshopp" target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
+                  @thestrawberryshopp
+                </a>
+              </p>
+            </div>
+          ) : (
+            tiktokPosts.map(post => {
+              const videoId = post.url.split("/video/")[1]?.split("?")[0];
+              return (
+                <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
+                  <blockquote
+                    className="tiktok-embed"
+                    cite={post.url}
+                    data-video-id={videoId}
+                    style={{ maxWidth: "100%", minWidth: "280px" }}
+                  >
+                    <section></section>
+                  </blockquote>
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
     </div>
   );
 }

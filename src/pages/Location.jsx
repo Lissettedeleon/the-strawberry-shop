@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
+import FloatingDecor from "@/components/FloatingDecor";
 
 const hours = [
   { days: "Monday", time: "11:00 AM – 8:00 PM" },
@@ -20,10 +21,7 @@ export default function Location() {
       <Navbar />
 
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute text-4xl opacity-15 animate-bounce" style={{ top: "10%", right: "8%", animationDuration: "3s" }}>📍</span>
-          <span className="absolute text-3xl opacity-10 animate-bounce" style={{ bottom: "15%", left: "10%", animationDuration: "3.5s" }}>🍓</span>
-        </div>
+        <FloatingDecor />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
