@@ -38,7 +38,7 @@ export default function Navbar() {
   return (
     <>
       {announcement && (
-        <div className="bg-accent text-accent-foreground text-center py-2 px-4 text-sm font-body font-medium">
+        <div className="bg-accent text-accent-foreground text-center py-2.5 px-4 text-sm font-body font-semibold tracking-wide">
           {announcement.message}
           {announcement.link_url && announcement.link_text && (
             <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
