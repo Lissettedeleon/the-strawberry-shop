@@ -10,6 +10,7 @@ import MenuItemCard from "@/components/MenuItemCard";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SocialFeed from "@/components/SocialFeed";
 import StickyMobileOrder from "@/components/StickyMobileOrder";
+import BrandedLoader from "@/components/BrandedLoader";
 import { Star, ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -88,13 +89,7 @@ export default function Home() {
             <p className="text-muted-foreground font-body text-lg">The ones everyone keeps coming back for 🍓</p>
           </div>
           {loading ? (
-            <div className="flex justify-center py-12">
-              <div className="flex items-center gap-2">
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0s" }}>🍓</span>
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0.2s" }}>🍓</span>
-                <span className="animate-bounce text-2xl" style={{ animationDelay: "0.4s" }}>🍓</span>
-              </div>
-            </div>
+            <BrandedLoader text="whipping up the menu..." />
           ) : featured.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map(item => (

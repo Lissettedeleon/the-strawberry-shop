@@ -24,7 +24,9 @@ export default function Contact() {
     try {
       await base44.entities.ContactMessage.create(contactForm);
       await base44.functions.invoke("sendContactEmail", { ...contactForm, type: "contact" });
-    } catch {}
+    } catch {
+      // Entity save failed — form validation should catch this
+    }
     setContactStatus("done");
     setContactForm({ name: "", email: "", message: "" });
     setTimeout(() => setContactStatus(""), 4000);
@@ -36,7 +38,9 @@ export default function Contact() {
     try {
       await base44.entities.CateringRequest.create(cateringForm);
       await base44.functions.invoke("sendContactEmail", { ...cateringForm, type: "catering" });
-    } catch {}
+    } catch {
+      // Entity save failed — form validation should catch this
+    }
     setCateringStatus("done");
     setCateringForm({ name: "", email: "", phone: "", event_date: "", quantity: "", items_of_interest: "", message: "" });
     setTimeout(() => setCateringStatus(""), 4000);

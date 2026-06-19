@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
+import BrandedLoader from './components/BrandedLoader';
 
 import Home from '@/pages/Home';
 import Menu from '@/pages/Menu';
@@ -18,14 +19,7 @@ const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
   if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center" style={{ backgroundColor: "#FFF0F3" }}>
-        <div className="text-center">
-          <div className="w-10 h-10 border-4 border-secondary border-t-primary rounded-full animate-spin mx-auto mb-4" />
-          <p className="font-body text-muted-foreground text-sm">Loading sweetness...</p>
-        </div>
-      </div>
-    );
+    return <BrandedLoader text="loading something sweet..." />;
   }
 
   if (authError) {
