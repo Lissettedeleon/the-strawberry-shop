@@ -14,7 +14,6 @@ import Order from '@/pages/Order';
 import About from '@/pages/About';
 import Location from '@/pages/Location';
 import Contact from '@/pages/Contact';
-import Allergens from '@/pages/Allergens';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -40,7 +39,6 @@ const AuthenticatedApp = () => {
       <Route path="/about" element={<About />} />
       <Route path="/location" element={<Location />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/allergens" element={<Allergens />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
