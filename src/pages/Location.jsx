@@ -125,33 +125,33 @@ export default function Location() {
 
       {/* Follow Us */}
       <section className="bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center hidden">
-          <p className="font-display text-primary/60 text-lg mb-1">💖 stay connected 💖</p>
-          <h2 className="font-display text-foreground text-3xl mb-8">follow us</h2>
-          <div className="flex justify-center gap-6">
-            {[
-            { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
-            { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
-            { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
-            { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
-            { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" }].
-            map((s) =>
-            <a
-              key={s.name}
-              href={s.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-2 group"
-              aria-label={s.name}>
-              
-                <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-primary/10 transition-all shadow-sm border-2 border-border group-hover:border-primary/30 hidden">
-                  {s.icon}
-                </div>
-                <span className="font-body font-semibold text-xs text-muted-foreground group-hover:text-primary transition-colors">{s.name}</span>
-              </a>
-            )}
-          </div>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </section>
 
       <Footer />
