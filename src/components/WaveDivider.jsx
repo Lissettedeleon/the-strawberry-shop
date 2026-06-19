@@ -4,7 +4,7 @@ const colorMap = {
   blush: "#FFB3C6",
   white: "#FFFFFF",
   red: "#E8193C",
-  dark: "#7A0A2A",
+  dark: "#A31C46",
 };
 
 export default function WaveDivider({ from = "white", to = "blush", flip = false }) {

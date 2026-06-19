@@ -143,7 +143,7 @@ export default function Menu() {
                 <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
                   {categoryEmojis[cat] || "🍓"} {cat.toLowerCase()}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                   {catItems.map(item => (
                     <MenuItemCard key={item.id} item={item} />
                   ))}
@@ -155,7 +155,7 @@ export default function Menu() {
               <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
                 {categoryEmojis[activeCategory] || "🍓"} {activeCategory.toLowerCase()}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                 {filteredItems.map(item => (
                   <MenuItemCard key={item.id} item={item} />
                 ))}

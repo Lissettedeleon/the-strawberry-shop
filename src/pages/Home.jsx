@@ -208,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* Order CTA */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7A0A2A 0%, #5A081E 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #A31C46 0%, #7A1535 100%)" }}>
         {/* Floating elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <span className="absolute text-3xl opacity-15 animate-pulse" style={{ top: "10%", left: "10%", animationDuration: "2s" }}>🍫</span>

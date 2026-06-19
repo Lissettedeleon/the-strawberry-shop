@@ -26,7 +26,7 @@ export default function Footer() {
                 { label: "Order Online", to: "/order" },
                 { label: "About Us", to: "/about" },
                 { label: "Location", to: "/location" },
-                { label: "Contact", to: "/contact" },
+                { label: "Catering", to: "/contact" },
               ].map(link => (
                 <Link key={link.to} to={link.to} className="block text-white/60 hover:text-white transition-colors font-body text-sm">
                   {link.label}
