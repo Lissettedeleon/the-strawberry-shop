@@ -4,6 +4,8 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
+import FAQAccordion from "@/components/FAQAccordion";
+import StickyMobileOrder from "@/components/StickyMobileOrder";
 import { Send, Calendar, MessageCircle } from "lucide-react";
 
 export default function Contact() {
@@ -203,8 +205,20 @@ export default function Contact() {
         </div>
       </section>
 
-      <WaveDivider from="blush" to="white" />
+      {/* FAQ */}
+      <section className="bg-white">
+        <WaveDivider from="blush" to="white" />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-10">
+            <p className="font-display text-primary/60 text-lg mb-1">🤔 good to know 🤔</p>
+            <h2 className="font-display text-foreground text-3xl">frequently asked questions</h2>
+          </div>
+          <FAQAccordion />
+        </div>
+      </section>
+
       <Footer />
+      <StickyMobileOrder />
     </div>
   );
 }

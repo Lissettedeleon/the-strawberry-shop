@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import AllergenTags from "./AllergenTags";
 
 export default function MenuItemCard({ item }) {
   return (
@@ -48,6 +49,7 @@ export default function MenuItemCard({ item }) {
             Seasonal ✨
           </span>
         )}
+        <AllergenTags allergens={item.allergens} />
       </div>
     </motion.div>
   );

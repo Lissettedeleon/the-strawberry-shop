@@ -7,6 +7,10 @@ import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import OrderButtons from "@/components/OrderButtons";
 import MenuItemCard from "@/components/MenuItemCard";
+import ReviewCarousel from "@/components/ReviewCarousel";
+import SocialFeed from "@/components/SocialFeed";
+import PhotoGallery from "@/components/PhotoGallery";
+import StickyMobileOrder from "@/components/StickyMobileOrder";
 import { Star, ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -176,44 +180,47 @@ export default function Home() {
       {/* Reviews */}
       <section style={{ backgroundColor: "#FFF0F3" }} className="relative">
         <WaveDivider from="white" to="blush" />
-        <div className="absolute top-20 left-5 opacity-10 pointer-events-none">
-          <span className="text-6xl">💬</span>
-        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           <div className="text-center mb-10">
             <p className="font-display text-primary/60 text-lg mb-1">💖 the love is real 💖</p>
-            <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-3">what people are saying</h2>
-            <div className="flex items-center justify-center gap-1 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={20} className="fill-primary text-primary" />
-              ))}
-            </div>
-            <p className="text-muted-foreground font-body">4.9 stars on DoorDash ⭐</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { text: "Best strawberry dessert I've ever had! The OG cup is perfection — simple but you can taste the quality.", author: "Sarah M." },
-              { text: "The Dubai cup is worth every penny. The pistachio cream with chocolate drizzle is INSANE. Already ordered twice this week.", author: "Marcus T." },
-              { text: "Finally a dessert spot that delivers on the hype! Fresh berries, real cream, and the Biscoff cup is addictive.", author: "Priya K." },
-            ].map((review, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white rounded-[30px_8px_30px_8px] p-6 shadow-sm border border-border hover:shadow-md transition-shadow"
-              >
-                <div className="flex gap-0.5 mb-3">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} className="fill-primary text-primary" />
+            <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-4">what people are saying</h2>
+            <div className="inline-flex items-center gap-3 bg-white rounded-full px-5 py-2.5 shadow-sm border border-border">
+              <span className="font-display text-primary text-3xl">4.9</span>
+              <div className="text-left">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-foreground font-body text-sm leading-relaxed mb-4">"{review.text}"</p>
-                <p className="text-muted-foreground font-body text-xs font-bold">— {review.author}</p>
-              </motion.div>
-            ))}
+                <p className="text-muted-foreground font-body text-xs">average rating ⭐</p>
+              </div>
+            </div>
           </div>
+          <ReviewCarousel />
+        </div>
+      </section>
+
+      {/* Social Feed */}
+      <section className="bg-white">
+        <WaveDivider from="blush" to="white" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-10">
+            <p className="font-display text-primary/60 text-lg mb-1">📱 come hang with us 📱</p>
+            <h2 className="font-display text-foreground text-3xl sm:text-4xl">find us on social</h2>
+          </div>
+          <SocialFeed />
+        </div>
+      </section>
+
+      {/* Photo Gallery */}
+      <section style={{ backgroundColor: "#FFF0F3" }} className="relative">
+        <WaveDivider from="white" to="blush" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+          <div className="text-center mb-10">
+            <p className="font-display text-primary/60 text-lg mb-1">📸 berry pretty 📸</p>
+            <h2 className="font-display text-foreground text-3xl sm:text-4xl">our gallery</h2>
+          </div>
+          <PhotoGallery />
         </div>
       </section>
 
@@ -249,6 +256,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <StickyMobileOrder />
     </div>
   );
 }

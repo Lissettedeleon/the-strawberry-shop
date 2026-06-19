@@ -29,6 +29,20 @@
       "type": "string",
       "description": "URL of the product image"
     },
+    "allergens": {
+      "type": "array",
+      "description": "Allergen and dietary tags for this item",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Contains Nuts",
+          "Contains Dairy",
+          "Gluten-Containing",
+          "Vegetarian"
+        ]
+      },
+      "default": []
+    },
     "is_sold_out": {
       "type": "boolean",
       "default": false,

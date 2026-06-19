@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
+import OpenClosedBadge from "./OpenClosedBadge";
 import { base44 } from "@/api/base44Client";
 
 const navLinks = [
@@ -53,6 +54,7 @@ export default function Navbar() {
             <Link to="/" className="flex items-center gap-3">
               <Logo size="md" />
               <span className="font-display text-primary text-lg hidden sm:block">the strawberry shop</span>
+              <OpenClosedBadge className="hidden lg:inline-flex" />
             </Link>
 
             <div className="hidden md:flex items-center gap-8">
