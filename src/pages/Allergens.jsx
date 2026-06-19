@@ -115,19 +115,19 @@ export default function Allergens() {
               <AlertTriangle size={28} className="text-amber-600" />
             </div>
             <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-4">still have questions?</h2>
-            <p className="text-muted-foreground font-body text-lg leading-relaxed mb-8 max-w-lg mx-auto hidden">
-              We make everything in a shared kitchen, so cross-contact is always possible. If you have a severe allergy, please talk to our team before ordering — we want you to enjoy your treats safely.
-            </p>
+            
+
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-5 py-3 text-foreground font-body font-semibold text-sm hidden">
-                <MapPin size={16} /> 7100 Foundry Row, Liberty Township
-              </div>
-              <a
-                href="tel:+15135551234"
-                className="inline-flex items-center gap-2 bg-primary text-white rounded-full px-5 py-3 font-body font-semibold text-sm hover:bg-primary/90 transition-colors hidden">
-                
-                <Phone size={16} /> Call the Shop
-              </a>
+              
+
+              
+              
+
+
+
+
+              
             </div>
           </motion.div>
         </div>
