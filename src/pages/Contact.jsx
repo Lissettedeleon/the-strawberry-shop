@@ -26,9 +26,9 @@ export default function Contact() {
 
 
 
+
       // Entity save failed — form validation should catch this
     }setStatus("done");setForm({ name: "", email: "", phone: "", event_date: "", quantity: "", items_of_interest: "", message: "" });setTimeout(() => setStatus(""), 4000);};
-
   const inputClass = "w-full bg-white border-2 border-border rounded-2xl px-4 py-3 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
 
   return (
@@ -117,8 +117,8 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="mt-14 text-center">
-            <p className="font-display text-primary/60 text-lg mb-1">💖 stay connected 💖</p>
-            <h3 className="font-display text-foreground text-2xl mb-6">follow us</h3>
+            <p className="font-display text-primary/60 text-lg mb-1 hidden">💖 stay connected 💖</p>
+            <h3 className="font-display text-foreground text-2xl mb-6 hidden">follow us</h3>
             <div className="flex justify-center gap-5 flex-wrap">
               {[
               { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
@@ -135,10 +135,10 @@ export default function Contact() {
                 className="flex flex-col items-center gap-2 group"
                 aria-label={s.name}>
                 
-                  <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-xl group-hover:scale-110 group-hover:bg-primary/10 transition-all shadow-sm border-2 border-border group-hover:border-primary/30">
+                  <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center text-xl group-hover:scale-110 group-hover:bg-primary/10 transition-all shadow-sm border-2 border-border group-hover:border-primary/30 hidden">
                     {s.icon}
                   </div>
-                  <span className="font-body font-semibold text-xs text-muted-foreground group-hover:text-primary transition-colors">{s.name}</span>
+                  <span className="font-body font-semibold text-xs text-muted-foreground group-hover:text-primary transition-colors hidden">{s.name}</span>
                 </a>
               )}
             </div>
