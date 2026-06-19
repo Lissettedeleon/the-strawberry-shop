@@ -181,6 +181,8 @@ export default function Contact() {
                 { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
                 { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
                 { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
+                { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
+                { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" },
               ].map(s => (
                 <a
                   key={s.name}
