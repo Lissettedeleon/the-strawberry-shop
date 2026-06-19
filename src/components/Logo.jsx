@@ -8,15 +8,10 @@ export default function Logo({ size = "md" }) {
   };
 
   return (
-    <div className={`${sizes[size]} rounded-full bg-primary flex items-center justify-center flex-shrink-0`}>
-      <div className="text-white text-center leading-none">
-        <span className="font-display text-xs block" style={{ fontSize: size === "sm" ? "6px" : size === "lg" ? "9px" : "7px", lineHeight: "1.1" }}>
-          the<br />straw<br />berry
-        </span>
-        <span className="font-body font-bold block" style={{ fontSize: size === "sm" ? "5px" : size === "lg" ? "7px" : "6px", letterSpacing: "1px" }}>
-          SHOP
-        </span>
-      </div>
-    </div>
+    <img
+      src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/e4f84c221_image.png"
+      alt="The Strawberry Shop"
+      className={`${sizes[size]} rounded-full object-contain bg-primary flex-shrink-0`}
+    />
   );
 }

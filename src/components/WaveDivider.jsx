@@ -1,7 +1,7 @@
 import React from "react";
 
 const colorMap = {
-  blush: "#FFF0F3",
+  blush: "#FFB3C6",
   white: "#FFFFFF",
   red: "#E8193C",
   dark: "#7A0A2A",

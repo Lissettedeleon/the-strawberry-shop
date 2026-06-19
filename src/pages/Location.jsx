@@ -37,7 +37,7 @@ export default function Location() {
         <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFF0F3" }}>
+      <section style={{ backgroundColor: "#FFB3C6" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <p className="font-display text-primary/60 text-lg text-center mb-10">📍 come say hi!</p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

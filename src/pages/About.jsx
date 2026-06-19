@@ -29,7 +29,7 @@ export default function About() {
         <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFF0F3" }} className="relative overflow-hidden">
+      <section style={{ backgroundColor: "#FFB3C6" }} className="relative overflow-hidden">
         <FloatingDecor />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">

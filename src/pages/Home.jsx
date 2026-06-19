@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* Featured Items */}
-      <section style={{ backgroundColor: "#FFF0F3" }} className="pb-4">
+      <section style={{ backgroundColor: "#FFB3C6" }} className="pb-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
             <p className="font-display text-primary/60 text-lg mb-1">✨ our picks ✨</p>
@@ -173,7 +173,7 @@ export default function Home() {
       </section>
 
       {/* Reviews */}
-      <section style={{ backgroundColor: "#FFF0F3" }} className="relative">
+      <section style={{ backgroundColor: "#FFB3C6" }} className="relative">
         <WaveDivider from="white" to="blush" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           <div className="text-center mb-10">
@@ -222,7 +222,7 @@ export default function Home() {
               <p className="font-display text-white/60 text-lg mb-1">🍓 get yours today 🍓</p>
               <h2 className="font-display text-white text-3xl sm:text-4xl mb-4 drop-shadow-lg">craving something sweet?</h2>
               <p className="text-white/75 font-body text-lg mb-8 leading-relaxed">
-                Order online for pickup or delivery. Your strawberry moment is just a few taps away.
+                Order online for pickup at the shop. Delivery available through Uber Eats & DoorDash.
               </p>
               <OrderButtons size="md" />
             </div>

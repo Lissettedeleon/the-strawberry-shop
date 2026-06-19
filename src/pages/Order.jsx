@@ -8,21 +8,21 @@ import { ExternalLink, MapPin, Truck } from "lucide-react";
 const platforms = [
   {
     name: "🍓 Order Direct (Toast)",
-    description: "Order straight from us — pickup or delivery. No extra fees.",
+    description: "Pickup only — order ahead and grab it at the shop. No extra service fees.",
     url: "https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row",
     icon: "📱",
     highlight: true,
   },
   {
     name: "🚗 Uber Eats",
-    description: "Get it delivered to your door through Uber Eats.",
+    description: "Delivery available. Standard platform delivery/service fees apply.",
     url: "https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg",
     icon: "🛵",
     highlight: false,
   },
   {
     name: "🏃 DoorDash",
-    description: "Craving strawberries? DoorDash has you covered.",
+    description: "Delivery available. Standard platform delivery/service fees apply.",
     url: "https://www.doordash.com/store/41748513",
     icon: "📦",
     highlight: false,
@@ -54,7 +54,7 @@ export default function Order() {
         <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFF0F3" }}>
+      <section style={{ backgroundColor: "#FFB3C6" }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <p className="font-display text-primary/60 text-lg text-center mb-8">✨ choose how you want it ✨</p>
 
