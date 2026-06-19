@@ -23,11 +23,11 @@ export default function Contact() {
       await base44.functions.invoke("sendContactEmail", { ...form, type: "catering" });
     } catch {
 
+
+
+
       // Entity save failed — form validation should catch this
-    }setStatus("done");
-    setForm({ name: "", email: "", phone: "", event_date: "", quantity: "", items_of_interest: "", message: "" });
-    setTimeout(() => setStatus(""), 4000);
-  };
+    }setStatus("done");setForm({ name: "", email: "", phone: "", event_date: "", quantity: "", items_of_interest: "", message: "" });setTimeout(() => setStatus(""), 4000);};
 
   const inputClass = "w-full bg-white border-2 border-border rounded-2xl px-4 py-3 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
 
@@ -150,13 +150,13 @@ export default function Contact() {
       <section className="bg-white relative overflow-hidden">
         <FloatingDecor />
         <WaveDivider from="blush" to="white" />
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 hidden">
-          <div className="text-center mb-10">
-            <p className="font-display text-primary/60 text-lg mb-1 hidden">🤔 good to know 🤔</p>
-            <h2 className="font-display text-foreground text-3xl hidden">frequently asked questions</h2>
-          </div>
-          <FAQAccordion />
-        </div>
+        
+
+
+
+
+
+        
       </section>
 
       <Footer />
