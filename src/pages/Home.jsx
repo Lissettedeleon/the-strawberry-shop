@@ -9,7 +9,6 @@ import OrderButtons from "@/components/OrderButtons";
 import MenuItemCard from "@/components/MenuItemCard";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SocialFeed from "@/components/SocialFeed";
-import PhotoGallery from "@/components/PhotoGallery";
 import StickyMobileOrder from "@/components/StickyMobileOrder";
 import { Star, ArrowRight } from "lucide-react";
 
@@ -66,12 +65,13 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex justify-center"
             >
-              <div className="w-full max-w-md aspect-square bg-white/15 backdrop-blur-sm rounded-[60px_20px_60px_20px] flex items-center justify-center shadow-2xl border-2 border-white/20">
-                <div className="text-center">
-                  <span className="text-8xl block mb-3 drop-shadow-lg animate-bounce" style={{ animationDuration: "2s" }}>🍓</span>
-                  <p className="text-white/80 font-display text-2xl">so fresh</p>
-                  <p className="text-white/50 font-body text-sm mt-1">so good</p>
-                </div>
+              <div className="w-full max-w-md aspect-square flex items-center justify-center">
+                <img
+                  src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/e4f84c221_image.png"
+                  alt="The Strawberry Shop logo"
+                  className="w-4/5 h-4/5 object-contain drop-shadow-2xl animate-bounce"
+                  style={{ animationDuration: "2.5s" }}
+                />
               </div>
             </motion.div>
           </div>
@@ -209,18 +209,6 @@ export default function Home() {
             <h2 className="font-display text-foreground text-3xl sm:text-4xl">find us on social</h2>
           </div>
           <SocialFeed />
-        </div>
-      </section>
-
-      {/* Photo Gallery */}
-      <section style={{ backgroundColor: "#FFF0F3" }} className="relative">
-        <WaveDivider from="white" to="blush" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-          <div className="text-center mb-10">
-            <p className="font-display text-primary/60 text-lg mb-1">📸 berry pretty 📸</p>
-            <h2 className="font-display text-foreground text-3xl sm:text-4xl">our gallery</h2>
-          </div>
-          <PhotoGallery />
         </div>
       </section>
 

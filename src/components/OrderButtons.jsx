@@ -3,10 +3,10 @@ import React from "react";
 const platforms = [
   {
     name: "🍓 Order Direct",
-    subtitle: "Toast",
+    subtitle: "Pickup",
     url: "https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row",
-    color: "bg-primary hover:bg-primary/90",
-    textColor: "text-white",
+    color: "bg-white hover:bg-white/90",
+    textColor: "text-primary",
   },
   {
     name: "🚗 Uber Eats",
@@ -42,7 +42,7 @@ export default function OrderButtons({ size = "md", direction = "row" }) {
           className={`${p.color} ${p.textColor} ${sizeClasses[size]} rounded-full font-body font-bold transition-all text-center inline-block shadow-sm hover:shadow-md hover:-translate-y-0.5`}
         >
           <span className="block leading-tight">{p.name}</span>
-          <span className={`block text-xs font-medium ${p.color === "bg-white hover:bg-secondary border-2 border-primary" ? "text-primary/60" : "text-white/50"}`}>{p.subtitle}</span>
+          <span className={`block text-xs font-medium ${p.textColor}/60`}>{p.subtitle}</span>
         </a>
       ))}
     </div>
