@@ -10,19 +10,19 @@ import BrandedLoader from "@/components/BrandedLoader";
 import { Search, X, ExternalLink } from "lucide-react";
 
 const CATEGORIES = [
-  "Specials",
-  "Our Berry Best Cups",
-  "Build Your Own Cup",
-  "Chocolate Covered Strawberries",
-  "Others",
-];
+"Specials",
+"Our Berry Best Cups",
+"Build Your Own Cup",
+"Chocolate Covered Strawberries",
+"Others"];
+
 
 const categoryEmojis = {
   "Specials": "✨",
   "Our Berry Best Cups": "🍓",
   "Build Your Own Cup": "🎨",
   "Chocolate Covered Strawberries": "🍫",
-  "Others": "🍬",
+  "Others": "🍬"
 };
 
 function OrderContent() {
@@ -33,23 +33,23 @@ function OrderContent() {
   const [orderType, setOrderType] = useState("pickup");
 
   useEffect(() => {
-    base44.entities.MenuItem.list("sort_order", 50)
-      .then(setItems)
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    base44.entities.MenuItem.list("sort_order", 50).
+    then(setItems).
+    catch(() => {}).
+    finally(() => setLoading(false));
   }, []);
 
   const query = search.trim().toLowerCase();
-  const searchedItems = query
-    ? items.filter(i => i.name.toLowerCase().includes(query))
-    : items;
+  const searchedItems = query ?
+  items.filter((i) => i.name.toLowerCase().includes(query)) :
+  items;
 
-  const filteredItems = activeCategory === "All"
-    ? searchedItems
-    : searchedItems.filter(i => i.category === activeCategory);
+  const filteredItems = activeCategory === "All" ?
+  searchedItems :
+  searchedItems.filter((i) => i.category === activeCategory);
 
   const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
-    const catItems = searchedItems.filter(i => i.category === cat);
+    const catItems = searchedItems.filter((i) => i.category === cat);
     if (catItems.length > 0) acc[cat] = catItems;
     return acc;
   }, {});
@@ -68,8 +68,8 @@ function OrderContent() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-3xl sm:text-5xl mb-3 drop-shadow-lg"
-          >
+            className="font-display text-white text-3xl sm:text-5xl mb-3 drop-shadow-lg">
+            
             order online
           </motion.h1>
           <p className="text-white/80 font-body text-lg mb-6">Fresh made just for you 🍓</p>
@@ -79,17 +79,17 @@ function OrderContent() {
             <button
               onClick={() => setOrderType("pickup")}
               className={`px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
-                orderType === "pickup" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
-              }`}
-            >
+              orderType === "pickup" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"}`
+              }>
+              
               🏪 Pickup
             </button>
             <button
               onClick={() => setOrderType("delivery")}
               className={`px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
-                orderType === "delivery" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
-              }`}
-            >
+              orderType === "delivery" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"}`
+              }>
+              
               🚗 Delivery
             </button>
           </div>
@@ -97,17 +97,17 @@ function OrderContent() {
         <WaveDivider from="red" to="blush" />
       </section>
 
-      {orderType === "delivery" ? (
-        <section style={{ backgroundColor: "#FFB3C6" }}>
+      {orderType === "delivery" ?
+      <section style={{ backgroundColor: "#FFB3C6" }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <p className="font-display text-primary/60 text-lg text-center mb-8">✨ delivery options ✨</p>
             <div className="space-y-5">
               <motion.a
-                href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg"
-                target="_blank" rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
-              >
+              href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg"
+              target="_blank" rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all">
+              
                 <div className="flex items-center gap-5">
                   <span className="text-4xl">🛵</span>
                   <div className="flex-1">
@@ -118,11 +118,11 @@ function OrderContent() {
                 </div>
               </motion.a>
               <motion.a
-                href="https://www.doordash.com/store/41748513"
-                target="_blank" rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
-              >
+              href="https://www.doordash.com/store/41748513"
+              target="_blank" rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all">
+              
                 <div className="flex items-center gap-5">
                   <span className="text-4xl">📦</span>
                   <div className="flex-1">
@@ -134,32 +134,32 @@ function OrderContent() {
               </motion.a>
             </div>
           </div>
-        </section>
-      ) : (
-        <>
+        </section> :
+
+      <>
           {/* Search + Categories */}
           <div style={{ backgroundColor: "#FFB3C6" }} className="sticky top-16 md:top-20 z-40 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
               <div className="relative max-w-md">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground hidden" />
                 <input
-                  type="text" value={search} onChange={e => setSearch(e.target.value)}
-                  placeholder="Search the menu..."
-                  className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
-                />
-                {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary">
+                type="text" value={search} onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search the menu..."
+                className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary hidden" />
+              
+                {search &&
+              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary">
                     <X size={18} />
                   </button>
-                )}
+              }
               </div>
               <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                 <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all ${activeCategory === "All" ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>🍓 All</button>
-                {CATEGORIES.map(cat => (
-                  <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${activeCategory === cat ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>
+                {CATEGORIES.map((cat) =>
+              <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${activeCategory === cat ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>
                     {categoryEmojis[cat]} {cat}
                   </button>
-                ))}
+              )}
               </div>
             </div>
           </div>
@@ -167,45 +167,45 @@ function OrderContent() {
           {/* Menu Grid */}
           <section style={{ backgroundColor: "#FFB3C6" }} className="pb-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              {loading ? (
-                <BrandedLoader text="whipping up the menu..." />
-              ) : activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ? (
-                <div className="text-center text-muted-foreground font-body py-16">
+              {loading ?
+            <BrandedLoader text="whipping up the menu..." /> :
+            activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ?
+            <div className="text-center text-muted-foreground font-body py-16">
                   <span className="text-4xl block mb-3">🔍🍓</span>
                   <p>No items match "{search}". Try a different search!</p>
-                </div>
-              ) : activeCategory === "All" ? (
-                Object.entries(groupedByCategory).map(([cat, catItems]) => (
-                  <div key={cat} className="mb-14">
+                </div> :
+            activeCategory === "All" ?
+            Object.entries(groupedByCategory).map(([cat, catItems]) =>
+            <div key={cat} className="mb-14">
                     <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">{categoryEmojis[cat]} {cat.toLowerCase()}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                      {catItems.map(item => (
-                        <OrderMenuItemCard key={item.id} item={item} />
-                      ))}
+                      {catItems.map((item) =>
+                <OrderMenuItemCard key={item.id} item={item} />
+                )}
                     </div>
                   </div>
-                ))
-              ) : (
-                <div>
+            ) :
+
+            <div>
                   <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">{categoryEmojis[activeCategory]} {activeCategory.toLowerCase()}</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {filteredItems.map(item => (
-                      <OrderMenuItemCard key={item.id} item={item} />
-                    ))}
+                    {filteredItems.map((item) =>
+                <OrderMenuItemCard key={item.id} item={item} />
+                )}
                   </div>
                 </div>
-              )}
+            }
             </div>
           </section>
 
           <FloatingCart />
         </>
-      )}
+      }
 
       <WaveDivider from="blush" to="white" />
       <Footer />
-    </div>
-  );
+    </div>);
+
 }
 
 export default function Order() {
