@@ -1,82 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
-import BrandedLoader from "@/components/BrandedLoader";
 import { useCart } from "@/lib/CartContext";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [rewardApplied, setRewardApplied] = useState(false);
-  const [rewardCode, setRewardCode] = useState("");
   const [placing, setPlacing] = useState(false);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const rewardDiscount = rewardApplied ? 5 : 0;
-  const total = Math.max(0, subtotal - rewardDiscount);
-
-  useEffect(() => {
-    async function load() {
-      try {
-        const u = await base44.auth.me();
-        setUser(u);
-        setName(u.first_name ? `${u.first_name} ${u.last_name || ""}`.trim() : u.full_name || "");
-        setEmail(u.email || "");
-        if (u.reward_code) setRewardCode(u.reward_code);
-      } catch {
-        // not logged in
-      }
-      setLoading(false);
-    }
-    load();
-  }, []);
+  const total = subtotal;
 
   const handlePlaceOrder = async () => {
     setPlacing(true);
     try {
       const orderNumber = "ORD-" + Date.now().toString(36).toUpperCase();
+      const customerName = `${firstName} ${lastName}`.trim();
       const order = await base44.entities.Order.create({
-        customer_name: name,
+        customer_name: customerName,
         customer_email: email,
         items,
         subtotal,
         total,
-        reward_applied: rewardApplied,
-        reward_discount: rewardDiscount,
+        reward_applied: false,
+        reward_discount: 0,
         order_number: orderNumber,
       });
-
-      // Award loyalty points if logged in
-      if (user) {
-        try {
-          const pointsEarned = Math.floor(total);
-          const currentPoints = user.loyalty_points || 0;
-          const newPoints = currentPoints + pointsEarned;
-          let updatedFields = { loyalty_points: newPoints };
-
-          // Check if they hit 100 points threshold
-          if (newPoints >= 100 && currentPoints < 100) {
-            const reward = "REWARD-" + Date.now().toString(36).toUpperCase().slice(-8);
-            updatedFields.reward_code = reward;
-            if (newPoints >= 200) {
-              updatedFields.loyalty_points = newPoints - 100;
-            }
-          }
-
-          await base44.auth.updateMe(updatedFields);
-        } catch {
-          // points update failed silently
-        }
-      }
 
       clearCart();
       navigate(`/order-confirmation?order=${order.id}&number=${orderNumber}`);
@@ -86,7 +44,7 @@ export default function Checkout() {
     setPlacing(false);
   };
 
-  if (loading) return <BrandedLoader text="loading..." />;
+
 
   if (items.length === 0) {
     return (
@@ -153,39 +111,30 @@ export default function Checkout() {
               })}
             </div>
 
-            {/* Name + Email for non-logged-in */}
-            {!user && (
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <h3 className="font-body font-bold text-foreground">Your Information</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-body font-semibold text-sm text-foreground mb-1">Name</label>
-                  <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" required />
+                  <label className="block font-body font-semibold text-xs text-foreground mb-1">First Name</label>
+                  <input type="text" value={firstName} onChange={e => setFirstName(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" required placeholder="First name" />
                 </div>
                 <div>
-                  <label className="block font-body font-semibold text-sm text-foreground mb-1">Email</label>
-                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" required />
+                  <label className="block font-body font-semibold text-xs text-foreground mb-1">Last Name</label>
+                  <input type="text" value={lastName} onChange={e => setLastName(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" required placeholder="Last name" />
                 </div>
               </div>
-            )}
-
-            {/* Reward */}
-            {user && rewardCode && (
-              <div>
-                <button
-                  onClick={() => setRewardApplied(!rewardApplied)}
-                  className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition-all ${rewardApplied ? "bg-primary/10 border-primary" : "bg-secondary border-border hover:border-primary/30"}`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${rewardApplied ? "bg-primary text-white" : "bg-white"}`}>
-                      {rewardApplied ? <Check size={16} /> : <span className="text-lg">🎁</span>}
-                    </div>
-                    <div className="text-left">
-                      <p className="font-body font-bold text-sm text-foreground">Apply $5 Reward</p>
-                      <p className="font-body text-xs text-muted-foreground">Code: {rewardCode}</p>
-                    </div>
-                  </div>
-                </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-body font-semibold text-xs text-foreground mb-1">Phone</label>
+                  <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" placeholder="(555) 123-4567" />
+                </div>
+                <div>
+                  <label className="block font-body font-semibold text-xs text-foreground mb-1">Email</label>
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm" required placeholder="your@email.com" />
+                </div>
               </div>
-            )}
+            </div>
 
             {/* Totals */}
             <div className="space-y-2 pt-2">
@@ -193,12 +142,6 @@ export default function Checkout() {
                 <span className="text-muted-foreground font-body">Subtotal</span>
                 <span className="font-body font-bold">${subtotal.toFixed(2)}</span>
               </div>
-              {rewardApplied && (
-                <div className="flex justify-between text-sm">
-                  <span className="text-primary font-body">Reward Discount</span>
-                  <span className="font-body font-bold text-primary">-${rewardDiscount.toFixed(2)}</span>
-                </div>
-              )}
               <div className="flex justify-between text-lg pt-2 border-t border-border">
                 <span className="font-body font-bold text-foreground">Total</span>
                 <span className="font-body font-extrabold text-primary">${total.toFixed(2)}</span>
@@ -207,7 +150,7 @@ export default function Checkout() {
 
             <button
               onClick={handlePlaceOrder}
-              disabled={placing || !name || !email}
+              disabled={placing || !firstName || !lastName || !email}
               className="w-full bg-primary text-white font-body font-bold py-3.5 rounded-full hover:bg-primary/90 transition-colors disabled:opacity-50"
             >
               {placing ? "Placing Order..." : `Place Order — $${total.toFixed(2)}`}

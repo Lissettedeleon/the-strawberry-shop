@@ -9,6 +9,8 @@ import BrandedLoader from "@/components/BrandedLoader";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
 import { CheckCircle } from "lucide-react";
 
+const STRAWBERRY_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/b80cb3d55_ChatGPTImageJun21202612_20_40AM.png";
+
 export default function OrderConfirmation() {
   const [params] = useSearchParams();
   const orderId = params.get("order");
@@ -35,13 +37,42 @@ export default function OrderConfirmation() {
 
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200, damping: 15 }}>
+          {/* Strawberry Mascot */}
+          <motion.img
+            src={STRAWBERRY_IMAGE}
+            alt="The Strawberry Shop mascot"
+            className="mx-auto w-32 h-32 sm:w-40 sm:h-40 object-contain mb-4"
+            initial={{ y: -40, opacity: 0 }}
+            animate={{ y: [0, -16, 0, -16, 0], opacity: 1 }}
+            transition={{
+              y: { duration: 0.6, times: [0, 0.25, 0.5, 0.75, 1], repeat: 3, repeatDelay: 0.2 },
+              opacity: { duration: 0.4 }
+            }}
+          />
+
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15, delay: 1.2 }}
+          >
             <CheckCircle size={64} className="mx-auto text-white mb-4" />
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="font-display text-white text-3xl sm:text-4xl mb-2 drop-shadow-lg">
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+            className="font-display text-white text-3xl sm:text-4xl mb-2 drop-shadow-lg"
+          >
             thank you!
           </motion.h1>
-          <p className="text-white/80 font-body text-lg">Thank you for your order! We will have it ready for you shortly.</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.6 }}
+            className="text-white/80 font-body text-lg"
+          >
+            Thank you for your order! We'll have it ready for you shortly. 🍓
+          </motion.p>
         </div>
         <WaveDivider from="red" to="blush" />
       </section>
