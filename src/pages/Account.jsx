@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import BrandedLoader from "@/components/BrandedLoader";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
-import { Copy, Check, Edit2, X, LogOut, Gift } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Copy, Check, Edit2, X, LogOut, Gift, KeyRound } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Account() {
   const [user, setUser] = useState(null);
@@ -18,12 +18,19 @@ export default function Account() {
   const [editForm, setEditForm] = useState({});
   const [receiptCode, setReceiptCode] = useState("");
   const [claimStatus, setClaimStatus] = useState("");
+  const [welcomeMsg, setWelcomeMsg] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
       try {
         const u = await base44.auth.me();
+        // Award 100 bonus points for new accounts
+        if (!u.loyalty_points || u.loyalty_points === 0) {
+          await base44.auth.updateMe({ loyalty_points: 100 });
+          u.loyalty_points = 100;
+          setWelcomeMsg("Welcome to The Strawberry Shop! You've earned 100 points just for joining — you're already on your way to your first reward.");
+        }
         setUser(u);
         setEditForm({ first_name: u.first_name || "", last_name: u.last_name || "", email: u.email || "", phone: u.phone || "" });
         try {
@@ -89,7 +96,7 @@ export default function Account() {
   };
 
   const handleLogout = () => {
-    base44.auth.logout("/");
+    base44.auth.logout(window.location.origin + "/");
   };
 
   if (loading) return <BrandedLoader text="loading your account..." />;
@@ -109,6 +116,14 @@ export default function Account() {
 
       <section style={{ backgroundColor: "#FFB3C6" }}>
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+          {/* Welcome message for new accounts */}
+          {welcomeMsg && (
+            <div className="bg-white rounded-[30px_10px_30px_10px] p-5 border-2 border-primary/30 shadow-sm text-center">
+              <span className="text-3xl block mb-2">🎉</span>
+              <p className="font-body font-semibold text-sm text-foreground leading-relaxed">{welcomeMsg}</p>
+            </div>
+          )}
 
           {/* Loyalty Points */}
           <div className="bg-white rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm">
@@ -195,6 +210,17 @@ export default function Account() {
                 <div className="flex justify-between"><span className="text-muted-foreground font-body text-sm">Phone</span><span className="font-body font-semibold text-sm">{user?.phone || "—"}</span></div>
               </div>
             )}
+          </div>
+
+          {/* Change Password */}
+          <div className="bg-white rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm">
+            <Link to="/forgot-password" className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <KeyRound size={16} className="text-muted-foreground" />
+                <span className="font-body font-bold text-foreground text-sm">Change Password</span>
+              </div>
+              <span className="text-muted-foreground text-xs">→</span>
+            </Link>
           </div>
 
           {/* Order History */}

@@ -71,14 +71,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/order"
                 className="bg-primary text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-primary/90 transition-colors"
               >
                 Order Now
-              </a>
+              </Link>
             </div>
 
             <button
@@ -107,14 +105,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/order"
                 className="block text-center bg-primary text-white font-body font-bold text-base px-5 py-3 rounded-full mt-3"
               >
                 Order Now
-              </a>
+              </Link>
             </div>
           </div>
         )}

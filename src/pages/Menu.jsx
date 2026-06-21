@@ -9,6 +9,7 @@ import FloatingDecor from "@/components/FloatingDecor";
 import BrandedLoader from "@/components/BrandedLoader";
 import { motion } from "framer-motion";
 import { Search, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CATEGORIES = [
   "Specials",
@@ -182,9 +183,9 @@ export default function Menu() {
             Pick your platform and treat yourself. You deserve it. 💕
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row" target="_blank" rel="noopener noreferrer" className="bg-primary text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md">
-              Order Direct (Toast)
-            </a>
+            <Link to="/order" className="bg-primary text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md">
+              Order Pickup
+            </Link>
             <a href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg" target="_blank" rel="noopener noreferrer" className="bg-foreground text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-foreground/90 transition-colors shadow-sm hover:shadow-md">
               Uber Eats
             </a>
