@@ -6,15 +6,15 @@ import OpenClosedBadge from "./OpenClosedBadge";
 import { base44 } from "@/api/base44Client";
 
 const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "Menu", to: "/menu" },
-  { label: "Order", to: "/order" },
-  { label: "About", to: "/about" },
-  { label: "Location", to: "/location" },
-  { label: "Catering", to: "/contact" },
-  { label: "FAQ", to: "/faq" },
-  { label: "Account", to: "/account" },
-];
+{ label: "Home", to: "/" },
+{ label: "Menu", to: "/menu" },
+{ label: "Order", to: "/order" },
+{ label: "About", to: "/about" },
+{ label: "Location", to: "/location" },
+{ label: "Catering", to: "/contact" },
+{ label: "FAQ", to: "/faq" },
+{ label: "Account", to: "/account" }];
+
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,9 +29,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1)
-      .then(res => { if (res.length > 0) setAnnouncement(res[0]); })
-      .catch(() => {});
+    base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1).
+    then((res) => {if (res.length > 0) setAnnouncement(res[0]);}).
+    catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -40,16 +40,16 @@ export default function Navbar() {
 
   return (
     <>
-      {announcement && (
-        <div className="bg-accent text-accent-foreground text-center py-2.5 px-4 text-sm font-body font-semibold tracking-wide">
+      {announcement &&
+      <div className="bg-accent text-accent-foreground text-center py-2.5 px-4 text-sm font-body font-semibold tracking-wide">
           {announcement.message}
-          {announcement.link_url && announcement.link_text && (
-            <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
+          {announcement.link_url && announcement.link_text &&
+        <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
               {announcement.link_text}
             </a>
-          )}
+        }
         </div>
-      )}
+      }
       <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -60,21 +60,21 @@ export default function Navbar() {
             </Link>
 
             <div className="hidden md:flex items-center gap-8">
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`font-body font-semibold text-sm tracking-wide transition-colors hover:text-primary ${
-                    location.pathname === link.to ? "text-primary" : "text-foreground/70"
-                  }`}
-                >
+              {navLinks.map((link) =>
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`font-body font-semibold text-sm tracking-wide transition-colors hover:text-primary ${
+                location.pathname === link.to ? "text-primary" : "text-foreground/70"}`
+                }>
+                
                   {link.label}
                 </Link>
-              ))}
+              )}
               <Link
                 to="/order"
-                className="bg-primary text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-primary/90 transition-colors"
-              >
+                className="bg-primary text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-primary/90 transition-colors">
+                
                 Order Now
               </Link>
             </div>
@@ -82,39 +82,39 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden p-2 text-foreground"
-              aria-label="Toggle menu"
-            >
+              aria-label="Toggle menu">
+              
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {mobileOpen && (
-          <div className="md:hidden bg-white border-t border-border">
+        {mobileOpen &&
+        <div className="md:hidden bg-white border-t border-border">
             <div className="px-4 py-4 space-y-1">
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`block px-4 py-3 rounded-xl font-body font-semibold text-base transition-colors ${
-                    location.pathname === link.to
-                      ? "bg-secondary text-primary"
-                      : "text-foreground/70 hover:bg-secondary/50"
-                  }`}
-                >
+              {navLinks.map((link) =>
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`block px-4 py-3 rounded-xl font-body font-semibold text-base transition-colors hidden ${
+              location.pathname === link.to ?
+              "bg-secondary text-primary" :
+              "text-foreground/70 hover:bg-secondary/50"}`
+              }>
+              
                   {link.label}
                 </Link>
-              ))}
+            )}
               <Link
-                to="/order"
-                className="block text-center bg-primary text-white font-body font-bold text-base px-5 py-3 rounded-full mt-3"
-              >
+              to="/order"
+              className="block text-center bg-primary text-white font-body font-bold text-base px-5 py-3 rounded-full mt-3">
+              
                 Order Now
               </Link>
             </div>
           </div>
-        )}
+        }
       </nav>
-    </>
-  );
+    </>);
+
 }
