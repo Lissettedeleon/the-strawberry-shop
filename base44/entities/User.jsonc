@@ -1,4 +1,6 @@
 {
+  "name": "User",
+  "type": "object",
   "properties": {
     "role": {
       "type": "string",
@@ -7,11 +9,30 @@
         "admin",
         "user"
       ]
+    },
+    "phone": {
+      "type": "string",
+      "description": "User's phone number"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "User's first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "User's last name"
+    },
+    "loyalty_points": {
+      "type": "number",
+      "default": 0,
+      "description": "Loyalty points balance"
+    },
+    "reward_code": {
+      "type": "string",
+      "description": "Current available reward code"
     }
   },
   "required": [
     "role"
-  ],
-  "name": "User",
-  "type": "object"
+  ]
 }

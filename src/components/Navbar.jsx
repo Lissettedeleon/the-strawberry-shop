@@ -13,6 +13,7 @@ const navLinks = [
   { label: "Location", to: "/location" },
   { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
+  { label: "Account", to: "/account" },
 ];
 
 export default function Navbar() {

@@ -1,122 +1,213 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
-import { ExternalLink, MapPin, Truck } from "lucide-react";
+import OrderMenuItemCard from "@/components/OrderMenuItemCard";
+import FloatingCart from "@/components/FloatingCart";
+import BrandedLoader from "@/components/BrandedLoader";
+import { Search, X, ExternalLink } from "lucide-react";
 
-const platforms = [
-  {
-    name: "🍓 Order Direct (Toast)",
-    description: "Pickup only — order ahead and grab it at the shop. No extra service fees.",
-    url: "https://order.toasttab.com/online/the-strawberry-shop-7100-foundry-row",
-    icon: "📱",
-    highlight: true,
-  },
-  {
-    name: "🚗 Uber Eats",
-    description: "Delivery available. Standard platform delivery/service fees apply.",
-    url: "https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg",
-    icon: "🛵",
-    highlight: false,
-  },
-  {
-    name: "🏃 DoorDash",
-    description: "Delivery available. Standard platform delivery/service fees apply.",
-    url: "https://www.doordash.com/store/41748513",
-    icon: "📦",
-    highlight: false,
-  },
+const CATEGORIES = [
+  "Specials",
+  "Our Berry Best Cups",
+  "Build Your Own Cup",
+  "Chocolate Covered Strawberries",
+  "Others",
 ];
 
-export default function Order() {
+const categoryEmojis = {
+  "Specials": "✨",
+  "Our Berry Best Cups": "🍓",
+  "Build Your Own Cup": "🎨",
+  "Chocolate Covered Strawberries": "🍫",
+  "Others": "🍬",
+};
+
+function OrderContent() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [search, setSearch] = useState("");
+  const [orderType, setOrderType] = useState("pickup");
+
+  useEffect(() => {
+    base44.entities.MenuItem.list("sort_order", 50)
+      .then(setItems)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  const query = search.trim().toLowerCase();
+  const searchedItems = query
+    ? items.filter(i => i.name.toLowerCase().includes(query))
+    : items;
+
+  const filteredItems = activeCategory === "All"
+    ? searchedItems
+    : searchedItems.filter(i => i.category === activeCategory);
+
+  const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
+    const catItems = searchedItems.filter(i => i.category === cat);
+    if (catItems.length > 0) acc[cat] = catItems;
+    return acc;
+  }, {});
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
+      {/* Hero */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute text-4xl opacity-15 animate-bounce" style={{ top: "15%", left: "5%", animationDuration: "3s" }}>🍓</span>
-          <span className="absolute text-3xl opacity-10 animate-bounce" style={{ bottom: "20%", right: "10%", animationDuration: "3.5s", animationDelay: "0.7s" }}>🛍️</span>
+          <span className="absolute text-4xl opacity-15 animate-bounce" style={{ top: "10%", left: "5%", animationDuration: "3s" }}>🍓</span>
+          <span className="absolute text-3xl opacity-10 animate-bounce" style={{ bottom: "20%", right: "8%", animationDuration: "3.5s", animationDelay: "0.7s" }}>🛍️</span>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg"
+            className="font-display text-white text-3xl sm:text-5xl mb-3 drop-shadow-lg"
           >
             order online
           </motion.h1>
-          <p className="text-white/80 font-body text-lg">
-            Pick your platform. We'll make it fresh. 🍓
-          </p>
+          <p className="text-white/80 font-body text-lg mb-6">Fresh made just for you 🍓</p>
+
+          {/* Order Type Toggle */}
+          <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-full p-1.5">
+            <button
+              onClick={() => setOrderType("pickup")}
+              className={`px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
+                orderType === "pickup" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
+              }`}
+            >
+              🏪 Pickup
+            </button>
+            <button
+              onClick={() => setOrderType("delivery")}
+              className={`px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
+                orderType === "delivery" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
+              }`}
+            >
+              🚗 Delivery
+            </button>
+          </div>
         </div>
         <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFB3C6" }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <p className="font-display text-primary/60 text-lg text-center mb-8">✨ choose how you want it ✨</p>
-
-          <div className="space-y-5">
-            {platforms.map((p, i) => (
+      {orderType === "delivery" ? (
+        <section style={{ backgroundColor: "#FFB3C6" }}>
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <p className="font-display text-primary/60 text-lg text-center mb-8">✨ delivery options ✨</p>
+            <div className="space-y-5">
               <motion.a
-                key={p.name}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className={`block rounded-[30px_10px_30px_10px] p-8 transition-all hover:shadow-lg hover:-translate-y-1 ${
-                  p.highlight
-                    ? "bg-primary text-white shadow-md border-2 border-primary"
-                    : "bg-white text-foreground border-2 border-border shadow-sm"
-                }`}
+                href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg"
+                target="_blank" rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
               >
                 <div className="flex items-center gap-5">
-                  <span className="text-4xl">{p.icon}</span>
+                  <span className="text-4xl">🛵</span>
                   <div className="flex-1">
-                    <h3 className="font-body font-bold text-xl mb-1">{p.name}</h3>
-                    <p className={`font-body text-sm ${p.highlight ? "text-white/80" : "text-muted-foreground"}`}>
-                      {p.description}
-                    </p>
+                    <h3 className="font-body font-bold text-xl mb-1">Uber Eats</h3>
+                    <p className="text-muted-foreground font-body text-sm">Delivery available. Standard platform fees apply.</p>
                   </div>
-                  <ExternalLink size={20} className={p.highlight ? "text-white/60" : "text-muted-foreground"} />
+                  <ExternalLink size={20} className="text-muted-foreground" />
                 </div>
               </motion.a>
-            ))}
+              <motion.a
+                href="https://www.doordash.com/store/41748513"
+                target="_blank" rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                className="block bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
+              >
+                <div className="flex items-center gap-5">
+                  <span className="text-4xl">📦</span>
+                  <div className="flex-1">
+                    <h3 className="font-body font-bold text-xl mb-1">DoorDash</h3>
+                    <p className="text-muted-foreground font-body text-sm">Delivery available. Standard platform fees apply.</p>
+                  </div>
+                  <ExternalLink size={20} className="text-muted-foreground" />
+                </div>
+              </motion.a>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <>
+          {/* Search + Categories */}
+          <div style={{ backgroundColor: "#FFB3C6" }} className="sticky top-16 md:top-20 z-40 shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
+              <div className="relative max-w-md">
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="text" value={search} onChange={e => setSearch(e.target.value)}
+                  placeholder="Search the menu..."
+                  className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
+                />
+                {search && (
+                  <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary">
+                    <X size={18} />
+                  </button>
+                )}
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all ${activeCategory === "All" ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>🍓 All</button>
+                {CATEGORIES.map(cat => (
+                  <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${activeCategory === cat ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>
+                    {categoryEmojis[cat]} {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div className="bg-white rounded-[30px_8px_30px_8px] p-6 border-2 border-border shadow-sm">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                  <MapPin size={20} className="text-primary" />
+          {/* Menu Grid */}
+          <section style={{ backgroundColor: "#FFB3C6" }} className="pb-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              {loading ? (
+                <BrandedLoader text="whipping up the menu..." />
+              ) : activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ? (
+                <div className="text-center text-muted-foreground font-body py-16">
+                  <span className="text-4xl block mb-3">🔍🍓</span>
+                  <p>No items match "{search}". Try a different search!</p>
                 </div>
-                <h4 className="font-body font-bold text-base">📍 Pickup</h4>
-              </div>
-              <p className="text-muted-foreground font-body text-sm">
-                Order ahead and pick up at our shop — 7100 Foundry Row, Liberty Township. Usually ready in 15–20 minutes.
-              </p>
-            </div>
-            <div className="bg-white rounded-[30px_8px_30px_8px] p-6 border-2 border-border shadow-sm">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                  <Truck size={20} className="text-primary" />
+              ) : activeCategory === "All" ? (
+                Object.entries(groupedByCategory).map(([cat, catItems]) => (
+                  <div key={cat} className="mb-14">
+                    <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">{categoryEmojis[cat]} {cat.toLowerCase()}</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                      {catItems.map(item => (
+                        <OrderMenuItemCard key={item.id} item={item} />
+                      ))}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">{categoryEmojis[activeCategory]} {activeCategory.toLowerCase()}</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    {filteredItems.map(item => (
+                      <OrderMenuItemCard key={item.id} item={item} />
+                    ))}
+                  </div>
                 </div>
-                <h4 className="font-body font-bold text-base">🚚 Delivery</h4>
-              </div>
-              <p className="text-muted-foreground font-body text-sm">
-                Available through Uber Eats and DoorDash. Delivery radius and fees vary by platform.
-              </p>
+              )}
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+
+          <FloatingCart />
+        </>
+      )}
 
       <WaveDivider from="blush" to="white" />
       <Footer />
     </div>
   );
+}
+
+export default function Order() {
+  return <OrderContent />;
 }

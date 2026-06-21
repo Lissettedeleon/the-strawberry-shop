@@ -1,0 +1,58 @@
+{
+  "name": "ReceiptCode",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique alphanumeric code"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Dollar amount tied to the code"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Claimed",
+        "Expired"
+      ],
+      "default": "Active"
+    },
+    "claimed_by": {
+      "type": "string",
+      "description": "User ID of who claimed it"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Expiration date"
+    }
+  },
+  "required": [
+    "code",
+    "amount"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

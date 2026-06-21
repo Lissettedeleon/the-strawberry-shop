@@ -1,0 +1,120 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Customer's full name"
+    },
+    "customer_email": {
+      "type": "string",
+      "description": "Customer's email"
+    },
+    "items": {
+      "type": "array",
+      "description": "Order items with customizations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "base_price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "removed_ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extras": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extra_count": {
+            "type": "number"
+          },
+          "chocolate_selections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selected_toppings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selected_sauces": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "special_instructions": {
+            "type": "string"
+          },
+          "item_total": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Order subtotal"
+    },
+    "total": {
+      "type": "number",
+      "description": "Final total"
+    },
+    "reward_applied": {
+      "type": "boolean",
+      "default": false
+    },
+    "reward_discount": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Preparing",
+        "Ready",
+        "Completed"
+      ],
+      "default": "Pending"
+    },
+    "order_number": {
+      "type": "string",
+      "description": "Human-readable order number"
+    }
+  },
+  "required": [
+    "items",
+    "subtotal",
+    "total"
+  ],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

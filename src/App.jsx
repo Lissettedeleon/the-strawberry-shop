@@ -15,6 +15,11 @@ import About from '@/pages/About';
 import Location from '@/pages/Location';
 import Contact from '@/pages/Contact';
 import FAQ from '@/pages/FAQ';
+import Checkout from '@/pages/Checkout';
+import OrderConfirmation from '@/pages/OrderConfirmation';
+import Account from '@/pages/Account';
+import AdminDashboard from '@/pages/AdminDashboard';
+import { CartProvider } from '@/lib/CartContext';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -33,16 +38,22 @@ const AuthenticatedApp = () => {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/menu" element={<Menu />} />
-      <Route path="/order" element={<Order />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/location" element={<Location />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/faq" element={<FAQ />} />
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/location" element={<Location />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </CartProvider>
   );
 };
 
