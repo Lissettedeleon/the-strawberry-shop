@@ -92,22 +92,22 @@ export default function OrderMenuItemCard({ item }) {
           <h3 className="font-body font-bold text-sm text-foreground truncate">{item.name}</h3>
           <span className="font-body font-extrabold text-primary text-sm mt-0.5">${item.price?.toFixed(2)}</span>
         </div>
-        <div className="flex flex-col pr-3 py-3 gap-1 hidden">
-          <button
-            onClick={() => handleAddSimple(item)}
-            disabled={item.is_sold_out}
-            className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 shrink-0"
-            aria-label="Add to cart">
-            
-            <Plus size={16} />
-          </button>
-          <button
-            onClick={(e) => {e.stopPropagation();setShowCustomize(!showCustomize);}}
-            className="font-body font-semibold text-[10px] text-primary/70 hover:text-primary transition-colors">
-            
-            Customize
-          </button>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
 
       {/* Customize Panel */}
