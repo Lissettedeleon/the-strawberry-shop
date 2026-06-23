@@ -70,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* Featured Items */}
-      <section className="px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-7xl mx-auto bg-[hsl(var(--muted))]">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-7xl mx-auto bg-[hsl(var(--background))]">
         <div className="text-center mb-8">
           <h2 className="font-body font-semibold text-[#c41230] text-2xl md:text-3xl mb-1">fan favorites</h2>
           <p className="text-[#6b7280] font-body text-sm">The ones everyone keeps coming back for</p>
