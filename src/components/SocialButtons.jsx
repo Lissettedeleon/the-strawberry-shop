@@ -107,16 +107,16 @@ export function InstagramButton({ className = "" }) {
 }
 
 export function GoogleReviewButton({ className = "" }) {
-  return (
-    <a
-      href="https://share.google/sVShJ5jaLb8Ju7gz1"
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 bg-white border-[1.5px] border-[#e8233a] text-[#e8233a] font-body font-semibold text-sm px-5 py-3 rounded-full min-h-[48px] hover:bg-[#fde8ea] transition-colors hidden ${className}`}>
-      
-      <span className="text-yellow-400 text-base">★★★★★</span>
-      Leave us a review on Google
-    </a>);
+  return null;
+
+
+
+
+
+
+
+
+
 
 }
 
