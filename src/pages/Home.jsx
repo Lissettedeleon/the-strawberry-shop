@@ -42,8 +42,12 @@ export default function Home() {
         </div>
         <div className="max-w-4xl mx-auto px-6 py-20 md:py-28 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div style={{ display: "inline-block", animation: "heroLogoBounce 1.5s ease-in-out infinite", marginBottom: "8px" }}>
-              <span className="text-5xl">🍓</span>
+            <div style={{ display: "inline-block", animation: "heroLogoBounce 1.5s ease-in-out infinite", marginBottom: "16px" }}>
+              <img
+                src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/79980b498_strawberry_shop_logo_white_outline_medium.png"
+                alt="The Strawberry Shop"
+                className="w-24 h-24 rounded-full object-contain"
+              />
             </div>
             <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 drop-shadow-lg">
               Life is sweeter with strawberries.
