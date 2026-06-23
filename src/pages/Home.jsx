@@ -46,7 +46,7 @@ export default function Home() {
               <img
                 src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/79980b498_strawberry_shop_logo_white_outline_medium.png"
                 alt="The Strawberry Shop"
-                className="w-24 h-24 rounded-full object-contain"
+                className="w-36 h-36 rounded-full object-contain"
               />
             </div>
             <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 drop-shadow-lg">
