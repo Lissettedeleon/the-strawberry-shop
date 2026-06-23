@@ -19,10 +19,10 @@ export default function Home() {
   const [heroImage, setHeroImage] = useState(null);
 
   useEffect(() => {
-    base44.entities.MenuItem.filter({ is_featured: true }, "sort_order", 6)
-      .then(setFeatured)
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    base44.entities.MenuItem.filter({ is_featured: true }, "sort_order", 6).
+    then(setFeatured).
+    catch(() => {}).
+    finally(() => setLoading(false));
   }, []);
 
   return (
@@ -45,8 +45,8 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+              transition={{ duration: 0.6 }}>
+              
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6">
                 <span className="animate-wiggle inline-block">🍓</span>
                 <span className="text-white/90 font-body font-semibold text-sm">fresh & locally loved</span>
@@ -63,15 +63,15 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="flex justify-center"
-            >
+              className="flex justify-center">
+              
               <div className="w-full max-w-md aspect-square flex items-center justify-center">
                 <img
                   src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/097a8a3d7_strawberry_shop_logo_white_outline_medium.png"
                   alt="The Strawberry Shop logo"
                   className="w-4/5 h-4/5 object-contain drop-shadow-2xl animate-bounce"
-                  style={{ animationDuration: "2.5s" }}
-                />
+                  style={{ animationDuration: "2.5s" }} />
+                
               </div>
             </motion.div>
           </div>
@@ -87,30 +87,30 @@ export default function Home() {
             <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-3">fan favorites</h2>
             <p className="text-muted-foreground font-body text-lg">The ones everyone keeps coming back for 🍓</p>
           </div>
-          {loading ? (
-            <BrandedLoader text="whipping up the menu..." />
-          ) : featured.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featured.map(item => (
-                <MenuItemCard key={item.id} item={item} />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {loading ?
+          <BrandedLoader text="whipping up the menu..." /> :
+          featured.length > 0 ?
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featured.map((item) =>
+            <MenuItemCard key={item.id} item={item} />
+            )}
+            </div> :
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { name: "The OG", price: 8.75, description: "Fresh strawberries layered with our signature house cream. Classic, clean, and oh so good." },
-                { name: "Build Your Own Cup", price: 12.50, description: "Your cup, your rules. Start with your favorite base, pick toppings, and finish it off." },
-                { name: "Half & Half", price: 11.50, description: "Two Belgian chocolates of your choice on a single strawberry." },
-              ].map((item, i) => (
-                <MenuItemCard key={i} item={item} />
-              ))}
+            { name: "The OG", price: 8.75, description: "Fresh strawberries layered with our signature house cream. Classic, clean, and oh so good." },
+            { name: "Build Your Own Cup", price: 12.50, description: "Your cup, your rules. Start with your favorite base, pick toppings, and finish it off." },
+            { name: "Half & Half", price: 11.50, description: "Two Belgian chocolates of your choice on a single strawberry." }].
+            map((item, i) =>
+            <MenuItemCard key={i} item={item} />
+            )}
             </div>
-          )}
+          }
           <div className="text-center mt-10">
             <Link
               to="/menu"
-              className="inline-flex items-center gap-2 bg-white text-primary font-body font-bold text-base px-8 py-3.5 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md"
-            >
+              className="inline-flex items-center gap-2 bg-white text-primary font-body font-bold text-base px-8 py-3.5 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md">
+              
               See Full Menu <ArrowRight size={18} />
             </Link>
           </div>
@@ -123,9 +123,9 @@ export default function Home() {
       <section className="bg-white relative overflow-hidden">
         <div className="absolute top-10 right-10 opacity-10 pointer-events-none">
           <div className="grid grid-cols-4 gap-3">
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-2 h-2 rounded-full bg-primary" />
-            ))}
+            {[...Array(16)].map((_, i) =>
+            <div key={i} className="w-2 h-2 rounded-full bg-primary" />
+            )}
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
@@ -134,8 +134,8 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center max-w-2xl mx-auto"
-          >
+            className="text-center max-w-2xl mx-auto">
+            
             <div className="w-24 h-24 rounded-full bg-secondary flex items-center justify-center mx-auto mb-6 border-2 border-border">
               <span className="text-5xl">🍓</span>
             </div>
@@ -147,8 +147,8 @@ export default function Home() {
             </p>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 bg-primary text-white font-body font-bold text-base px-8 py-3.5 rounded-full hover:bg-primary/90 transition-all shadow-sm hover:shadow-md"
-            >
+              className="inline-flex items-center gap-2 bg-primary text-white font-body font-bold text-base px-8 py-3.5 rounded-full hover:bg-primary/90 transition-all shadow-sm hover:shadow-md">
+              
               Our Story <ArrowRight size={18} />
             </Link>
           </motion.div>
@@ -160,15 +160,15 @@ export default function Home() {
         <WaveDivider from="white" to="blush" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
           <div className="text-center mb-10">
-            <p className="font-display text-primary/60 text-lg mb-1">💖 the love is real 💖</p>
+            <p className="font-display text-primary/60 text-lg mb-1 hidden">💖 the love is real 💖</p>
             <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-4">what people are saying</h2>
             <div className="inline-flex items-center gap-3 bg-white rounded-full px-5 py-2.5 shadow-sm border border-border">
               <span className="font-display text-primary text-3xl">5.0</span>
               <div className="text-left">
                 <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-primary text-primary" />
-                  ))}
+                  {[...Array(5)].map((_, i) =>
+                  <Star key={i} size={14} className="fill-primary text-primary" />
+                  )}
                 </div>
                 <p className="text-muted-foreground font-body text-xs">12 reviews on Google ⭐</p>
               </div>
@@ -180,8 +180,8 @@ export default function Home() {
               href="https://search.google.com/local/writereview?placeid=ChIJ_____wAAAGQAAAAA"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-primary font-body font-bold text-sm px-6 py-3 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md"
-            >
+              className="inline-flex items-center gap-2 bg-white text-primary font-body font-bold text-sm px-6 py-3 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md">
+              
               ⭐ Leave a Google Review
             </a>
           </div>
@@ -233,6 +233,6 @@ export default function Home() {
 
       <Footer />
       <StickyMobileOrder />
-    </div>
-  );
+    </div>);
+
 }
