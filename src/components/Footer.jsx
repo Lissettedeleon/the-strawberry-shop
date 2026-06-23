@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import { SocialIconsRow, GoogleReviewButton } from "./SocialButtons";
 
 const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "Menu", to: "/menu" },
-  { label: "About", to: "/about" },
-  { label: "Location", to: "/location" },
-  { label: "Catering", to: "/contact" },
-  { label: "FAQ", to: "/faq" },
-];
+{ label: "Home", to: "/" },
+{ label: "Menu", to: "/menu" },
+{ label: "About", to: "/about" },
+{ label: "Location", to: "/location" },
+{ label: "Catering", to: "/contact" },
+{ label: "FAQ", to: "/faq" }];
+
 
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-[#fde8ea]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-[hsl(var(--background))]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {/* Brand */}
           <div className="text-center md:text-left">
@@ -24,11 +24,11 @@ export default function Footer() {
 
           {/* Nav links */}
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">
-            {navLinks.map(link => (
-              <Link key={link.to} to={link.to} className="text-[#6b7280] hover:text-[#e8233a] font-body text-[13px] transition-colors">
+            {navLinks.map((link) =>
+            <Link key={link.to} to={link.to} className="text-[#6b7280] hover:text-[#e8233a] font-body text-[13px] transition-colors">
                 {link.label}
               </Link>
-            ))}
+            )}
           </div>
 
           {/* Tagline */}
@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         {/* Social + Google review */}
-        <div className="mt-8 pt-6 border-t border-[#fde8ea] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-8 pt-6 border-t border-[#fde8ea] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[hsl(var(--border))]">
           <div className="flex justify-center sm:justify-start">
             <SocialIconsRow />
           </div>
@@ -51,6 +51,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }
