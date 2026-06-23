@@ -181,12 +181,12 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-t border-[#fde8ea] hidden">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-body font-semibold text-[#c41230] text-xl mb-6 text-center">Frequently Asked Questions</h2>
-          <FAQAccordion />
-        </div>
-      </section>
+      
+
+
+
+
+      
 
       <Footer />
     </div>);
