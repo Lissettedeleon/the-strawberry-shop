@@ -80,52 +80,52 @@ export default function Menu() {
 
       {/* Search + Category Filter */}
       <div style={{ backgroundColor: "#FFB3C6" }} className="sticky top-16 md:top-20 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3 hidden">
-          <div className="relative max-w-md">
-            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            
+        
 
 
 
 
-            
-            
-            {search &&
-            <button
-              onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
-              aria-label="Clear search">
-              
-                <X size={18} />
-              </button>
-            }
-          </div>
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            <button
-              onClick={() => setActiveCategory("All")}
-              className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all ${
-              activeCategory === "All" ?
-              "bg-primary text-white shadow-md" :
-              "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"}`
-              }>
-              
-              🍓 All
-            </button>
-            {CATEGORIES.map((cat) =>
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${
-              activeCategory === cat ?
-              "bg-primary text-white shadow-md" :
-              "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"}`
-              }>
-              
-                {categoryEmojis[cat] || ""} {cat}
-              </button>
-            )}
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
 
       {/* Menu Items */}
