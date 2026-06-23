@@ -133,16 +133,16 @@ function OrderContent() {
       <>
           {/* Categories */}
           <div style={{ backgroundColor: "#FFB3C1" }} className="sticky top-16 z-40 border-b border-[#f590a0]/40">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 hidden">
-              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all min-h-[40px] ${activeCategory === "All" ? "bg-[#e8233a] text-white shadow-md" : "bg-[#fde8ea] text-[#c41230] hover:bg-[#f5b8c0]"}`}>🍓 All</button>
-                {CATEGORIES.map((cat) =>
-              <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap min-h-[40px] ${activeCategory === cat ? "bg-[#e8233a] text-white shadow-md" : "bg-[#fde8ea] text-[#c41230] hover:bg-[#f5b8c0]"}`}>
-                    {categoryEmojis[cat]} {cat}
-                  </button>
-              )}
-              </div>
-            </div>
+            
+
+
+
+
+
+
+
+
+          
           </div>
 
           {/* Menu Grid */}
