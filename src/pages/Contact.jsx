@@ -184,29 +184,29 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="mt-14 text-center">
-            <div className="flex justify-center gap-5 flex-wrap hidden">
-              {[
-              { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
-              { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
-              { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
-              { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
-              { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" }].
-              map((s) =>
-              <a
-                key={s.name}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-2 group"
-                aria-label={s.name}>
-                
-                  <span className="text-2xl">{s.icon}</span>
-                  <span className="text-xs text-muted-foreground font-body group-hover:text-primary transition-colors">
-                    {s.name}
-                  </span>
-                </a>
-              )}
-            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
           </div>
         </div>
       </section>
@@ -215,9 +215,9 @@ export default function Contact() {
       <section className="bg-white relative overflow-hidden">
         <FloatingDecor />
         <WaveDivider from="blush" to="white" />
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
-          <FAQAccordion />
-        </div>
+        
+
+        
       </section>
 
       <Footer />
