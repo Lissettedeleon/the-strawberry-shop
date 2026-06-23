@@ -9,7 +9,7 @@ import FAQAccordion from "@/components/FAQAccordion";
 import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
 import { Send } from "lucide-react";
 
-const CONFETTI_COLORS = ["#e8233a","#f5b8c0","#fde8ea","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
+const CONFETTI_COLORS = ["#e8233a", "#f5b8c0", "#fde8ea", "#ffd93d", "#6bcb77", "#4d96ff", "#ff922b", "#cc5de8", "#ffffff", "#ff6b9d"];
 
 function fireConfetti() {
   confetti({
@@ -19,7 +19,7 @@ function fireConfetti() {
     gravity: 1,
     ticks: 200,
     origin: { x: 0.5, y: 0.1 },
-    colors: CONFETTI_COLORS,
+    colors: CONFETTI_COLORS
   });
 }
 
@@ -35,10 +35,10 @@ export default function Contact() {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    fetch("https://assets10.lottiefiles.com/packages/lf20_touohxv0.json")
-      .then(r => r.json())
-      .then(setLottieData)
-      .catch(() => {});
+    fetch("https://assets10.lottiefiles.com/packages/lf20_touohxv0.json").
+    then((r) => r.json()).
+    then(setLottieData).
+    catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -69,11 +69,11 @@ export default function Contact() {
         <Navbar />
         <div className="max-w-lg mx-auto px-4 py-16 text-center">
           <div className="flex justify-center mb-4">
-            {lottieData ? (
-              <Lottie animationData={lottieData} loop style={{ width: 180, height: 180 }} />
-            ) : (
-              <div className="text-7xl animate-bounce" style={{ animationDuration: "2s" }}>🍓</div>
-            )}
+            {lottieData ?
+            <Lottie animationData={lottieData} loop style={{ width: 180, height: 180 }} /> :
+
+            <div className="text-7xl animate-bounce" style={{ animationDuration: "2s" }}>🍓</div>
+            }
           </div>
           <div className="flex justify-center mb-5">
             <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center animate-pulse">
@@ -89,8 +89,8 @@ export default function Contact() {
           </Link>
         </div>
         <Footer />
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -119,49 +119,49 @@ export default function Contact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Your Name *</label>
-                <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full name" className={inputClass} required />
+                <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Full name" className={inputClass} required />
               </div>
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Email *</label>
-                <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" className={inputClass} required />
+                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" className={inputClass} required />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Phone</label>
-                <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="(555) 123-4567" className={inputClass} />
+                <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="(555) 123-4567" className={inputClass} />
               </div>
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Event Date *</label>
-                <input type="date" value={form.event_date} onChange={e => setForm({ ...form, event_date: e.target.value })} className={inputClass} required />
+                <input type="date" value={form.event_date} onChange={(e) => setForm({ ...form, event_date: e.target.value })} className={inputClass} required />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Guest Count / Quantity</label>
-                <input type="text" value={form.quantity} onChange={e => setForm({ ...form, quantity: e.target.value })} placeholder="e.g. 50 guests" className={inputClass} />
+                <input type="text" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} placeholder="e.g. 50 guests" className={inputClass} />
               </div>
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Items Interested In</label>
-                <input type="text" value={form.items_of_interest} onChange={e => setForm({ ...form, items_of_interest: e.target.value })} placeholder="e.g. OG cups, build-your-own" className={inputClass} />
+                <input type="text" value={form.items_of_interest} onChange={(e) => setForm({ ...form, items_of_interest: e.target.value })} placeholder="e.g. OG cups, build-your-own" className={inputClass} />
               </div>
             </div>
             <div>
               <label className="block font-body text-xs text-[#6b7280] mb-1.5">Anything else?</label>
-              <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Special requests, dietary needs, theme ideas..." rows={4} className={inputClass} style={{ minHeight: "unset" }} />
+              <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Special requests, dietary needs, theme ideas..." rows={4} className={inputClass} style={{ minHeight: "unset" }} />
             </div>
 
-            {errorMsg && (
-              <div className="bg-[#fde8ea] border border-[#f5b8c0] rounded-xl px-4 py-3">
+            {errorMsg &&
+            <div className="bg-[#fde8ea] border border-[#f5b8c0] rounded-xl px-4 py-3">
                 <p className="text-[#c41230] font-body text-sm">{errorMsg}</p>
               </div>
-            )}
+            }
 
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full bg-[#e8233a] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#c41230] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
-            >
+              className="w-full bg-[#e8233a] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#c41230] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95">
+              
               <Send size={16} />
               {status === "sending" ? "Sending..." : "Submit Catering Request 🎉"}
             </button>
@@ -170,7 +170,7 @@ export default function Contact() {
       </section>
 
       {/* Social */}
-      <section className="bg-white py-10 border-t border-[#fde8ea]">
+      <section className="py-10 border-t border-[#fde8ea] bg-[hsl(var(--background))]">
         <div className="max-w-lg mx-auto px-4 text-center">
           <p className="font-body font-semibold text-[#c41230] text-base mb-4">Follow us</p>
           <div className="flex justify-center mb-4">
@@ -181,7 +181,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-t border-[#fde8ea]">
+      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-t border-[#fde8ea] hidden">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-body font-semibold text-[#c41230] text-xl mb-6 text-center">Frequently Asked Questions</h2>
           <FAQAccordion />
@@ -189,6 +189,6 @@ export default function Contact() {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 }
