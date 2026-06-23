@@ -12,19 +12,19 @@ import { Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CATEGORIES = [
-  "Specials",
-  "Our Berry Best Cups",
-  "Build Your Own Cup",
-  "Chocolate Covered Strawberries",
-  "Others",
-];
+"Specials",
+"Our Berry Best Cups",
+"Build Your Own Cup",
+"Chocolate Covered Strawberries",
+"Others"];
+
 
 const categoryEmojis = {
   "Specials": "✨",
   "Our Berry Best Cups": "🍓",
   "Build Your Own Cup": "🎨",
   "Chocolate Covered Strawberries": "🍫",
-  "Others": "🍬",
+  "Others": "🍬"
 };
 
 export default function Menu() {
@@ -34,24 +34,24 @@ export default function Menu() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    base44.entities.MenuItem.list("sort_order", 50)
-      .then(setItems)
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    base44.entities.MenuItem.list("sort_order", 50).
+    then(setItems).
+    catch(() => {}).
+    finally(() => setLoading(false));
   }, []);
 
   const query = search.trim().toLowerCase();
-  const searchedItems = query
-    ? items.filter(i => i.name.toLowerCase().includes(query))
-    : items;
+  const searchedItems = query ?
+  items.filter((i) => i.name.toLowerCase().includes(query)) :
+  items;
   const isSearching = query.length > 0;
 
-  const filteredItems = activeCategory === "All"
-    ? searchedItems
-    : searchedItems.filter(i => i.category === activeCategory);
+  const filteredItems = activeCategory === "All" ?
+  searchedItems :
+  searchedItems.filter((i) => i.category === activeCategory);
 
   const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
-    const catItems = searchedItems.filter(i => i.category === cat);
+    const catItems = searchedItems.filter((i) => i.category === cat);
     if (catItems.length > 0) acc[cat] = catItems;
     return acc;
   }, {});
@@ -67,8 +67,8 @@ export default function Menu() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg"
-          >
+            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
+            
             our menu
           </motion.h1>
           <p className="text-white/80 font-body text-lg">
@@ -86,44 +86,44 @@ export default function Menu() {
             <input
               type="text"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search the menu..."
-              className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-            />
-            {search && (
-              <button
-                onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
-                aria-label="Clear search"
-              >
+              className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors hidden" />
+            
+            {search &&
+            <button
+              onClick={() => setSearch("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
+              aria-label="Clear search">
+              
                 <X size={18} />
               </button>
-            )}
+            }
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             <button
               onClick={() => setActiveCategory("All")}
               className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all ${
-                activeCategory === "All"
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"
-              }`}
-            >
+              activeCategory === "All" ?
+              "bg-primary text-white shadow-md" :
+              "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"}`
+              }>
+              
               🍓 All
             </button>
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${
-                  activeCategory === cat
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"
-                }`}
-              >
+            {CATEGORIES.map((cat) =>
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${
+              activeCategory === cat ?
+              "bg-primary text-white shadow-md" :
+              "bg-white text-foreground/60 hover:bg-secondary hover:shadow-sm"}`
+              }>
+              
                 {categoryEmojis[cat] || ""} {cat}
               </button>
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -131,44 +131,44 @@ export default function Menu() {
       {/* Menu Items */}
       <section style={{ backgroundColor: "#FFB3C6" }} className="pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {loading ? (
-            <BrandedLoader text="whipping up the menu..." />
-          ) : activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ? (
-            <div className="text-center text-muted-foreground font-body py-16">
+          {loading ?
+          <BrandedLoader text="whipping up the menu..." /> :
+          activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ?
+          <div className="text-center text-muted-foreground font-body py-16">
               <span className="text-4xl block mb-3">🔍🍓</span>
               <p>No items match "{search}". Try a different search!</p>
-            </div>
-          ) : activeCategory === "All" ? (
-            Object.entries(groupedByCategory).map(([cat, catItems]) => (
-              <div key={cat} className="mb-14">
+            </div> :
+          activeCategory === "All" ?
+          Object.entries(groupedByCategory).map(([cat, catItems]) =>
+          <div key={cat} className="mb-14">
                 <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
                   {categoryEmojis[cat] || "🍓"} {cat.toLowerCase()}
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-                  {catItems.map(item => (
-                    <MenuItemCard key={item.id} item={item} />
-                  ))}
+                  {catItems.map((item) =>
+              <MenuItemCard key={item.id} item={item} />
+              )}
                 </div>
               </div>
-            ))
-          ) : (
-            <div>
+          ) :
+
+          <div>
               <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
                 {categoryEmojis[activeCategory] || "🍓"} {activeCategory.toLowerCase()}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-                {filteredItems.map(item => (
-                  <MenuItemCard key={item.id} item={item} />
-                ))}
+                {filteredItems.map((item) =>
+              <MenuItemCard key={item.id} item={item} />
+              )}
               </div>
-              {filteredItems.length === 0 && (
-                <div className="text-center text-muted-foreground font-body py-12">
+              {filteredItems.length === 0 &&
+            <div className="text-center text-muted-foreground font-body py-12">
                   <span className="text-4xl block mb-3">{isSearching ? "🔍🍓" : "🍓"}</span>
                   <p>{isSearching ? `No items match "${search}" here.` : "No items in this category yet."}</p>
                 </div>
-              )}
+            }
             </div>
-          )}
+          }
         </div>
       </section>
 
@@ -198,6 +198,6 @@ export default function Menu() {
 
       <Footer />
       <StickyMobileOrder />
-    </div>
-  );
+    </div>);
+
 }
