@@ -51,29 +51,29 @@ export default function Contact() {
               transition={{
                 y: { duration: 0.6, times: [0, 0.25, 0.5, 0.75, 1], repeat: 3, repeatDelay: 0.2 },
                 opacity: { duration: 0.4 }
-              }}
-            />
+              }} />
+            
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15, delay: 1.2 }}
-            >
+              transition={{ type: "spring", stiffness: 200, damping: 15, delay: 1.2 }}>
+              
               <CheckCircle size={64} className="mx-auto text-white mb-4" />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4 }}
-              className="font-display text-white text-3xl sm:text-4xl mb-2 drop-shadow-lg"
-            >
+              className="font-display text-white text-3xl sm:text-4xl mb-2 drop-shadow-lg">
+              
               request sent!
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.6 }}
-              className="text-white/80 font-body text-lg"
-            >
+              className="text-white/80 font-body text-lg">
+              
               Your catering request has been sent! We'll be in touch with you shortly. 🍓
             </motion.p>
           </div>
@@ -94,8 +94,8 @@ export default function Contact() {
         </section>
         <WaveDivider from="blush" to="white" />
         <Footer />
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -108,8 +108,8 @@ export default function Contact() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg"
-          >
+            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
+            
             catering & events
           </motion.h1>
           <p className="text-white/80 font-body text-lg">
@@ -134,8 +134,8 @@ export default function Contact() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             onSubmit={handleSubmit}
-            className="bg-white rounded-[30px_10px_30px_10px] p-6 sm:p-8 border-2 border-border shadow-sm space-y-5"
-          >
+            className="bg-white rounded-[30px_10px_30px_10px] p-6 sm:p-8 border-2 border-border shadow-sm space-y-5">
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label className="block font-body font-semibold text-sm text-foreground mb-1.5">👤 Your Name</label>
@@ -173,39 +173,39 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full bg-primary text-white font-body font-bold py-3.5 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm hover:shadow-md min-h-[44px]"
-            >
+              className="w-full bg-primary text-white font-body font-bold py-3.5 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm hover:shadow-md min-h-[44px]">
+              
               <Send size={16} /> {status === "sending" ? "Sending..." : "Submit Catering Request 🎉"}
             </button>
-            {errorMsg && (
-              <p className="text-center text-red-500 font-body text-sm">{errorMsg}</p>
-            )}
+            {errorMsg &&
+            <p className="text-center text-red-500 font-body text-sm">{errorMsg}</p>
+            }
           </motion.form>
 
           {/* Social Links */}
           <div className="mt-14 text-center">
-            <div className="flex justify-center gap-5 flex-wrap">
+            <div className="flex justify-center gap-5 flex-wrap hidden">
               {[
-                { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
-                { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
-                { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
-                { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
-                { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" },
-              ].map((s) => (
-                <a
-                  key={s.name}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2 group"
-                  aria-label={s.name}
-                >
+              { name: "Instagram", url: "https://www.instagram.com/thestrawberryshopp", icon: "📸" },
+              { name: "TikTok", url: "https://www.tiktok.com/@thestrawberryshopp", icon: "🎵" },
+              { name: "Facebook", url: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", icon: "💬" },
+              { name: "Pinterest", url: "https://www.pinterest.com/strawberryshopoh/_created", icon: "📌" },
+              { name: "Google", url: "https://share.google/6tW3Eo2PrVKv75sjQ", icon: "🌐" }].
+              map((s) =>
+              <a
+                key={s.name}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-2 group"
+                aria-label={s.name}>
+                
                   <span className="text-2xl">{s.icon}</span>
                   <span className="text-xs text-muted-foreground font-body group-hover:text-primary transition-colors">
                     {s.name}
                   </span>
                 </a>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -215,13 +215,13 @@ export default function Contact() {
       <section className="bg-white relative overflow-hidden">
         <FloatingDecor />
         <WaveDivider from="blush" to="white" />
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
           <FAQAccordion />
         </div>
       </section>
 
       <Footer />
       <StickyMobileOrder />
-    </div>
-  );
+    </div>);
+
 }
