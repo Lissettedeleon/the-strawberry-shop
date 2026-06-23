@@ -103,19 +103,19 @@ export default function Location() {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="bg-white rounded-[30px_8px_30px_8px] p-8 border-2 border-border shadow-sm hidden">
-                
-                <h3 className="font-body font-bold text-lg text-foreground mb-3">
-                  <span className="mr-2">🚗</span>Parking
-                </h3>
-                <p className="text-foreground/70 font-body text-sm leading-relaxed">
-                  Free parking is available right in front of our shop at Foundry Row. The lot is spacious and easy to access.
-                </p>
-              </motion.div>
+              
+
+
+
+
+
+
+
+
+
+
+
+              
             </div>
           </div>
         </div>
