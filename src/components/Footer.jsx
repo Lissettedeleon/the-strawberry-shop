@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         {/* Social + Google review */}
-        <div className="mt-8 pt-6 border-t border-[#fde8ea] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[hsl(var(--border))]">
+        <div className="mt-8 pt-6 border-t border-[#fde8ea] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[hsl(var(--background))] text-[hsl(var(--secondary))] rounded-[10039px]">
           <div className="flex justify-center sm:justify-start">
             <SocialIconsRow />
           </div>
