@@ -4,12 +4,8 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const body = await req.json();
-
-    // Contacts and catering requests are already saved to the database
-    // from the frontend. This function serves as a lightweight acknowledgement.
     const { name, type } = body;
     const label = type === "catering" ? "Catering request" : "Contact message";
-
     return Response.json({ success: true, message: `${label} from ${name} received` });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });

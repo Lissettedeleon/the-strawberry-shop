@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WaveDivider from "@/components/WaveDivider";
 import OrderMenuItemCard from "@/components/OrderMenuItemCard";
 import FloatingCart from "@/components/FloatingCart";
 import BrandedLoader from "@/components/BrandedLoader";
+import WaveDivider from "@/components/WaveDivider";
 import { Search, X, ExternalLink } from "lucide-react";
 
 const CATEGORIES = [
@@ -59,7 +59,7 @@ function OrderContent() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #e8233a 0%, #c41230 100%)" }}>
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <span className="absolute text-4xl opacity-15 animate-bounce" style={{ top: "10%", left: "5%", animationDuration: "3s" }}>🍓</span>
           <span className="absolute text-3xl opacity-10 animate-bounce" style={{ bottom: "20%", right: "8%", animationDuration: "3.5s", animationDelay: "0.7s" }}>🛍️</span>
@@ -98,7 +98,7 @@ function OrderContent() {
       </section>
 
       {orderType === "delivery" ?
-      <section style={{ backgroundColor: "#FFB3C6" }}>
+      <section style={{ backgroundColor: "#fff8f9" }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <p className="font-display text-primary/60 text-lg text-center mb-8">✨ delivery options ✨</p>
             <div className="space-y-5">
@@ -138,25 +138,27 @@ function OrderContent() {
 
       <>
           {/* Search + Categories */}
-          <div style={{ backgroundColor: "#FFB3C6" }} className="sticky top-16 md:top-20 z-40 shadow-sm">
+          <div style={{ backgroundColor: "#fff8f9" }} className="sticky top-16 z-40 border-b border-[#fde8ea] shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
               <div className="relative max-w-md">
-                
-                
-
-
-              
-              
-                {search &&
-              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary">
-                    <X size={18} />
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Search menu..."
+                  className="w-full bg-white border border-[#f5b8c0] rounded-full pl-9 pr-9 py-2.5 font-body text-sm text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#e8233a]/30 focus:border-[#e8233a] transition-all min-h-[44px]"
+                />
+                {search && (
+                  <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] hover:text-[#e8233a]">
+                    <X size={16} />
                   </button>
-              }
+                )}
               </div>
               <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-                <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all ${activeCategory === "All" ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>🍓 All</button>
+                <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all min-h-[40px] ${activeCategory === "All" ? "bg-[#e8233a] text-white shadow-md" : "bg-[#fde8ea] text-[#c41230] hover:bg-[#f5b8c0]"}`}>🍓 All</button>
                 {CATEGORIES.map((cat) =>
-              <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap ${activeCategory === cat ? "bg-primary text-white shadow-md" : "bg-white text-foreground/60 hover:bg-secondary"}`}>
+              <button key={cat} onClick={() => setActiveCategory(cat)} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all whitespace-nowrap min-h-[40px] ${activeCategory === cat ? "bg-[#e8233a] text-white shadow-md" : "bg-[#fde8ea] text-[#c41230] hover:bg-[#f5b8c0]"}`}>
                     {categoryEmojis[cat]} {cat}
                   </button>
               )}
@@ -165,7 +167,7 @@ function OrderContent() {
           </div>
 
           {/* Menu Grid */}
-          <section style={{ backgroundColor: "#FFB3C6" }} className="pb-24">
+          <section style={{ backgroundColor: "#fff8f9" }} className="pb-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {loading ?
             <BrandedLoader text="whipping up the menu..." /> :
@@ -202,7 +204,6 @@ function OrderContent() {
         </>
       }
 
-      <WaveDivider from="blush" to="white" />
       <Footer />
     </div>);
 

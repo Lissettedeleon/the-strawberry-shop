@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import Lottie from "lottie-react";
+import confetti from "canvas-confetti";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WaveDivider from "@/components/WaveDivider";
 import FAQAccordion from "@/components/FAQAccordion";
-import StickyMobileOrder from "@/components/StickyMobileOrder";
-import FloatingDecor from "@/components/FloatingDecor";
-import { Send, CheckCircle } from "lucide-react";
+import { SocialButtons, GoogleReviewButton } from "@/components/SocialButtons";
+import { Send } from "lucide-react";
 
-const STRAWBERRY_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/b80cb3d55_ChatGPTImageJun21202612_20_40AM.png";
+const CONFETTI_COLORS = ["#e8233a","#f5b8c0","#fde8ea","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
+
+function fireConfetti() {
+  confetti({
+    particleCount: 200,
+    spread: 120,
+    startVelocity: 45,
+    gravity: 1,
+    ticks: 200,
+    origin: { x: 0.5, y: 0.1 },
+    colors: CONFETTI_COLORS,
+  });
+}
+
+const inputClass = "w-full bg-white border border-[#f5b8c0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#e8233a]/30 focus:border-[#e8233a] transition-all min-h-[48px]";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -18,6 +31,23 @@ export default function Contact() {
   });
   const [status, setStatus] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [lottieData, setLottieData] = useState(null);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    fetch("https://assets10.lottiefiles.com/packages/lf20_touohxv0.json")
+      .then(r => r.json())
+      .then(setLottieData)
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (status === "done") {
+      fireConfetti();
+      intervalRef.current = setInterval(fireConfetti, 3500);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [status]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,195 +63,132 @@ export default function Contact() {
     }
   };
 
-  const inputClass = "w-full bg-white border-2 border-border rounded-2xl px-4 py-3 font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
-
-  // Success screen
   if (status === "done") {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen" style={{ background: "#fff8f9" }}>
         <Navbar />
-        <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
-            <motion.img
-              src={STRAWBERRY_IMAGE}
-              alt="The Strawberry Shop mascot"
-              className="mx-auto w-32 h-32 sm:w-40 sm:h-40 object-contain mb-4"
-              initial={{ y: -40, opacity: 0 }}
-              animate={{ y: [0, -16, 0, -16, 0], opacity: 1 }}
-              transition={{
-                y: { duration: 0.6, times: [0, 0.25, 0.5, 0.75, 1], repeat: 3, repeatDelay: 0.2 },
-                opacity: { duration: 0.4 }
-              }} />
-            
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15, delay: 1.2 }}>
-              
-              <CheckCircle size={64} className="mx-auto text-white mb-4" />
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
-              className="font-display text-white text-3xl sm:text-4xl mb-2 drop-shadow-lg">
-              
-              request sent!
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.6 }}
-              className="text-white/80 font-body text-lg">
-              
-              Your catering request has been sent! We'll be in touch with you shortly. 🍓
-            </motion.p>
+        <div className="max-w-lg mx-auto px-4 py-16 text-center">
+          <div className="flex justify-center mb-4">
+            {lottieData ? (
+              <Lottie animationData={lottieData} loop style={{ width: 180, height: 180 }} />
+            ) : (
+              <div className="text-7xl animate-bounce" style={{ animationDuration: "2s" }}>🍓</div>
+            )}
           </div>
-          <WaveDivider from="red" to="blush" />
-        </section>
-        <section style={{ backgroundColor: "#FFB3C6" }}>
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-            <div className="bg-white rounded-[30px_10px_30px_10px] p-8 border-2 border-border shadow-sm">
-              <span className="text-5xl block mb-4">🍓🎉</span>
-              <p className="font-body text-foreground text-lg mb-6">
-                We've received your catering request and will get back to you within 24 hours with options and pricing.
-              </p>
-              <Link to="/" className="inline-block bg-primary text-white font-body font-bold px-8 py-3 rounded-full hover:bg-primary/90 transition-colors">
-                Back to Home
-              </Link>
+          <div className="flex justify-center mb-5">
+            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center animate-pulse">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
           </div>
-        </section>
-        <WaveDivider from="blush" to="white" />
+          <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Request Sent! 🎉</h1>
+          <p className="font-body text-[#6b7280] text-base mb-6">Your catering request has been sent! We'll be in touch with you shortly. 🍓</p>
+          <Link to="/" className="inline-block bg-[#e8233a] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#c41230] transition-colors">
+            Back to Home
+          </Link>
+        </div>
         <Footer />
-      </div>);
-
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
-        <FloatingDecor />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
-            
-            catering & events
-          </motion.h1>
-          <p className="text-white/80 font-body text-lg">
-            Let us make your next event unforgettable 🍓🎉
-          </p>
+      {/* Header */}
+      <section style={{ background: "linear-gradient(135deg, #e8233a 0%, #c41230 100%)" }} className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
+          <h1 className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">catering & events</h1>
+          <p className="text-white/80 font-body text-lg">Let us make your next event unforgettable 🍓🎉</p>
         </div>
-        <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFB3C6" }} className="relative overflow-hidden">
-        <FloatingDecor />
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-          <div className="text-center mb-10">
-            <p className="font-display text-primary/60 text-lg mb-1">🎉 parties, showers, meetings & more 🎉</p>
-            <h2 className="font-display text-foreground text-3xl sm:text-4xl mb-3">book your event</h2>
-            <p className="text-muted-foreground font-body text-base max-w-lg mx-auto">
-              From bridal showers to office parties — we create beautiful strawberry dessert spreads your guests will love. We'll get back to you within 24 hours with options and pricing.
+      {/* Form */}
+      <section style={{ background: "#fff8f9" }} className="py-12 md:py-16">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="font-body font-semibold text-[#c41230] text-2xl mb-2">book your event</h2>
+            <p className="text-[#6b7280] font-body text-sm max-w-md mx-auto">
+              From bridal showers to office parties — we'll get back to you within 24 hours with options and pricing.
             </p>
           </div>
 
-          <motion.form
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            onSubmit={handleSubmit}
-            className="bg-white rounded-[30px_10px_30px_10px] p-6 sm:p-8 border-2 border-border shadow-sm space-y-5">
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <form onSubmit={handleSubmit} className="bg-white border border-[#f5b8c0] rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">👤 Your Name</label>
-                <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" className={inputClass} required />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Your Name *</label>
+                <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Full name" className={inputClass} required />
               </div>
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">📧 Email</label>
-                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" className={inputClass} required />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Email *</label>
+                <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" className={inputClass} required />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">📞 Phone</label>
-                <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="(555) 123-4567" className={inputClass} />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Phone</label>
+                <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="(555) 123-4567" className={inputClass} />
               </div>
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">📅 Event Date</label>
-                <input type="date" value={form.event_date} onChange={(e) => setForm({ ...form, event_date: e.target.value })} className={inputClass} required />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Event Date *</label>
+                <input type="date" value={form.event_date} onChange={e => setForm({ ...form, event_date: e.target.value })} className={inputClass} required />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">📊 Guest Count / Quantity</label>
-                <input type="text" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} placeholder="e.g. 50 guests" className={inputClass} />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Guest Count / Quantity</label>
+                <input type="text" value={form.quantity} onChange={e => setForm({ ...form, quantity: e.target.value })} placeholder="e.g. 50 guests" className={inputClass} />
               </div>
               <div>
-                <label className="block font-body font-semibold text-sm text-foreground mb-1.5">🍓 Items Interested In</label>
-                <input type="text" value={form.items_of_interest} onChange={(e) => setForm({ ...form, items_of_interest: e.target.value })} placeholder="e.g. OG cups, build-your-own" className={inputClass} />
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Items Interested In</label>
+                <input type="text" value={form.items_of_interest} onChange={e => setForm({ ...form, items_of_interest: e.target.value })} placeholder="e.g. OG cups, build-your-own" className={inputClass} />
               </div>
             </div>
             <div>
-              <label className="block font-body font-semibold text-sm text-foreground mb-1.5">💬 Anything else?</label>
-              <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Special requests, dietary needs, theme ideas..." rows={4} className={inputClass} />
+              <label className="block font-body text-xs text-[#6b7280] mb-1.5">Anything else?</label>
+              <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Special requests, dietary needs, theme ideas..." rows={4} className={inputClass} style={{ minHeight: "unset" }} />
             </div>
+
+            {errorMsg && (
+              <div className="bg-[#fde8ea] border border-[#f5b8c0] rounded-xl px-4 py-3">
+                <p className="text-[#c41230] font-body text-sm">{errorMsg}</p>
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full bg-primary text-white font-body font-bold py-3.5 rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 shadow-sm hover:shadow-md min-h-[44px]">
-              
-              <Send size={16} /> {status === "sending" ? "Sending..." : "Submit Catering Request 🎉"}
+              className="w-full bg-[#e8233a] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#c41230] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+            >
+              <Send size={16} />
+              {status === "sending" ? "Sending..." : "Submit Catering Request 🎉"}
             </button>
-            {errorMsg &&
-            <p className="text-center text-red-500 font-body text-sm">{errorMsg}</p>
-            }
-          </motion.form>
+          </form>
+        </div>
+      </section>
 
-          {/* Social Links */}
-          <div className="mt-14 text-center">
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+      {/* Social */}
+      <section className="bg-white py-10 border-t border-[#fde8ea]">
+        <div className="max-w-lg mx-auto px-4 text-center">
+          <p className="font-body font-semibold text-[#c41230] text-base mb-4">Follow us</p>
+          <div className="flex flex-wrap justify-center gap-3 mb-4">
+            <SocialButtons />
           </div>
+          <GoogleReviewButton />
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="bg-white relative overflow-hidden">
-        <FloatingDecor />
-        <WaveDivider from="blush" to="white" />
-        
-
-        
+      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-t border-[#fde8ea]">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-body font-semibold text-[#c41230] text-xl mb-6 text-center">Frequently Asked Questions</h2>
+          <FAQAccordion />
+        </div>
       </section>
 
       <Footer />
-      <StickyMobileOrder />
-    </div>);
-
+    </div>
+  );
 }

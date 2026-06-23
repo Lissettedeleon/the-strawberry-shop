@@ -87,7 +87,11 @@
   }
   body {
     @apply bg-background text-foreground font-body;
-    font-size: 18px;
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
