@@ -80,7 +80,7 @@ export default function Menu() {
 
       {/* Search + Category Filter */}
       <div style={{ backgroundColor: "#FFB3C6" }} className="sticky top-16 md:top-20 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3 hidden">
           <div className="relative max-w-md">
             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
             
