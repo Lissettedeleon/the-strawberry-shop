@@ -12,10 +12,10 @@ import { GoogleReviewButton } from "@/components/SocialButtons";
 import { ArrowRight, Star } from "lucide-react";
 
 const PERKS = [
-  { emoji: "🌿", title: "Fresh Daily", sub: "Made every morning, never frozen" },
-  { emoji: "⚡", title: "Pickup Ready", sub: "Order online, skip the line" },
-  { emoji: "🎨", title: "Made to Order", sub: "Customize every cup your way" },
-];
+{ emoji: "🌿", title: "Fresh Daily", sub: "Made every morning, never frozen" },
+{ emoji: "⚡", title: "Pickup Ready", sub: "Order online, skip the line" },
+{ emoji: "🎨", title: "Made to Order", sub: "Customize every cup your way" }];
+
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
@@ -23,10 +23,10 @@ export default function Home() {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
 
   useEffect(() => {
-    base44.entities.MenuItem.filter({ is_featured: true }, "sort_order", 6)
-      .then(setFeatured)
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    base44.entities.MenuItem.filter({ is_featured: true }, "sort_order", 6).
+    then(setFeatured).
+    catch(() => {}).
+    finally(() => setLoading(false));
   }, []);
 
   return (
@@ -51,14 +51,14 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => setOrderModalOpen(true)}
-                className="bg-white text-[#e8233a] font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#fde8ea] transition-colors active:scale-95 shadow-lg"
-              >
+                className="bg-white text-[#e8233a] font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#fde8ea] transition-colors active:scale-95 shadow-lg">
+                
                 Order for Pickup 🍓
               </button>
               <Link
                 to="/menu"
-                className="bg-transparent text-white border-2 border-white/60 font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-white/10 transition-colors active:scale-95"
-              >
+                className="bg-transparent text-white border-2 border-white/60 font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-white/10 transition-colors active:scale-95">
+                
                 View Menu
               </Link>
             </div>
@@ -73,47 +73,47 @@ export default function Home() {
           <p className="text-[#6b7280] font-body text-sm">The ones everyone keeps coming back for</p>
         </div>
 
-        {loading ? (
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            {[1,2,3].map(i => (
-              <div key={i} className="shrink-0 w-64 h-64 rounded-2xl bg-[#fde8ea] animate-pulse" />
-            ))}
-          </div>
-        ) : featured.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featured.slice(0, 3).map(item => <MenuItemCard key={item.id} item={item} />)}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {loading ?
+        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            {[1, 2, 3].map((i) =>
+          <div key={i} className="shrink-0 w-64 h-64 rounded-2xl bg-[#fde8ea] animate-pulse" />
+          )}
+          </div> :
+        featured.length > 0 ?
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featured.slice(0, 3).map((item) => <MenuItemCard key={item.id} item={item} />)}
+          </div> :
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { name: "The OG", price: 8.75, description: "Fresh strawberries layered with our signature house cream." },
-              { name: "Build Your Own Cup", price: 12.50, description: "Your cup, your rules. Pick any base and toppings." },
-              { name: "Half & Half", price: 11.50, description: "Two Belgian chocolates on a single strawberry." },
-            ].map((item, i) => <MenuItemCard key={i} item={item} />)}
+          { name: "The OG", price: 8.75, description: "Fresh strawberries layered with our signature house cream." },
+          { name: "Build Your Own Cup", price: 12.50, description: "Your cup, your rules. Pick any base and toppings." },
+          { name: "Half & Half", price: 11.50, description: "Two Belgian chocolates on a single strawberry." }].
+          map((item, i) => <MenuItemCard key={i} item={item} />)}
           </div>
-        )}
+        }
 
         <div className="text-center mt-8">
           <Link
             to="/menu"
-            className="inline-flex items-center gap-2 border-[1.5px] border-[#e8233a] text-[#e8233a] font-body font-bold text-sm px-7 py-3 rounded-full min-h-[44px] hover:bg-[#fde8ea] transition-colors"
-          >
+            className="inline-flex items-center gap-2 border-[1.5px] border-[#e8233a] text-[#e8233a] font-body font-bold text-sm px-7 py-3 rounded-full min-h-[44px] hover:bg-[#fde8ea] transition-colors">
+            
             See Full Menu <ArrowRight size={16} />
           </Link>
         </div>
       </section>
 
       {/* 3 perks */}
-      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-y border-[#fde8ea]">
+      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-y border-[#fde8ea] hidden">
         <div className="max-w-3xl mx-auto px-6">
           <div className="grid grid-cols-3 gap-4 text-center">
-            {PERKS.map((p, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+            {PERKS.map((p, i) =>
+            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <span className="text-3xl md:text-4xl block mb-2">{p.emoji}</span>
                 <p className="font-body font-semibold text-[#c41230] text-sm md:text-base">{p.title}</p>
                 <p className="font-body text-[#6b7280] text-xs md:text-sm mt-0.5 hidden sm:block">{p.sub}</p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -157,8 +157,8 @@ export default function Home() {
           <p className="text-white/75 font-body text-base mb-8">Order online for pickup or get it delivered through DoorDash &amp; Uber Eats.</p>
           <button
             onClick={() => setOrderModalOpen(true)}
-            className="bg-white text-[#e8233a] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#fde8ea] transition-colors active:scale-95 shadow-lg"
-          >
+            className="bg-white text-[#e8233a] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#fde8ea] transition-colors active:scale-95 shadow-lg">
+            
             Order Now 🍓
           </button>
         </div>
@@ -166,6 +166,6 @@ export default function Home() {
 
       <Footer />
       <OrderModal open={orderModalOpen} onClose={() => setOrderModalOpen(false)} />
-    </div>
-  );
+    </div>);
+
 }
