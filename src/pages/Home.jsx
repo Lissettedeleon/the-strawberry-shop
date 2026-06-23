@@ -70,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* Featured Items */}
-      <section className="bg-white px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-7xl mx-auto bg-[hsl(var(--secondary))]">
         <div className="text-center mb-8">
           <h2 className="font-body font-semibold text-[#c41230] text-2xl md:text-3xl mb-1">fan favorites</h2>
           <p className="text-[#6b7280] font-body text-sm">The ones everyone keeps coming back for</p>
@@ -123,7 +123,7 @@ export default function Home() {
 
       {/* Reviews */}
       <section className="bg-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[hsl(var(--background))]">
           <div className="text-center mb-8">
             <h2 className="font-body font-semibold text-[#c41230] text-2xl md:text-3xl mb-3">what people are saying</h2>
             <div className="inline-flex items-center gap-3 bg-[#fff8f9] border border-[#f5b8c0] rounded-full px-5 py-2.5 mb-4">
