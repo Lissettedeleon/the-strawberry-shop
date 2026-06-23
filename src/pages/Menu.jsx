@@ -177,16 +177,16 @@ export default function Menu() {
       {/* Order CTA */}
       <section className="bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <p className="font-display text-primary/60 text-lg mb-1">🍓 hungry yet? 🍓</p>
-          <h2 className="font-display text-foreground text-3xl mb-4">ready to order?</h2>
-          <p className="text-muted-foreground font-body text-lg mb-8">
+          <p className="font-display text-primary/60 text-lg mb-1 hidden">🍓 hungry yet? 🍓</p>
+          <h2 className="font-display text-foreground text-3xl mb-4 hidden">ready to order?</h2>
+          <p className="text-muted-foreground font-body text-lg mb-8 hidden">
             Pick your platform and treat yourself. You deserve it. 💕
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/order" className="bg-primary text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md">
+            <Link to="/order" className="bg-primary text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md hidden">
               Order Pickup
             </Link>
-            <a href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg" target="_blank" rel="noopener noreferrer" className="bg-foreground text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-foreground/90 transition-colors shadow-sm hover:shadow-md">
+            <a href="https://www.ubereats.com/store/the-strawberry-shop-7100-foundry-row/sBLlZJJpWzytPViiGPa2Fg" target="_blank" rel="noopener noreferrer" className="bg-foreground text-white font-body font-bold px-8 py-3.5 rounded-full hover:bg-foreground/90 transition-colors shadow-sm hover:shadow-md hidden">
               Uber Eats
             </a>
             <a href="https://www.doordash.com/store/41748513" target="_blank" rel="noopener noreferrer" className="bg-white text-primary font-body font-bold px-8 py-3.5 rounded-full border-2 border-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md">
