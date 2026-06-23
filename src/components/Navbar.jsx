@@ -10,10 +10,9 @@ import { base44 } from "@/api/base44Client";
 const navLinks = [
   { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
-  { label: "Order", to: "/order" },
   { label: "About", to: "/about" },
   { label: "Location", to: "/location" },
-  { label: "Contact", to: "/contact" },
+  { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
 ];
 

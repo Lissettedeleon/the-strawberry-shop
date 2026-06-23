@@ -42,6 +42,9 @@ export default function Home() {
         </div>
         <div className="max-w-4xl mx-auto px-6 py-20 md:py-28 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div style={{ display: "inline-block", animation: "heroLogoBounce 1.5s ease-in-out infinite", marginBottom: "8px" }}>
+              <span className="text-5xl">🍓</span>
+            </div>
             <h1 className="font-display text-white text-4xl sm:text-5xl md:text-6xl leading-tight mb-4 drop-shadow-lg">
               Life is sweeter with strawberries.
             </h1>

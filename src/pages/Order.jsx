@@ -7,7 +7,7 @@ import OrderMenuItemCard from "@/components/OrderMenuItemCard";
 import FloatingCart from "@/components/FloatingCart";
 import BrandedLoader from "@/components/BrandedLoader";
 import WaveDivider from "@/components/WaveDivider";
-import { Search, X, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const CATEGORIES = [
 "Specials",
@@ -29,7 +29,6 @@ function OrderContent() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [search, setSearch] = useState("");
   const [orderType, setOrderType] = useState("pickup");
 
   useEffect(() => {
@@ -39,23 +38,18 @@ function OrderContent() {
     finally(() => setLoading(false));
   }, []);
 
-  const query = search.trim().toLowerCase();
-  const searchedItems = query ?
-  items.filter((i) => i.name.toLowerCase().includes(query)) :
-  items;
-
   const filteredItems = activeCategory === "All" ?
-  searchedItems :
-  searchedItems.filter((i) => i.category === activeCategory);
+  items :
+  items.filter((i) => i.category === activeCategory);
 
   const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
-    const catItems = searchedItems.filter((i) => i.category === cat);
+    const catItems = items.filter((i) => i.category === cat);
     if (catItems.length > 0) acc[cat] = catItems;
     return acc;
   }, {});
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: "#FFB3C1" }}>
       <Navbar />
 
       {/* Hero */}
@@ -94,11 +88,11 @@ function OrderContent() {
             </button>
           </div>
         </div>
-        <WaveDivider from="red" to="blush" />
+        <div style={{ background: "linear-gradient(to bottom, #c41230 0%, #FFB3C1 100%)", height: "48px" }} />
       </section>
 
       {orderType === "delivery" ?
-      <section style={{ backgroundColor: "#fff8f9" }}>
+      <section style={{ backgroundColor: "#FFB3C1" }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <p className="font-display text-primary/60 text-lg text-center mb-8">✨ delivery options ✨</p>
             <div className="space-y-5">
@@ -137,24 +131,9 @@ function OrderContent() {
         </section> :
 
       <>
-          {/* Search + Categories */}
-          <div style={{ backgroundColor: "#fff8f9" }} className="sticky top-16 z-40 border-b border-[#fde8ea] shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
-              <div className="relative max-w-md">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
-                <input
-                  type="text"
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder="Search menu..."
-                  className="w-full bg-white border border-[#f5b8c0] rounded-full pl-9 pr-9 py-2.5 font-body text-sm text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#e8233a]/30 focus:border-[#e8233a] transition-all min-h-[44px]"
-                />
-                {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] hover:text-[#e8233a]">
-                    <X size={16} />
-                  </button>
-                )}
-              </div>
+          {/* Categories */}
+          <div style={{ backgroundColor: "#FFB3C1" }} className="sticky top-16 z-40 border-b border-[#f590a0]/40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
               <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                 <button onClick={() => setActiveCategory("All")} className={`shrink-0 px-5 py-2 rounded-full font-body font-semibold text-sm transition-all min-h-[40px] ${activeCategory === "All" ? "bg-[#e8233a] text-white shadow-md" : "bg-[#fde8ea] text-[#c41230] hover:bg-[#f5b8c0]"}`}>🍓 All</button>
                 {CATEGORIES.map((cat) =>
@@ -167,14 +146,14 @@ function OrderContent() {
           </div>
 
           {/* Menu Grid */}
-          <section style={{ backgroundColor: "#fff8f9" }} className="pb-28">
+          <section style={{ backgroundColor: "#FFB3C1" }} className="pb-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {loading ?
             <BrandedLoader text="whipping up the menu..." /> :
             activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ?
             <div className="text-center text-muted-foreground font-body py-16">
-                  <span className="text-4xl block mb-3">🔍🍓</span>
-                  <p>No items match "{search}". Try a different search!</p>
+                  <span className="text-4xl block mb-3">🍓</span>
+                  <p>No menu items found.</p>
                 </div> :
             activeCategory === "All" ?
             Object.entries(groupedByCategory).map(([cat, catItems]) =>

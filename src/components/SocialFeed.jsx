@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
+import TikTokFeedSection from "@/components/TikTokFeedSection";
 
 export default function SocialFeed() {
   const [posts, setPosts] = useState([]);
@@ -128,50 +129,7 @@ export default function SocialFeed() {
       )}
 
       {/* TikTok Feed */}
-      {activeTab === "TikTok" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {tiktokPosts.length === 0 ? (
-            <div className="col-span-full text-center py-12 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
-              <span className="text-5xl block mb-3">🎵</span>
-              <p className="text-muted-foreground font-body text-sm">
-                TikTok videos coming soon! Follow us{" "}
-                <a href="https://www.tiktok.com/@thestrawberryshopp" target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
-                  @thestrawberryshopp
-                </a>
-              </p>
-            </div>
-          ) : (
-            tiktokPosts.map(post => {
-              const videoId = post.url.split("/video/")[1]?.split("?")[0];
-              if (!videoId) {
-                return (
-                  <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm text-center">
-                    <span className="text-4xl block mb-3">🎵</span>
-                    <p className="text-muted-foreground font-body text-sm">
-                      Check out our TikTok{" "}
-                      <a href={post.url} target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
-                        @thestrawberryshopp
-                      </a>
-                    </p>
-                  </div>
-                );
-              }
-              return (
-                <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
-                  <blockquote
-                    className="tiktok-embed"
-                    cite={post.url}
-                    data-video-id={videoId}
-                    style={{ maxWidth: "100%", minWidth: "280px" }}
-                  >
-                    <section></section>
-                  </blockquote>
-                </div>
-              );
-            })
-          )}
-        </div>
-      )}
+      {activeTab === "TikTok" && <TikTokFeedSection />}
     </div>
   );
 }

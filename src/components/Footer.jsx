@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { InstagramButton, TikTokButton, GoogleReviewButton } from "./SocialButtons";
+import { SocialIconsRow, GoogleReviewButton } from "./SocialButtons";
 
 const navLinks = [
   { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
-  { label: "Order", to: "/order" },
   { label: "About", to: "/about" },
   { label: "Location", to: "/location" },
-  { label: "Contact", to: "/contact" },
+  { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
 ];
 
@@ -40,9 +39,8 @@ export default function Footer() {
 
         {/* Social + Google review */}
         <div className="mt-8 pt-6 border-t border-[#fde8ea] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
-            <InstagramButton />
-            <TikTokButton />
+          <div className="flex justify-center sm:justify-start">
+            <SocialIconsRow />
           </div>
           <GoogleReviewButton />
         </div>

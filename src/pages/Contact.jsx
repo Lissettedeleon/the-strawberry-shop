@@ -6,7 +6,7 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FAQAccordion from "@/components/FAQAccordion";
-import { InstagramButton, TikTokButton, GoogleReviewButton } from "@/components/SocialButtons";
+import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
 import { Send } from "lucide-react";
 
 const CONFETTI_COLORS = ["#e8233a","#f5b8c0","#fde8ea","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
@@ -173,9 +173,8 @@ export default function Contact() {
       <section className="bg-white py-10 border-t border-[#fde8ea]">
         <div className="max-w-lg mx-auto px-4 text-center">
           <p className="font-body font-semibold text-[#c41230] text-base mb-4">Follow us</p>
-          <div className="flex flex-wrap justify-center gap-3 mb-4">
-            <InstagramButton />
-            <TikTokButton />
+          <div className="flex justify-center mb-4">
+            <SocialIconsRow />
           </div>
           <GoogleReviewButton />
         </div>

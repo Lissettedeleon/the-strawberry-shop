@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { InstagramButton, TikTokButton, GoogleReviewButton } from "@/components/SocialButtons";
+import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
 import { Heart, Leaf, Sparkles } from "lucide-react";
 
 export default function About() {
@@ -71,9 +71,8 @@ export default function About() {
       <section style={{ background: "#fff8f9" }} className="py-12 border-t border-[#fde8ea]">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <p className="font-body font-semibold text-[#c41230] text-base mb-4">Follow us & leave a review</p>
-          <div className="flex flex-wrap justify-center gap-3 mb-4">
-            <InstagramButton />
-            <TikTokButton />
+          <div className="flex justify-center mb-4">
+            <SocialIconsRow />
           </div>
           <div className="flex justify-center mb-8">
             <GoogleReviewButton />
