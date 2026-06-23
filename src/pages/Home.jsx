@@ -104,19 +104,19 @@ export default function Home() {
       </section>
 
       {/* 3 perks */}
-      <section style={{ background: "#fff8f9" }} className="py-10 md:py-14 border-y border-[#fde8ea] hidden">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            {PERKS.map((p, i) =>
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <span className="text-3xl md:text-4xl block mb-2">{p.emoji}</span>
-                <p className="font-body font-semibold text-[#c41230] text-sm md:text-base">{p.title}</p>
-                <p className="font-body text-[#6b7280] text-xs md:text-sm mt-0.5 hidden sm:block">{p.sub}</p>
-              </motion.div>
-            )}
-          </div>
-        </div>
-      </section>
+      
+
+
+
+
+
+
+
+
+
+
+
+      
 
       {/* Reviews */}
       <section className="bg-white py-12 md:py-16">
