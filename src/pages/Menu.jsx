@@ -83,12 +83,12 @@ export default function Menu() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-3">
           <div className="relative max-w-md">
             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search the menu..."
-              className="w-full bg-white border-2 border-border rounded-full pl-11 pr-10 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors hidden" />
+            
+
+
+
+
+            
             
             {search &&
             <button
