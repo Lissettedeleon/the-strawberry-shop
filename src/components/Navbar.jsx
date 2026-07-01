@@ -43,9 +43,12 @@ export default function Navbar() {
     <>
       {/* Top utility bar */}
       <div className="bg-[#FBF1F3] border-b border-[#F6E3E7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center sm:justify-between py-1.5">
-          <p className="hidden sm:block text-[#5C0110] text-xs font-body font-semibold">7100 Foundry Row, Liberty Township, OH</p>
-          <SocialIconsRow compact className="gap-3" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-1.5">
+          <div className="hidden sm:flex items-center gap-3">
+            <p className="text-[#5C0110] text-xs font-body font-semibold">7100 Foundry Row, Liberty Township, OH</p>
+            <OpenClosedBadge />
+          </div>
+          <SocialIconsRow compact className="gap-3 mx-auto sm:mx-0" />
         </div>
       </div>
 
