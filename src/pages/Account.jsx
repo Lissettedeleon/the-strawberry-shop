@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import BrandedLoader from "@/components/BrandedLoader";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
-import { Copy, Check, Edit2, X, LogOut, Gift, KeyRound } from "lucide-react";
+import { Copy, Check, Edit2, X, LogOut, Gift, KeyRound, PartyPopper } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Account() {
@@ -90,9 +90,8 @@ export default function Account() {
     }
   };
 
-  const handleReorder = (order) => {
-    // Navigate to order page with items preloaded - for now just navigate to order
-    navigate("/order");
+  const handleReorder = () => {
+    navigate("/menu");
   };
 
   const handleLogout = () => {
@@ -105,7 +104,7 @@ export default function Account() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8193C 0%, #C41230 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-white text-3xl sm:text-4xl text-center drop-shadow-lg">
             Welcome back{user?.first_name ? ` ${user.first_name}` : ""}
@@ -114,13 +113,13 @@ export default function Account() {
         <WaveDivider from="red" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#FFB3C6" }}>
+      <section style={{ backgroundColor: "#E0A4B0" }}>
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
           {/* Welcome message for new accounts */}
           {welcomeMsg && (
             <div className="bg-white rounded-[30px_10px_30px_10px] p-5 border-2 border-primary/30 shadow-sm text-center">
-              <span className="text-3xl block mb-2">🎉</span>
+              <PartyPopper size={32} className="mx-auto mb-2 text-primary" />
               <p className="font-body font-semibold text-sm text-foreground leading-relaxed">{welcomeMsg}</p>
             </div>
           )}
@@ -139,12 +138,12 @@ export default function Account() {
               <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: `${progressPct}%` }} />
             </div>
             <p className="font-body text-xs text-muted-foreground">
-              {points >= 100 ? "🎉 You've earned a reward!" : `${100 - points} points until your next $5 reward`}
+              {points >= 100 ? "You've earned a reward!" : `${100 - points} points until your next $5 reward`}
             </p>
             {rewardCode && (
               <div className="mt-4 p-3 bg-primary/10 rounded-2xl border-2 border-primary/20 flex items-center justify-between">
                 <div>
-                  <p className="font-body font-bold text-xs text-primary">🎁 Your $5 Reward</p>
+                  <p className="font-body font-bold text-xs text-primary">Your $5 Reward</p>
                   <p className="font-mono text-sm text-foreground">{rewardCode}</p>
                 </div>
                 <button onClick={copyReward} className="p-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors">

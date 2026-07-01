@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,34 +6,34 @@
 
 @layer base {
   :root {
-    --background: 350 100% 97%;
-    --foreground: 345 60% 16%;
+    --background: 348 55% 97%;
+    --foreground: 350 55% 14%;
     --card: 0 0% 100%;
-    --card-foreground: 345 60% 16%;
+    --card-foreground: 350 55% 14%;
     --popover: 0 0% 100%;
-    --popover-foreground: 345 60% 16%;
-    --primary: 351 82% 50%;
+    --popover-foreground: 350 55% 14%;
+    --primary: 350 98% 25%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 345 100% 85%;
-    --secondary-foreground: 345 60% 16%;
-    --muted: 350 50% 95%;
-    --muted-foreground: 340 30% 45%;
-    --accent: 341 71% 37%;
+    --secondary: 348 49% 76%;
+    --secondary-foreground: 350 70% 20%;
+    --muted: 347 52% 93%;
+    --muted-foreground: 345 25% 42%;
+    --accent: 350 98% 25%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 345 80% 85%;
-    --input: 345 80% 85%;
-    --ring: 351 82% 50%;
-    --chart-1: 351 82% 50%;
-    --chart-2: 345 80% 25%;
+    --border: 348 49% 76%;
+    --input: 348 49% 76%;
+    --ring: 350 98% 25%;
+    --chart-1: 350 98% 25%;
+    --chart-2: 348 49% 76%;
     --chart-3: 350 100% 92%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 1rem;
-    --font-heading: 'Pacifico', cursive;
+    --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Quicksand', sans-serif;
-    --font-display: 'Pacifico', cursive;
+    --font-display: 'Fredoka', sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ImageOff, Sparkles } from "lucide-react";
 import AllergenTags from "./AllergenTags";
 
 export default function MenuItemModal({ item, onClose }) {
@@ -29,7 +29,7 @@ export default function MenuItemModal({ item, onClose }) {
           </div>
         ) : (
           <div className="aspect-square bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center">
-            <span className="text-8xl">🍓</span>
+            <ImageOff size={56} className="text-primary/40" />
           </div>
         )}
 
@@ -38,8 +38,8 @@ export default function MenuItemModal({ item, onClose }) {
             <div>
               <h2 className="font-display text-foreground text-2xl">{item.name}</h2>
               {item.is_seasonal && (
-                <span className="inline-block mt-1 bg-primary/10 text-primary text-xs font-body font-bold px-3 py-1 rounded-full">
-                  Seasonal ✨
+                <span className="inline-flex items-center gap-1 mt-1 bg-primary/10 text-primary text-xs font-body font-bold px-3 py-1 rounded-full">
+                  <Sparkles size={12} /> Seasonal
                 </span>
               )}
             </div>
@@ -62,7 +62,7 @@ export default function MenuItemModal({ item, onClose }) {
           )}
 
           {item.is_sold_out && (
-            <p className="text-foreground/50 font-body font-bold text-sm">Sold Out 😢</p>
+            <p className="text-foreground/50 font-body font-bold text-sm">Sold Out</p>
           )}
 
           <AllergenTags allergens={item.allergens} />

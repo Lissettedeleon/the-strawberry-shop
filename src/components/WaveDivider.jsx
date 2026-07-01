@@ -1,10 +1,10 @@
 import React from "react";
 
 const colorMap = {
-  blush: "#FFB3C6",
+  blush: "#E0A4B0",
   white: "#FFFFFF",
-  red: "#E8193C",
-  dark: "#A31C46",
+  red: "#7C0116",
+  dark: "#5C0110",
 };
 
 export default function WaveDivider({ from = "white", to = "blush", flip = false }) {
