@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import OrderMenuItemCard from "@/components/OrderMenuItemCard";
-import FloatingCart from "@/components/FloatingCart";
 import BrandedLoader from "@/components/BrandedLoader";
 import PowderAccent from "@/components/PowderAccent";
 import { motion } from "framer-motion";
@@ -159,7 +158,6 @@ export default function Menu() {
       </section>
 
       <Footer />
-      <FloatingCart />
     </div>
   );
 }

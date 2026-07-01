@@ -6,7 +6,26 @@ import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
 import OrderChoiceModal from "./OrderChoiceModal";
+import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
+
+function CartButton({ className = "", iconSize = 20 }) {
+  const { itemCount, setCartOpen } = useCart();
+  return (
+    <button
+      onClick={() => setCartOpen(true)}
+      className={`relative p-2 text-[#1a1a1a] flex items-center justify-center transition-colors hover:text-[#7C0116] ${className}`}
+      aria-label="Cart"
+    >
+      <ShoppingBag size={iconSize} />
+      {itemCount > 0 && (
+        <span className="absolute top-0 right-0 min-w-[18px] h-[18px] px-1 rounded-full bg-[#7C0116] text-white text-[10px] font-body font-bold flex items-center justify-center">
+          {itemCount}
+        </span>
+      )}
+    </button>
+  );
+}
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -87,6 +106,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <CartButton />
               <button
                 onClick={() => setOrderChoiceOpen(true)}
                 className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
@@ -95,9 +115,10 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Mobile: open badge + hamburger */}
-            <div className="md:hidden flex items-center gap-2">
+            {/* Mobile: open badge + cart + hamburger */}
+            <div className="md:hidden flex items-center gap-1">
               <OpenClosedBadge />
+              <CartButton />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="p-2 text-[#1a1a1a] min-w-[44px] min-h-[44px] flex items-center justify-center"

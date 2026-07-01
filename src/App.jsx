@@ -19,6 +19,7 @@ import OrderConfirmation from '@/pages/OrderConfirmation';
 import AdminDashboard from '@/pages/AdminDashboard';
 
 import { CartProvider } from '@/lib/CartContext';
+import CartDrawer from '@/components/CartDrawer';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError } = useAuth();
@@ -49,6 +50,7 @@ const AuthenticatedApp = () => {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <CartDrawer />
       </CartProvider>
     );
   }
@@ -73,6 +75,7 @@ const AuthenticatedApp = () => {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <CartDrawer />
     </CartProvider>
   );
 };
