@@ -104,6 +104,11 @@ export default function Checkout() {
                       <span className="font-body font-semibold text-[#1a1a1a] text-sm">{item.quantity}x {item.name}</span>
                       <span className="font-body font-bold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
                     </div>
+                    {item.ingredients?.length > 0 && (
+                      <p className="text-xs text-[#6b7280] mt-0.5">
+                        Comes with: {item.ingredients.filter(i => !item.removed_ingredients?.includes(i)).join(", ")}
+                      </p>
+                    )}
                     {item.removed_ingredients?.length > 0 && <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>}
                     {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
                     {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>}

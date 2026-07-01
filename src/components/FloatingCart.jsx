@@ -11,26 +11,19 @@ export default function FloatingCart() {
 
   return (
     <>
-      {/* Floating button */}
-      {itemCount === 0 ? (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-4 z-50 w-14 h-14 rounded-full bg-[#7C0116] text-white shadow-xl flex items-center justify-center hover:bg-[#5C0110] transition-colors active:scale-95"
-          aria-label="Cart"
-        >
-          <ShoppingBag size={22} />
-        </button>
-      ) : (
-        <button
-          onClick={() => setOpen(!open)}
-          className="fixed bottom-6 left-4 right-4 z-50 bg-[#7C0116] text-white shadow-xl rounded-full px-5 py-3.5 flex items-center justify-center gap-3 hover:bg-[#5C0110] transition-colors active:scale-95 min-h-[52px]"
-          aria-label="Cart"
-        >
-          <ShoppingBag size={20} />
-          <span className="font-body font-bold text-sm flex-1 text-left">{itemCount} item{itemCount !== 1 ? "s" : ""}</span>
-          <span className="font-body font-bold text-sm">${subtotal.toFixed(2)}</span>
-        </button>
-      )}
+      {/* Floating button, top-right */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="fixed top-24 right-4 z-50 w-14 h-14 rounded-full bg-[#7C0116] text-white shadow-xl flex items-center justify-center hover:bg-[#5C0110] transition-colors active:scale-95"
+        aria-label="Cart"
+      >
+        <ShoppingBag size={22} />
+        {itemCount > 0 && (
+          <span className="absolute -top-1 -right-1 min-w-[22px] h-[22px] px-1 rounded-full bg-white text-[#7C0116] text-xs font-body font-bold flex items-center justify-center border-2 border-[#7C0116]">
+            {itemCount}
+          </span>
+        )}
+      </button>
 
       <AnimatePresence>
         {open && (
@@ -97,6 +90,11 @@ function CartItems({ items, updateItem, removeItem }) {
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <h4 className="font-body font-bold text-[#1a1a1a] text-sm">{item.name}</h4>
+                {item.ingredients?.length > 0 && (
+                  <p className="text-xs text-[#6b7280] mt-0.5">
+                    Comes with: {item.ingredients.filter(i => !item.removed_ingredients?.includes(i)).join(", ")}
+                  </p>
+                )}
                 {item.removed_ingredients?.length > 0 && <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>}
                 {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
                 {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>}
