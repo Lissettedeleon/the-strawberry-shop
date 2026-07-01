@@ -10,6 +10,23 @@
       "type": "string",
       "description": "Customer's email"
     },
+    "customer_phone": {
+      "type": "string",
+      "description": "Customer's phone number"
+    },
+    "fulfillment_type": {
+      "type": "string",
+      "enum": ["pickup", "delivery"],
+      "default": "pickup"
+    },
+    "delivery_address": {
+      "type": "object",
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "zip": { "type": "string" }
+      }
+    },
     "items": {
       "type": "array",
       "description": "Order items with customizations",
@@ -24,6 +41,13 @@
           },
           "quantity": {
             "type": "number"
+          },
+          "ingredients": {
+            "type": "array",
+            "description": "Base ingredients the item comes with",
+            "items": {
+              "type": "string"
+            }
           },
           "removed_ingredients": {
             "type": "array",
@@ -71,9 +95,13 @@
       "type": "number",
       "description": "Order subtotal"
     },
+    "tax": {
+      "type": "number",
+      "description": "Sales tax applied to the subtotal"
+    },
     "total": {
       "type": "number",
-      "description": "Final total"
+      "description": "Final total, including tax"
     },
     "reward_applied": {
       "type": "boolean",

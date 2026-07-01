@@ -112,9 +112,21 @@ export default function OrderConfirmation() {
                 );
               })}
             </div>
-            <div className="flex justify-between items-center pt-3 mt-1 border-t border-[#F6E3E7]">
-              <span className="font-body font-bold text-[#1a1a1a]">Total</span>
-              <span className="font-body font-extrabold text-[#7C0116] text-lg">${order.total?.toFixed(2)}</span>
+            <div className="pt-3 mt-1 border-t border-[#F6E3E7] space-y-1.5">
+              <div className="flex justify-between items-center">
+                <span className="font-body text-[#6b7280] text-sm">Subtotal</span>
+                <span className="font-body font-semibold text-[#1a1a1a] text-sm">${order.subtotal?.toFixed(2)}</span>
+              </div>
+              {order.tax != null && (
+                <div className="flex justify-between items-center">
+                  <span className="font-body text-[#6b7280] text-sm">Tax</span>
+                  <span className="font-body font-semibold text-[#1a1a1a] text-sm">${order.tax.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex justify-between items-center pt-1.5 border-t border-[#F6E3E7]">
+                <span className="font-body font-bold text-[#1a1a1a]">Total</span>
+                <span className="font-body font-extrabold text-[#7C0116] text-lg">${order.total?.toFixed(2)}</span>
+              </div>
             </div>
           </div>
         )}

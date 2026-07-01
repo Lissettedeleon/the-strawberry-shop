@@ -5,7 +5,7 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/lib/CartContext";
-import { EXTRA_PRICE } from "@/lib/itemConfigs";
+import { EXTRA_PRICE, TAX_RATE } from "@/lib/itemConfigs";
 import { ArrowLeft, ChevronDown, ChevronUp, ShoppingBag, Store, Truck } from "lucide-react";
 
 const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
@@ -21,7 +21,8 @@ export default function Checkout() {
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState({ street: "", city: "", zip: "" });
 
-  const total = subtotal;
+  const tax = subtotal * TAX_RATE;
+  const total = subtotal + tax;
   const isDelivery = fulfillmentType === "delivery";
   const canPlaceOrder = firstName && lastName && email && (!isDelivery || deliveryAddress.street);
 
@@ -38,6 +39,7 @@ export default function Checkout() {
         delivery_address: isDelivery ? deliveryAddress : undefined,
         items,
         subtotal,
+        tax,
         total,
         reward_applied: false,
         reward_discount: 0,
@@ -179,9 +181,19 @@ export default function Checkout() {
           </div>
 
           {/* Total */}
-          <div className="flex justify-between items-center pt-3 border-t border-[#F6E3E7]">
-            <span className="font-body font-bold text-[#1a1a1a]">Total</span>
-            <span className="font-body font-extrabold text-[#7C0116] text-xl">${total.toFixed(2)}</span>
+          <div className="pt-3 border-t border-[#F6E3E7] space-y-1.5">
+            <div className="flex justify-between items-center">
+              <span className="font-body text-[#6b7280] text-sm">Subtotal</span>
+              <span className="font-body font-semibold text-[#1a1a1a] text-sm">${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="font-body text-[#6b7280] text-sm">Tax</span>
+              <span className="font-body font-semibold text-[#1a1a1a] text-sm">${tax.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center pt-1.5 border-t border-[#F6E3E7]">
+              <span className="font-body font-bold text-[#1a1a1a]">Total</span>
+              <span className="font-body font-extrabold text-[#7C0116] text-xl">${total.toFixed(2)}</span>
+            </div>
           </div>
 
           <button
