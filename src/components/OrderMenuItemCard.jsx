@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ImageOff } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
+import { ITEM_CONFIGS } from "@/lib/itemConfigs";
 import AllergenTags from "./AllergenTags";
 import OrderItemModal from "./OrderItemModal";
 
@@ -14,6 +15,7 @@ export default function OrderMenuItemCard({ item }) {
       name: menuItem.name,
       base_price: menuItem.price,
       quantity: qty,
+      ingredients: ITEM_CONFIGS[menuItem.name]?.ingredients || [],
       removed_ingredients: [],
       extras: [],
       extra_count: 0,

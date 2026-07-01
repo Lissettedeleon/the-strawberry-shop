@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import Lottie from "lottie-react";
 import confetti from "canvas-confetti";
+import { Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BrandedLoader from "@/components/BrandedLoader";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
-import Logo from "@/components/Logo";
 
-const CONFETTI_COLORS = ["#7C0116","#E0A4B0","#F6E3E7","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
+const CONFETTI_COLORS = ["#7C0116", "#E0A4B0", "#F6E3E7", "#ffd93d", "#6bcb77", "#4d96ff", "#ff922b", "#cc5de8", "#ffffff", "#ff6b9d"];
 
 function fireConfetti() {
   confetti({
@@ -28,15 +28,7 @@ export default function OrderConfirmation() {
   const orderNumber = params.get("number");
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [lottieData, setLottieData] = useState(null);
   const intervalRef = useRef(null);
-
-  useEffect(() => {
-    fetch("https://assets10.lottiefiles.com/packages/lf20_touohxv0.json")
-      .then(r => r.json())
-      .then(setLottieData)
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     if (orderId) {
@@ -56,16 +48,7 @@ export default function OrderConfirmation() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#FBF1F3" }}>
-        <div className="text-center">
-          <div className="mb-3 flex justify-center">
-            <Logo size="lg" className="animate-[spin_1.6s_linear_infinite]" />
-          </div>
-          <p className="font-body text-[#6b7280]">Finalizing your order...</p>
-        </div>
-      </div>
-    );
+    return <BrandedLoader text="Finalizing your order..." />;
   }
 
   return (
@@ -73,23 +56,9 @@ export default function OrderConfirmation() {
       <Navbar />
 
       <div className="max-w-lg mx-auto px-4 py-12 text-center">
-        {/* Lottie strawberry */}
-        <div className="flex justify-center mb-4">
-          {lottieData ? (
-            <Lottie animationData={lottieData} loop style={{ width: 180, height: 180 }} />
-          ) : (
-            <Logo size="lg" className="animate-bounce" />
-          )}
-        </div>
-
-        {/* Pulsing green checkmark */}
         <div className="flex justify-center mb-5">
-          <div className="relative">
-            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center animate-pulse">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
+          <div className="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center">
+            <Check className="w-10 h-10 text-white" strokeWidth={3} />
           </div>
         </div>
 
@@ -116,6 +85,11 @@ export default function OrderConfirmation() {
                       <span className="font-body font-semibold text-[#1a1a1a] text-sm">{item.quantity}x {item.name}</span>
                       <span className="font-body font-bold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
                     </div>
+                    {item.ingredients?.length > 0 && (
+                      <p className="text-xs text-[#6b7280] mt-0.5">
+                        Comes with: {item.ingredients.filter(i => !item.removed_ingredients?.includes(i)).join(", ")}
+                      </p>
+                    )}
                     {item.removed_ingredients?.length > 0 && (
                       <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>
                     )}
