@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WaveDivider from "@/components/WaveDivider";
-import OrderMenuItemCard from "@/components/OrderMenuItemCard";
 import BrandedLoader from "@/components/BrandedLoader";
-import PowderAccent from "@/components/PowderAccent";
+import MenuFolder from "@/components/MenuFolder";
 import { motion } from "framer-motion";
-import { SearchX, Store, Truck } from "lucide-react";
+import { SearchX, Store, Truck, Globe } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "@/components/DeliveryBadges";
 import { useCart } from "@/lib/CartContext";
 
@@ -19,11 +17,15 @@ const CATEGORIES = [
   "Others",
 ];
 
+const DELIVERY_FEE = "$3.99";
+const DELIVERY_TIME = "35–45 min";
+const DELIVERY_MINIMUM = "$15.00";
+
 export default function Menu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("All");
   const { fulfillmentType, setFulfillmentType } = useCart();
+  const isDelivery = fulfillmentType === "delivery";
 
   useEffect(() => {
     base44.entities.MenuItem.list("sort_order", 50)
@@ -32,10 +34,6 @@ export default function Menu() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredItems = activeCategory === "All"
-    ? items
-    : items.filter((i) => i.category === activeCategory);
-
   const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
     const catItems = items.filter((i) => i.category === cat);
     if (catItems.length > 0) acc[cat] = catItems;
@@ -43,119 +41,95 @@ export default function Menu() {
   }, {});
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#E0A4B0" }}>
+    <div
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: isDelivery ? "#F7E3E8" : "#E0A4B0" }}
+    >
       <Navbar />
 
-      {/* Header */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}>
-        <PowderAccent />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
-            our menu
-          </motion.h1>
-          <p className="text-white/80 font-body text-lg mb-6">
-            Every cup starts with the freshest strawberries. Always.
-          </p>
-
-          {/* Pickup / Delivery toggle */}
-          <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-full p-1.5">
-            <button
-              onClick={() => setFulfillmentType("pickup")}
-              className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
-                fulfillmentType === "pickup" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
-              }`}
-            >
-              <Store size={15} /> Pickup
-            </button>
-            <button
-              onClick={() => setFulfillmentType("delivery")}
-              className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
-                fulfillmentType === "delivery" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
-              }`}
-            >
-              <Truck size={15} /> Delivery
-            </button>
-          </div>
-        </div>
-        <WaveDivider from="red" to="blush" />
-      </section>
-
-      {/* Category Filter */}
-      <div style={{ backgroundColor: "#E0A4B0" }} className="sticky top-16 z-40 border-b border-[#CC8794]/40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            {["All", ...CATEGORIES].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 px-4 py-2 rounded-full font-body font-semibold text-xs sm:text-sm transition-all ${
-                  activeCategory === cat ? "bg-[#7C0116] text-white shadow-sm" : "bg-white text-[#1a1a1a] hover:bg-[#F6E3E7]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Page head */}
+      <div className="text-center px-4 pt-10 pb-4">
+        <p className="font-body font-black text-[#7C0116] text-xs tracking-widest uppercase mb-2">
+          Every cup starts fresh
+        </p>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="font-menu-bubble text-[#7C0116] text-3xl sm:text-4xl mb-2"
+        >
+          our menu
+        </motion.h1>
+        <p className="text-[#6b4a52] font-body font-bold text-sm">
+          Made fresh daily with real strawberries, always.
+        </p>
       </div>
 
-      {/* Menu Items */}
-      <section style={{ backgroundColor: "#E0A4B0" }} className="pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {loading ? (
-            <BrandedLoader text="whipping up the menu..." />
-          ) : activeCategory === "All" && Object.keys(groupedByCategory).length === 0 ? (
-            <div className="text-center text-muted-foreground font-body py-16">
-              <SearchX size={40} className="mx-auto mb-3 text-[#5C0110]/50" />
-              <p>No menu items yet. Check back soon!</p>
-            </div>
-          ) : activeCategory === "All" ? (
-            Object.entries(groupedByCategory).map(([cat, catItems]) => (
-              <div key={cat} className="mb-14">
-                <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
-                  {cat.toLowerCase()}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {catItems.map((item) => (
-                    <OrderMenuItemCard key={item.id} item={item} />
-                  ))}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>
-              <h2 className="font-display text-foreground text-2xl sm:text-3xl mb-6">
-                {activeCategory.toLowerCase()}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {filteredItems.map((item) => (
-                  <OrderMenuItemCard key={item.id} item={item} />
-                ))}
-              </div>
-              {filteredItems.length === 0 && (
-                <div className="text-center text-muted-foreground font-body py-12">
-                  <SearchX size={32} className="mx-auto mb-3 text-[#5C0110]/50" />
-                  <p>No items in this category yet.</p>
-                </div>
-              )}
-            </div>
-          )}
+      {/* Pickup / Delivery toggle */}
+      <div className="flex flex-col items-center gap-3 px-4 pb-9">
+        <div className="inline-flex bg-white rounded-full p-1.5 shadow-sm">
+          <button
+            onClick={() => setFulfillmentType("pickup")}
+            className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-extrabold text-sm transition-all ${
+              !isDelivery ? "bg-[#7C0116] text-white" : "text-[#7a6469]"
+            }`}
+          >
+            <Store size={15} /> Pickup
+          </button>
+          <button
+            onClick={() => setFulfillmentType("delivery")}
+            className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-extrabold text-sm transition-all ${
+              isDelivery ? "bg-[#7C0116] text-white" : "text-[#7a6469]"
+            }`}
+          >
+            <Truck size={15} /> Delivery
+          </button>
         </div>
-      </section>
 
-      {/* Alternative delivery apps */}
-      <section className="bg-white py-8 border-t border-[#F6E3E7]">
-        <div className="max-w-md mx-auto px-4 text-center">
-          <p className="font-body text-[#6b7280] text-sm mb-3">Prefer to order delivery through an app instead?</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <UberEatsBadge />
-            <DoorDashBadge />
+        {isDelivery && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-2xl flex flex-col items-center gap-3"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 bg-white rounded-2xl px-6 py-3 shadow-sm">
+              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+                Delivery fee: <span className="text-[#7a6469] font-bold">{DELIVERY_FEE}</span>
+              </span>
+              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+                Estimated time: <span className="text-[#7a6469] font-bold">{DELIVERY_TIME}</span>
+              </span>
+              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+                Minimum order: <span className="text-[#7a6469] font-bold">{DELIVERY_MINIMUM}</span>
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <span className="font-body text-[#6b4a52] text-xs font-bold">Order delivery through:</span>
+              <span className="inline-flex items-center gap-1.5 bg-[#7C0116] text-white font-body font-bold text-xs px-3 py-1.5 rounded-full">
+                <Globe size={13} /> Our Website
+              </span>
+              <UberEatsBadge className="!text-xs !px-3 !py-1.5" />
+              <DoorDashBadge className="!text-xs !px-3 !py-1.5" />
+            </div>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Menu folders */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-14 pb-24 flex flex-col gap-10">
+        {loading ? (
+          <BrandedLoader text="whipping up the menu..." />
+        ) : Object.keys(groupedByCategory).length === 0 ? (
+          <div className="text-center text-[#6b4a52] font-body font-bold py-16">
+            <SearchX size={40} className="mx-auto mb-3 text-[#7C0116]/50" />
+            <p>No menu items yet. Check back soon!</p>
           </div>
-        </div>
-      </section>
+        ) : (
+          Object.entries(groupedByCategory).map(([cat, catItems]) => (
+            <MenuFolder key={cat} category={cat} items={catItems} />
+          ))
+        )}
+      </div>
 
       <Footer />
     </div>

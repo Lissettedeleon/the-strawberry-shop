@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik+Bubbles&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -122,6 +122,12 @@
 @keyframes heroLogoBounce {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
+}
+
+/* Menu page only — folder tab labels + page heading */
+.font-menu-bubble {
+  font-family: 'Rubik Bubbles', cursive;
+  font-weight: 400;
 }
 
 /* Smooth scrollbar for webkit */
