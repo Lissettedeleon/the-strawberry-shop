@@ -6,8 +6,9 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
+import Logo from "@/components/Logo";
 
-const CONFETTI_COLORS = ["#e8233a","#f5b8c0","#fde8ea","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
+const CONFETTI_COLORS = ["#7C0116","#E0A4B0","#F6E3E7","#ffd93d","#6bcb77","#4d96ff","#ff922b","#cc5de8","#ffffff","#ff6b9d"];
 
 function fireConfetti() {
   confetti({
@@ -56,9 +57,11 @@ export default function OrderConfirmation() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#fff8f9" }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "#FBF1F3" }}>
         <div className="text-center">
-          <div className="text-5xl mb-3 animate-bounce">🍓</div>
+          <div className="mb-3 flex justify-center">
+            <Logo size="lg" className="animate-[spin_1.6s_linear_infinite]" />
+          </div>
           <p className="font-body text-[#6b7280]">Finalizing your order...</p>
         </div>
       </div>
@@ -66,7 +69,7 @@ export default function OrderConfirmation() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "#fff8f9" }}>
+    <div className="min-h-screen" style={{ background: "#FBF1F3" }}>
       <Navbar />
 
       <div className="max-w-lg mx-auto px-4 py-12 text-center">
@@ -75,7 +78,7 @@ export default function OrderConfirmation() {
           {lottieData ? (
             <Lottie animationData={lottieData} loop style={{ width: 180, height: 180 }} />
           ) : (
-            <div className="text-7xl animate-bounce" style={{ animationDuration: "2s" }}>🍓</div>
+            <Logo size="lg" className="animate-bounce" />
           )}
         </div>
 
@@ -90,34 +93,34 @@ export default function OrderConfirmation() {
           </div>
         </div>
 
-        <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Order Placed! 🎉</h1>
-        <p className="font-body text-[#6b7280] text-base mb-1">We'll have it ready for you shortly 🍓</p>
+        <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Order Placed!</h1>
+        <p className="font-body text-[#6b7280] text-base mb-1">We'll have it ready for you shortly.</p>
 
         {orderNumber && (
-          <div className="mt-4 mb-6 inline-block bg-white border border-[#f5b8c0] rounded-2xl px-6 py-3">
+          <div className="mt-4 mb-6 inline-block bg-white border border-[#E0A4B0] rounded-2xl px-6 py-3">
             <p className="font-body text-[#6b7280] text-xs mb-1">Order Number</p>
-            <p className="font-body font-bold text-[#e8233a] text-xl">{orderNumber}</p>
+            <p className="font-body font-bold text-[#7C0116] text-xl">{orderNumber}</p>
           </div>
         )}
 
         {order && (
-          <div className="bg-white border border-[#f5b8c0] rounded-2xl p-5 text-left mb-6">
+          <div className="bg-white border border-[#E0A4B0] rounded-2xl p-5 text-left mb-6">
             <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-3">Order Summary</h3>
             <div className="space-y-3">
               {order.items?.map((item, idx) => {
                 const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
                 const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
                 return (
-                  <div key={idx} className="py-2 border-b border-[#fde8ea] last:border-0">
+                  <div key={idx} className="py-2 border-b border-[#F6E3E7] last:border-0">
                     <div className="flex justify-between">
                       <span className="font-body font-semibold text-[#1a1a1a] text-sm">{item.quantity}x {item.name}</span>
-                      <span className="font-body font-bold text-[#e8233a] text-sm">${lineTotal.toFixed(2)}</span>
+                      <span className="font-body font-bold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
                     </div>
                     {item.removed_ingredients?.length > 0 && (
                       <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>
                     )}
                     {item.extras?.length > 0 && (
-                      <p className="text-xs text-[#e8233a] mt-0.5">+ {item.extras.join(", ")}</p>
+                      <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>
                     )}
                     {item.chocolate_selections?.length > 0 && (
                       <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>
@@ -135,23 +138,23 @@ export default function OrderConfirmation() {
                 );
               })}
             </div>
-            <div className="flex justify-between items-center pt-3 mt-1 border-t border-[#fde8ea]">
+            <div className="flex justify-between items-center pt-3 mt-1 border-t border-[#F6E3E7]">
               <span className="font-body font-bold text-[#1a1a1a]">Total</span>
-              <span className="font-body font-extrabold text-[#e8233a] text-lg">${order.total?.toFixed(2)}</span>
+              <span className="font-body font-extrabold text-[#7C0116] text-lg">${order.total?.toFixed(2)}</span>
             </div>
           </div>
         )}
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            to="/order"
-            className="inline-block bg-[#e8233a] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#c41230] transition-colors text-center"
+            to="/menu"
+            className="inline-block bg-[#7C0116] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors text-center"
           >
             Order Again
           </Link>
           <Link
             to="/"
-            className="inline-block bg-white border border-[#f5b8c0] text-[#6b7280] font-body font-semibold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#fde8ea] transition-colors text-center"
+            className="inline-block bg-white border border-[#E0A4B0] text-[#6b7280] font-body font-semibold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#F6E3E7] transition-colors text-center"
           >
             Back to Home
           </Link>

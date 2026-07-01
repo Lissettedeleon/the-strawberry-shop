@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, ImageOff } from "lucide-react";
 import AllergenTags from "./AllergenTags";
 import MenuItemModal from "./MenuItemModal";
 
@@ -16,7 +17,7 @@ export default function MenuItemCard({ item }) {
       >
         {/* Sparkle on hover */}
         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 hidden sm:block">
-          <span className="text-lg">✨</span>
+          <Sparkles size={18} className="text-primary" />
         </div>
 
         {/* Mobile: compact horizontal layout */}
@@ -31,7 +32,7 @@ export default function MenuItemCard({ item }) {
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center">
-                <span className="text-3xl">🍓</span>
+                <ImageOff size={24} className="text-primary/40" />
               </div>
             )}
           </div>
@@ -64,7 +65,7 @@ export default function MenuItemCard({ item }) {
             </div>
           ) : (
             <div className="aspect-square bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center relative overflow-hidden">
-              <span className="text-6xl group-hover:scale-125 transition-transform duration-300">🍓</span>
+              <ImageOff size={48} className="text-primary/40 group-hover:scale-110 transition-transform duration-300" />
               <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-primary/10" />
               <div className="absolute bottom-6 right-6 w-5 h-5 rounded-full bg-primary/10" />
             </div>
@@ -79,12 +80,12 @@ export default function MenuItemCard({ item }) {
             )}
             {item.is_sold_out && (
               <span className="inline-block mt-3 bg-foreground/10 text-foreground/50 text-xs font-body font-bold px-3 py-1 rounded-full">
-                Sold Out 😢
+                Sold Out
               </span>
             )}
             {item.is_seasonal && !item.is_sold_out && (
-              <span className="inline-block mt-3 bg-primary/10 text-primary text-xs font-body font-bold px-3 py-1 rounded-full animate-pulse">
-                Seasonal ✨
+              <span className="inline-flex items-center gap-1 mt-3 bg-primary/10 text-primary text-xs font-body font-bold px-3 py-1 rounded-full animate-pulse">
+                <Sparkles size={11} /> Seasonal
               </span>
             )}
             <AllergenTags allergens={item.allergens} />

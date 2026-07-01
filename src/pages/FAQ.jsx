@@ -8,14 +8,14 @@ export default function FAQ() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #e8233a 0%, #c41230 100%)" }}>
+      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
           <h1 className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">frequently asked questions</h1>
-          <p className="text-white/80 font-body text-lg">Everything you need to know before you visit 🍓</p>
+          <p className="text-white/80 font-body text-lg">Everything you need to know before you visit.</p>
         </div>
       </section>
 
-      <section style={{ background: "#fff8f9" }} className="py-12 md:py-16">
+      <section style={{ background: "#FBF1F3" }} className="py-12 md:py-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <FAQAccordion />
         </div>

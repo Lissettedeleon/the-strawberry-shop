@@ -9,9 +9,9 @@ import BrandedLoader from './components/BrandedLoader';
 
 import Home from '@/pages/Home';
 import Menu from '@/pages/Menu';
-import Order from '@/pages/Order';
 import About from '@/pages/About';
 import Location from '@/pages/Location';
+import Hours from '@/pages/Hours';
 import Contact from '@/pages/Contact';
 import FAQ from '@/pages/FAQ';
 import Checkout from '@/pages/Checkout';
@@ -34,9 +34,10 @@ const AuthenticatedApp = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/order" element={<Navigate to="/menu" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/location" element={<Location />} />
+          <Route path="/hours" element={<Hours />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -57,9 +58,10 @@ const AuthenticatedApp = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/order" element={<Navigate to="/menu" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/location" element={<Location />} />
+        <Route path="/hours" element={<Hours />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/checkout" element={<Checkout />} />

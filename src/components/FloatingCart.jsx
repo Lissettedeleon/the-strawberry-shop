@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, X, Minus, Plus, Trash2 } from "lucide-react";
+import { ShoppingBag, X, Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { EXTRA_PRICE } from "@/lib/itemConfigs";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function FloatingCart() {
       {itemCount === 0 ? (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-4 z-50 w-14 h-14 rounded-full bg-[#e8233a] text-white shadow-xl flex items-center justify-center hover:bg-[#c41230] transition-colors active:scale-95"
+          className="fixed bottom-6 right-4 z-50 w-14 h-14 rounded-full bg-[#7C0116] text-white shadow-xl flex items-center justify-center hover:bg-[#5C0110] transition-colors active:scale-95"
           aria-label="Cart"
         >
           <ShoppingBag size={22} />
@@ -23,7 +23,7 @@ export default function FloatingCart() {
       ) : (
         <button
           onClick={() => setOpen(!open)}
-          className="fixed bottom-6 left-4 right-4 z-50 bg-[#e8233a] text-white shadow-xl rounded-full px-5 py-3.5 flex items-center justify-center gap-3 hover:bg-[#c41230] transition-colors active:scale-95 min-h-[52px]"
+          className="fixed bottom-6 left-4 right-4 z-50 bg-[#7C0116] text-white shadow-xl rounded-full px-5 py-3.5 flex items-center justify-center gap-3 hover:bg-[#5C0110] transition-colors active:scale-95 min-h-[52px]"
           aria-label="Cart"
         >
           <ShoppingBag size={20} />
@@ -52,9 +52,9 @@ export default function FloatingCart() {
               className="fixed bottom-0 left-0 right-0 z-[70] bg-white rounded-t-[24px] max-h-[85vh] flex flex-col shadow-2xl md:hidden"
             >
               <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 mb-1 shrink-0" />
-              <div className="flex items-center justify-between px-5 py-3 border-b border-[#fde8ea] shrink-0">
+              <div className="flex items-center justify-between px-5 py-3 border-b border-[#F6E3E7] shrink-0">
                 <h2 className="font-body font-bold text-[#1a1a1a] text-base">Your Cart</h2>
-                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-[#fde8ea] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
+                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-[#F6E3E7] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
                   <X size={18} className="text-[#6b7280]" />
                 </button>
               </div>
@@ -70,9 +70,9 @@ export default function FloatingCart() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="fixed right-0 top-0 h-full w-full max-w-sm bg-white z-[70] shadow-2xl flex-col hidden md:flex"
             >
-              <div className="flex items-center justify-between p-5 border-b border-[#fde8ea] shrink-0">
+              <div className="flex items-center justify-between p-5 border-b border-[#F6E3E7] shrink-0">
                 <h2 className="font-body font-bold text-[#1a1a1a] text-lg">Your Cart</h2>
-                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-[#fde8ea] transition-colors">
+                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-[#F6E3E7] transition-colors">
                   <X size={18} className="text-[#6b7280]" />
                 </button>
               </div>
@@ -93,12 +93,12 @@ function CartItems({ items, updateItem, removeItem }) {
         const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
         const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
         return (
-          <div key={item.cartId} className="bg-[#fff8f9] border border-[#f5b8c0] rounded-2xl p-4 space-y-2">
+          <div key={item.cartId} className="bg-[#FBF1F3] border border-[#E0A4B0] rounded-2xl p-4 space-y-2">
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <h4 className="font-body font-bold text-[#1a1a1a] text-sm">{item.name}</h4>
                 {item.removed_ingredients?.length > 0 && <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>}
-                {item.extras?.length > 0 && <p className="text-xs text-[#e8233a] mt-0.5">+ {item.extras.join(", ")}</p>}
+                {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
                 {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>}
                 {item.selected_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>}
                 {item.selected_sauces?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>}
@@ -113,25 +113,25 @@ function CartItems({ items, updateItem, removeItem }) {
                 <button onClick={() => {
                   if ((item.quantity || 1) <= 1) removeItem(item.cartId);
                   else updateItem(item.cartId, { quantity: (item.quantity || 1) - 1, item_total: ((item.base_price || 0) + extrasTotal) * ((item.quantity || 1) - 1) });
-                }} className="w-8 h-8 rounded-full bg-white border border-[#f5b8c0] flex items-center justify-center hover:bg-[#fde8ea] transition-colors">
+                }} className="w-8 h-8 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors">
                   <Minus size={12} />
                 </button>
                 <span className="font-body font-bold text-sm w-5 text-center">{item.quantity || 1}</span>
                 <button onClick={() => {
                   const newQty = (item.quantity || 1) + 1;
                   updateItem(item.cartId, { quantity: newQty, item_total: ((item.base_price || 0) + extrasTotal) * newQty });
-                }} className="w-8 h-8 rounded-full bg-white border border-[#f5b8c0] flex items-center justify-center hover:bg-[#fde8ea] transition-colors">
+                }} className="w-8 h-8 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors">
                   <Plus size={12} />
                 </button>
               </div>
-              <span className="font-body font-extrabold text-[#e8233a] text-sm">${lineTotal.toFixed(2)}</span>
+              <span className="font-body font-extrabold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
             </div>
           </div>
         );
       })}
       {items.length === 0 && (
         <div className="text-center py-12">
-          <span className="text-4xl block mb-3">🛒</span>
+          <ShoppingCart size={32} className="mx-auto mb-3 text-[#7C0116]/40" />
           <p className="text-[#6b7280] font-body text-sm">Your cart is empty</p>
         </div>
       )}
@@ -142,15 +142,15 @@ function CartItems({ items, updateItem, removeItem }) {
 function CartFooter({ subtotal, items, onClose }) {
   if (items.length === 0) return null;
   return (
-    <div className="border-t border-[#fde8ea] p-4 space-y-3 shrink-0">
+    <div className="border-t border-[#F6E3E7] p-4 space-y-3 shrink-0">
       <div className="flex items-center justify-between">
         <span className="font-body font-bold text-[#1a1a1a]">Subtotal</span>
-        <span className="font-body font-extrabold text-[#e8233a] text-lg">${subtotal.toFixed(2)}</span>
+        <span className="font-body font-extrabold text-[#7C0116] text-lg">${subtotal.toFixed(2)}</span>
       </div>
       <Link
         to="/checkout"
         onClick={onClose}
-        className="block w-full bg-[#e8233a] text-white font-body font-bold text-sm py-4 rounded-full text-center hover:bg-[#c41230] transition-colors min-h-[52px] flex items-center justify-center active:scale-95"
+        className="block w-full bg-[#7C0116] text-white font-body font-bold text-sm py-4 rounded-full text-center hover:bg-[#5C0110] transition-colors min-h-[52px] flex items-center justify-center active:scale-95"
       >
         Checkout
       </Link>

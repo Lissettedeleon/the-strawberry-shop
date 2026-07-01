@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { base44 } from "@/api/base44Client";
 import TikTokFeedSection from "@/components/TikTokFeedSection";
+import { Instagram, Music2 } from "lucide-react";
 
 export default function SocialFeed() {
   const [posts, setPosts] = useState([]);
@@ -70,9 +71,9 @@ export default function SocialFeed() {
     return (
       <div className="flex justify-center py-12">
         <div className="flex items-center gap-2">
-          <span className="animate-bounce text-2xl">🍓</span>
-          <span className="animate-bounce text-2xl" style={{ animationDelay: "0.2s" }}>🍓</span>
-          <span className="animate-bounce text-2xl" style={{ animationDelay: "0.4s" }}>🍓</span>
+          <span className="w-3 h-3 rounded-full bg-primary animate-bounce" />
+          <span className="w-3 h-3 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0.2s" }} />
+          <span className="w-3 h-3 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0.4s" }} />
         </div>
       </div>
     );
@@ -88,7 +89,7 @@ export default function SocialFeed() {
             activeTab === "Instagram" ? "bg-primary text-white shadow-sm" : "text-foreground/60 hover:text-foreground"
           }`}
         >
-          📸 On Instagram
+          <Instagram size={16} className="inline mr-1.5 -mt-0.5" /> On Instagram
         </button>
         <button
           onClick={() => setActiveTab("TikTok")}
@@ -96,16 +97,16 @@ export default function SocialFeed() {
             activeTab === "TikTok" ? "bg-primary text-white shadow-sm" : "text-foreground/60 hover:text-foreground"
           }`}
         >
-          🎵 On TikTok
+          <Music2 size={16} className="inline mr-1.5 -mt-0.5" /> On TikTok
         </button>
       </div>
 
       {/* Instagram Feed */}
       {activeTab === "Instagram" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-3xl mx-auto">
           {instagramPosts.length === 0 ? (
-            <div className="col-span-full text-center py-12 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
-              <span className="text-5xl block mb-3">📸</span>
+            <div className="max-w-md mx-auto text-center py-12 px-6 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
+              <Instagram size={40} className="mx-auto mb-3 text-primary" />
               <p className="text-muted-foreground font-body text-sm">
                 Instagram posts coming soon! Follow us{" "}
                 <a href="https://www.instagram.com/thestrawberryshopp" target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
@@ -114,16 +115,18 @@ export default function SocialFeed() {
               </p>
             </div>
           ) : (
-            instagramPosts.map(post => (
-              <div key={post.id} className="bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
-                <blockquote
-                  className="instagram-media"
-                  data-instgrm-permalink={post.url}
-                  data-instgrm-version="14"
-                  style={{ background: "#FFF", border: 0, margin: 0, padding: 0, width: "100%" }}
-                />
-              </div>
-            ))
+            <div className={`grid gap-6 ${instagramPosts.length === 1 ? "grid-cols-1 max-w-sm mx-auto" : "grid-cols-1 sm:grid-cols-2 justify-items-center"}`}>
+              {instagramPosts.map(post => (
+                <div key={post.id} className="w-full bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
+                  <blockquote
+                    className="instagram-media"
+                    data-instgrm-permalink={post.url}
+                    data-instgrm-version="14"
+                    style={{ background: "#FFF", border: 0, margin: 0, padding: 0, width: "100%" }}
+                  />
+                </div>
+              ))}
+            </div>
           )}
         </div>
       )}

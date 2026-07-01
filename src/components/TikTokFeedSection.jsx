@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Music2 } from "lucide-react";
 
 const VIDEO_1_URL = "https://www.tiktok.com/@thestrawberryshopp/video/7649445152708185358";
 const VIDEO_2_URL = "https://www.tiktok.com/@thestrawberryshopp/video/7616177536048893197";
@@ -28,19 +29,19 @@ function VideoCard({ oembedUrl, videoUrl }) {
       href={videoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white rounded-2xl border border-[#f5b8c0] overflow-hidden hover:shadow-md transition-shadow"
+      className="block bg-white rounded-2xl border border-[#E0A4B0] overflow-hidden hover:shadow-md transition-shadow"
     >
       <div className="relative w-full aspect-[9/16]">
         {thumbnail ? (
           <img src={thumbnail} alt="TikTok video thumbnail" className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full bg-[#fde8ea] flex items-center justify-center">
-            <span className="text-4xl">🎵</span>
+          <div className="w-full h-full bg-[#F6E3E7] flex items-center justify-center">
+            <Music2 size={32} className="text-[#7C0116]" />
           </div>
         )}
         {/* Dark overlay + play button */}
         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-          <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: "#e8233a" }}>
+          <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: "#7C0116" }}>
             <svg className="w-6 h-6 text-white ml-1" fill="white" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>

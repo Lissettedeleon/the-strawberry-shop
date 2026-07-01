@@ -59,7 +59,25 @@ const SOCIAL_LINKS = [
 { id: "linktree", icon: <LinktreeIcon />, href: "https://linktr.ee/Thestrawberryshopoh", label: "Linktree" }];
 
 
-export function SocialIconsRow({ className = "" }) {
+export function SocialIconsRow({ className = "", compact = false }) {
+  if (compact) {
+    return (
+      <div className={`flex items-center justify-center gap-3 ${className}`}>
+        {SOCIAL_LINKS.map(({ id, icon, href, label }) =>
+        <a
+          key={id}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className="w-6 h-6 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
+
+            {icon}
+          </a>
+        )}
+      </div>);
+  }
+
   return (
     <div className={`flex items-center justify-center gap-3 ${className}`}>
       {SOCIAL_LINKS.map(({ id, icon, href, label }) =>
@@ -69,9 +87,9 @@ export function SocialIconsRow({ className = "" }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        className="w-11 h-11 rounded-full bg-white border border-[#f5b8c0] flex items-center justify-center hover:bg-[#fde8ea] transition-colors"
+        className="w-11 h-11 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors"
         style={{ borderWidth: "0.5px" }}>
-        
+
           {icon}
         </a>
       )}
@@ -99,7 +117,7 @@ export function InstagramButton({ className = "" }) {
       href="https://www.instagram.com/thestrawberryshopp"
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 bg-[#fde8ea] text-[#c41230] font-body font-semibold text-sm px-5 py-3 rounded-full min-h-[44px] hover:opacity-90 transition-opacity ${className}`}>
+      className={`inline-flex items-center gap-2 bg-[#F6E3E7] text-[#5C0110] font-body font-semibold text-sm px-5 py-3 rounded-full min-h-[44px] hover:opacity-90 transition-opacity ${className}`}>
       
       Follow on Instagram
     </a>);

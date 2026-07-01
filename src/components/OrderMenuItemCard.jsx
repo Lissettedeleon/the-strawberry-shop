@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, ImageOff } from "lucide-react";
 import CustomizePanel from "./CustomizePanel";
 import { useCart } from "@/lib/CartContext";
 import AllergenTags from "./AllergenTags";
@@ -43,7 +43,7 @@ export default function OrderMenuItemCard({ item }) {
           </div> :
 
         <div className="aspect-square bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center relative overflow-hidden">
-            <span className="text-6xl group-hover:scale-125 transition-transform duration-300">🍓</span>
+            <ImageOff size={48} className="text-primary/40 group-hover:scale-110 transition-transform duration-300" />
           </div>
         }
         <div className="p-4">
@@ -84,7 +84,7 @@ export default function OrderMenuItemCard({ item }) {
           <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" loading="lazy" /> :
 
           <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/50 flex items-center justify-center">
-              <span className="text-3xl">🍓</span>
+              <ImageOff size={24} className="text-primary/40" />
             </div>
           }
         </div>

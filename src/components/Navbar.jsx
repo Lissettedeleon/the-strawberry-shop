@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
-import OrderModal from "./OrderModal";
+import { SocialIconsRow } from "./SocialButtons";
 import { base44 } from "@/api/base44Client";
 
 const navLinks = [
@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Menu", to: "/menu" },
   { label: "About", to: "/about" },
   { label: "Location", to: "/location" },
+  { label: "Hours", to: "/hours" },
   { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
 ];
@@ -20,7 +21,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
-  const [orderModalOpen, setOrderModalOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -41,8 +41,16 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Top utility bar */}
+      <div className="bg-[#FBF1F3] border-b border-[#F6E3E7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center sm:justify-between py-1.5">
+          <p className="hidden sm:block text-[#5C0110] text-xs font-body font-semibold">7100 Foundry Row, Liberty Township, OH</p>
+          <SocialIconsRow compact className="gap-3" />
+        </div>
+      </div>
+
       {announcement && (
-        <div className="bg-[#e8233a] text-white text-center py-2 px-4 text-sm font-body font-semibold">
+        <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-sm font-body font-semibold">
           {announcement.message}
           {announcement.link_url && announcement.link_text && (
             <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
@@ -52,13 +60,13 @@ export default function Navbar() {
         </div>
       )}
 
-      <nav className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-b border-[#fde8ea]"}`}>
+      <nav className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-b border-[#F6E3E7]"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <Logo size="sm" />
-              <span className="font-display text-[#e8233a] text-base hidden sm:block">the strawberry shop</span>
+              <span className="font-display text-[#7C0116] text-base hidden sm:block">the strawberry shop</span>
             </Link>
 
             {/* Desktop nav */}
@@ -68,18 +76,18 @@ export default function Navbar() {
                   key={link.to}
                   to={link.to}
                   className={`font-body font-semibold text-sm transition-colors ${
-                    location.pathname === link.to ? "text-[#e8233a]" : "text-[#6b7280] hover:text-[#e8233a]"
+                    location.pathname === link.to ? "text-[#7C0116]" : "text-[#6b7280] hover:text-[#7C0116]"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <button
-                onClick={() => setOrderModalOpen(true)}
-                className="bg-[#e8233a] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#c41230] transition-colors min-h-[40px] active:scale-95"
+              <Link
+                to="/menu"
+                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
               >
-                Order Now
-              </button>
+                <ShoppingBag size={16} /> Order Now
+              </Link>
             </div>
 
             {/* Mobile: open badge + hamburger */}
@@ -122,20 +130,21 @@ export default function Navbar() {
                       to={link.to}
                       className={`flex items-center px-4 py-3.5 rounded-xl font-body font-semibold text-lg transition-colors min-h-[52px] ${
                         location.pathname === link.to
-                          ? "bg-[#fde8ea] text-[#e8233a]"
-                          : "text-[#1a1a1a] hover:bg-[#fde8ea]"
+                          ? "bg-[#F6E3E7] text-[#7C0116]"
+                          : "text-[#1a1a1a] hover:bg-[#F6E3E7]"
                       }`}
                     >
                       {link.label}
                     </Link>
                   ))}
                   <div className="pt-3">
-                    <button
-                      onClick={() => { setMobileOpen(false); setOrderModalOpen(true); }}
-                      className="w-full bg-[#e8233a] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
+                    <Link
+                      to="/menu"
+                      onClick={() => setMobileOpen(false)}
+                      className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
                     >
-                      Order Now 🍓
-                    </button>
+                      <ShoppingBag size={18} /> Order Now
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -143,8 +152,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-
-      <OrderModal open={orderModalOpen} onClose={() => setOrderModalOpen(false)} />
     </>
   );
 }
