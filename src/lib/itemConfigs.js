@@ -63,3 +63,7 @@ export const ALL_EXTRAS = [...TOPPINGS, ...SAUCES];
 export const CHOCOLATE_TYPES = ["Milk", "White", "Dark"];
 
 export const EXTRA_PRICE = 1.00;
+
+// Liberty Township, OH (Butler County) combined sales tax rate.
+// Confirm against your Toast POS tax settings before relying on this.
+export const TAX_RATE = 0.065;
