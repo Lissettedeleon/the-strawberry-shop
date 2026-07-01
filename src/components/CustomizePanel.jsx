@@ -74,6 +74,7 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
       name: item.name,
       base_price: item.price,
       quantity,
+      ingredients,
       removed_ingredients: removedIngredients,
       extras: Object.entries(extras).filter(([,c]) => c > 0).map(([n]) => n),
       extra_count: extraCount,
