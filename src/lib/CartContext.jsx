@@ -9,6 +9,7 @@ export function useCart() {
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+  const [fulfillmentType, setFulfillmentType] = useState("pickup");
 
   const addItem = useCallback((item) => {
     setItems(prev => [...prev, { ...item, cartId: Date.now() + Math.random() }]);
@@ -34,7 +35,7 @@ export function CartProvider({ children }) {
   }, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, updateItem, removeItem, clearCart, itemCount, subtotal }}>
+    <CartContext.Provider value={{ items, addItem, updateItem, removeItem, clearCart, itemCount, subtotal, fulfillmentType, setFulfillmentType }}>
       {children}
     </CartContext.Provider>
   );

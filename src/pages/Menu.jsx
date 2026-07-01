@@ -8,8 +8,9 @@ import FloatingCart from "@/components/FloatingCart";
 import BrandedLoader from "@/components/BrandedLoader";
 import PowderAccent from "@/components/PowderAccent";
 import { motion } from "framer-motion";
-import { SearchX } from "lucide-react";
+import { SearchX, Store, Truck } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "@/components/DeliveryBadges";
+import { useCart } from "@/lib/CartContext";
 
 const CATEGORIES = [
   "Specials",
@@ -23,6 +24,7 @@ export default function Menu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
+  const { fulfillmentType, setFulfillmentType } = useCart();
 
   useEffect(() => {
     base44.entities.MenuItem.list("sort_order", 50)
@@ -55,9 +57,29 @@ export default function Menu() {
             className="font-display text-white text-4xl sm:text-5xl mb-3 drop-shadow-lg">
             our menu
           </motion.h1>
-          <p className="text-white/80 font-body text-lg">
+          <p className="text-white/80 font-body text-lg mb-6">
             Every cup starts with the freshest strawberries. Always.
           </p>
+
+          {/* Pickup / Delivery toggle */}
+          <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-full p-1.5">
+            <button
+              onClick={() => setFulfillmentType("pickup")}
+              className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
+                fulfillmentType === "pickup" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
+              }`}
+            >
+              <Store size={15} /> Pickup
+            </button>
+            <button
+              onClick={() => setFulfillmentType("delivery")}
+              className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-bold text-sm transition-all ${
+                fulfillmentType === "delivery" ? "bg-white text-primary shadow-md" : "text-white/80 hover:text-white"
+              }`}
+            >
+              <Truck size={15} /> Delivery
+            </button>
+          </div>
         </div>
         <WaveDivider from="red" to="blush" />
       </section>

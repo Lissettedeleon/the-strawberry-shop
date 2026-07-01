@@ -9,11 +9,13 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 import SocialFeed from "@/components/SocialFeed";
 import PowderAccent from "@/components/PowderAccent";
 import { GoogleReviewButton } from "@/components/SocialButtons";
+import OrderChoiceModal from "@/components/OrderChoiceModal";
 import { ArrowRight, Star, ShoppingBag } from "lucide-react";
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [orderChoiceOpen, setOrderChoiceOpen] = useState(false);
 
   useEffect(() => {
     base44.entities.MenuItem.filter({ is_featured: true }, "sort_order", 6).
@@ -45,11 +47,11 @@ export default function Home() {
               Fresh strawberry cups, chocolate-covered berries &amp; creative desserts — made fresh daily with a whole lot of love.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/menu"
+              <button
+                onClick={() => setOrderChoiceOpen(true)}
                 className="flex items-center justify-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#F6E3E7] transition-colors active:scale-95 shadow-lg">
                 <ShoppingBag size={18} /> Order Online
-              </Link>
+              </button>
               <Link
                 to="/menu"
                 className="bg-transparent text-white border-2 border-white/60 font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-white/10 transition-colors active:scale-95">
@@ -99,10 +101,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* 3 perks */}
-      
-
 
 
 
@@ -168,15 +166,16 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display text-white text-3xl sm:text-4xl mb-3 drop-shadow-lg">craving something sweet?</h2>
           <p className="text-white/75 font-body text-base mb-8">Order online for pickup or delivery, right through our website.</p>
-          <Link
-            to="/menu"
+          <button
+            onClick={() => setOrderChoiceOpen(true)}
             className="inline-flex items-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F6E3E7] transition-colors active:scale-95 shadow-lg">
             <ShoppingBag size={18} /> Order Now
-          </Link>
+          </button>
         </div>
       </section>
 
       <Footer />
+      <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
     </div>);
 
 }

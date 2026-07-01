@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, ImageOff } from "lucide-react";
-import CustomizePanel from "./CustomizePanel";
+import { ImageOff } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import AllergenTags from "./AllergenTags";
+import OrderItemModal from "./OrderItemModal";
 
 export default function OrderMenuItemCard({ item }) {
-  const [showCustomize, setShowCustomize] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { addItem } = useCart();
 
   const handleAddSimple = (menuItem, qty = 1) => {
@@ -25,18 +25,14 @@ export default function OrderMenuItemCard({ item }) {
     });
   };
 
-  const handleAddCustomized = (data) => {
-    addItem(data);
-    setShowCustomize(false);
-  };
-
   return (
-    <div>
+    <>
       <motion.div
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.03 }}
         transition={{ type: "spring", stiffness: 280, damping: 18 }}
-        className="bg-card rounded-[28px_10px_28px_10px] overflow-hidden shadow-sm border-2 border-border hover:border-primary/30 hover:shadow-lg transition-all group hidden sm:block">
-        
+        onClick={() => setShowModal(true)}
+        className="bg-card rounded-[28px_10px_28px_10px] overflow-hidden shadow-sm border-2 border-border hover:border-primary/30 hover:shadow-lg transition-all group hidden sm:block cursor-pointer">
+
         {item.image_url ?
         <div className="aspect-square overflow-hidden bg-secondary">
             <img src={item.image_url} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
@@ -58,28 +54,14 @@ export default function OrderMenuItemCard({ item }) {
           <span className="inline-block mb-2 bg-foreground/10 text-foreground/50 text-[10px] font-body font-bold px-2 py-0.5 rounded-full">Sold Out</span>
           }
           <AllergenTags allergens={item.allergens} />
-          <div className="flex gap-2 mt-3">
-            <button
-              onClick={() => setShowCustomize(!showCustomize)}
-              className="flex-1 bg-secondary text-foreground font-body font-semibold text-xs py-2.5 rounded-full hover:bg-secondary/80 transition-colors">
-              
-              Customize
-            </button>
-            <button
-              onClick={() => handleAddSimple(item)}
-              disabled={item.is_sold_out}
-              className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 shrink-0"
-              aria-label="Add to cart">
-              
-              <Plus size={18} />
-            </button>
-          </div>
         </div>
       </motion.div>
 
       {/* Mobile: horizontal layout */}
-      <div className="flex sm:hidden bg-card rounded-[18px_6px_18px_6px] overflow-hidden shadow-sm border-2 border-border">
-        <div className="w-20 h-20 shrink-0 overflow-hidden bg-secondary rounded-tl-[18px]" onClick={() => setShowCustomize(!showCustomize)}>
+      <div
+        onClick={() => setShowModal(true)}
+        className="flex sm:hidden bg-card rounded-[18px_6px_18px_6px] overflow-hidden shadow-sm border-2 border-border cursor-pointer">
+        <div className="w-20 h-20 shrink-0 overflow-hidden bg-secondary rounded-tl-[18px]">
           {item.image_url ?
           <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" loading="lazy" /> :
 
@@ -88,48 +70,25 @@ export default function OrderMenuItemCard({ item }) {
             </div>
           }
         </div>
-        <div className="flex-1 min-w-0 p-3 flex flex-col justify-center" onClick={() => setShowCustomize(!showCustomize)}>
+        <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
           <h3 className="font-body font-bold text-sm text-foreground truncate">{item.name}</h3>
           <span className="font-body font-extrabold text-primary text-sm mt-0.5">${item.price?.toFixed(2)}</span>
+          {item.description &&
+          <p className="text-muted-foreground font-body text-xs leading-relaxed mt-0.5 line-clamp-1">{item.description}</p>
+          }
         </div>
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
       </div>
 
-      {/* Customize Panel */}
       <AnimatePresence>
-        {showCustomize &&
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="overflow-hidden">
-          
-            <div className="bg-white rounded-b-[20px_8px_20px_8px] border-2 border-t-0 border-border p-4 mt-[-4px]">
-              <CustomizePanel
-              item={item}
-              onAddToCart={handleAddCustomized}
-              onAddSimple={(it, qty) => {handleAddSimple(it, qty);setShowCustomize(false);}} />
-            
-            </div>
-          </motion.div>
-        }
+        {showModal && (
+          <OrderItemModal
+            item={item}
+            onAddToCart={addItem}
+            onAddSimple={handleAddSimple}
+            onClose={() => setShowModal(false)}
+          />
+        )}
       </AnimatePresence>
-    </div>);
-
+    </>
+  );
 }

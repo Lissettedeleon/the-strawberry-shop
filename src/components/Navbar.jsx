@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
+import OrderChoiceModal from "./OrderChoiceModal";
 import { base44 } from "@/api/base44Client";
 
 const navLinks = [
@@ -21,6 +22,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
+  const [orderChoiceOpen, setOrderChoiceOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -85,12 +87,12 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/menu"
+              <button
+                onClick={() => setOrderChoiceOpen(true)}
                 className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
               >
                 <ShoppingBag size={16} /> Order Now
-              </Link>
+              </button>
             </div>
 
             {/* Mobile: open badge + hamburger */}
@@ -141,13 +143,12 @@ export default function Navbar() {
                     </Link>
                   ))}
                   <div className="pt-3">
-                    <Link
-                      to="/menu"
-                      onClick={() => setMobileOpen(false)}
+                    <button
+                      onClick={() => { setMobileOpen(false); setOrderChoiceOpen(true); }}
                       className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
                     >
                       <ShoppingBag size={18} /> Order Now
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -155,6 +156,8 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
+
+      <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
     </>
   );
 }
