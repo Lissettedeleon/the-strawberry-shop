@@ -11,7 +11,7 @@ import { ArrowLeft, ChevronDown, ChevronUp, ShoppingBag, Store, Truck } from "lu
 const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
 
 export default function Checkout() {
-  const { items, subtotal, clearCart } = useCart();
+  const { items, subtotal, clearCart, fulfillmentType, setFulfillmentType } = useCart();
   const navigate = useNavigate();
   const [placing, setPlacing] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -19,7 +19,6 @@ export default function Checkout() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [summaryOpen, setSummaryOpen] = useState(false);
-  const [fulfillmentType, setFulfillmentType] = useState("pickup");
   const [deliveryAddress, setDeliveryAddress] = useState({ street: "", city: "", zip: "" });
 
   const total = subtotal;

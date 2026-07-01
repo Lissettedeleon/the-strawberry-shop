@@ -5,22 +5,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
+import OrderChoiceModal from "./OrderChoiceModal";
 import { base44 } from "@/api/base44Client";
 
 const navLinks = [
-{ label: "Home", to: "/" },
-{ label: "Menu", to: "/menu" },
-{ label: "About", to: "/about" },
-{ label: "Location", to: "/location" },
-{ label: "Hours", to: "/hours" },
-{ label: "Catering", to: "/contact" },
-{ label: "FAQ", to: "/faq" }];
-
+  { label: "Home", to: "/" },
+  { label: "Menu", to: "/menu" },
+  { label: "About", to: "/about" },
+  { label: "Location", to: "/location" },
+  { label: "Hours", to: "/hours" },
+  { label: "Catering", to: "/contact" },
+  { label: "FAQ", to: "/faq" },
+];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
+  const [orderChoiceOpen, setOrderChoiceOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -30,9 +32,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1).
-    then((res) => {if (res.length > 0) setAnnouncement(res[0]);}).
-    catch(() => {});
+    base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1)
+      .then(res => { if (res.length > 0) setAnnouncement(res[0]); })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -52,16 +54,16 @@ export default function Navbar() {
         </div>
       </div>
 
-      {announcement &&
-      <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-sm font-body font-semibold hidden">
+      {announcement && (
+        <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-sm font-body font-semibold hidden">
           {announcement.message}
-          {announcement.link_url && announcement.link_text &&
-        <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
+          {announcement.link_url && announcement.link_text && (
+            <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
               {announcement.link_text}
             </a>
-        }
+          )}
         </div>
-      }
+      )}
 
       <nav className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-b border-[#F6E3E7]"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,23 +76,23 @@ export default function Navbar() {
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-6">
-              {navLinks.map((link) =>
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-body font-semibold text-sm transition-colors ${
-                location.pathname === link.to ? "text-[#7C0116]" : "text-[#6b7280] hover:text-[#7C0116]"}`
-                }>
-                
+              {navLinks.map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`font-body font-semibold text-sm transition-colors ${
+                    location.pathname === link.to ? "text-[#7C0116]" : "text-[#6b7280] hover:text-[#7C0116]"
+                  }`}
+                >
                   {link.label}
                 </Link>
-              )}
-              <Link
-                to="/menu"
-                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95">
-                
+              ))}
+              <button
+                onClick={() => setOrderChoiceOpen(true)}
+                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
+              >
                 <ShoppingBag size={16} /> Order Now
-              </Link>
+              </button>
             </div>
 
             {/* Mobile: open badge + hamburger */}
@@ -99,8 +101,8 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="p-2 text-[#1a1a1a] min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Toggle menu">
-                
+                aria-label="Toggle menu"
+              >
                 {mobileOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
@@ -109,52 +111,53 @@ export default function Navbar() {
 
         {/* Mobile drawer */}
         <AnimatePresence>
-          {mobileOpen &&
-          <>
+          {mobileOpen && (
+            <>
               <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 bg-black/30 z-[40] md:hidden"
-              style={{ top: 64 }} />
-            
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileOpen(false)}
+                className="fixed inset-0 bg-black/30 z-[40] md:hidden"
+                style={{ top: 64 }}
+              />
               <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-16 right-0 bottom-0 w-72 bg-white z-[50] shadow-2xl md:hidden">
-              
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="fixed top-16 right-0 bottom-0 w-72 bg-white z-[50] shadow-2xl md:hidden"
+              >
                 <div className="px-6 py-6 space-y-1">
-                  {navLinks.map((link) =>
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`flex items-center px-4 py-3.5 rounded-xl font-body font-semibold text-lg transition-colors min-h-[52px] ${
-                  location.pathname === link.to ?
-                  "bg-[#F6E3E7] text-[#7C0116]" :
-                  "text-[#1a1a1a] hover:bg-[#F6E3E7]"}`
-                  }>
-                  
+                  {navLinks.map(link => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className={`flex items-center px-4 py-3.5 rounded-xl font-body font-semibold text-lg transition-colors min-h-[52px] ${
+                        location.pathname === link.to
+                          ? "bg-[#F6E3E7] text-[#7C0116]"
+                          : "text-[#1a1a1a] hover:bg-[#F6E3E7]"
+                      }`}
+                    >
                       {link.label}
                     </Link>
-                )}
+                  ))}
                   <div className="pt-3">
-                    <Link
-                    to="/menu"
-                    onClick={() => setMobileOpen(false)}
-                    className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95">
-                    
+                    <button
+                      onClick={() => { setMobileOpen(false); setOrderChoiceOpen(true); }}
+                      className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
+                    >
                       <ShoppingBag size={18} /> Order Now
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </motion.div>
             </>
-          }
+          )}
         </AnimatePresence>
       </nav>
-    </>);
 
+      <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
+    </>
+  );
 }
