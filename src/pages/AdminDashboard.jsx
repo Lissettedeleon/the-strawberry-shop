@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import BrandedLoader from "@/components/BrandedLoader";
-import { EXTRA_PRICE } from "@/lib/itemConfigs";
 import { CheckCircle, Clock, RefreshCw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -165,8 +164,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="space-y-1">
                     {order.items?.map((item, idx) => {
-                      const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
-                      const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
+                      const lineTotal = ((item.base_price || 0) + (item.extras_total || 0)) * (item.quantity || 1);
                       return (
                         <div key={idx} className="flex justify-between text-xs">
                           <div>

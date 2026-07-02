@@ -5,7 +5,7 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/lib/CartContext";
-import { EXTRA_PRICE, TAX_RATE } from "@/lib/itemConfigs";
+import { TAX_RATE } from "@/lib/itemConfigs";
 import { ArrowLeft, ChevronDown, ChevronUp, ShoppingBag, Store, Truck } from "lucide-react";
 
 const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
@@ -98,8 +98,7 @@ export default function Checkout() {
           {summaryOpen && (
             <div className="px-5 pb-4 border-t border-[#F6E3E7]">
               {items.map((item, idx) => {
-                const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
-                const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
+                const lineTotal = ((item.base_price || 0) + (item.extras_total || 0)) * (item.quantity || 1);
                 return (
                   <div key={idx} className="py-2.5 border-b border-[#F6E3E7] last:border-0">
                     <div className="flex justify-between">
@@ -112,10 +111,12 @@ export default function Checkout() {
                       </p>
                     )}
                     {item.removed_ingredients?.length > 0 && <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>}
-                    {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
-                    {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>}
+                    {item.base_selection && <p className="text-xs text-[#6b7280] mt-0.5">Base: {item.base_selection}</p>}
+                    {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Chocolates: {item.chocolate_selections.join(", ")}</p>}
                     {item.selected_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>}
+                    {item.selected_choc_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_choc_toppings.join(", ")}</p>}
                     {item.selected_sauces?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>}
+                    {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
                     {item.special_instructions && <p className="text-xs text-[#6b7280] mt-0.5 italic">"{item.special_instructions}"</p>}
                   </div>
                 );

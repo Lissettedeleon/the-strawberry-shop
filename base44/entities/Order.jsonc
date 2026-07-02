@@ -57,21 +57,42 @@
           },
           "extras": {
             "type": "array",
+            "description": "Selected paid add-ons (e.g. Dubai's Add cream)",
             "items": {
               "type": "string"
             }
           },
-          "extra_count": {
-            "type": "number"
+          "selected_addons": {
+            "type": "array",
+            "description": "Same as extras — selected paid add-ons",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extras_total": {
+            "type": "number",
+            "description": "Total dollar cost of all selected toppings/sauces/add-ons for this item"
+          },
+          "base_selection": {
+            "type": "string",
+            "description": "Build Your Own Cup base cream choice"
           },
           "chocolate_selections": {
             "type": "array",
+            "description": "Half & Half's required 2 chocolate choices",
             "items": {
               "type": "string"
             }
           },
           "selected_toppings": {
             "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selected_choc_toppings": {
+            "type": "array",
+            "description": "Chocolate-covered strawberry / Half & Half toppings chocolates",
             "items": {
               "type": "string"
             }
