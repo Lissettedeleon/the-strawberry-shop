@@ -11,11 +11,11 @@ import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
 import { Send, ClipboardList, Mail, CalendarCheck, PackageCheck, ImageOff } from "lucide-react";
 
 const BOOKING_STEPS = [
-  { icon: ClipboardList, title: "Tell us about your event", text: "Fill out the form below with your date, guest count, and what you're interested in." },
-  { icon: Mail, title: "We follow up within 24 hours", text: "We'll reach out with a custom menu and pricing tailored to your event." },
-  { icon: CalendarCheck, title: "Lock in your date", text: "Confirm the details and we'll reserve your spot on our calendar." },
-  { icon: PackageCheck, title: "We handle the rest", text: "Pickup or delivery on the day of — fresh, on time, and ready to serve." },
-];
+{ icon: ClipboardList, title: "Tell us about your event", text: "Fill out the form below with your date, guest count, and what you're interested in." },
+{ icon: Mail, title: "We follow up within 24 hours", text: "We'll reach out with a custom menu and pricing tailored to your event." },
+{ icon: CalendarCheck, title: "Lock in your date", text: "Confirm the details and we'll reserve your spot on our calendar." },
+{ icon: PackageCheck, title: "We handle the rest", text: "Pickup or delivery on the day of — fresh, on time, and ready to serve." }];
+
 
 const CONFETTI_COLORS = ["#7C0116", "#E0A4B0", "#F6E3E7", "#ffd93d", "#6bcb77", "#4d96ff", "#ff922b", "#cc5de8", "#ffffff", "#ff6b9d"];
 
@@ -118,25 +118,25 @@ export default function Contact() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-body font-semibold text-[#5C0110] text-2xl text-center mb-10">how booking works</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
-            {BOOKING_STEPS.map((step, i) => (
-              <div key={step.title} className="text-center">
+            {BOOKING_STEPS.map((step, i) =>
+            <div key={step.title} className="text-center">
                 <div className="w-14 h-14 rounded-full bg-[#F6E3E7] flex items-center justify-center mx-auto mb-4">
                   <step.icon className="text-[#7C0116]" size={24} />
                 </div>
                 <p className="font-body font-bold text-[#1a1a1a] text-sm mb-1">{i + 1}. {step.title}</p>
                 <p className="text-[#6b7280] font-body text-xs leading-relaxed">{step.text}</p>
               </div>
-            ))}
+            )}
           </div>
 
           {/* Event photos */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
             {/* TODO: swap in real catering/event photos once provided */}
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="aspect-square bg-[#F6E3E7] rounded-2xl border border-[#E0A4B0] flex items-center justify-center">
+            {[1, 2, 3].map((i) =>
+            <div key={i} className="aspect-square bg-[#F6E3E7] rounded-2xl border border-[#E0A4B0] flex items-center justify-center hidden">
                 <ImageOff size={28} className="text-[#7C0116]/40" />
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
