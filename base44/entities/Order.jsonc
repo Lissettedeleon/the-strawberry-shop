@@ -16,15 +16,24 @@
     },
     "fulfillment_type": {
       "type": "string",
-      "enum": ["pickup", "delivery"],
+      "enum": [
+        "pickup",
+        "delivery"
+      ],
       "default": "pickup"
     },
     "delivery_address": {
       "type": "object",
       "properties": {
-        "street": { "type": "string" },
-        "city": { "type": "string" },
-        "zip": { "type": "string" }
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        }
       }
     },
     "items": {
@@ -64,7 +73,7 @@
           },
           "selected_addons": {
             "type": "array",
-            "description": "Same as extras — selected paid add-ons",
+            "description": "Same as extras \u2014 selected paid add-ons",
             "items": {
               "type": "string"
             }
@@ -153,8 +162,22 @@
     "total"
   ],
   "rls": {
-    "create": true,
-    "read": true,
+    "create": null,
+    "read": {
+      "$or": [
+        {
+          "data.customer_email": "{{user.email}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
     "update": {
       "user_condition": {
         "role": "admin"
