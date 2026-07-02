@@ -54,7 +54,7 @@ export default function Location() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-4 bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors"
                 >
-                  <Navigation size={14} /> Get Directions
+                  <Navigation size={14} /> Open in Apple Maps
                 </a>
               </motion.div>
 
