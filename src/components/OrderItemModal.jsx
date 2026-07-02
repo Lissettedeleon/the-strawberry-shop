@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { X, ImageOff, Sparkles } from "lucide-react";
-import AllergenTags from "./AllergenTags";
 import CustomizePanel from "./CustomizePanel";
 
 export default function OrderItemModal({ item, onAddToCart, onAddSimple, onClose }) {
@@ -57,8 +56,6 @@ export default function OrderItemModal({ item, onAddToCart, onAddSimple, onClose
           {item.description && (
             <p className="text-muted-foreground font-body text-base leading-relaxed mb-4">{item.description}</p>
           )}
-
-          <AllergenTags allergens={item.allergens} />
 
           {item.is_sold_out ? (
             <p className="mt-4 text-foreground/50 font-body font-bold text-sm">Sold Out</p>
