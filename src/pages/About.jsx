@@ -69,25 +69,25 @@ export default function About() {
       </section>
 
       {/* Social + CTA */}
-      <section style={{ background: "#FBF1F3" }} className="py-12 border-t border-[#F6E3E7] hidden">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <p className="font-body font-semibold text-[#5C0110] text-base mb-4 hidden">Follow us & leave a review</p>
-          <div className="flex justify-center mb-4 hidden">
-            <SocialIconsRow />
-          </div>
-          <div className="flex justify-center mb-8 hidden">
-            <GoogleReviewButton />
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 hidden">
-            <Link to="/location" className="inline-flex items-center gap-1.5 bg-white border border-[#E0A4B0] text-[#1a1a1a] font-body font-bold px-7 py-3 rounded-full min-h-[44px] hover:bg-[#F6E3E7] transition-colors">
-              <MapPin size={15} /> Find Us
-            </Link>
-            <Link to="/menu" className="bg-[#7C0116] text-white font-body font-bold px-7 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors">
-              View Menu
-            </Link>
-          </div>
-        </div>
-      </section>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
       <Footer />
     </div>);
