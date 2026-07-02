@@ -6,7 +6,7 @@ export default function MenuFolder({ category, items }) {
 
   return (
     <div className="relative">
-      <div className="font-menu-bubble inline-flex items-center bg-[#7C0116] text-white text-[13px] px-5 py-2.5 rounded-t-2xl ml-6 -mb-px relative z-10">
+      <div className="font-bubble inline-flex items-center bg-[#7C0116] text-white text-[13px] px-5 py-2.5 rounded-t-2xl ml-6 -mb-px relative z-10">
         {category.toLowerCase()}
       </div>
       <div

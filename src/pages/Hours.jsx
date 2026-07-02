@@ -3,23 +3,9 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Clock } from "lucide-react";
+import { WEEKLY_HOURS, HOLIDAY_HOURS, formatRange } from "@/lib/hours";
 
-const hours = [
-  { days: "Monday", time: "11:00 AM – 8:00 PM" },
-  { days: "Tuesday", time: "11:00 AM – 8:00 PM" },
-  { days: "Wednesday", time: "11:00 AM – 8:00 PM" },
-  { days: "Thursday", time: "11:00 AM – 8:00 PM" },
-  { days: "Friday", time: "11:00 AM – 8:00 PM" },
-  { days: "Saturday", time: "11:00 AM – 8:00 PM" },
-  { days: "Sunday", time: "12:00 PM – 6:00 PM" },
-];
-
-const holidayHours = [
-  { label: "Easter (April 5)", time: "Closed" },
-  { label: "Independence Day (July 4)", time: "11:00 AM – 6:00 PM" },
-  { label: "Labor Day (September 7)", time: "11:00 AM – 6:00 PM" },
-  { label: "Thanksgiving (November 26)", time: "Closed" },
-];
+const orderedWeek = [1, 2, 3, 4, 5, 6, 0].map(day => WEEKLY_HOURS.find(h => h.day === day));
 
 export default function Hours() {
   return (
@@ -42,22 +28,25 @@ export default function Hours() {
           >
             <h3 className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base mb-3"><Clock size={16} className="text-[#7C0116]" /> Regular Hours</h3>
             <div className="space-y-2">
-              {hours.map(h => (
-                <div key={h.days} className="flex justify-between font-body text-sm">
-                  <span className="text-[#6b7280]">{h.days}</span>
-                  <span className="text-[#1a1a1a] font-semibold">{h.time}</span>
+              {orderedWeek.map(h => (
+                <div key={h.label} className="flex justify-between font-body text-sm">
+                  <span className="text-[#6b7280]">{h.label}</span>
+                  <span className="text-[#1a1a1a] font-semibold">{formatRange(h)}</span>
                 </div>
               ))}
             </div>
             <div className="mt-4 pt-4 border-t border-[#F6E3E7]">
               <p className="font-body font-bold text-[#1a1a1a] text-sm mb-2">Holiday Hours</p>
               <div className="space-y-2">
-                {holidayHours.map(h => (
-                  <div key={h.label} className="flex justify-between font-body text-sm">
-                    <span className="text-[#6b7280]">{h.label}</span>
-                    <span className={`font-semibold ${h.time === "Closed" ? "text-[#7C0116]" : "text-[#1a1a1a]"}`}>{h.time}</span>
-                  </div>
-                ))}
+                {HOLIDAY_HOURS.map(h => {
+                  const time = formatRange(h);
+                  return (
+                    <div key={h.label} className="flex justify-between font-body text-sm">
+                      <span className="text-[#6b7280]">{h.label}</span>
+                      <span className={`font-semibold ${time === "Closed" ? "text-[#7C0116]" : "text-[#1a1a1a]"}`}>{time}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

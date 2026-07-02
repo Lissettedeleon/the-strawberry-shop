@@ -124,8 +124,7 @@
   50% { transform: translateY(-6px); }
 }
 
-/* Menu page only — folder tab labels + page heading */
-.font-menu-bubble {
+.font-bubble {
   font-family: 'Rubik Bubbles', cursive;
   font-weight: 400;
 }
