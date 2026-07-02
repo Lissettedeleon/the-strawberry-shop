@@ -32,7 +32,6 @@ const navLinks = [
   { label: "Menu", to: "/menu" },
   { label: "About", to: "/about" },
   { label: "Location", to: "/location" },
-  { label: "Hours", to: "/hours" },
   { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
 ];
