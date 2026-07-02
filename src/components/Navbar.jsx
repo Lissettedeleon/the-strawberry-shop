@@ -28,7 +28,6 @@ function CartButton({ className = "", iconSize = 20 }) {
 }
 
 const navLinks = [
-  { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
   { label: "About", to: "/about" },
   { label: "Location", to: "/location" },
