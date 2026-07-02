@@ -12,6 +12,7 @@ import Menu from '@/pages/Menu';
 import About from '@/pages/About';
 import Location from '@/pages/Location';
 import Hours from '@/pages/Hours';
+import GiftCards from '@/pages/GiftCards';
 import Contact from '@/pages/Contact';
 import FAQ from '@/pages/FAQ';
 import Checkout from '@/pages/Checkout';
@@ -39,6 +40,7 @@ const AuthenticatedApp = () => {
           <Route path="/about" element={<About />} />
           <Route path="/location" element={<Location />} />
           <Route path="/hours" element={<Hours />} />
+          <Route path="/gift-cards" element={<GiftCards />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -64,6 +66,7 @@ const AuthenticatedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/location" element={<Location />} />
         <Route path="/hours" element={<Hours />} />
+        <Route path="/gift-cards" element={<GiftCards />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/checkout" element={<Checkout />} />

@@ -1,0 +1,79 @@
+{
+  "name": "GiftCard",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique redeemable gift card code"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Face value of the gift card"
+    },
+    "balance": {
+      "type": "number",
+      "description": "Remaining redeemable balance"
+    },
+    "sender_name": {
+      "type": "string",
+      "description": "Purchaser's name"
+    },
+    "sender_email": {
+      "type": "string",
+      "description": "Purchaser's email"
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "Recipient's name"
+    },
+    "recipient_email": {
+      "type": "string",
+      "description": "Recipient's email, where the gift card is delivered"
+    },
+    "message": {
+      "type": "string",
+      "description": "Personal note to include with the gift card"
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date to email the gift card to the recipient (defaults to immediately)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Payment",
+        "Active",
+        "Redeemed",
+        "Expired"
+      ],
+      "default": "Pending Payment",
+      "description": "Pending Payment until charged through Toast/Base44 payment processing"
+    }
+  },
+  "required": [
+    "amount",
+    "sender_name",
+    "sender_email",
+    "recipient_name",
+    "recipient_email"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ const navLinks = [
 { label: "Location", to: "/location" },
 { label: "Hours", to: "/hours" },
 { label: "Catering", to: "/contact" },
+{ label: "Gift Cards", to: "/gift-cards" },
 { label: "FAQ", to: "/faq" }];
 
 
