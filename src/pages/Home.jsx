@@ -8,7 +8,7 @@ import SocialFeed from "@/components/SocialFeed";
 import PowderAccent from "@/components/PowderAccent";
 import HoursStrip from "@/components/HoursStrip";
 import HowItWorks from "@/components/HowItWorks";
-import { StrawberryLineIcon } from "@/components/HomeIcons";
+import Logo from "@/components/Logo";
 import { GoogleReviewButton } from "@/components/SocialButtons";
 import OrderChoiceModal from "@/components/OrderChoiceModal";
 import { Star, ShoppingBag } from "lucide-react";
@@ -39,10 +39,10 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 py-20 md:py-24 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div
-              className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-white/15 mb-4"
-              style={{ transform: "rotate(-6deg)" }}
+              className="inline-flex items-center justify-center w-28 h-28 mb-4"
+              style={{ animation: "heroLogoFloat 1.5s ease-in-out infinite" }}
             >
-              <StrawberryLineIcon size={56} className="text-white" />
+              <Logo size="xl" className="w-28 h-28" />
             </div>
             <h1 className="font-bubble text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-4 drop-shadow-lg">
               Life is sweeter with strawberries.

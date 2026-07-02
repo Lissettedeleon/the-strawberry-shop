@@ -10,7 +10,7 @@ export default function Logo({ size = "md", className = "" }) {
 
   return (
     <img
-      src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/79980b498_strawberry_shop_logo_white_outline_medium.png"
+      src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/f90f12d64_thestrawberryshoplogos_Mesadetrabajo12.png"
       alt="The Strawberry Shop"
       className={`${sizes[size]} rounded-full object-contain flex-shrink-0 ${className}`}
     />
