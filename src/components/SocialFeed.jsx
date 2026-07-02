@@ -3,6 +3,15 @@ import { base44 } from "@/api/base44Client";
 import TikTokFeedSection from "@/components/TikTokFeedSection";
 import { Instagram, Music2 } from "lucide-react";
 
+const PLACEHOLDER_GRADIENTS = [
+  "linear-gradient(135deg, #7C0116, #a3123a)",
+  "linear-gradient(135deg, #E0A4B0, #F7E3E8)",
+  "linear-gradient(135deg, #5C0110, #7C0116)",
+  "linear-gradient(135deg, #F7E3E8, #E0A4B0)",
+  "linear-gradient(135deg, #a3123a, #5C0110)",
+  "linear-gradient(135deg, #E0A4B0, #7C0116)",
+];
+
 export default function SocialFeed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -105,8 +114,12 @@ export default function SocialFeed() {
       {activeTab === "Instagram" && (
         <div className="max-w-3xl mx-auto">
           {instagramPosts.length === 0 ? (
-            <div className="max-w-md mx-auto text-center py-12 px-6 bg-card rounded-[30px_10px_30px_10px] border-2 border-border">
-              <Instagram size={40} className="mx-auto mb-3 text-primary" />
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                {PLACEHOLDER_GRADIENTS.map((gradient, i) => (
+                  <div key={i} className="aspect-square rounded-2xl" style={{ background: gradient }} />
+                ))}
+              </div>
               <p className="text-muted-foreground font-body text-sm">
                 Instagram posts coming soon! Follow us{" "}
                 <a href="https://www.instagram.com/thestrawberryshopp" target="_blank" rel="noopener noreferrer" className="text-primary font-bold underline">
