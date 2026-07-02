@@ -30,12 +30,12 @@ export default function Location() {
                 <p className="font-body font-bold text-[#5C0110] text-xl mb-1">7100 Foundry Row</p>
                 <p className="font-body text-[#6b7280] text-sm mb-4">Liberty Township, OH 45069</p>
                 <a
-                  href="https://www.google.com/maps/dir//7100+Foundry+Row,+Liberty+Township,+OH+45069"
+                  href="https://maps.apple.com/?daddr=7100+Foundry+Row,+Liberty+Township,+OH+45069"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors"
                 >
-                  Open in Google Maps
+                  Open in Apple Maps
                 </a>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function Location() {
                   7100 Foundry Row<br />Liberty Township, OH 45069
                 </p>
                 <a
-                  href="https://www.google.com/maps/dir//7100+Foundry+Row,+Liberty+Township,+OH+45069"
+                  href="https://maps.apple.com/?daddr=7100+Foundry+Row,+Liberty+Township,+OH+45069"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-4 bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors"
