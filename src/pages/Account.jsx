@@ -33,8 +33,8 @@ export default function Account() {
         setUser(u);
         setEditForm({ first_name: u.first_name || "", last_name: u.last_name || "", email: u.email || "", phone: u.phone || "" });
         try {
-          const ods = await base44.entities.Order.filter({ customer_email: u.email }, "-created_date", 20);
-          setOrders(ods);
+          const res = await base44.functions.invoke("getMyOrders", {});
+          setOrders(res.data?.orders || []);
         } catch {}
       } catch {
         navigate("/login");
@@ -68,19 +68,15 @@ export default function Account() {
   const handleClaimCode = async () => {
     setClaimStatus("");
     try {
-      // Use exec_tool or a backend function to find the code
+      // Points are credited server-side in the claimReceiptCode function
       const response = await base44.functions.invoke("claimReceiptCode", { code: receiptCode.trim().toUpperCase() });
       if (response.data?.success) {
-        const newPoints = (user.loyalty_points || 0) + response.data.points;
-        await base44.auth.updateMe({ loyalty_points: newPoints });
-        if (newPoints >= 100 && !rewardCode) {
-          const reward = "REWARD-" + Date.now().toString(36).toUpperCase().slice(-8);
-          await base44.auth.updateMe({ loyalty_points: newPoints >= 200 ? newPoints - 100 : newPoints, reward_code: reward });
-        }
         const u = await base44.auth.me();
         setUser(u);
         setClaimStatus(`success:Points added! Your new balance is ${u.loyalty_points || 0} points.`);
         setReceiptCode("");
+      } else if (response.data?.error === "not_authenticated") {
+        setClaimStatus("error:Please log in to claim points.");
       } else {
         setClaimStatus("error:This code is invalid or has already been claimed.");
       }

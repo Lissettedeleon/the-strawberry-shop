@@ -30,15 +30,15 @@ export default function OrderConfirmation() {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (orderId) {
-      base44.entities.Order.get(orderId)
-        .then(setOrder)
+    if (orderId && orderNumber) {
+      base44.functions.invoke("getOrderReceipt", { orderId, orderNumber })
+        .then(res => setOrder(res.data?.order || null))
         .catch(() => {})
         .finally(() => setLoading(false));
     } else {
       setLoading(false);
     }
-  }, [orderId]);
+  }, [orderId, orderNumber]);
 
   useEffect(() => {
     fireConfetti();
