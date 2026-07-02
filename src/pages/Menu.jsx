@@ -49,9 +49,9 @@ export default function Menu() {
 
       {/* Page head */}
       <div className="text-center px-4 pt-10 pb-4">
-        <p className="font-body font-black text-[#7C0116] text-xs tracking-widest uppercase mb-2 hidden">
-          Every cup starts fresh
-        </p>
+        
+
+        
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,9 +59,9 @@ export default function Menu() {
           
           our menu
         </motion.h1>
-        <p className="text-[#6b4a52] font-body font-bold text-sm hidden">
-          Made fresh daily with real strawberries, always.
-        </p>
+        
+
+        
       </div>
 
       {/* Pickup / Delivery toggle */}
