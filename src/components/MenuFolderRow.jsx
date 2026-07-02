@@ -17,7 +17,7 @@ export default function MenuFolderRow({ item }) {
       ingredients: ITEM_CONFIGS[menuItem.name]?.ingredients || [],
       removed_ingredients: [],
       extras: [],
-      extra_count: 0,
+      extras_total: 0,
       chocolate_selections: [],
       selected_toppings: [],
       selected_sauces: [],

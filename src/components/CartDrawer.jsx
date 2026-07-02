@@ -2,7 +2,6 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
-import { EXTRA_PRICE } from "@/lib/itemConfigs";
 import { Link } from "react-router-dom";
 
 export default function CartDrawer() {
@@ -67,7 +66,7 @@ function CartItems({ items, updateItem, removeItem }) {
   return (
     <div className="flex-1 overflow-y-auto p-4 space-y-3">
       {items.map(item => {
-        const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
+        const extrasTotal = item.extras_total || 0;
         const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
         return (
           <div key={item.cartId} className="bg-[#FBF1F3] border border-[#E0A4B0] rounded-2xl p-4 space-y-2">
@@ -80,10 +79,12 @@ function CartItems({ items, updateItem, removeItem }) {
                   </p>
                 )}
                 {item.removed_ingredients?.length > 0 && <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>}
-                {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
-                {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>}
+                {item.base_selection && <p className="text-xs text-[#6b7280] mt-0.5">Base: {item.base_selection}</p>}
+                {item.chocolate_selections?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Chocolates: {item.chocolate_selections.join(", ")}</p>}
                 {item.selected_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>}
+                {item.selected_choc_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_choc_toppings.join(", ")}</p>}
                 {item.selected_sauces?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>}
+                {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
                 {item.special_instructions && <p className="text-xs text-[#6b7280] mt-0.5 italic">"{item.special_instructions}"</p>}
               </div>
               <button onClick={() => removeItem(item.cartId)} className="p-1 text-[#6b7280] hover:text-red-500 transition-colors shrink-0 ml-2 min-w-[32px] min-h-[32px] flex items-center justify-center">

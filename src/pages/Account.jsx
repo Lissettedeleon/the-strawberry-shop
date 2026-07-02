@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
 import BrandedLoader from "@/components/BrandedLoader";
-import { EXTRA_PRICE } from "@/lib/itemConfigs";
 import { Copy, Check, Edit2, X, LogOut, Gift, KeyRound, PartyPopper } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 

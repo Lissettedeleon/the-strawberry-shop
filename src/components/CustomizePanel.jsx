@@ -1,71 +1,138 @@
 import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { ITEM_CONFIGS, TOPPINGS, SAUCES, ALL_EXTRAS, CHOCOLATE_TYPES, EXTRA_PRICE } from "@/lib/itemConfigs";
+import {
+  ITEM_CONFIGS,
+  STANDARD_TOPPINGS,
+  STANDARD_SAUCES,
+  TOPPINGS_CHOCOLATES,
+  HALF_AND_HALF_CHOCOLATES,
+  BYO_BASES,
+  BYO_TOPPINGS,
+  BYO_SAUCES,
+  TOPPING_PRICE,
+  priceOf,
+} from "@/lib/itemConfigs";
+
+function priceLabel(price) {
+  return price > 0 ? `+$${price.toFixed(2)}` : "Free";
+}
+
+function ChipPicker({ title, subtitle, items, selected, onToggle, max, showPrice = true }) {
+  return (
+    <div>
+      <h4 className="font-body font-bold text-sm text-foreground mb-2">{title}</h4>
+      {subtitle && <p className="text-xs text-muted-foreground mb-2">{subtitle}</p>}
+      <div className="flex flex-wrap gap-2">
+        {items.map(({ name, price }) => {
+          const isSelected = selected.includes(name);
+          const isDisabled = !isSelected && !!max && selected.length >= max;
+          return (
+            <button
+              key={name}
+              type="button"
+              onClick={() => onToggle(name)}
+              disabled={isDisabled}
+              className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                isSelected
+                  ? "bg-primary text-white"
+                  : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30 disabled:opacity-40"
+              }`}
+            >
+              {name}{showPrice ? ` (${priceLabel(price)})` : ""}
+            </button>
+          );
+        })}
+      </div>
+      {max > 0 && <p className="text-xs text-muted-foreground mt-1.5">{selected.length}/{max} selected</p>}
+    </div>
+  );
+}
+
+function RemovalChips({ ingredients, removed, onToggle }) {
+  if (ingredients.length === 0) return null;
+  return (
+    <div>
+      <h4 className="font-body font-bold text-sm text-foreground mb-2">Remove Ingredients</h4>
+      <div className="flex flex-wrap gap-2">
+        {ingredients.map((ing) => (
+          <button
+            key={ing}
+            type="button"
+            onClick={() => onToggle(ing)}
+            className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+              removed.includes(ing)
+                ? "bg-red-100 text-red-600 border-2 border-red-300"
+                : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30"
+            }`}
+          >
+            No {ing}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
   const config = item.name ? ITEM_CONFIGS[item.name] : null;
+  const type = config?.type || "ingredient_removal";
   const ingredients = config?.ingredients || [];
-  const isChocolatePicker = config?.type === "chocolate_picker";
-  const isBuildYourOwn = config?.type === "build_your_own";
-  const isSimple = config?.type === "simple";
+  const removableIngredients = config?.removable_ingredients || ingredients;
+  const addons = config?.addons || [];
 
   const [removedIngredients, setRemovedIngredients] = useState([]);
-  const [extras, setExtras] = useState({});
-  const [instructions, setInstructions] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [chocolateSelections, setChocolateSelections] = useState([]);
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [selectedSauces, setSelectedSauces] = useState([]);
+  const [selectedChocToppings, setSelectedChocToppings] = useState([]);
+  const [chocolateSelections, setChocolateSelections] = useState([]);
+  const [baseCream, setBaseCream] = useState("");
+  const [selectedAddons, setSelectedAddons] = useState([]);
+  const [instructions, setInstructions] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
-  const toggleIngredient = (ing) => {
-    setRemovedIngredients(prev =>
-      prev.includes(ing) ? prev.filter(i => i !== ing) : [...prev, ing]
-    );
+  const toggleInList = (setter, max) => (value) => {
+    setter((prev) => {
+      if (prev.includes(value)) return prev.filter((v) => v !== value);
+      if (max && prev.length >= max) return prev;
+      return [...prev, value];
+    });
   };
 
+  const toggleIngredient = toggleInList(setRemovedIngredients);
+  const toggleTopping = toggleInList(setSelectedToppings, 2);
+  const toggleSauce = toggleInList(setSelectedSauces, 2);
+  const toggleChocTopping = toggleInList(setSelectedChocToppings, 2);
+  const toggleAddon = toggleInList(setSelectedAddons);
+
   const toggleChocolate = (choc) => {
-    setChocolateSelections(prev => {
-      if (prev.includes(choc)) return prev.filter(c => c !== choc);
+    setChocolateSelections((prev) => {
+      if (prev.includes(choc)) return prev.filter((c) => c !== choc);
       if (prev.length >= 2) return prev;
       return [...prev, choc];
     });
   };
 
-  const toggleTopping = (t) => {
-    setSelectedToppings(prev => {
-      if (prev.includes(t)) return prev.filter(x => x !== t);
-      if (prev.length >= 2) return prev;
-      return [...prev, t];
-    });
-  };
+  let extrasTotal = 0;
+  if (type === "toppings_sauces") {
+    extrasTotal =
+      selectedToppings.length * TOPPING_PRICE +
+      selectedSauces.reduce((s, name) => s + priceOf(STANDARD_SAUCES, name), 0);
+  } else if (type === "choc_toppings" || type === "half_and_half") {
+    extrasTotal = selectedChocToppings.reduce((s, name) => s + priceOf(TOPPINGS_CHOCOLATES, name), 0);
+  } else if (type === "build_your_own") {
+    extrasTotal = selectedSauces.reduce((s, name) => s + priceOf(BYO_SAUCES, name), 0);
+  } else if (type === "dubai") {
+    extrasTotal = selectedAddons.reduce((s, name) => {
+      const addon = addons.find((a) => a.name === name);
+      return s + (addon ? addon.price : 0);
+    }, 0);
+  }
 
-  const toggleSauce = (s) => {
-    setSelectedSauces(prev => {
-      if (prev.includes(s)) return prev.filter(x => x !== s);
-      if (prev.length >= 2) return prev;
-      return [...prev, s];
-    });
-  };
-
-  const adjustExtra = (name, delta) => {
-    setExtras(prev => {
-      const current = prev[name] || 0;
-      const next = current + delta;
-      if (next <= 0) {
-        const copy = { ...prev };
-        delete copy[name];
-        return copy;
-      }
-      return { ...prev, [name]: next };
-    });
-  };
-
-  const extraCount = Object.values(extras).reduce((s, v) => s + v, 0);
-  const extraTotal = extraCount * EXTRA_PRICE;
-  const itemTotal = ((item.price || 0) + extraTotal) * quantity;
+  const itemTotal = ((item.price || 0) + extrasTotal) * quantity;
 
   const canAddToCart = () => {
-    if (isChocolatePicker && chocolateSelections.length !== 2) return false;
+    if (type === "half_and_half") return chocolateSelections.length === 2;
+    if (type === "build_your_own") return !!baseCream && selectedToppings.length >= 1 && selectedSauces.length >= 1;
     return true;
   };
 
@@ -76,17 +143,20 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
       quantity,
       ingredients,
       removed_ingredients: removedIngredients,
-      extras: Object.entries(extras).filter(([,c]) => c > 0).map(([n]) => n),
-      extra_count: extraCount,
+      extras: selectedAddons,
+      extras_total: extrasTotal,
       chocolate_selections: chocolateSelections,
       selected_toppings: selectedToppings,
       selected_sauces: selectedSauces,
+      selected_choc_toppings: selectedChocToppings,
+      base_selection: baseCream,
+      selected_addons: selectedAddons,
       special_instructions: instructions,
       item_total: itemTotal,
     });
   };
 
-  if (isSimple) {
+  if (type === "simple") {
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -109,132 +179,93 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
 
   return (
     <div className="space-y-5">
-      {/* Remove Ingredients */}
-      {ingredients.length > 0 && (
-        <div>
-          <h4 className="font-body font-bold text-sm text-foreground mb-2">Remove Ingredients</h4>
-          <div className="flex flex-wrap gap-2">
-            {ingredients.map(ing => (
-              <button
-                key={ing}
-                onClick={() => toggleIngredient(ing)}
-                className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
-                  removedIngredients.includes(ing)
-                    ? "bg-red-100 text-red-600 border-2 border-red-300"
-                    : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30"
-                }`}
-              >
-                No {ing}
-              </button>
-            ))}
-          </div>
-        </div>
+      {(type === "ingredient_removal" || type === "dubai") && (
+        <RemovalChips ingredients={removableIngredients} removed={removedIngredients} onToggle={toggleIngredient} />
       )}
 
-      {/* Chocolate Picker */}
-      {isChocolatePicker && (
-        <div>
-          <h4 className="font-body font-bold text-sm text-foreground mb-2">Choose 2 Chocolate Types</h4>
-          <div className="flex flex-wrap gap-2">
-            {CHOCOLATE_TYPES.map(choc => (
-              <button
-                key={choc}
-                onClick={() => toggleChocolate(choc)}
-                disabled={!chocolateSelections.includes(choc) && chocolateSelections.length >= 2}
-                className={`px-4 py-2 rounded-full text-xs font-body font-semibold transition-all ${
-                  chocolateSelections.includes(choc)
-                    ? "bg-primary text-white"
-                    : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30 disabled:opacity-40"
-                }`}
-              >
-                {choc} Chocolate
-              </button>
-            ))}
-          </div>
-          {chocolateSelections.length > 0 && (
-            <p className="text-xs text-muted-foreground mt-1.5">{chocolateSelections.length}/2 selected</p>
-          )}
-        </div>
+      {type === "dubai" && addons.length > 0 && (
+        <ChipPicker
+          title="Add-ons"
+          items={addons}
+          selected={selectedAddons}
+          onToggle={toggleAddon}
+        />
       )}
 
-      {/* Build Your Own */}
-      {isBuildYourOwn && (
+      {type === "toppings_sauces" && (
         <>
-          <div>
-            <h4 className="font-body font-bold text-sm text-foreground mb-2">Choose Your Toppings (up to 2)</h4>
-            <div className="flex flex-wrap gap-2">
-              {TOPPINGS.map(t => (
-                <button
-                  key={t}
-                  onClick={() => toggleTopping(t)}
-                  disabled={!selectedToppings.includes(t) && selectedToppings.length >= 2}
-                  className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
-                    selectedToppings.includes(t)
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30 disabled:opacity-40"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-            {selectedToppings.length > 0 && (
-              <p className="text-xs text-muted-foreground mt-1.5">{selectedToppings.length}/2 selected</p>
-            )}
-          </div>
-          <div>
-            <h4 className="font-body font-bold text-sm text-foreground mb-2">Choose Your Sauces (up to 2)</h4>
-            <div className="flex flex-wrap gap-2">
-              {SAUCES.map(s => (
-                <button
-                  key={s}
-                  onClick={() => toggleSauce(s)}
-                  disabled={!selectedSauces.includes(s) && selectedSauces.length >= 2}
-                  className={`px-3 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
-                    selectedSauces.includes(s)
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-foreground/70 border-2 border-transparent hover:border-primary/30 disabled:opacity-40"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-            {selectedSauces.length > 0 && (
-              <p className="text-xs text-muted-foreground mt-1.5">{selectedSauces.length}/2 selected</p>
-            )}
-          </div>
+          <ChipPicker
+            title="Toppings (up to 2)"
+            items={STANDARD_TOPPINGS.map((name) => ({ name, price: TOPPING_PRICE }))}
+            selected={selectedToppings}
+            onToggle={toggleTopping}
+            max={2}
+          />
+          <ChipPicker
+            title="Additional Sauces (up to 2)"
+            items={STANDARD_SAUCES}
+            selected={selectedSauces}
+            onToggle={toggleSauce}
+            max={2}
+          />
         </>
       )}
 
-      {/* Add Extras */}
-      {!isSimple && (
-        <div>
-          <h4 className="font-body font-bold text-sm text-foreground mb-2">Add Extras ($1.00 each)</h4>
-          <div className="space-y-1.5">
-            {ALL_EXTRAS.map(extra => (
-              <div key={extra} className="flex items-center justify-between py-1">
-                <span className="font-body text-xs text-foreground/80">{extra}</span>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => adjustExtra(extra, -1)}
-                    disabled={!extras[extra]}
-                    className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center hover:bg-primary/20 disabled:opacity-30 transition-colors"
-                  >
-                    <Minus size={12} />
-                  </button>
-                  <span className="font-body font-bold text-xs w-4 text-center">{extras[extra] || 0}</span>
-                  <button
-                    onClick={() => adjustExtra(extra, 1)}
-                    className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
-                  >
-                    <Plus size={12} />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {type === "choc_toppings" && (
+        <ChipPicker
+          title="Toppings (up to 2)"
+          items={TOPPINGS_CHOCOLATES}
+          selected={selectedChocToppings}
+          onToggle={toggleChocTopping}
+          max={2}
+        />
+      )}
+
+      {type === "half_and_half" && (
+        <>
+          <ChipPicker
+            title="Choose 2 Chocolates (required)"
+            items={HALF_AND_HALF_CHOCOLATES.map((name) => ({ name, price: 0 }))}
+            selected={chocolateSelections}
+            onToggle={toggleChocolate}
+            max={2}
+            showPrice={false}
+          />
+          <ChipPicker
+            title="Toppings (up to 2, optional)"
+            items={TOPPINGS_CHOCOLATES}
+            selected={selectedChocToppings}
+            onToggle={toggleChocTopping}
+            max={2}
+          />
+        </>
+      )}
+
+      {type === "build_your_own" && (
+        <>
+          <ChipPicker
+            title="Base Cream (required, pick 1)"
+            items={BYO_BASES.map((name) => ({ name, price: 0 }))}
+            selected={baseCream ? [baseCream] : []}
+            onToggle={(name) => setBaseCream((prev) => (prev === name ? "" : name))}
+            max={1}
+            showPrice={false}
+          />
+          <ChipPicker
+            title="Toppings (required, pick 1–2)"
+            items={BYO_TOPPINGS.map((name) => ({ name, price: 0 }))}
+            selected={selectedToppings}
+            onToggle={toggleTopping}
+            max={2}
+          />
+          <ChipPicker
+            title="Sauces (required, pick 1–2)"
+            items={BYO_SAUCES}
+            selected={selectedSauces}
+            onToggle={toggleSauce}
+            max={2}
+          />
+        </>
       )}
 
       {/* Special Instructions */}
@@ -242,7 +273,7 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
         <h4 className="font-body font-bold text-sm text-foreground mb-2">Special Instructions</h4>
         <textarea
           value={instructions}
-          onChange={e => setInstructions(e.target.value)}
+          onChange={(e) => setInstructions(e.target.value)}
           placeholder="Any special requests..."
           rows={2}
           className="w-full bg-secondary border-2 border-border rounded-xl px-3 py-2 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"

@@ -6,7 +6,6 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandedLoader from "@/components/BrandedLoader";
-import { EXTRA_PRICE } from "@/lib/itemConfigs";
 
 const CONFETTI_COLORS = ["#7C0116", "#E0A4B0", "#F6E3E7", "#ffd93d", "#6bcb77", "#4d96ff", "#ff922b", "#cc5de8", "#ffffff", "#ff6b9d"];
 
@@ -77,8 +76,7 @@ export default function OrderConfirmation() {
             <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-3">Order Summary</h3>
             <div className="space-y-3">
               {order.items?.map((item, idx) => {
-                const extrasTotal = (item.extra_count || 0) * EXTRA_PRICE;
-                const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
+                const lineTotal = ((item.base_price || 0) + (item.extras_total || 0)) * (item.quantity || 1);
                 return (
                   <div key={idx} className="py-2 border-b border-[#F6E3E7] last:border-0">
                     <div className="flex justify-between">
@@ -93,17 +91,23 @@ export default function OrderConfirmation() {
                     {item.removed_ingredients?.length > 0 && (
                       <p className="text-xs text-red-500 mt-0.5">No: {item.removed_ingredients.join(", ")}</p>
                     )}
-                    {item.extras?.length > 0 && (
-                      <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>
+                    {item.base_selection && (
+                      <p className="text-xs text-[#6b7280] mt-0.5">Base: {item.base_selection}</p>
                     )}
                     {item.chocolate_selections?.length > 0 && (
-                      <p className="text-xs text-[#6b7280] mt-0.5">Choc: {item.chocolate_selections.join(", ")}</p>
+                      <p className="text-xs text-[#6b7280] mt-0.5">Chocolates: {item.chocolate_selections.join(", ")}</p>
                     )}
                     {item.selected_toppings?.length > 0 && (
                       <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>
                     )}
+                    {item.selected_choc_toppings?.length > 0 && (
+                      <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_choc_toppings.join(", ")}</p>
+                    )}
                     {item.selected_sauces?.length > 0 && (
                       <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>
+                    )}
+                    {item.extras?.length > 0 && (
+                      <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>
                     )}
                     {item.special_instructions && (
                       <p className="text-xs text-[#6b7280] mt-0.5 italic">"{item.special_instructions}"</p>

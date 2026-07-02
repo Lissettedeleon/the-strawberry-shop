@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { EXTRA_PRICE } from "./itemConfigs";
 
 const CartContext = createContext();
 
@@ -31,8 +30,7 @@ export function CartProvider({ children }) {
   const itemCount = items.reduce((sum, i) => sum + (i.quantity || 1), 0);
   const subtotal = items.reduce((sum, i) => {
     const qty = i.quantity || 1;
-    const extrasTotal = (i.extra_count || 0) * EXTRA_PRICE;
-    return sum + ((i.base_price || 0) + extrasTotal) * qty;
+    return sum + ((i.base_price || 0) + (i.extras_total || 0)) * qty;
   }, 0);
 
   return (
