@@ -68,9 +68,9 @@ export default function Location() {
                 </Link>
               </motion.div>
 
-              <div className="flex justify-center hidden">
-                <GoogleReviewButton />
-              </div>
+              
+
+              
             </div>
           </div>
         </div>
