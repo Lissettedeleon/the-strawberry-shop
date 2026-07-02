@@ -133,7 +133,7 @@ function CartFooter({ subtotal, items, onClose }) {
       <Link
         to="/checkout"
         onClick={onClose}
-        className="block w-full bg-[#7C0116] text-white font-body font-bold text-sm py-4 rounded-full text-center hover:bg-[#5C0110] transition-colors min-h-[52px] flex items-center justify-center active:scale-95"
+        className="block w-full bg-[#7C0116] text-white font-body font-bold text-sm py-4 rounded-full text-center leading-6 hover:bg-[#5C0110] transition-colors min-h-[52px] active:scale-95"
       >
         Checkout
       </Link>
