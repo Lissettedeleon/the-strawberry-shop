@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Sparkles, BadgeCheck } from "lucide-react";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import { GoogleReviewButton } from "@/components/SocialButtons";
 
@@ -8,46 +7,6 @@ export default function LocalTrust() {
   return (
     <section className="py-14 md:py-20 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
-          <p className="font-body font-semibold text-[#7C0116] text-xs uppercase tracking-[0.18em] mb-2">
-            Locally made
-          </p>
-          <h2 className="font-bubble text-[#7C0116] text-3xl md:text-4xl mb-4 leading-tight">
-            Fresh Treats in Liberty Township
-          </h2>
-          <p className="text-[#5C0110]/80 font-body text-base md:text-lg leading-relaxed mb-6 max-w-xl mx-auto">
-            The Strawberry Shop creates fresh, handcrafted strawberry desserts made for everyday
-            cravings, thoughtful gifts, celebrations, and special moments.
-          </p>
-          <div className="space-y-3 max-w-md mx-auto text-left">
-            {[
-              { icon: MapPin, text: "Local pickup at 7100 Foundry Row, Liberty Township, OH" },
-              { icon: Sparkles, text: "Made fresh daily with quality strawberries" },
-              { icon: BadgeCheck, text: "Handcrafted with care, every single order" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.text}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="flex items-start gap-3"
-              >
-                <div className="w-9 h-9 rounded-xl bg-[#FBF1F3] flex items-center justify-center text-[#7C0116] shrink-0">
-                  <item.icon size={18} />
-                </div>
-                <p className="font-body text-[#1a1a1a] text-sm md:text-base pt-1.5">{item.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Reviews */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
