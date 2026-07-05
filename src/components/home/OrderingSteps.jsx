@@ -63,12 +63,14 @@ export default function OrderingSteps() {
         </div>
 
         <div className="text-center mt-12">
-          <Link
-            to="/menu"
-            className="inline-flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all active:scale-95 shadow-lg"
-          >
-            <ShoppingBag size={18} /> Start Your Order
-          </Link>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="inline-block">
+            <Link
+              to="/menu"
+              className="inline-flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
+            >
+              <ShoppingBag size={18} /> Start Your Order
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
