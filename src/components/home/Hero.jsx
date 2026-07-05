@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import WaveDivider from "@/components/WaveDivider";
+import { useCart } from "@/lib/CartContext";
 
 const HERO_VIDEO =
   "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/8307ed9eb_Hero_Product_Video.mp4";
 
 export default function Hero() {
   const videoRef = useRef(null);
+  const { setOrderChoiceOpen } = useCart();
 
   useEffect(() => {
     // Mobile browsers (especially iOS Safari) often ignore the declarative
@@ -54,14 +55,14 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.24 }}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-                <Link
-                  to="/menu"
-                  className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
-                >
-                  <ShoppingBag size={18} /> Order Now
-                </Link>
-              </motion.div>
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => setOrderChoiceOpen(true)}
+                className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
+              >
+                <ShoppingBag size={18} /> Order Now
+              </motion.button>
               <motion.a
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
