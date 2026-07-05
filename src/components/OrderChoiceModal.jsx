@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight, Globe } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "./DeliveryBadges";
+import { SHEET_TRANSITION, EASE_OUT_STRONG } from "@/lib/motion";
 
 export default function OrderChoiceModal({ open, onClose }) {
   return (
@@ -21,7 +22,7 @@ export default function OrderChoiceModal({ open, onClose }) {
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={SHEET_TRANSITION}
             className="fixed bottom-0 left-0 right-0 z-[100] md:hidden bg-white rounded-t-[24px] px-4 pt-3 pb-8 shadow-2xl"
           >
             <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5" />
@@ -36,7 +37,7 @@ export default function OrderChoiceModal({ open, onClose }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            transition={{ duration: 0.25, ease: EASE_OUT_STRONG }}
             className="hidden md:block fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
           >
             <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100" aria-label="Close">
