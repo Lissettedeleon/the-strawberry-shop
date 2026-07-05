@@ -53,7 +53,7 @@ export default function ReviewCarousel() {
                 ))}
               </div>
               <p className="text-foreground font-body text-lg md:text-xl leading-relaxed mb-5">"{current.quote}"</p>
-              <p className="font-display text-primary text-xl">{current.name}</p>
+              <p className="font-cursive text-primary text-2xl md:text-3xl">{current.name}</p>
             </motion.div>
           </AnimatePresence>
         </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -131,6 +131,11 @@
 
 .font-bubble {
   font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+}
+
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
   font-weight: 700;
 }
 

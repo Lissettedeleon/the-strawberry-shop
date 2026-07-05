@@ -21,7 +21,7 @@ export default function OrderingSteps() {
           <h2 className="font-bubble text-[#7C0116] text-3xl md:text-4xl">Ordering Made Simple</h2>
         </div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-6">
           {/* Connecting line, desktop only */}
           <motion.div
             initial={{ scaleX: 0 }}
