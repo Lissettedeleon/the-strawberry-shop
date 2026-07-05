@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowRight } from "lucide-react";
@@ -8,6 +8,14 @@ const HERO_VIDEO =
   "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/8307ed9eb_Hero_Product_Video.mp4";
 
 export default function Hero() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Mobile browsers (especially iOS Safari) often ignore the declarative
+    // autoPlay attribute — kick playback explicitly once mounted.
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden"
@@ -78,12 +86,13 @@ export default function Hero() {
               className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[16/11] sm:aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7]"
             >
               <video
+                ref={videoRef}
                 src={HERO_VIDEO}
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="auto"
                 className="w-full h-full object-cover"
               />
             </motion.div>

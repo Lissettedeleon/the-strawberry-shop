@@ -5,7 +5,7 @@ import { GoogleReviewButton } from "@/components/SocialButtons";
 
 export default function LocalTrust() {
   return (
-    <section className="py-14 md:py-20 bg-white">
+    <section className="py-14 md:py-20" style={{ backgroundColor: "#FBF1F3" }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Reviews */}
         <motion.div
