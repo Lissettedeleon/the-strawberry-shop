@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag, ClipboardList, Send, Store } from "lucide-react";
+import { useCart } from "@/lib/CartContext";
 
 const STEPS = [
   { icon: ShoppingBag, title: "Choose Your Treats", text: "Browse the menu and add your favorite strawberry desserts to your order." },
@@ -11,6 +11,7 @@ const STEPS = [
 ];
 
 export default function OrderingSteps() {
+  const { setOrderChoiceOpen } = useCart();
   return (
     <section className="py-14 md:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,14 +64,14 @@ export default function OrderingSteps() {
         </div>
 
         <div className="text-center mt-12">
-          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="inline-block">
-            <Link
-              to="/menu"
-              className="inline-flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
-            >
-              <ShoppingBag size={18} /> Start Your Order
-            </Link>
-          </motion.div>
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => setOrderChoiceOpen(true)}
+            className="inline-flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
+          >
+            <ShoppingBag size={18} /> Start Your Order
+          </motion.button>
         </div>
       </div>
     </section>
