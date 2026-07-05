@@ -23,8 +23,9 @@ import OrderConfirmation from '@/pages/OrderConfirmation';
 import AdminDashboard from '@/pages/AdminDashboard';
 import Login from '@/pages/Login';
 
-import { CartProvider } from '@/lib/CartContext';
+import { CartProvider, useCart } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
+import OrderChoiceModal from '@/components/OrderChoiceModal';
 
 const PublicRoutes = () => (
   <Routes>
@@ -52,6 +53,17 @@ const PublicRoutes = () => (
   </Routes>
 );
 
+const GlobalOverlays = () => {
+  const { orderChoiceOpen, setOrderChoiceOpen } = useCart();
+  return (
+    <>
+      <CartDrawer />
+      <MobileOrderBar />
+      <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
+    </>
+  );
+};
+
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError } = useAuth();
 
@@ -64,8 +76,7 @@ const AuthenticatedApp = () => {
     return (
       <CartProvider>
         <PublicRoutes />
-        <CartDrawer />
-        <MobileOrderBar />
+        <GlobalOverlays />
       </CartProvider>
     );
   }
@@ -73,8 +84,7 @@ const AuthenticatedApp = () => {
   return (
     <CartProvider>
       <PublicRoutes />
-      <CartDrawer />
-      <MobileOrderBar />
+      <GlobalOverlays />
     </CartProvider>
   );
 };
