@@ -17,26 +17,14 @@ export default function Hero() {
       <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-3xl opacity-30 bg-[#E0A4B0] pointer-events-none" />
       <div className="absolute -bottom-24 -left-16 w-72 h-72 rounded-full blur-3xl opacity-20 bg-[#7C0116] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20 relative z-10">
         <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
           {/* Text + CTAs */}
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/80 border border-[#E0A4B0] rounded-full px-4 py-1.5 mb-5"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#7C0116] animate-pulse" />
-              <span className="font-body font-semibold text-[#7C0116] text-xs tracking-wide">
-                Fresh daily · Liberty Township, OH
-              </span>
-            </motion.span>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.08 }}
+              transition={{ duration: 0.6 }}
               className="font-bubble text-[#7C0116] text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.05] mb-5"
             >
               Fresh Strawberry Desserts Made to Brighten Your Day
@@ -87,7 +75,7 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7]"
+              className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[16/11] sm:aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7]"
             >
               <video
                 src={HERO_VIDEO}
