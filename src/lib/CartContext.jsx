@@ -10,6 +10,7 @@ export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
   const [fulfillmentType, setFulfillmentType] = useState("pickup");
   const [cartOpen, setCartOpen] = useState(false);
+  const [orderChoiceOpen, setOrderChoiceOpen] = useState(false);
 
   const addItem = useCallback((item) => {
     setItems(prev => [...prev, { ...item, cartId: Date.now() + Math.random() }]);
@@ -34,7 +35,7 @@ export function CartProvider({ children }) {
   }, 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, updateItem, removeItem, clearCart, itemCount, subtotal, fulfillmentType, setFulfillmentType, cartOpen, setCartOpen }}>
+    <CartContext.Provider value={{ items, addItem, updateItem, removeItem, clearCart, itemCount, subtotal, fulfillmentType, setFulfillmentType, cartOpen, setCartOpen, orderChoiceOpen, setOrderChoiceOpen }}>
       {children}
     </CartContext.Provider>
   );

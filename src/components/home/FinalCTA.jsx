@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
+import { useCart } from "@/lib/CartContext";
 
 export default function FinalCTA() {
+  const { setOrderChoiceOpen } = useCart();
   return (
     <section
       className="relative overflow-hidden py-16 md:py-24"
@@ -42,12 +43,12 @@ export default function FinalCTA() {
           whileTap={{ scale: 0.96 }}
           className="inline-block"
         >
-          <Link
-            to="/menu"
+          <button
+            onClick={() => setOrderChoiceOpen(true)}
             className="inline-flex items-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F6E3E7] transition-all active:scale-95 shadow-xl"
           >
             <ShoppingBag size={18} /> Start Your Order
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>
