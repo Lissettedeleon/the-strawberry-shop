@@ -21,24 +21,39 @@ export default function OrderingSteps() {
           <h2 className="font-bubble text-[#7C0116] text-3xl md:text-4xl">Ordering Made Simple</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Connecting line, desktop only */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
+            style={{ originX: 0 }}
+            className="hidden lg:block absolute top-7 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#F6E3E7] via-[#E0A4B0] to-[#F6E3E7]"
+          />
           {STEPS.map((step, i) => (
             <motion.div
               key={step.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
               className="relative text-center"
             >
-              <div className="relative inline-block mb-4">
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 260, damping: 16, delay: i * 0.12 + 0.1 }}
+                className="relative inline-block mb-4 bg-white"
+              >
                 <div className="w-14 h-14 rounded-2xl bg-[#FBF1F3] border border-[#F6E3E7] flex items-center justify-center text-[#7C0116]">
                   <step.icon size={26} />
                 </div>
                 <span className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#7C0116] text-white font-body font-extrabold text-xs flex items-center justify-center border-2 border-white">
                   {i + 1}
                 </span>
-              </div>
+              </motion.div>
               <h3 className="font-bubble text-[#1a1a1a] text-base mb-1.5">{step.title}</h3>
               <p className="text-[#6b7280] font-body text-sm leading-relaxed max-w-[240px] mx-auto">
                 {step.text}
