@@ -7,6 +7,7 @@ import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
 import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
+import { SHEET_TRANSITION } from "@/lib/motion";
 
 const DEFAULT_ANNOUNCEMENT =
   "Fresh strawberry desserts, chocolate-covered treats, and pickup orders available in Liberty Township.";
@@ -160,7 +161,7 @@ export default function Navbar() {
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                transition={SHEET_TRANSITION}
                 className="fixed top-16 right-0 bottom-0 w-72 bg-white z-[50] shadow-2xl md:hidden"
               >
                 <div className="px-6 py-6 space-y-1">
