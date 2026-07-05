@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { EASE_OUT_STRONG } from "@/lib/motion";
 
 const colorMap = {
   blush: "#E0A4B0",
@@ -18,7 +19,7 @@ export default function WaveDivider({ from = "white", to = "blush", flip = false
         initial={{ scaleY: 0.3, opacity: 0 }}
         whileInView={{ scaleY: 1, opacity: 1 }}
         viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.7, ease: EASE_OUT_STRONG }}
         style={{ transformOrigin: "bottom" }}
       >
         <path
