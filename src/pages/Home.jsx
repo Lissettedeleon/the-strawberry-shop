@@ -18,9 +18,10 @@ export default function Home() {
       <Hero />
       <HoursStrip />
       <OrderingSteps />
-      <LocalTrust />
 
       <WaveDivider from="white" to="#FBF1F3" />
+
+      <LocalTrust />
 
       {/* Social Feed */}
       <section className="py-14 md:py-20" style={{ background: "linear-gradient(180deg, #FBF1F3 0%, #F6E3E7 100%)" }}>
