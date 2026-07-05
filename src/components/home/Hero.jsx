@@ -19,28 +19,44 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 relative z-10">
         <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
           {/* Text + CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-flex items-center gap-2 bg-white/80 border border-[#E0A4B0] rounded-full px-4 py-1.5 mb-5">
+          <div>
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-white/80 border border-[#E0A4B0] rounded-full px-4 py-1.5 mb-5"
+            >
               <span className="w-2 h-2 rounded-full bg-[#7C0116] animate-pulse" />
               <span className="font-body font-semibold text-[#7C0116] text-xs tracking-wide">
                 Fresh daily · Liberty Township, OH
               </span>
-            </span>
+            </motion.span>
 
-            <h1 className="font-bubble text-[#7C0116] text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.05] mb-5">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="font-bubble text-[#7C0116] text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.05] mb-5"
+            >
               Fresh Strawberry Desserts Made to Brighten Your Day
-            </h1>
+            </motion.h1>
 
-            <p className="text-[#5C0110]/80 font-body text-base md:text-lg mb-8 max-w-xl leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="text-[#5C0110]/80 font-body text-base md:text-lg mb-8 max-w-xl leading-relaxed"
+            >
               Handcrafted strawberry cups, chocolate-covered treats, dessert trays, and sweet
               favorites made for pickup in Liberty Township.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
               <Link
                 to="/menu"
                 className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all active:scale-95 shadow-lg"
@@ -53,8 +69,8 @@ export default function Hero() {
               >
                 See What We Make <ArrowRight size={16} />
               </a>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
           {/* Product video */}
           <motion.div
@@ -63,7 +79,11 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="relative"
           >
-            <div className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7]">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7]"
+            >
               <video
                 src={HERO_VIDEO}
                 autoPlay
@@ -73,11 +93,16 @@ export default function Hero() {
                 preload="metadata"
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 hidden sm:block">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 hidden sm:block"
+            >
               <p className="font-bubble text-[#7C0116] text-sm leading-tight">Made fresh to order</p>
               <p className="font-body text-[#6b7280] text-xs">Pickup at 7100 Foundry Row</p>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -32,13 +32,20 @@ export default function LocalTrust() {
                 { icon: MapPin, text: "Local pickup at 7100 Foundry Row, Liberty Township, OH" },
                 { icon: Sparkles, text: "Made fresh daily with quality strawberries" },
                 { icon: BadgeCheck, text: "Handcrafted with care, every single order" },
-              ].map((item) => (
-                <div key={item.text} className="flex items-start gap-3">
+              ].map((item, i) => (
+                <motion.div
+                  key={item.text}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                  className="flex items-start gap-3"
+                >
                   <div className="w-9 h-9 rounded-xl bg-[#FBF1F3] flex items-center justify-center text-[#7C0116] shrink-0">
                     <item.icon size={18} />
                   </div>
                   <p className="font-body text-[#1a1a1a] text-sm md:text-base pt-1.5">{item.text}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
             <div className="mt-6">
@@ -51,8 +58,9 @@ export default function LocalTrust() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            whileHover={{ y: -4 }}
           >
-            <div className="rounded-3xl bg-[#FBF1F3] border border-[#F6E3E7] p-6 md:p-8">
+            <div className="rounded-3xl bg-[#FBF1F3] border border-[#F6E3E7] p-6 md:p-8 shadow-sm transition-shadow hover:shadow-md">
               <PhotoGallery />
             </div>
           </motion.div>
