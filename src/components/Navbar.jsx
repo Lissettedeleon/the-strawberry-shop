@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu as MenuIcon, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
-import OrderChoiceModal from "./OrderChoiceModal";
 import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
+
+const DEFAULT_ANNOUNCEMENT =
+  "Fresh strawberry desserts, chocolate-covered treats, and pickup orders available in Liberty Township.";
 
 function CartButton({ className = "", iconSize = 20 }) {
   const { itemCount, setCartOpen } = useCart();
@@ -28,18 +30,18 @@ function CartButton({ className = "", iconSize = 20 }) {
 }
 
 const navLinks = [
-  { label: "Menu", to: "/menu" },
+  { label: "Home", to: "/" },
   { label: "About", to: "/about" },
+  { label: "Order", to: "/menu" },
   { label: "Location", to: "/location" },
-  { label: "Catering", to: "/contact" },
   { label: "FAQ", to: "/faq" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [announcement, setAnnouncement] = useState(null);
-  const [orderChoiceOpen, setOrderChoiceOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function Navbar() {
 
   useEffect(() => {
     base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1)
-      .then(res => { if (res.length > 0) setAnnouncement(res[0]); })
+      .then((res) => { if (res.length > 0) setAnnouncement(res[0]); })
       .catch(() => {});
   }, []);
 
@@ -58,8 +60,25 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [location]);
 
+  const announcementText = announcement?.message || DEFAULT_ANNOUNCEMENT;
+
   return (
     <>
+      {/* Announcement bar */}
+      <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-xs sm:text-sm font-body font-semibold">
+        {announcementText}
+        {announcement?.link_url && announcement?.link_text && (
+          <a
+            href={announcement.link_url}
+            className="underline ml-2 font-bold"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {announcement.link_text}
+          </a>
+        )}
+      </div>
+
       {/* Top utility bar */}
       <div className="bg-[#FBF1F3] border-b border-[#F6E3E7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-1.5">
@@ -71,46 +90,43 @@ export default function Navbar() {
         </div>
       </div>
 
-      {announcement && (
-        <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-sm font-body font-semibold hidden">
-          {announcement.message}
-          {announcement.link_url && announcement.link_text && (
-            <a href={announcement.link_url} className="underline ml-2 font-bold" target="_blank" rel="noopener noreferrer">
-              {announcement.link_text}
-            </a>
-          )}
-        </div>
-      )}
-
-      <nav className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-b border-[#F6E3E7]"}`}>
+      <nav
+        className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
+          scrolled ? "shadow-md" : "border-b border-[#F6E3E7]"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 shrink-0">
               <Logo size="sm" />
-              <span className="font-display text-[#7C0116] text-base hidden sm:block">the strawberry shop</span>
+              <span className="font-display text-[#7C0116] text-base hidden sm:block">
+                the strawberry shop
+              </span>
             </Link>
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-6">
-              {navLinks.map(link => (
+              {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
                   className={`font-body font-semibold text-sm transition-colors ${
-                    location.pathname === link.to ? "text-[#7C0116]" : "text-[#6b7280] hover:text-[#7C0116]"
+                    location.pathname === link.to
+                      ? "text-[#7C0116]"
+                      : "text-[#6b7280] hover:text-[#7C0116]"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
               <CartButton />
-              <button
-                onClick={() => setOrderChoiceOpen(true)}
+              <Link
+                to="/menu"
                 className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
               >
                 <ShoppingBag size={16} /> Order Now
-              </button>
+              </Link>
             </div>
 
             {/* Mobile: open badge + cart + hamburger */}
@@ -122,7 +138,7 @@ export default function Navbar() {
                 className="p-2 text-[#1a1a1a] min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Toggle menu"
               >
-                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                {mobileOpen ? <X size={24} /> : <MenuIcon size={24} />}
               </button>
             </div>
           </div>
@@ -148,7 +164,7 @@ export default function Navbar() {
                 className="fixed top-16 right-0 bottom-0 w-72 bg-white z-[50] shadow-2xl md:hidden"
               >
                 <div className="px-6 py-6 space-y-1">
-                  {navLinks.map(link => (
+                  {navLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
@@ -162,12 +178,13 @@ export default function Navbar() {
                     </Link>
                   ))}
                   <div className="pt-3">
-                    <button
-                      onClick={() => { setMobileOpen(false); setOrderChoiceOpen(true); }}
+                    <Link
+                      to="/menu"
+                      onClick={() => setMobileOpen(false)}
                       className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
                     >
                       <ShoppingBag size={18} /> Order Now
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -175,8 +192,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-
-      <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
     </>
   );
 }
