@@ -57,18 +57,22 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.24 }}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <Link
-                to="/menu"
-                className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all active:scale-95 shadow-lg"
-              >
-                <ShoppingBag size={18} /> Order Now
-              </Link>
-              <a
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                <Link
+                  to="/menu"
+                  className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
+                >
+                  <ShoppingBag size={18} /> Order Now
+                </Link>
+              </motion.div>
+              <motion.a
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
                 href="#fresh-favorites"
-                className="flex items-center justify-center gap-2 bg-white text-[#7C0116] border-2 border-[#E0A4B0] font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#FBF1F3] transition-all active:scale-95"
+                className="flex items-center justify-center gap-2 bg-white text-[#7C0116] border-2 border-[#E0A4B0] font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#FBF1F3] transition-all"
               >
                 See What We Make <ArrowRight size={16} />
-              </a>
+              </motion.a>
             </motion.div>
           </div>
 
