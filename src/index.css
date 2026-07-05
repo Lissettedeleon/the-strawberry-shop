@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik+Bubbles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -31,9 +31,9 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 1rem;
-    --font-heading: 'Fredoka', sans-serif;
+    --font-heading: 'Baloo 2', sans-serif;
     --font-body: 'Quicksand', sans-serif;
-    --font-display: 'Fredoka', sans-serif;
+    --font-display: 'Baloo 2', sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -124,9 +124,14 @@
   50% { transform: translateY(-6px); }
 }
 
+@keyframes heroLogoFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
 .font-bubble {
-  font-family: 'Rubik Bubbles', cursive;
-  font-weight: 400;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
 }
 
 /* Smooth scrollbar for webkit */

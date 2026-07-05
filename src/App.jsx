@@ -6,6 +6,9 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
 import BrandedLoader from './components/BrandedLoader';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import AdminRoute from '@/components/AdminRoute';
+import MobileOrderBar from '@/components/MobileOrderBar';
 
 import Home from '@/pages/Home';
 import Menu from '@/pages/Menu';
@@ -18,9 +21,36 @@ import FAQ from '@/pages/FAQ';
 import Checkout from '@/pages/Checkout';
 import OrderConfirmation from '@/pages/OrderConfirmation';
 import AdminDashboard from '@/pages/AdminDashboard';
+import Login from '@/pages/Login';
 
 import { CartProvider } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
+
+const PublicRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/menu" element={<Menu />} />
+    <Route path="/order" element={<Navigate to="/menu" replace />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/location" element={<Location />} />
+    <Route path="/hours" element={<Hours />} />
+    <Route path="/gift-cards" element={<GiftCards />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/faq" element={<FAQ />} />
+    <Route path="/checkout" element={<Checkout />} />
+    <Route path="/order-confirmation" element={<OrderConfirmation />} />
+    {/* Admin login (for staff only) — customers never need to authenticate */}
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Navigate to="/login" replace />} />
+    <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
+    <Route path="/reset-password" element={<Navigate to="/login" replace />} />
+    {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
+    <Route element={<AdminRoute />}>
+      <Route path="/admin" element={<AdminDashboard />} />
+    </Route>
+    <Route path="*" element={<PageNotFound />} />
+  </Routes>
+);
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError } = useAuth();
@@ -33,52 +63,18 @@ const AuthenticatedApp = () => {
   if (authError && authError.type !== 'auth_required') {
     return (
       <CartProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/order" element={<Navigate to="/menu" replace />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/hours" element={<Hours />} />
-          <Route path="/gift-cards" element={<GiftCards />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/login" element={<Navigate to="/" replace />} />
-          <Route path="/register" element={<Navigate to="/" replace />} />
-          <Route path="/forgot-password" element={<Navigate to="/" replace />} />
-          <Route path="/reset-password" element={<Navigate to="/" replace />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+        <PublicRoutes />
         <CartDrawer />
+        <MobileOrderBar />
       </CartProvider>
     );
   }
 
   return (
     <CartProvider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/order" element={<Navigate to="/menu" replace />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/location" element={<Location />} />
-        <Route path="/hours" element={<Hours />} />
-        <Route path="/gift-cards" element={<GiftCards />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order-confirmation" element={<OrderConfirmation />} />
-        <Route path="/login" element={<Navigate to="/" replace />} />
-        <Route path="/register" element={<Navigate to="/" replace />} />
-        <Route path="/forgot-password" element={<Navigate to="/" replace />} />
-        <Route path="/reset-password" element={<Navigate to="/" replace />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <PublicRoutes />
       <CartDrawer />
+      <MobileOrderBar />
     </CartProvider>
   );
 };

@@ -29,6 +29,8 @@ export default function Checkout() {
   const handlePlaceOrder = async () => {
     setPlacing(true);
     try {
+      // NOTE: No live payment processing yet — orders are recorded for pickup only.
+      // This will connect to Toast Payments once that POS integration is approved and live.
       const orderNumber = "ORD-" + Date.now().toString(36).toUpperCase();
       const customerName = `${firstName} ${lastName}`.trim();
       const order = await base44.entities.Order.create({

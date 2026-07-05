@@ -33,8 +33,8 @@ export default function Location() {
                   href="https://maps.apple.com/?daddr=7100+Foundry+Row,+Liberty+Township,+OH+45069"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors"
-                >
+                  className="inline-block bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors">
+                  
                   Open in Apple Maps
                 </a>
               </div>
@@ -42,8 +42,8 @@ export default function Location() {
 
             <div className="space-y-5">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm"
-              >
+              className="bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm">
+                
                 <h3 className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base mb-3"><MapPin size={16} className="text-[#7C0116]" /> Address</h3>
                 <p className="text-[#6b7280] font-body text-base leading-relaxed">
                   7100 Foundry Row<br />Liberty Township, OH 45069
@@ -52,8 +52,8 @@ export default function Location() {
                   href="https://maps.apple.com/?daddr=7100+Foundry+Row,+Liberty+Township,+OH+45069"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-4 bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors"
-                >
+                  className="inline-flex items-center gap-1.5 mt-4 bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors">
+                  
                   <Navigation size={14} /> Open in Apple Maps
                 </a>
               </motion.div>
@@ -61,22 +61,22 @@ export default function Location() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
                 <Link
                   to="/hours"
-                  className="flex items-center justify-between bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm hover:bg-[#F6E3E7] transition-colors"
-                >
+                  className="flex items-center justify-between bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm hover:bg-[#F6E3E7] transition-colors">
+                  
                   <span className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base"><Clock size={16} className="text-[#7C0116]" /> See Our Hours</span>
                   <ChevronRight size={18} className="text-[#7C0116]" />
                 </Link>
               </motion.div>
 
-              <div className="flex justify-center">
-                <GoogleReviewButton />
-              </div>
+              
+
+              
             </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 }

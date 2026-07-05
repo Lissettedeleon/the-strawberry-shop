@@ -52,44 +52,44 @@ export default function About() {
           <h2 className="font-body font-semibold text-[#5C0110] text-2xl text-center mb-10">what we're about</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: <Leaf className="text-[#7C0116]" size={24} />, title: "Always Fresh", text: "We source the ripest, juiciest strawberries and prep everything daily. No shortcuts, no compromises." },
-              { icon: <Heart className="text-[#7C0116]" size={24} />, title: "Made with Love", text: "Every cup is built by hand with care. We treat each order like it's for our own family." },
-              { icon: <Sparkles className="text-[#7C0116]" size={24} />, title: "A Little Bit Extra", text: "From Belgian chocolate to house-made matcha cream — we believe in going above and beyond." },
-            ].map((v, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm hover:scale-[1.02] transition-transform"
-              >
+            { icon: <Leaf className="text-[#7C0116]" size={24} />, title: "Always Fresh", text: "We source the ripest, juiciest strawberries and prep everything daily. No shortcuts, no compromises." },
+            { icon: <Heart className="text-[#7C0116]" size={24} />, title: "Made with Love", text: "Every cup is built by hand with care. We treat each order like it's for our own family." },
+            { icon: <Sparkles className="text-[#7C0116]" size={24} />, title: "A Little Bit Extra", text: "From Belgian chocolate to house-made matcha cream — we believe in going above and beyond." }].
+            map((v, i) =>
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+            className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm hover:scale-[1.02] transition-transform">
+              
                 <div className="w-14 h-14 rounded-full bg-[#F6E3E7] flex items-center justify-center mx-auto mb-4">{v.icon}</div>
                 <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-2">{v.title}</h3>
                 <p className="text-[#6b7280] font-body text-sm leading-relaxed">{v.text}</p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
       {/* Social + CTA */}
-      <section style={{ background: "#FBF1F3" }} className="py-12 border-t border-[#F6E3E7]">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <p className="font-body font-semibold text-[#5C0110] text-base mb-4">Follow us & leave a review</p>
-          <div className="flex justify-center mb-4">
-            <SocialIconsRow />
-          </div>
-          <div className="flex justify-center mb-8">
-            <GoogleReviewButton />
-          </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/location" className="inline-flex items-center gap-1.5 bg-white border border-[#E0A4B0] text-[#1a1a1a] font-body font-bold px-7 py-3 rounded-full min-h-[44px] hover:bg-[#F6E3E7] transition-colors">
-              <MapPin size={15} /> Find Us
-            </Link>
-            <Link to="/menu" className="bg-[#7C0116] text-white font-body font-bold px-7 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors">
-              View Menu
-            </Link>
-          </div>
-        </div>
-      </section>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 }

@@ -114,20 +114,19 @@ export const ITEM_CONFIGS = {
     removable_ingredients: ["Pistachio Cream", "Nutella", "Chocolate Sauce"],
     addons: [{ name: "Add cream", price: DUBAI_ADD_CREAM_PRICE }],
   },
-  "Belgian Milk Chocolate Strawberries": {
+  "Belgian Milk Chocolate": {
     type: "choc_toppings",
     ingredients: ["Milk Chocolate"],
   },
-  "Belgian White Chocolate Strawberries": {
+  "Belgian White Chocolate": {
     type: "choc_toppings",
     ingredients: ["White Chocolate"],
   },
-  "Belgian Dark Chocolate Strawberries": {
+  "Belgian Dark Chocolate": {
     type: "choc_toppings",
     ingredients: ["Dark Chocolate"],
   },
-  "Half and Half Chocolate Strawberries": HALF_AND_HALF_CONFIG,
-  "Half & Half Chocolate Strawberries": HALF_AND_HALF_CONFIG,
+  "Half & Half": HALF_AND_HALF_CONFIG,
   "Build Your Own Cup": {
     type: "build_your_own",
   },
@@ -135,7 +134,7 @@ export const ITEM_CONFIGS = {
     type: "simple",
     ingredients: ["Fresh Strawberries"],
   },
-  "Strawberries and Nutella": {
+  "Strawberries & Nutella": {
     type: "simple",
     ingredients: ["Nutella", "Fresh Strawberries"],
   },
