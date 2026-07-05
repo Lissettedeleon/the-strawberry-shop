@@ -24,7 +24,7 @@ export default function Home() {
 
       {/* Social Feed */}
       <section className="py-14 md:py-20" style={{ background: "linear-gradient(180deg, #FBF1F3 0%, #F6E3E7 100%)" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
