@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import { Link } from "react-router-dom";
+import { SHEET_TRANSITION } from "@/lib/motion";
 
 export default function CartDrawer() {
   const { items, subtotal, updateItem, removeItem, cartOpen, setCartOpen } = useCart();
@@ -25,7 +26,7 @@ export default function CartDrawer() {
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={SHEET_TRANSITION}
             className="fixed bottom-0 left-0 right-0 z-[70] bg-white rounded-t-[24px] max-h-[85vh] flex flex-col shadow-2xl md:hidden"
           >
             <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 mb-1 shrink-0" />
@@ -44,7 +45,7 @@ export default function CartDrawer() {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={SHEET_TRANSITION}
             className="fixed right-0 top-0 h-full w-full max-w-sm bg-white z-[70] shadow-2xl flex-col hidden md:flex"
           >
             <div className="flex items-center justify-between p-5 border-b border-[#F6E3E7] shrink-0">
