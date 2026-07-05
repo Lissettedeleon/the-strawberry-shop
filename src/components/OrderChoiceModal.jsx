@@ -57,14 +57,16 @@ function OrderOptions({ onClose }) {
       <Link
         to="/menu"
         onClick={onClose}
-        className="flex items-center gap-4 bg-[#7C0116] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#5C0110] transition-colors active:scale-95"
+        className="block bg-[#7C0116] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#5C0110] transition-colors active:scale-95"
       >
-        <Globe size={22} className="shrink-0" />
-        <div className="flex-1">
-          <p className="font-body font-bold text-base leading-tight">Order Through Our Website</p>
-          <p className="font-body text-white/80 text-xs mt-0.5">Pickup or delivery — order and pay here</p>
-        </div>
-        <ChevronRight size={18} className="text-white/80 shrink-0" />
+        <span className="flex items-center gap-4 w-full h-full">
+          <Globe size={22} className="shrink-0" />
+          <span className="flex-1">
+            <span className="block font-body font-bold text-base leading-tight">Order Through Our Website</span>
+            <span className="block font-body text-white/80 text-xs mt-0.5">Pickup or delivery — order and pay here</span>
+          </span>
+          <ChevronRight size={18} className="text-white/80 shrink-0" />
+        </span>
       </Link>
 
       <UberEatsBadge className="!flex w-full justify-center py-4" />
