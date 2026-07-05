@@ -8,7 +8,7 @@ const FRONT_VIDEO_URL = "https://www.tiktok.com/@thestrawberryshopp/video/761383
 
 export default function FrontVideo() {
   return (
-    <section className="py-12 md:py-16" style={{ backgroundColor: "#F7E3E8" }}>
+    <section className="py-12 md:py-16" style={{ backgroundColor: "#FFF6F2" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-14">
         <div
           className="bg-white rounded-[20px_20px_26px_26px] p-5 sm:p-8"
