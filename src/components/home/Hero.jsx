@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowRight } from "lucide-react";
+import WaveDivider from "@/components/WaveDivider";
 
 const HERO_VIDEO =
   "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/8307ed9eb_Hero_Product_Video.mp4";
@@ -110,6 +111,8 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      <WaveDivider from="#FBF1F3" to="white" />
     </section>
   );
 }

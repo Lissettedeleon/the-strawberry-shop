@@ -1,0 +1,38 @@
+{
+  "name": "EmailRateLimit",
+  "type": "object",
+  "properties": {
+    "rate_key": {
+      "type": "string",
+      "description": "IP address used as the rate-limit key"
+    },
+    "last_sent": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last email sent for this key"
+    }
+  },
+  "required": ["rate_key", "last_sent"],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
