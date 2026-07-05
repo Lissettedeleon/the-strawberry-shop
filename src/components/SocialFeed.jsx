@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import TikTokFeedSection from "@/components/TikTokFeedSection";
 import { Instagram, Music2 } from "lucide-react";
@@ -91,7 +92,13 @@ export default function SocialFeed() {
   return (
     <div>
       {/* Tab Buttons */}
-      <div className="flex gap-2 mb-8 bg-secondary rounded-full p-1.5 w-fit mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5 }}
+        className="flex gap-2 mb-8 bg-secondary rounded-full p-1.5 w-fit mx-auto"
+      >
         <button
           onClick={() => setActiveTab("Instagram")}
           className={`px-6 py-2.5 rounded-full font-body font-semibold text-sm transition-all ${
@@ -108,16 +115,25 @@ export default function SocialFeed() {
         >
           <Music2 size={16} className="inline mr-1.5 -mt-0.5" /> On TikTok
         </button>
-      </div>
+      </motion.div>
 
       {/* Instagram Feed */}
       {activeTab === "Instagram" && (
-        <div className="max-w-3xl mx-auto">
+        <div>
           {instagramPosts.length === 0 ? (
-            <div className="max-w-2xl mx-auto text-center">
-              <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="text-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-5 mb-6 max-w-2xl mx-auto">
                 {PLACEHOLDER_GRADIENTS.map((gradient, i) => (
-                  <div key={i} className="aspect-square rounded-2xl" style={{ background: gradient }} />
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="aspect-square rounded-2xl shadow-sm"
+                    style={{ background: gradient }}
+                  />
                 ))}
               </div>
               <p className="text-muted-foreground font-body text-sm">
@@ -128,16 +144,24 @@ export default function SocialFeed() {
               </p>
             </div>
           ) : (
-            <div className={`grid gap-6 ${instagramPosts.length === 1 ? "grid-cols-1 max-w-sm mx-auto" : "grid-cols-1 sm:grid-cols-2 justify-items-center"}`}>
-              {instagramPosts.map(post => (
-                <div key={post.id} className="w-full bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm">
+            <div className={`grid gap-6 max-w-4xl mx-auto ${instagramPosts.length === 1 ? "grid-cols-1 max-w-md mx-auto" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center"}`}>
+              {instagramPosts.map((post, i) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className="w-full bg-card rounded-[30px_10px_30px_10px] overflow-hidden border-2 border-border shadow-sm transition-shadow hover:shadow-md"
+                >
                   <blockquote
                     className="instagram-media"
                     data-instgrm-permalink={post.url}
                     data-instgrm-version="14"
                     style={{ background: "#FFF", border: 0, margin: 0, padding: 0, width: "100%" }}
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
