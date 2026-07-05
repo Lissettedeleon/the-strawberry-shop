@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Music2 } from "lucide-react";
 
 const VIDEO_1_URL = "https://www.tiktok.com/@thestrawberryshopp/video/7649445152708185358";
@@ -14,7 +15,7 @@ function TikTokSVG() {
   );
 }
 
-function VideoCard({ oembedUrl, videoUrl }) {
+function VideoCard({ oembedUrl, videoUrl, delay = 0 }) {
   const [thumbnail, setThumbnail] = useState(null);
 
   useEffect(() => {
@@ -25,11 +26,16 @@ function VideoCard({ oembedUrl, videoUrl }) {
   }, [oembedUrl]);
 
   return (
-    <a
+    <motion.a
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, delay }}
+      whileHover={{ y: -4 }}
       href={videoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white rounded-2xl border border-[#E0A4B0] overflow-hidden hover:shadow-md transition-shadow"
+      className="block bg-white rounded-2xl border border-[#E0A4B0] overflow-hidden shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="relative w-full aspect-[9/16]">
         {thumbnail ? (
@@ -48,7 +54,7 @@ function VideoCard({ oembedUrl, videoUrl }) {
           </div>
         </div>
       </div>
-    </a>
+    </motion.a>
   );
 }
 
@@ -71,9 +77,9 @@ export default function TikTokFeedSection() {
       </div>
 
       {/* Video Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
-        <VideoCard oembedUrl={OEMBED_1} videoUrl={VIDEO_1_URL} />
-        <VideoCard oembedUrl={OEMBED_2} videoUrl={VIDEO_2_URL} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl mx-auto">
+        <VideoCard oembedUrl={OEMBED_1} videoUrl={VIDEO_1_URL} delay={0} />
+        <VideoCard oembedUrl={OEMBED_2} videoUrl={VIDEO_2_URL} delay={0.1} />
       </div>
 
       {/* Follow button */}
