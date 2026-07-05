@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag, ClipboardList, Send, Store } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
+import { EASE_IN_OUT_STRONG } from "@/lib/motion";
 
 const STEPS = [
   { icon: ShoppingBag, title: "Choose Your Treats", text: "Browse the menu and add your favorite strawberry desserts to your order." },
@@ -28,7 +29,7 @@ export default function OrderingSteps() {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.9, ease: "easeInOut" }}
+            transition={{ duration: 0.7, ease: EASE_IN_OUT_STRONG }}
             style={{ originX: 0 }}
             className="hidden lg:block absolute top-7 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#F6E3E7] via-[#E0A4B0] to-[#F6E3E7]"
           />
