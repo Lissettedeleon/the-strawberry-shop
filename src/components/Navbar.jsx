@@ -31,8 +31,8 @@ function CartButton({ className = "", iconSize = 20 }) {
 
 const navLinks = [
   { label: "Home", to: "/" },
+  { label: "Menu", to: "/menu" },
   { label: "About", to: "/about" },
-  { label: "Order", to: "/menu" },
   { label: "Location", to: "/location" },
   { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },
@@ -121,12 +121,6 @@ export default function Navbar() {
                 </Link>
               ))}
               <CartButton />
-              <Link
-                to="/menu"
-                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
-              >
-                <ShoppingBag size={16} /> Order Now
-              </Link>
             </div>
 
             {/* Mobile: open badge + cart + hamburger */}
@@ -183,7 +177,7 @@ export default function Navbar() {
                       onClick={() => setMobileOpen(false)}
                       className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95"
                     >
-                      <ShoppingBag size={18} /> Order Now
+                      <ShoppingBag size={18} /> Menu
                     </Link>
                   </div>
                 </div>

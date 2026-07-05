@@ -1,28 +1,24 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HoursStrip from "@/components/HoursStrip";
 import Hero from "@/components/home/Hero";
-import ProductPreview from "@/components/home/ProductPreview";
-import ProductVideo from "@/components/home/ProductVideo";
-import OrderingSteps from "@/components/home/OrderingSteps";
-import Occasions from "@/components/home/Occasions";
-import LocalTrust from "@/components/home/LocalTrust";
+import FrontVideo from "@/components/home/FrontVideo";
+import FreshFavorites from "@/components/home/FreshFavorites";
+import SocialSection from "@/components/home/SocialSection";
+import LocalPreview from "@/components/home/LocalPreview";
 import LocationPickup from "@/components/home/LocationPickup";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white pb-16 md:pb-0">
+    <div className="min-h-screen pb-16 md:pb-0" style={{ backgroundColor: "#F7E3E8" }}>
       <Navbar />
 
       <Hero />
-      <HoursStrip />
-      <ProductPreview />
-      <ProductVideo />
-      <OrderingSteps />
-      <Occasions />
-      <LocalTrust />
+      <FrontVideo />
+      <FreshFavorites />
+      <SocialSection />
+      <LocalPreview />
       <LocationPickup />
       <FinalCTA />
 
