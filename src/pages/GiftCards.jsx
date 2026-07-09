@@ -5,6 +5,44 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Gift, Check } from "lucide-react";
+import Logo from "@/components/Logo";
+
+function FlowerAccent({ className = "" }) {
+  const petals = [0, 60, 120, 180, 240, 300];
+  return (
+    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
+      <g opacity="0.16">
+        {petals.map((deg) => (
+          <ellipse
+            key={deg}
+            cx="100"
+            cy="60"
+            rx="26"
+            ry="42"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="2.5"
+            transform={`rotate(${deg} 100 100)`}
+          />
+        ))}
+        <circle cx="100" cy="100" r="10" fill="none" stroke="#FFFFFF" strokeWidth="2.5" />
+        {[...Array(10)].map((_, i) => {
+          const a = (i / 10) * Math.PI * 2;
+          const r = 55 + (i % 3) * 14;
+          return (
+            <circle
+              key={i}
+              cx={100 + Math.cos(a) * r}
+              cy={100 + Math.sin(a) * r}
+              r="2.2"
+              fill="#FFFFFF"
+            />
+          );
+        })}
+      </g>
+    </svg>
+  );
+}
 
 const AMOUNTS = [25, 50, 75, 100];
 
@@ -84,11 +122,42 @@ export default function GiftCards() {
       <Navbar />
 
       <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-bubble text-white text-3xl sm:text-4xl mb-3 drop-shadow-lg">
-            gift cards
+        <FlowerAccent className="absolute -bottom-10 -left-10 w-64 sm:w-80 md:w-96 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
+          <Logo size="lg" className="absolute top-6 right-4 sm:right-6 lg:right-8 md:w-20 md:h-20" />
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="font-body font-semibold text-white/70 text-xs uppercase tracking-[0.2em] mb-3"
+          >
+            Gift Cards
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="font-bubble text-white text-4xl sm:text-5xl md:text-6xl leading-[1.05] drop-shadow-lg max-w-xl"
+          >
+            Because you deserve
           </motion.h1>
-          <p className="text-white/80 font-body text-lg">Because they deserve something sweet too.</p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="font-body text-white text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] mt-1 mb-4"
+          >
+            sweet things
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-white/80 font-body text-base sm:text-lg max-w-md"
+          >
+            Give the gift of fresh strawberry treats — delivered by email, ready whenever they are.
+          </motion.p>
         </div>
       </section>
 
