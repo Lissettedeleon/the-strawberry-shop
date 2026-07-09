@@ -61,7 +61,7 @@ export default function Location() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
                 <Link
                   to="/hours"
-                  className="flex items-center justify-between bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm hover:bg-[#F6E3E7] transition-colors">
+                  className="flex items-center justify-between bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm hover:bg-[#F6E3E7] transition-colors hidden">
                   
                   <span className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base"><Clock size={16} className="text-[#7C0116]" /> See Our Hours</span>
                   <ChevronRight size={18} className="text-[#7C0116]" />
