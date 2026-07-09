@@ -67,19 +67,19 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-xs sm:text-sm font-body font-semibold hidden">
-        {announcementText}
-        {announcement?.link_url && announcement?.link_text &&
-        <a
-          href={announcement.link_url}
-          className="underline ml-2 font-bold"
-          target="_blank"
-          rel="noopener noreferrer">
-          
-            {announcement.link_text}
-          </a>
-        }
-      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+      
 
       {/* Top utility bar */}
       <div className="bg-[#FBF1F3] border-b border-[#F6E3E7]">
