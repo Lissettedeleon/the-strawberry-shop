@@ -9,21 +9,24 @@ import Logo from "@/components/Logo";
 
 function StrawberryAccent({ className = "" }) {
   const leafAngles = [-72, -48, -24, 0, 24, 48, 72];
+  // Rows follow the taper of the body below — wide at the shoulders,
+  // narrowing steadily to the point, not a uniform oval.
   const seedRows = [
-    { y: 88, count: 5, halfWidth: 54 },
-    { y: 116, count: 5, halfWidth: 50 },
-    { y: 144, count: 4, halfWidth: 40 },
-    { y: 170, count: 4, halfWidth: 28 },
-    { y: 194, count: 2, halfWidth: 12 },
+    { y: 92, count: 5, halfWidth: 62 },
+    { y: 122, count: 5, halfWidth: 56 },
+    { y: 150, count: 4, halfWidth: 44 },
+    { y: 176, count: 3, halfWidth: 30 },
+    { y: 200, count: 2, halfWidth: 15 },
   ];
 
   return (
-    <svg viewBox="0 0 200 224" className={className} aria-hidden="true">
+    <svg viewBox="0 0 200 230" className={className} aria-hidden="true">
       <g opacity="0.22" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
         {leafAngles.map((deg) => (
-          <ellipse key={deg} cx="100" cy="30" rx="7" ry="26" transform={`rotate(${deg} 100 58)`} />
+          <ellipse key={deg} cx="100" cy="34" rx="7" ry="26" transform={`rotate(${deg} 100 64)`} />
         ))}
-        <path d="M100,58 C62,58 30,92 30,132 C30,175 62,208 100,220 C138,208 170,175 170,132 C170,92 138,58 100,58 Z" />
+        {/* Distinct shoulders that taper to a single point — not a round oval */}
+        <path d="M100,64 C118,58 142,62 158,78 C176,96 178,116 168,136 C156,162 132,190 114,208 C108,214 103,219 100,226 C97,219 92,214 86,208 C68,190 44,162 32,136 C22,116 24,96 42,78 C58,62 82,58 100,64 Z" />
       </g>
       <g opacity="0.22" fill="#FFFFFF">
         {seedRows.map((row, ri) =>
