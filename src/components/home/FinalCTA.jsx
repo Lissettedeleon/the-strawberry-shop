@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function FinalCTA() {
   const { setOrderChoiceOpen } = useCart();
@@ -39,16 +40,17 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
           className="inline-block"
         >
-          <button
+          <MagneticButton
+            strength={0.35}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => setOrderChoiceOpen(true)}
-            className="inline-flex items-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F6E3E7] transition-all active:scale-95 shadow-xl"
+            className="inline-flex items-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F6E3E7] transition-colors shadow-xl"
           >
             <ShoppingBag size={18} /> Start Your Order
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>
