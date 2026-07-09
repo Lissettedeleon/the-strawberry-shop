@@ -83,22 +83,22 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="relative">
             
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[16/11] sm:aspect-[4/3] md:aspect-[5/4] bg-[#F6E3E7] hidden">
-              
-              <video
-                ref={videoRef}
-                src={HERO_VIDEO}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="w-full h-full object-cover hidden" />
-              
-            </motion.div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
           </motion.div>
         </div>
       </div>
