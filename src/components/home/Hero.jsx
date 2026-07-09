@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import WaveDivider from "@/components/WaveDivider";
+import MagneticButton from "@/components/MagneticButton";
 import { useCart } from "@/lib/CartContext";
 
 const HERO_VIDEO =
@@ -55,14 +56,15 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.24 }}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <motion.button
+              <MagneticButton
+                strength={0.35}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => setOrderChoiceOpen(true)}
-                className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-all shadow-lg"
+                className="flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-base px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors shadow-lg"
               >
                 <ShoppingBag size={18} /> Order Now
-              </motion.button>
+              </MagneticButton>
               <motion.a
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
@@ -96,15 +98,6 @@ export default function Hero() {
                 preload="auto"
                 className="w-full h-full object-cover"
               />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 hidden sm:block"
-            >
-              <p className="font-bubble text-[#7C0116] text-sm leading-tight">Made fresh to order</p>
-              <p className="font-body text-[#6b7280] text-xs">Pickup at 7100 Foundry Row</p>
             </motion.div>
           </motion.div>
         </div>

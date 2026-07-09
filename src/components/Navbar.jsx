@@ -8,6 +8,7 @@ import { SocialIconsRow } from "./SocialButtons";
 import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
 import { SHEET_TRANSITION } from "@/lib/motion";
+import MagneticButton from "./MagneticButton";
 
 const DEFAULT_ANNOUNCEMENT =
   "Fresh strawberry desserts, chocolate-covered treats, and pickup orders available in Liberty Township.";
@@ -112,22 +113,31 @@ export default function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`font-body font-semibold text-sm transition-colors ${
+                  className={`relative py-1.5 font-body font-semibold text-sm transition-colors ${
                     location.pathname === link.to
                       ? "text-[#7C0116]"
                       : "text-[#6b7280] hover:text-[#7C0116]"
                   }`}
                 >
                   {link.label}
+                  {location.pathname === link.to && (
+                    <motion.span
+                      layoutId="navActiveIndicator"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      className="absolute left-0 right-0 -bottom-0.5 h-[2px] rounded-full bg-[#7C0116]"
+                    />
+                  )}
                 </Link>
               ))}
               <CartButton />
-              <button
+              <MagneticButton
+                strength={0.3}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => setOrderChoiceOpen(true)}
-                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px] active:scale-95"
+                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px]"
               >
                 <ShoppingBag size={16} /> Order Now
-              </button>
+              </MagneticButton>
             </div>
 
             {/* Mobile: open badge + cart + hamburger */}
