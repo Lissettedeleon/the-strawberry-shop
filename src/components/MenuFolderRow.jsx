@@ -32,7 +32,7 @@ export default function MenuFolderRow({ item }) {
         onClick={() => setShowModal(true)}
         className="flex items-center gap-3.5 p-2 rounded-2xl hover:bg-[#F7E3E8] transition-colors cursor-pointer"
       >
-        <div className="w-14 h-14 rounded-2xl shrink-0 overflow-hidden bg-[#F7E3E8] flex items-center justify-center ring-2 ring-[#7C0116] ring-offset-2 ring-offset-white shadow-sm">
+        <div className="w-14 h-14 rounded-2xl shrink-0 overflow-hidden bg-[#F7E3E8] flex items-center justify-center">
           {item.image_url ? (
             <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
           ) : (
