@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const PRODUCT_VIDEO =
-  "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/8307ed9eb_Hero_Product_Video.mp4";
+const PRODUCT_IMAGE =
+  "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/3bdcbd663_generated_image.png";
 
 export default function ProductVideo() {
   return (
@@ -47,14 +47,11 @@ export default function ProductVideo() {
             className="relative"
           >
             <div className="relative rounded-[28px] overflow-hidden shadow-2xl border-4 border-white aspect-[16/10] bg-[#F6E3E7]">
-              <video
-                src={PRODUCT_VIDEO}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="w-full h-full object-cover"
+              <img
+                src={PRODUCT_IMAGE}
+                alt="Fresh strawberry dessert cups with toppings from The Strawberry Shop"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[600ms] ease-out"
+                loading="lazy"
               />
             </div>
           </motion.div>
