@@ -7,38 +7,32 @@ import Footer from "@/components/Footer";
 import { Gift, Check } from "lucide-react";
 import Logo from "@/components/Logo";
 
-function FlowerAccent({ className = "" }) {
-  const petals = [0, 60, 120, 180, 240, 300];
+function StrawberryAccent({ className = "" }) {
+  const leafAngles = [-72, -48, -24, 0, 24, 48, 72];
+  const seedRows = [
+    { y: 88, count: 5, halfWidth: 54 },
+    { y: 116, count: 5, halfWidth: 50 },
+    { y: 144, count: 4, halfWidth: 40 },
+    { y: 170, count: 4, halfWidth: 28 },
+    { y: 194, count: 2, halfWidth: 12 },
+  ];
+
   return (
-    <svg viewBox="0 0 200 200" className={className} aria-hidden="true">
-      <g opacity="0.16">
-        {petals.map((deg) => (
-          <ellipse
-            key={deg}
-            cx="100"
-            cy="60"
-            rx="26"
-            ry="42"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="2.5"
-            transform={`rotate(${deg} 100 100)`}
-          />
+    <svg viewBox="0 0 200 224" className={className} aria-hidden="true">
+      <g opacity="0.22" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
+        {leafAngles.map((deg) => (
+          <ellipse key={deg} cx="100" cy="30" rx="7" ry="26" transform={`rotate(${deg} 100 58)`} />
         ))}
-        <circle cx="100" cy="100" r="10" fill="none" stroke="#FFFFFF" strokeWidth="2.5" />
-        {[...Array(10)].map((_, i) => {
-          const a = (i / 10) * Math.PI * 2;
-          const r = 55 + (i % 3) * 14;
-          return (
-            <circle
-              key={i}
-              cx={100 + Math.cos(a) * r}
-              cy={100 + Math.sin(a) * r}
-              r="2.2"
-              fill="#FFFFFF"
-            />
-          );
-        })}
+        <path d="M100,58 C62,58 30,92 30,132 C30,175 62,208 100,220 C138,208 170,175 170,132 C170,92 138,58 100,58 Z" />
+      </g>
+      <g opacity="0.22" fill="#FFFFFF">
+        {seedRows.map((row, ri) =>
+          [...Array(row.count)].map((_, i) => {
+            const t = row.count === 1 ? 0.5 : i / (row.count - 1);
+            const x = 100 - row.halfWidth + t * row.halfWidth * 2;
+            return <circle key={`${ri}-${i}`} cx={x} cy={row.y} r="2.6" />;
+          })
+        )}
       </g>
     </svg>
   );
@@ -122,7 +116,7 @@ export default function GiftCards() {
       <Navbar />
 
       <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
-        <FlowerAccent className="absolute -bottom-10 -left-10 w-64 sm:w-80 md:w-96 pointer-events-none" />
+        <StrawberryAccent className="absolute -bottom-14 -left-8 w-56 sm:w-72 md:w-80 pointer-events-none rotate-[-8deg]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
           <Logo size="lg" className="absolute top-6 right-4 sm:right-6 lg:right-8 md:w-20 md:h-20" />
