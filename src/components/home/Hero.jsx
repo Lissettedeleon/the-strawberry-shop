@@ -101,7 +101,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg px-4 py-3 hidden sm:block text-[hsl(var(--background))]">
+              className="absolute -bottom-4 -left-4 rounded-2xl shadow-lg px-4 py-3 hidden sm:block text-[hsl(var(--background))] bg-[hsl(var(--background))]">
               
               <p className="font-bubble text-[#7C0116] text-sm leading-tight hidden">Made fresh to order</p>
               <p className="font-body text-[#6b7280] text-xs hidden">Pickup at 7100 Foundry Row</p>
