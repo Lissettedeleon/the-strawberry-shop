@@ -1,25 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import confetti from "canvas-confetti";
 import { Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandedLoader from "@/components/BrandedLoader";
-
-const CONFETTI_COLORS = ["#7C0116", "#E0A4B0", "#F6E3E7", "#ffd93d", "#6bcb77", "#4d96ff", "#ff922b", "#cc5de8", "#ffffff", "#ff6b9d"];
-
-function fireConfetti() {
-  confetti({
-    particleCount: 200,
-    spread: 120,
-    startVelocity: 45,
-    gravity: 1,
-    ticks: 200,
-    origin: { x: 0.5, y: 0.1 },
-    colors: CONFETTI_COLORS,
-  });
-}
 
 export default function OrderConfirmation() {
   const [params] = useSearchParams();
@@ -27,7 +12,6 @@ export default function OrderConfirmation() {
   const orderNumber = params.get("number");
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const intervalRef = useRef(null);
 
   useEffect(() => {
     if (orderId && orderNumber) {
@@ -39,12 +23,6 @@ export default function OrderConfirmation() {
       setLoading(false);
     }
   }, [orderId, orderNumber]);
-
-  useEffect(() => {
-    fireConfetti();
-    intervalRef.current = setInterval(fireConfetti, 3500);
-    return () => clearInterval(intervalRef.current);
-  }, []);
 
   if (loading) {
     return <BrandedLoader text="Finalizing your order..." />;
