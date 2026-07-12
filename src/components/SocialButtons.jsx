@@ -43,20 +43,11 @@ function PinterestIcon() {
 
 }
 
-function LinktreeIcon() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="#43E55E">
-      <path d="M13.11 1.006L8.89 5.995l-3.442-3.38a.714.714 0 00-1.007 1.012l3.42 3.36-4.776.005a.714.714 0 00.001 1.428l4.776-.005-3.42 3.36a.714.714 0 001.006 1.013l3.441-3.38 4.22 4.987a.714.714 0 001.09-.928L10.014 9.09l4.776.005a.714.714 0 00.001-1.428l-4.776-.005 4.185-4.368a.714.714 0 00-1.09-.929v.641zM11.286 13.714v9.572h1.428v-9.572h-1.428z" />
-    </svg>);
-
-}
-
 const SOCIAL_LINKS = [
 { id: "instagram", icon: <InstagramIcon />, href: "https://www.instagram.com/thestrawberryshopp", label: "Instagram" },
 { id: "tiktok", icon: <TikTokIcon />, href: "https://www.tiktok.com/@thestrawberryshopp", label: "TikTok" },
 { id: "facebook", icon: <FacebookIcon />, href: "https://www.facebook.com/people/The-strawberry-shop/61579290425454/", label: "Facebook" },
-{ id: "pinterest", icon: <PinterestIcon />, href: "https://www.pinterest.com/strawberryshopoh/", label: "Pinterest" },
-{ id: "linktree", icon: <LinktreeIcon />, href: "https://linktr.ee/Thestrawberryshopoh", label: "Linktree" }];
+{ id: "pinterest", icon: <PinterestIcon />, href: "https://www.pinterest.com/strawberryshopoh/", label: "Pinterest" }];
 
 
 export function SocialIconsRow({ className = "", compact = false }) {
