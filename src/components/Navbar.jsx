@@ -32,11 +32,13 @@ function CartButton({ className = "", iconSize = 20 }) {
 }
 
 const navLinks = [
+  { label: "Home", to: "/" },
   { label: "Menu", to: "/menu" },
-  { label: "About", to: "/about" },
-  { label: "Location", to: "/location" },
-  { label: "FAQ", to: "/faq" },
-  { label: "Contact", to: "/contact" },
+  { label: "Catering", to: "/catering" },
+  { label: "Gift Cards", to: "/gift-cards" },
+  { label: "About Us", to: "/about" },
+  { label: "Reviews", to: "/reviews" },
+  { label: "Visit Us", to: "/visit-us" },
 ];
 
 export default function Navbar() {
@@ -100,9 +102,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 shrink-0">
+            <Link to="/" className="flex items-center gap-2 shrink-0 min-w-0">
               <Logo size="sm" />
-              <span className="font-display text-[#7C0116] text-base hidden sm:block">
+              <span className="font-display text-[#7C0116] text-sm sm:text-base whitespace-nowrap">
                 the strawberry shop
               </span>
             </Link>
