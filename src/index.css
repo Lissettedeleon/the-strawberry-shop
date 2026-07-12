@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Quicksand:wght@400;500;600;700&family=Alex+Brush&family=Chewy&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -31,9 +31,9 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 1rem;
-    --font-heading: 'Baloo 2', sans-serif;
+    --font-heading: 'Libre Caslon Display', serif;
     --font-body: 'Quicksand', sans-serif;
-    --font-display: 'Baloo 2', sans-serif;
+    --font-display: 'Chewy', cursive;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -130,13 +130,13 @@
 }
 
 .font-bubble {
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
+  font-family: 'Libre Caslon Display', serif;
+  font-weight: 400;
 }
 
 .font-cursive {
-  font-family: 'Dancing Script', cursive;
-  font-weight: 700;
+  font-family: 'Alex Brush', cursive;
+  font-weight: 400;
 }
 
 /* Smooth scrollbar for webkit */
