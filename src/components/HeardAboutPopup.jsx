@@ -42,11 +42,11 @@ export default function HeardAboutPopup({ open, onClose, onSubmit, showRating = 
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }}
+            animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+            exit={{ opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }}
             transition={{ duration: 0.25, ease: EASE_OUT_STRONG }}
-            className="hidden md:block fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
+            className="hidden md:block fixed left-1/2 top-1/2 z-[100] w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl"
           >
             <PopupContent {...{ showRating, rating, setRating, sources, toggleSource, title, subtitle, onClose, handleSubmit }} />
           </motion.div>
