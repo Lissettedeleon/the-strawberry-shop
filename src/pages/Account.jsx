@@ -15,8 +15,6 @@ export default function Account() {
   const [copied, setCopied] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editForm, setEditForm] = useState({});
-  const [receiptCode, setReceiptCode] = useState("");
-  const [claimStatus, setClaimStatus] = useState("");
   const [welcomeMsg, setWelcomeMsg] = useState("");
   const navigate = useNavigate();
 
@@ -65,26 +63,6 @@ export default function Account() {
     } catch {}
   };
 
-  const handleClaimCode = async () => {
-    setClaimStatus("");
-    try {
-      // Points are credited server-side in the claimReceiptCode function
-      const response = await base44.functions.invoke("claimReceiptCode", { code: receiptCode.trim().toUpperCase() });
-      if (response.data?.success) {
-        const u = await base44.auth.me();
-        setUser(u);
-        setClaimStatus(`success:Points added! Your new balance is ${u.loyalty_points || 0} points.`);
-        setReceiptCode("");
-      } else if (response.data?.error === "not_authenticated") {
-        setClaimStatus("error:Please log in to claim points.");
-      } else {
-        setClaimStatus("error:This code is invalid or has already been claimed.");
-      }
-    } catch {
-      setClaimStatus("error:This code is invalid or has already been claimed.");
-    }
-  };
-
   const handleReorder = () => {
     navigate("/menu");
   };
@@ -101,7 +79,7 @@ export default function Account() {
 
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-white text-3xl sm:text-4xl text-center drop-shadow-lg">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-bubble text-white text-3xl sm:text-4xl text-center drop-shadow-lg">
             Welcome back{user?.first_name ? ` ${user.first_name}` : ""}
           </motion.h1>
         </div>
@@ -145,29 +123,6 @@ export default function Account() {
                   {copied ? <Check size={14} /> : <Copy size={14} />}
                 </button>
               </div>
-            )}
-          </div>
-
-          {/* Claim Points */}
-          <div className="bg-white rounded-[30px_10px_30px_10px] p-6 border-2 border-border shadow-sm">
-            <h2 className="font-body font-bold text-foreground mb-3">Claim Points</h2>
-            <p className="text-muted-foreground font-body text-xs mb-3">Enter a receipt code from an in-store purchase to earn points.</p>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={receiptCode}
-                onChange={e => setReceiptCode(e.target.value)}
-                placeholder="Enter your receipt code"
-                className="flex-1 bg-secondary border-2 border-border rounded-xl px-3 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
-              />
-              <button onClick={handleClaimCode} className="bg-primary text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-primary/90 transition-colors shrink-0">
-                Submit
-              </button>
-            </div>
-            {claimStatus && (
-              <p className={`mt-2 font-body text-xs ${claimStatus.startsWith("success") ? "text-green-600" : "text-red-500"}`}>
-                {claimStatus.replace(/^(success|error):/, "")}
-              </p>
             )}
           </div>
 

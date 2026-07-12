@@ -16,9 +16,9 @@ export default function Reviews() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-white text-4xl sm:text-5xl drop-shadow-lg"
+            className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg"
           >
-            reviews
+            Reviews
           </motion.h1>
         </div>
       </section>
