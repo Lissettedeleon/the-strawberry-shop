@@ -8,7 +8,6 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BrandedLoader from './components/BrandedLoader';
-import ProtectedRoute from '@/components/ProtectedRoute';
 import AdminRoute from '@/components/AdminRoute';
 import MobileOrderBar from '@/components/MobileOrderBar';
 import { EASE_OUT_STRONG } from '@/lib/motion';
@@ -60,9 +59,6 @@ const PublicRoutes = () => {
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           {/* Admin login (for staff only) — customers never need to authenticate */}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Navigate to="/login" replace />} />
-          <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
-          <Route path="/reset-password" element={<Navigate to="/login" replace />} />
           {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />
