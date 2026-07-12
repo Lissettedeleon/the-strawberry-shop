@@ -9,14 +9,14 @@ export default function OpenClosedBadge({ className = "" }) {
     return () => clearInterval(timer);
   }, []);
 
-  return null;
-
-
-
-
-
-
-
-
-
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full font-body font-bold text-xs px-3 py-1 ${
+        status.isOpen ? "bg-green-100 text-green-700" : "bg-secondary text-primary"
+      } ${className}`}
+    >
+      <span className={`w-2 h-2 rounded-full ${status.isOpen ? "bg-green-500 animate-pulse" : "bg-primary"}`} />
+      {status.isOpen ? "Open Now" : `Closed${status.opensAt ? ` · Opens ${status.opensAt}` : ""}`}
+    </span>
+  );
 }

@@ -8,7 +8,6 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BrandedLoader from './components/BrandedLoader';
-import ProtectedRoute from '@/components/ProtectedRoute';
 import AdminRoute from '@/components/AdminRoute';
 import MobileOrderBar from '@/components/MobileOrderBar';
 import { EASE_OUT_STRONG } from '@/lib/motion';
@@ -16,11 +15,11 @@ import { EASE_OUT_STRONG } from '@/lib/motion';
 import Home from '@/pages/Home';
 import Menu from '@/pages/Menu';
 import About from '@/pages/About';
-import Location from '@/pages/Location';
-import Hours from '@/pages/Hours';
+import VisitUs from '@/pages/VisitUs';
+import Reviews from '@/pages/Reviews';
 import GiftCards from '@/pages/GiftCards';
-import Contact from '@/pages/Contact';
-import FAQ from '@/pages/FAQ';
+import Catering from '@/pages/Catering';
+import UnderConstruction from '@/pages/UnderConstruction';
 import Checkout from '@/pages/Checkout';
 import OrderConfirmation from '@/pages/OrderConfirmation';
 import AdminDashboard from '@/pages/AdminDashboard';
@@ -29,6 +28,7 @@ import Login from '@/pages/Login';
 import { CartProvider, useCart } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
 import OrderChoiceModal from '@/components/OrderChoiceModal';
+import AppDownloadPopup from '@/components/AppDownloadPopup';
 
 const PublicRoutes = () => {
   const location = useLocation();
@@ -46,18 +46,19 @@ const PublicRoutes = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/order" element={<Navigate to="/menu" replace />} />
           <Route path="/about" element={<About />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/hours" element={<Hours />} />
+          <Route path="/visit-us" element={<VisitUs />} />
+          <Route path="/location" element={<Navigate to="/visit-us" replace />} />
+          <Route path="/hours" element={<Navigate to="/visit-us" replace />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/gift-cards" element={<GiftCards />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<FAQ />} />
+          <Route path="/catering" element={<Catering />} />
+          <Route path="/contact" element={<Navigate to="/catering" replace />} />
+          <Route path="/faq" element={<Navigate to="/" replace />} />
+          <Route path="/app" element={<UnderConstruction />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           {/* Admin login (for staff only) — customers never need to authenticate */}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Navigate to="/login" replace />} />
-          <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
-          <Route path="/reset-password" element={<Navigate to="/login" replace />} />
           {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />
@@ -76,6 +77,7 @@ const GlobalOverlays = () => {
       <CartDrawer />
       <MobileOrderBar />
       <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
+      <AppDownloadPopup />
     </>
   );
 };

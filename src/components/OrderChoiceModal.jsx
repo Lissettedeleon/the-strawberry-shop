@@ -63,8 +63,8 @@ function OrderOptions({ onClose }) {
         <span className="flex items-center gap-4 w-full h-full">
           <Globe size={22} className="shrink-0" />
           <span className="flex-1">
-            <span className="block font-body font-bold text-base leading-tight">Order Through Our Website</span>
-            <span className="block font-body text-white/80 text-xs mt-0.5">Pickup or delivery — order and pay here</span>
+            <span className="block font-body font-bold text-base leading-tight">Order Online</span>
+            <span className="block font-body text-white/80 text-xs mt-0.5">Pickup & Delivery</span>
           </span>
           <ChevronRight size={18} className="text-white/80 shrink-0" />
         </span>

@@ -11,10 +11,10 @@ import { useCart } from "@/lib/CartContext";
 
 const CATEGORIES = [
 "Specials",
-"Our Berry Best Cups",
-"Build Your Own Cup",
+"Strawberries and Cream",
 "Chocolate Covered Strawberries",
-"Others"];
+"Build Your Own Cup",
+"More to Enjoy"];
 
 
 const DELIVERY_FEE = "$3.99";
@@ -56,8 +56,8 @@ export default function Menu() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="font-bubble text-[#7C0116] text-3xl sm:text-4xl mb-2">
-          
-          our menu
+
+          Choose Your Favorite, or Try Something New
         </motion.h1>
         
 

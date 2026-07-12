@@ -4,42 +4,8 @@ import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Gift, Check } from "lucide-react";
-import Logo from "@/components/Logo";
-
-function StrawberryAccent({ className = "" }) {
-  const leafAngles = [-72, -48, -24, 0, 24, 48, 72];
-  // Rows follow the taper of the body below — wide at the shoulders,
-  // narrowing steadily to the point, not a uniform oval.
-  const seedRows = [
-    { y: 92, count: 5, halfWidth: 62 },
-    { y: 122, count: 5, halfWidth: 56 },
-    { y: 150, count: 4, halfWidth: 44 },
-    { y: 176, count: 3, halfWidth: 30 },
-    { y: 200, count: 2, halfWidth: 15 },
-  ];
-
-  return (
-    <svg viewBox="0 0 200 230" className={className} aria-hidden="true">
-      <g opacity="0.22" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round">
-        {leafAngles.map((deg) => (
-          <ellipse key={deg} cx="100" cy="34" rx="7" ry="26" transform={`rotate(${deg} 100 64)`} />
-        ))}
-        {/* Distinct shoulders that taper to a single point — not a round oval */}
-        <path d="M100,64 C118,58 142,62 158,78 C176,96 178,116 168,136 C156,162 132,190 114,208 C108,214 103,219 100,226 C97,219 92,214 86,208 C68,190 44,162 32,136 C22,116 24,96 42,78 C58,62 82,58 100,64 Z" />
-      </g>
-      <g opacity="0.22" fill="#FFFFFF">
-        {seedRows.map((row, ri) =>
-          [...Array(row.count)].map((_, i) => {
-            const t = row.count === 1 ? 0.5 : i / (row.count - 1);
-            const x = 100 - row.halfWidth + t * row.halfWidth * 2;
-            return <circle key={`${ri}-${i}`} cx={x} cy={row.y} r="2.6" />;
-          })
-        )}
-      </g>
-    </svg>
-  );
-}
+import { Gift, Check, ImageOff } from "lucide-react";
+import HeardAboutPopup from "@/components/HeardAboutPopup";
 
 const AMOUNTS = [25, 50, 75, 100];
 
@@ -61,8 +27,13 @@ export default function GiftCards() {
   const [status, setStatus] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [code, setCode] = useState("");
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const finalAmount = customAmount ? parseFloat(customAmount) || 0 : amount;
+
+  const scrollToForm = () => {
+    document.getElementById("gift-card-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,10 +50,20 @@ export default function GiftCards() {
       });
       setCode(newCode);
       setStatus("done");
+      setFeedbackOpen(true);
     } catch {
       setStatus("");
       setErrorMsg("Something went wrong. Please try again or contact us directly.");
     }
+  };
+
+  const handleFeedback = ({ rating, sources }) => {
+    base44.entities.CustomerFeedback.create({
+      type: "gift_card",
+      reference_id: code,
+      rating,
+      sources,
+    }).catch(() => {});
   };
 
   if (status === "done") {
@@ -110,6 +91,15 @@ export default function GiftCards() {
           </div>
         </div>
         <Footer />
+
+        <HeardAboutPopup
+          open={feedbackOpen}
+          onClose={() => setFeedbackOpen(false)}
+          onSubmit={handleFeedback}
+          showRating
+          title="Rate your experience"
+          subtitle="Let us know how getting your gift card went"
+        />
       </div>
     );
   }
@@ -119,48 +109,75 @@ export default function GiftCards() {
       <Navbar />
 
       <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
-        <StrawberryAccent className="absolute -bottom-14 -left-8 w-56 sm:w-72 md:w-80 pointer-events-none rotate-[-8deg]" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
-          <Logo size="lg" className="absolute top-6 right-4 sm:right-6 lg:right-8 md:w-20 md:h-20" />
-
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-body font-semibold text-white/70 text-xs uppercase tracking-[0.2em] mb-3"
-          >
-            Gift Cards
-          </motion.p>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative z-10 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-bubble text-white text-4xl sm:text-5xl md:text-6xl leading-[1.05] drop-shadow-lg max-w-xl"
+            className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg mb-6"
           >
-            Because you deserve
+            A sweet gift
           </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="aspect-video max-w-md mx-auto rounded-2xl bg-white/10 border border-white/30 flex items-center justify-center mb-6"
+          >
+            <ImageOff size={32} className="text-white/50" />
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-body text-white text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] mt-1 mb-4"
+            className="text-white/80 font-body text-base sm:text-lg max-w-xl mx-auto"
           >
-            sweet things
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-white/80 font-body text-base sm:text-lg max-w-md"
-          >
-            Give the gift of fresh strawberry treats — delivered by email, ready whenever they are.
+            Make someone's day a little sweeter with a gift card they can use toward their favorite strawberry desserts. The perfect gift for celebrations, special moments, or simply because
           </motion.p>
         </div>
       </section>
 
-      <section style={{ background: "#FBF1F3" }} className="py-12 md:py-16">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="bg-white border border-[#E0A4B0] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm">
+      <section style={{ background: "#FBF1F3" }} className="py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-bubble text-[#7C0116] text-2xl md:text-3xl text-center mb-8">Choose your gift card</h2>
+
+          <div className="grid sm:grid-cols-2 gap-5 mb-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
+            >
+              <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">E-Gift Card</h3>
+              <p className="font-body text-[#6b7280] text-sm mb-5">A sweet gift, delivered instantly</p>
+              <button
+                onClick={scrollToForm}
+                className="w-full bg-[#7C0116] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#5C0110] transition-colors active:scale-95"
+              >
+                Buy Now
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: 0.1 }}
+              className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
+            >
+              <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">Gift Card</h3>
+              <p className="font-body text-[#6b7280] text-sm mb-5">The perfect gift for any occasion</p>
+              <button
+                onClick={scrollToForm}
+                className="w-full bg-[#7C0116] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#5C0110] transition-colors active:scale-95"
+              >
+                Buy Now
+              </button>
+            </motion.div>
+          </div>
+
+          <form id="gift-card-form" onSubmit={handleSubmit} className="bg-white border border-[#E0A4B0] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm scroll-mt-24">
             <div>
               <label className="block font-body font-bold text-[#1a1a1a] text-sm mb-3">Choose an amount</label>
               <div className="grid grid-cols-4 gap-2 mb-3">

@@ -12,10 +12,7 @@
       "description": "Timestamp of the last email sent for this key"
     }
   },
-  "required": [
-    "rate_key",
-    "last_sent"
-  ],
+  "required": ["rate_key", "last_sent"],
   "rls": {
     "create": {
       "user_condition": {

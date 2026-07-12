@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandedLoader from "@/components/BrandedLoader";
+import HeardAboutPopup from "@/components/HeardAboutPopup";
 
 export default function OrderConfirmation() {
   const [params] = useSearchParams();
@@ -12,6 +13,7 @@ export default function OrderConfirmation() {
   const orderNumber = params.get("number");
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   useEffect(() => {
     if (orderId && orderNumber) {
@@ -23,6 +25,19 @@ export default function OrderConfirmation() {
       setLoading(false);
     }
   }, [orderId, orderNumber]);
+
+  useEffect(() => {
+    if (!loading) setFeedbackOpen(true);
+  }, [loading]);
+
+  const handleFeedback = ({ rating, sources }) => {
+    base44.entities.CustomerFeedback.create({
+      type: "order",
+      reference_id: orderId || orderNumber || "",
+      rating,
+      sources,
+    }).catch(() => {});
+  };
 
   if (loading) {
     return <BrandedLoader text="Finalizing your order..." />;
@@ -130,6 +145,15 @@ export default function OrderConfirmation() {
       </div>
 
       <Footer />
+
+      <HeardAboutPopup
+        open={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        onSubmit={handleFeedback}
+        showRating
+        title="Rate your ordering experience"
+        subtitle="Let us know how it went"
+      />
     </div>
   );
 }

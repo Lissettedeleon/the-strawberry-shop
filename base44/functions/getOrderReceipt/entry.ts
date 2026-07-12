@@ -11,7 +11,7 @@ Deno.serve(async (req) => {
 
     const order = await base44.asServiceRole.entities.Order.get(orderId).catch(() => null);
 
-    // orderNumber acts as a proof-of-ownership check since guests aren't logged in
+    // orderNumber acts as a proof-of-ownership check since Order.read is admin-only
     if (!order || order.order_number !== orderNumber) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
