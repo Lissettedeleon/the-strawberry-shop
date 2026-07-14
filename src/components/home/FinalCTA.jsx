@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, ImageOff } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -18,6 +18,17 @@ export default function FinalCTA() {
         className="absolute -top-24 -right-20 w-72 h-72 rounded-full blur-3xl bg-[#E0A4B0] pointer-events-none"
       />
       <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="rounded-[28px] overflow-hidden shadow-2xl border-4 border-white/20 aspect-video bg-black/20 mb-8 flex items-center justify-center"
+        >
+          {/* TODO: swap in the closing-CTA picture once provided */}
+          <ImageOff size={32} className="text-white/40" />
+        </motion.div>
+
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
