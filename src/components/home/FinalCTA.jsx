@@ -1,21 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/CartContext";
 import MagneticButton from "@/components/MagneticButton";
 
-const HERO_VIDEO =
-  "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/8307ed9eb_Hero_Product_Video.mp4";
-
 export default function FinalCTA() {
   const { setOrderChoiceOpen } = useCart();
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    // Mobile browsers (especially iOS Safari) often ignore the declarative
-    // autoPlay attribute — kick playback explicitly once mounted.
-    videoRef.current?.play().catch(() => {});
-  }, []);
 
   return (
     <section
@@ -28,25 +18,6 @@ export default function FinalCTA() {
         className="absolute -top-24 -right-20 w-72 h-72 rounded-full blur-3xl bg-[#E0A4B0] pointer-events-none"
       />
       <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="rounded-[28px] overflow-hidden shadow-2xl border-4 border-white/20 aspect-video bg-black/20 mb-8"
-        >
-          <video
-            ref={videoRef}
-            src={HERO_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

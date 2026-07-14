@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ImageOff } from "lucide-react";
 import WaveDivider from "@/components/WaveDivider";
 
+const HERO_VIDEO = "/videos/hero.mp4";
+
 export default function Hero() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Mobile browsers (especially iOS Safari) often ignore the declarative
+    // autoPlay attribute — kick playback explicitly once mounted.
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden"
@@ -14,9 +23,18 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="aspect-[4/3] sm:aspect-[16/9] rounded-[28px] overflow-hidden shadow-xl border-4 border-white bg-[#F6E3E7] flex items-center justify-center mb-8"
+          className="aspect-[4/3] sm:aspect-[16/9] rounded-[28px] overflow-hidden shadow-xl border-4 border-white bg-[#F6E3E7] mb-8"
         >
-          <ImageOff size={40} className="text-[#7C0116]/40" />
+          <video
+            ref={videoRef}
+            src={HERO_VIDEO}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
 
         <motion.h1
