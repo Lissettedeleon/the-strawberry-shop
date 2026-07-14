@@ -84,15 +84,15 @@ export default function Navbar() {
       </div>
 
       {/* Top utility bar */}
-      <div className="bg-[#FBF1F3] border-b border-[#F6E3E7] hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-1.5">
-          <div className="hidden sm:flex items-center gap-3">
-            <p className="text-[#5C0110] text-xs font-body font-semibold">7100 Foundry Row, Liberty Township, OH</p>
-            <OpenClosedBadge />
-          </div>
-          <SocialIconsRow compact className="gap-3 mx-auto sm:mx-0" />
-        </div>
-      </div>
+      
+
+
+
+
+
+
+
+      
 
       <nav
         className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
