@@ -41,7 +41,7 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8">
           {cards.map((card, i) => (
             <motion.div
               key={card.name}
@@ -49,9 +49,9 @@ export default function ProductPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group"
+              className="group text-center sm:text-left"
             >
-              <div className="relative aspect-square overflow-hidden rounded-3xl bg-[#F6E3E7] shadow-sm mb-4">
+              <div className="relative aspect-square overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F6E3E7] shadow-sm mb-2 sm:mb-4">
                 {card.image ? (
                   <img
                     src={card.image}
@@ -65,10 +65,10 @@ export default function ProductPreview() {
                   </div>
                 )}
               </div>
-              <h3 className="font-bubble text-[#1a1a1a] text-lg md:text-xl mb-1.5">{card.name}</h3>
-              <p className="text-[#6b7280] font-body text-sm leading-relaxed mb-2">{card.desc}</p>
+              <h3 className="font-bubble text-[#1a1a1a] text-sm sm:text-lg md:text-xl mb-0.5 sm:mb-1.5">{card.name}</h3>
+              <p className="text-[#6b7280] font-body text-[11px] sm:text-sm leading-snug sm:leading-relaxed mb-1 sm:mb-2 line-clamp-2">{card.desc}</p>
               {card.price != null && (
-                <p className="text-[#7C0116] font-body font-extrabold text-base">${card.price.toFixed(2)}</p>
+                <p className="text-[#7C0116] font-body font-extrabold text-xs sm:text-base">${card.price.toFixed(2)}</p>
               )}
             </motion.div>
           ))}
