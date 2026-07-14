@@ -50,15 +50,15 @@ export default function Reviews() {
             <ImageOff size={32} className="text-[#7C0116]/40" />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center hidden">
-            
-            <p className="font-body font-semibold text-[#5C0110] text-lg mb-4">Follow us</p>
-            <SocialIconsRow />
-          </motion.div>
+          
+
+
+
+
+
+
+
+          
         </div>
       </section>
 
