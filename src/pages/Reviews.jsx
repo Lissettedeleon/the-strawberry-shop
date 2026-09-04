@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
-import { ImageOff } from "lucide-react";
+
 
 export default function Reviews() {
   return (
@@ -40,14 +40,18 @@ export default function Reviews() {
             </div>
           </motion.div>
 
-          {/* Picture or video placeholder */}
+          {/* Customer photo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            className="aspect-video rounded-2xl border border-[#E0A4B0] bg-white flex items-center justify-center mb-10">
+            className="rounded-2xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-10">
             
-            <ImageOff size={32} className="text-[#7C0116]/40" />
+            <img
+              src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/1325aa9bf_IMG_0916.jpeg"
+              alt="Customer holding a Strawberry Shop dessert cup"
+              className="w-full h-auto object-cover"
+            />
           </motion.div>
 
           
