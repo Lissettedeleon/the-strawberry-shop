@@ -10,7 +10,7 @@ export default function FinalCTA() {
   return (
     <section
       className="relative overflow-hidden py-16 md:py-24"
-      style={{ background: "#d6292b" }}
+      style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}
     >
       <motion.div
         animate={{ opacity: [0.15, 0.3, 0.15] }}
