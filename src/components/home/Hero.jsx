@@ -29,7 +29,11 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          className="h-full w-auto max-w-full object-contain rounded-[2rem]"
+          className="h-full w-auto max-w-full object-contain"
+          style={{
+            WebkitMaskImage: "radial-gradient(ellipse 88% 92% at 50% 50%, black 60%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 88% 92% at 50% 50%, black 60%, transparent 100%)",
+          }}
         />
       </motion.div>
 

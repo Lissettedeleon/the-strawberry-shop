@@ -25,14 +25,12 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="aspect-[4/5] sm:aspect-video mb-8"
-          style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}
+          className="rounded-[28px] overflow-hidden shadow-2xl aspect-square sm:aspect-video mb-8"
         >
           <img
             src={CTA_IMAGE}
             alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
-            className="w-full h-full object-contain"
-            style={{ mixBlendMode: "screen" }}
+            className="w-full h-full object-cover object-bottom"
           />
         </motion.div>
 
