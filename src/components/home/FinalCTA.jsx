@@ -26,6 +26,7 @@ export default function FinalCTA() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
           className="rounded-[28px] overflow-hidden shadow-2xl aspect-[4/5] sm:aspect-video mb-8"
+          style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}
         >
           <img
             src={CTA_IMAGE}
