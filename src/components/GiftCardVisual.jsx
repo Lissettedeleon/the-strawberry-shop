@@ -48,18 +48,20 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
         {/* Bottom: GIFT CARD + amount + To/From */}
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="font-body font-bold text-white text-xs sm:text-sm tracking-[0.25em]">
-              GIFT CARD
-            </p>
+            <div className="flex items-baseline gap-2.5">
+              <p className="font-body font-bold text-white text-xs sm:text-sm tracking-[0.25em]">
+                GIFT CARD
+              </p>
+              {typeof amount === "number" && amount > 0 && (
+                <p className="font-bubble text-white text-xl sm:text-2xl leading-none">
+                  ${amount}
+                </p>
+              )}
+            </div>
             <div className="mt-1.5 flex items-center gap-1.5">
               <div className="w-16 h-px bg-white/50" />
               <HeartIcon className="w-3 h-3 text-white/70" />
             </div>
-            {typeof amount === "number" && amount > 0 && (
-              <p className="mt-3 font-bubble text-white text-3xl sm:text-4xl leading-none">
-                ${amount}
-              </p>
-            )}
           </div>
 
           <div className="rounded-2xl px-4 py-3 w-40 sm:w-48" style={{ background: "#F6E4E3" }}>
