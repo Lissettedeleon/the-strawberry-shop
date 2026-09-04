@@ -14,29 +14,26 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: "#FBF1F3" }}
-    >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="aspect-[4/3] sm:aspect-[16/9] rounded-[28px] overflow-hidden shadow-xl border-4 border-[#FBF1F3] bg-[#FBF1F3] mb-8"
-        >
-          <video
-            ref={videoRef}
-            src={HERO_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-contain"
-          />
-        </motion.div>
+    <section className="relative overflow-hidden" style={{ background: "#FBF1F3" }}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="w-full aspect-[16/9] sm:aspect-[21/9] bg-[#FBF1F3]"
+      >
+        <video
+          ref={videoRef}
+          src={HERO_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
 
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
