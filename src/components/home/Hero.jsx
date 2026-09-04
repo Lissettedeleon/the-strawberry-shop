@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/WaveDivider";
 
-const HERO_VIDEO = "/videos/hero.mp4";
+const HERO_VIDEO = "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/83ee622ce_10f4979c8724439e815444ebe04e327b.mov";
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -14,29 +14,26 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #FBF1F3 0%, #F6E3E7 55%, #FBF1F3 100%)" }}
-    >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="aspect-[4/3] sm:aspect-[16/9] rounded-[28px] overflow-hidden shadow-xl border-4 border-white bg-[#F6E3E7] mb-8"
-        >
-          <video
-            ref={videoRef}
-            src={HERO_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
+    <section className="relative overflow-hidden" style={{ background: "#FBF1F3" }}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="w-full h-[420px] sm:h-[540px] flex items-center justify-center pt-6 sm:pt-8"
+      >
+        <video
+          ref={videoRef}
+          src={HERO_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="h-full w-auto max-w-full object-contain rounded-[2rem]"
+        />
+      </motion.div>
 
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

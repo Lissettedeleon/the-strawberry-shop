@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ShoppingBag, ImageOff } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
+
+const CTA_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/0cba52a6f_HEIFImage.jpeg";
 import { useCart } from "@/lib/CartContext";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -23,10 +25,13 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="rounded-[28px] overflow-hidden shadow-2xl border-4 border-white/20 aspect-video bg-black/20 mb-8 flex items-center justify-center"
+          className="rounded-[28px] overflow-hidden shadow-2xl aspect-[4/5] sm:aspect-video mb-8"
         >
-          {/* TODO: swap in the closing-CTA picture once provided */}
-          <ImageOff size={32} className="text-white/40" />
+          <img
+            src={CTA_IMAGE}
+            alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
 
         <motion.h2
