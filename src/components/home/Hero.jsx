@@ -19,7 +19,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="w-full aspect-[4/3] sm:aspect-[16/9] bg-[#FBF1F3]"
+        className="w-full h-[420px] sm:h-[540px] flex items-center justify-center"
       >
         <video
           ref={videoRef}
@@ -29,7 +29,7 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          className="w-full h-full object-cover"
+          className="h-full w-auto max-w-full object-contain"
         />
       </motion.div>
 
