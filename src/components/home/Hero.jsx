@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/WaveDivider";
 
-const HERO_VIDEO = "/videos/hero.mp4";
+const HERO_VIDEO = "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/83ee622ce_10f4979c8724439e815444ebe04e327b.mov";
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #FBF1F3 0%, #F6E3E7 55%, #FBF1F3 100%)" }}
+      style={{ background: "#FBF1F3" }}
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 relative z-10 text-center">
         <motion.div
