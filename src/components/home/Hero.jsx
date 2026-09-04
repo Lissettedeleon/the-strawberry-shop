@@ -19,7 +19,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="w-full aspect-[16/9] sm:aspect-[21/9] bg-[#FBF1F3]"
+        className="w-full aspect-[4/3] sm:aspect-[16/9] bg-[#FBF1F3]"
       >
         <video
           ref={videoRef}
