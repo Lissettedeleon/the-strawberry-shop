@@ -141,20 +141,6 @@ export default function GiftCards() {
 
       <section style={{ background: "#FBF1F3" }} className="py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-bubble text-[#7C0116] text-2xl md:text-3xl text-center mb-8">Choose your gift card</h2>
-
-          <div className="max-w-sm mx-auto mb-14">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
-            >
-              <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">Gift Card</h3>
-              <p className="font-body text-[#6b7280] text-sm">The perfect gift for any occasion</p>
-            </motion.div>
-          </div>
-
           <form id="gift-card-form" onSubmit={handleSubmit} className="bg-white border border-[#E0A4B0] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm scroll-mt-24">
             <div>
               <label className="block font-body font-bold text-[#1a1a1a] text-sm mb-3">Choose an amount</label>
