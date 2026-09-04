@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Gift, Check, ImageOff } from "lucide-react";
+import { Gift, Check } from "lucide-react";
 import HeardAboutPopup from "@/components/HeardAboutPopup";
+import GiftCardVisual from "@/components/GiftCardVisual";
 
 const AMOUNTS = [25, 50, 75, 100];
 
@@ -122,9 +123,13 @@ export default function GiftCards() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="aspect-video max-w-md mx-auto rounded-2xl bg-white/10 border border-white/30 flex items-center justify-center mb-6"
+            className="mb-6"
           >
-            <ImageOff size={32} className="text-white/50" />
+            <GiftCardVisual
+              amount={finalAmount}
+              recipientName={form.recipient_name}
+              senderName={form.sender_name}
+            />
           </motion.div>
 
           <motion.p
