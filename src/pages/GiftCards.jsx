@@ -32,10 +32,6 @@ export default function GiftCards() {
 
   const finalAmount = customAmount ? parseFloat(customAmount) || 0 : amount;
 
-  const scrollToForm = () => {
-    document.getElementById("gift-card-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
@@ -155,13 +151,7 @@ export default function GiftCards() {
               className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
             >
               <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">Gift Card</h3>
-              <p className="font-body text-[#6b7280] text-sm mb-5">The perfect gift for any occasion</p>
-              <button
-                onClick={scrollToForm}
-                className="w-full bg-[#7C0116] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#5C0110] transition-colors active:scale-95"
-              >
-                Buy Now
-              </button>
+              <p className="font-body text-[#6b7280] text-sm">The perfect gift for any occasion</p>
             </motion.div>
           </div>
 
