@@ -90,11 +90,11 @@ export default function Catering() {
 
       <section className="bg-white py-12 md:py-16 border-b border-[#F6E3E7]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-8 aspect-[4/3] sm:aspect-[16/9]">
+          <div className="rounded-2xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-8">
             <img
               src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/065c34d26_IMG_2458.jpeg"
               alt="The Strawberry Shop catering display with chocolate-covered strawberries and toppings"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-auto"
             />
           </div>
           <p className="text-[#6b7280] font-body text-base leading-relaxed text-center max-w-2xl mx-auto">
