@@ -29,7 +29,7 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          className="h-full w-auto max-w-full object-contain"
+          className="h-full w-auto max-w-full object-contain rounded-[2rem] border-[6px] border-[#FBF1F3] shadow-[0_20px_50px_-20px_rgba(124,1,22,0.25)]"
         />
       </motion.div>
 
