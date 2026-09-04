@@ -147,28 +147,11 @@ export default function GiftCards() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-bubble text-[#7C0116] text-2xl md:text-3xl text-center mb-8">Choose your gift card</h2>
 
-          <div className="grid sm:grid-cols-2 gap-5 mb-14">
+          <div className="max-w-sm mx-auto mb-14">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
-            >
-              <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">E-Gift Card</h3>
-              <p className="font-body text-[#6b7280] text-sm mb-5">A sweet gift, delivered instantly</p>
-              <button
-                onClick={scrollToForm}
-                className="w-full bg-[#7C0116] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#5C0110] transition-colors active:scale-95"
-              >
-                Buy Now
-              </button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: 0.1 }}
               className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm"
             >
               <h3 className="font-body font-bold text-[#1a1a1a] text-lg mb-1">Gift Card</h3>
