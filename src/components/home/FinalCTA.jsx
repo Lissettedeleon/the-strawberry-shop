@@ -31,6 +31,7 @@ export default function FinalCTA() {
             src={CTA_IMAGE}
             alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
             className="w-full h-full object-cover"
+            style={{ mixBlendMode: "screen" }}
           />
         </motion.div>
 
