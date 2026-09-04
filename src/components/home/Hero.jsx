@@ -31,8 +31,10 @@ export default function Hero() {
           preload="auto"
           className="h-full w-auto max-w-full object-contain"
           style={{
-            WebkitMaskImage: "radial-gradient(ellipse 88% 92% at 50% 50%, black 60%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 88% 92% at 50% 50%, black 60%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 94% at 50% 50%, black 35%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.35) 80%, transparent 100%)",
+            maskImage:
+              "radial-gradient(ellipse 90% 94% at 50% 50%, black 35%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.35) 80%, transparent 100%)",
           }}
         />
       </motion.div>

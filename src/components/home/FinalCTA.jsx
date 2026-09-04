@@ -25,7 +25,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="rounded-[28px] overflow-hidden shadow-2xl aspect-square sm:aspect-video mb-8"
+          className="max-w-[280px] sm:max-w-md mx-auto rounded-[28px] overflow-hidden shadow-2xl aspect-square sm:aspect-video mb-8"
         >
           <img
             src={CTA_IMAGE}
