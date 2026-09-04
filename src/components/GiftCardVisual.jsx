@@ -25,7 +25,7 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
 
       {/* Amount — centered on the thin line between "GIFT CARD" and the heart */}
       {amount > 0 && (
-        <div className="absolute bottom-[13%] left-[33%] sm:left-[31%]">
+        <div className="absolute bottom-[16%] left-[33%] sm:left-[31%]">
           <span className="font-bubble text-white text-sm sm:text-base drop-shadow-md">
             ${amount.toFixed(0)}
           </span>
