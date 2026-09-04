@@ -4,7 +4,7 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeardAboutPopup from "@/components/HeardAboutPopup";
-import { Send, ImageOff, Check } from "lucide-react";
+import { Send, Check } from "lucide-react";
 
 const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
 
@@ -90,8 +90,12 @@ export default function Catering() {
 
       <section className="bg-white py-12 md:py-16 border-b border-[#F6E3E7]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="aspect-video rounded-2xl border border-[#E0A4B0] bg-[#FBF1F3] flex items-center justify-center mb-8">
-            <ImageOff size={32} className="text-[#7C0116]/40" />
+          <div className="rounded-2xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-8">
+            <img
+              src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/065c34d26_IMG_2458.jpeg"
+              alt="The Strawberry Shop catering display with chocolate-covered strawberries and toppings"
+              className="w-full h-auto object-cover"
+            />
           </div>
           <p className="text-[#6b7280] font-body text-base leading-relaxed text-center max-w-2xl mx-auto">
             Whether you're celebrating a birthday, wedding, baby shower, corporate event, or any special gathering, our handcrafted strawberry desserts add a fresh, memorable touch to every celebration. Contact us today to start planning your custom dessert experience
