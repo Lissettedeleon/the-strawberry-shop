@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 
-const CTA_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/0cba52a6f_HEIFImage.jpeg";
+const CTA_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/b11b80d0c_HEIFImage.jpeg";
 import { useCart } from "@/lib/CartContext";
 import MagneticButton from "@/components/MagneticButton";
 
