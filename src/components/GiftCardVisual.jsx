@@ -23,6 +23,15 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
         className="absolute inset-0 w-full h-full object-cover"
       />
 
+      {/* Amount */}
+      {amount > 0 && (
+        <div className="absolute top-[14%] right-[6%] text-right">
+          <span className="font-bubble text-white text-2xl sm:text-3xl drop-shadow-md">
+            ${amount.toFixed(0)}
+          </span>
+        </div>
+      )}
+
       {/* To/From text box overlaid on bottom-right */}
       <div
         className="absolute bottom-[10%] right-[6%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
