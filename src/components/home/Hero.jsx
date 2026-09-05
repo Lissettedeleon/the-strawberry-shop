@@ -19,7 +19,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="w-full h-[420px] sm:h-[540px] flex items-center justify-center pt-6 sm:pt-8"
+        className="w-full h-[560px] sm:h-[720px] flex items-center justify-center pt-6 sm:pt-8"
       >
         <video
           ref={videoRef}
