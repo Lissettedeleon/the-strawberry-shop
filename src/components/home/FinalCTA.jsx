@@ -19,21 +19,18 @@ export default function FinalCTA() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -top-24 -right-20 w-72 h-72 rounded-full blur-3xl bg-[#E0A4B0] pointer-events-none"
       />
-      <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="max-w-[280px] sm:max-w-md mx-auto rounded-[28px] overflow-hidden shadow-2xl aspect-square sm:aspect-video mb-8"
-        >
-          <img
-            src={CTA_IMAGE}
-            alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
-            className="w-full h-full object-cover object-bottom"
-          />
-        </motion.div>
+      <motion.img
+        src={CTA_IMAGE}
+        alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
+        initial={{ opacity: 0, scale: 0.96 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6 }}
+        className="relative z-0 block max-w-[260px] sm:max-w-sm w-full h-auto mx-auto mb-8"
+        style={{ mixBlendMode: "multiply" }}
+      />
 
+      <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
