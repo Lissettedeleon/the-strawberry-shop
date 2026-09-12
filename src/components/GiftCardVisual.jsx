@@ -34,7 +34,7 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
 
       {/* To/From text box overlaid on bottom-right */}
       <div
-        className="absolute bottom-[10%] right-[6%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
+        className="absolute bottom-[6%] right-[3%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
         style={{ background: "#FCE4E6" }}
       >
         <ToFromRow label="TO" value={recipientName} />

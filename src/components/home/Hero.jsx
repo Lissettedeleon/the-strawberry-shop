@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/WaveDivider";
 
-const HERO_VIDEO = "https://media.base44.com/videos/public/6a34ab1480a9a94dcd8377fa/83ee622ce_10f4979c8724439e815444ebe04e327b.mov";
+const HERO_VIDEO = "/videos/hero.mp4";
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -19,7 +19,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="w-full h-[560px] sm:h-[720px] flex items-center justify-center pt-6 sm:pt-8"
+        className="w-full h-[320px] sm:h-[600px] flex items-center justify-center pt-6 sm:pt-8"
       >
         <video
           ref={videoRef}

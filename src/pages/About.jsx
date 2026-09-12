@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Heart, Leaf, Sparkles, ImageOff } from "lucide-react";
+import { Heart, Leaf, Sparkles } from "lucide-react";
+
+const ABOUT_VIDEO = "/videos/about.mp4";
 
 const VALUES = [
   { icon: Leaf, title: "Always Fresh", text: "Every order is made with fresh strawberries and quality ingredients." },
@@ -11,6 +13,12 @@ const VALUES = [
 ];
 
 export default function About() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -38,13 +46,17 @@ export default function About() {
               transition={{ duration: 0.6 }}
               className="flex justify-center"
             >
-              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#E0A4B0] rounded-2xl flex items-center justify-center shadow-sm overflow-hidden">
-                {/* TODO: swap in the shop photo once provided */}
-                <div className="text-center p-8">
-                  <ImageOff size={56} className="mx-auto mb-4 text-[#7C0116]/40" />
-                  <p className="font-display text-[#7C0116] text-2xl">since day one</p>
-                  <p className="font-body text-[#6b7280] text-sm mt-1">made fresh, made with love</p>
-                </div>
+              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#E0A4B0] rounded-2xl shadow-sm overflow-hidden">
+                <video
+                  ref={videoRef}
+                  src={ABOUT_VIDEO}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
             <motion.div
