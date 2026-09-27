@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { MapPin, Navigation, Clock } from "lucide-react";
-import { WEEKLY_HOURS, HOLIDAY_HOURS, formatRange } from "@/lib/hours";
+import { WEEKLY_HOURS, getUpcomingHolidays, formatRange } from "@/lib/hours";
 
 const orderedWeek = [1, 2, 3, 4, 5, 6, 0].map(day => WEEKLY_HOURS.find(h => h.day === day));
 
@@ -67,7 +67,7 @@ export default function VisitUs() {
             </h3>
             <div className="space-y-2">
               {orderedWeek.map(h => (
-                <div key={h.label} className="flex justify-between font-body text-sm">
+                <div key={h.label} className="flex justify-between gap-3 font-body text-sm">
                   <span className="text-[#6b7280]">{h.label}</span>
                   <span className="text-[#1a1a1a] font-semibold">{formatRange(h)}</span>
                 </div>
@@ -84,16 +84,17 @@ export default function VisitUs() {
           >
             <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-3">Special hours</h3>
             <div className="space-y-2">
-              {HOLIDAY_HOURS.map(h => {
+              {getUpcomingHolidays().map(h => {
                 const time = formatRange(h);
                 return (
-                  <div key={h.label} className="flex justify-between font-body text-sm">
+                  <div key={h.label} className="flex justify-between gap-3 font-body text-sm">
                     <span className="text-[#6b7280]">{h.label}</span>
-                    <span className={`font-semibold ${time === "Closed" ? "text-[#7C0116]" : "text-[#1a1a1a]"}`}>{time}</span>
+                    <span className={`font-semibold whitespace-nowrap shrink-0 ${time === "Closed" ? "text-[#7C0116]" : "text-[#1a1a1a]"}`}>{time}</span>
                   </div>
                 );
               })}
             </div>
+            <p className="font-body text-xs text-[#6b7280] mt-4">Holiday hours are subject to change.</p>
           </motion.div>
         </div>
       </section>

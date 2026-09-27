@@ -11,16 +11,78 @@ export const WEEKLY_HOURS = [
   { day: 0, label: "Sunday", open: 12, close: 18 },
 ];
 
-// Holiday overrides — month is 0-indexed to match Date#getMonth()
-export const HOLIDAY_HOURS = [
-  { month: 3, day: 5, label: "Easter (April 5)", closed: true },
-  { month: 6, day: 4, label: "Independence Day (July 4)", open: 11, close: 18 },
-  { month: 8, day: 7, label: "Labor Day (September 7)", open: 11, close: 18 },
-  { month: 10, day: 26, label: "Thanksgiving (November 26)", closed: true },
+// Holiday overrides. Each rule computes its date for a given year, so the
+// list stays correct every year without editing dates by hand.
+function nthWeekday(year, month, weekday, n) {
+  const first = new Date(year, month, 1);
+  const offset = (weekday - first.getDay() + 7) % 7;
+  return new Date(year, month, 1 + offset + (n - 1) * 7);
+}
+
+function lastWeekday(year, month, weekday) {
+  const last = new Date(year, month + 1, 0);
+  const offset = (last.getDay() - weekday + 7) % 7;
+  return new Date(year, month, last.getDate() - offset);
+}
+
+// Anonymous Gregorian algorithm for Easter Sunday
+function easterSunday(year) {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31) - 1;
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month, day);
+}
+
+function thanksgiving(year) {
+  return nthWeekday(year, 10, 4, 4);
+}
+
+function addDays(date, n) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + n);
+}
+
+export const HOLIDAY_RULES = [
+  { name: "New Year's Day", date: y => new Date(y, 0, 1), open: 11, close: 18 },
+  { name: "Easter", date: easterSunday, closed: true },
+  { name: "Memorial Day", date: y => lastWeekday(y, 4, 1), open: 11, close: 18 },
+  { name: "Independence Day", date: y => new Date(y, 6, 4), open: 11, close: 18 },
+  { name: "Labor Day", date: y => nthWeekday(y, 8, 1, 1), open: 11, close: 18 },
+  { name: "Thanksgiving", date: thanksgiving, closed: true },
+  { name: "Black Friday", date: y => addDays(thanksgiving(y), 1), open: 11, close: 21 },
+  { name: "Small Business Saturday", date: y => addDays(thanksgiving(y), 2), open: 11, close: 21 },
+  { name: "Christmas Eve", date: y => new Date(y, 11, 24), open: 11, close: 18 },
+  { name: "Christmas Day", date: y => new Date(y, 11, 25), closed: true },
+  { name: "New Year's Eve", date: y => new Date(y, 11, 31), open: 11, close: 18 },
 ];
 
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
 function getHolidayOverride(date) {
-  return HOLIDAY_HOURS.find(h => h.month === date.getMonth() && h.day === date.getDate());
+  return HOLIDAY_RULES.find(h => sameDay(h.date(date.getFullYear()), date));
+}
+
+// Every holiday's next occurrence (today or later), soonest first.
+export function getUpcomingHolidays(from = new Date()) {
+  const today = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+  return HOLIDAY_RULES.map(h => {
+    let date = h.date(today.getFullYear());
+    if (date < today) date = h.date(today.getFullYear() + 1);
+    const label = `${h.name} (${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })})`;
+    return { ...h, date, label };
+  }).sort((a, b) => a.date - b.date);
 }
 
 export function getHoursForDay(day, date) {
