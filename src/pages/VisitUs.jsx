@@ -7,6 +7,18 @@ import { WEEKLY_HOURS, getUpcomingHolidays, formatRange } from "@/lib/hours";
 
 const orderedWeek = [1, 2, 3, 4, 5, 6, 0].map(day => WEEKLY_HOURS.find(h => h.day === day));
 
+// Collapse back-to-back days with the same hours into one row,
+// e.g. "Monday – Saturday".
+const weekRows = orderedWeek.reduce((rows, h) => {
+  const last = rows[rows.length - 1];
+  if (last && last.open === h.open && last.close === h.close) {
+    last.to = h.label;
+  } else {
+    rows.push({ from: h.label, to: h.label, open: h.open, close: h.close });
+  }
+  return rows;
+}, []);
+
 const DIRECTIONS_URL = "https://maps.apple.com/?daddr=7100+Foundry+Row,+Liberty+Township,+OH+45069";
 
 export default function VisitUs() {
@@ -66,10 +78,10 @@ export default function VisitUs() {
               <Clock size={16} className="text-[#7C0116]" /> Hours
             </h3>
             <div className="space-y-2">
-              {orderedWeek.map(h => (
-                <div key={h.label} className="flex justify-between gap-3 font-body text-sm">
-                  <span className="text-[#6b7280]">{h.label}</span>
-                  <span className="text-[#1a1a1a] font-semibold">{formatRange(h)}</span>
+              {weekRows.map(h => (
+                <div key={h.from} className="flex justify-between gap-3 font-body text-sm">
+                  <span className="text-[#6b7280]">{h.from === h.to ? h.from : `${h.from} – ${h.to}`}</span>
+                  <span className="text-[#1a1a1a] font-semibold whitespace-nowrap shrink-0">{formatRange(h)}</span>
                 </div>
               ))}
             </div>
