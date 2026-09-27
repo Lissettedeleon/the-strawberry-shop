@@ -47,45 +47,36 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        {/* Same card on every screen: stacked full-width on phones, three across from tablet up */}
-        <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          {cards.map((card, i) => {
-            const zoom = PHOTO_ZOOM[card.name?.toLowerCase()] || 1;
-            return (
-              <motion.div
-                key={card.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group rounded-3xl p-6 pt-7 sm:p-5 sm:pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                style={{ background: CARD_BG }}
-              >
-                <div className="w-[70%] sm:w-[82%] mx-auto mb-5">
-                  <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
-                    {card.image ? (
-                      <img
-                        src={card.image}
-                        alt={card.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                        style={{ transform: `scale(${zoom})` }}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <ImageOff size={32} className="text-[#E61F3F]/40" />
-                      </div>
-                    )}
-                  </div>
-                </div>
+        {/* Phones: the cards glide slowly sideways in a loop (paused while
+            touched). The track holds two copies, each card spaced with a right
+            margin (not gap) so each copy is exactly half the track and the
+            -50% loop is seamless. */}
+        <div className="sm:hidden -mx-4 overflow-hidden fav-marquee">
+          <div className="fav-marquee-track flex w-max">
+            {[...cards, ...cards].map((card, i) => (
+              <FavoriteCard
+                key={`${card.name}-${i}`}
+                card={card}
+                className="w-[72vw] shrink-0 mr-4"
+                aria-hidden={i >= cards.length ? "true" : undefined}
+              />
+            ))}
+          </div>
+        </div>
 
-                <div>
-                  <h3 className="font-bubble text-[#E61F3F] text-xl md:text-2xl mb-1">{card.name}</h3>
-                  <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Tablet and up: three across */}
+        <div className="hidden sm:grid grid-cols-3 gap-6 md:gap-8">
+          {cards.map((card, i) => (
+            <motion.div
+              key={card.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <FavoriteCard card={card} className="h-full" />
+            </motion.div>
+          ))}
         </div>
 
         <div className="text-center mt-10 md:mt-14">
@@ -98,5 +89,37 @@ export default function ProductPreview() {
         </div>
       </div>
     </section>
+  );
+}
+
+function FavoriteCard({ card, className = "", ...rest }) {
+  const zoom = PHOTO_ZOOM[card.name?.toLowerCase()] || 1;
+  return (
+    <div
+      {...rest}
+      className={`group rounded-3xl p-5 pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${className}`}
+      style={{ background: CARD_BG }}
+    >
+      <div className="w-[82%] mx-auto mb-5">
+        <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
+          {card.image ? (
+            <img
+              src={card.image}
+              alt={card.name}
+              loading="lazy"
+              className="w-full h-full object-cover"
+              style={{ transform: `scale(${zoom})` }}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <ImageOff size={32} className="text-[#E61F3F]/40" />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <h3 className="font-bubble text-[#E61F3F] text-xl md:text-2xl mb-1">{card.name}</h3>
+      <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
+    </div>
   );
 }
