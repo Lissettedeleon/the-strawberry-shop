@@ -57,7 +57,7 @@ export default function ProductPreview() {
               <FavoriteCard
                 key={`${card.name}-${i}`}
                 card={card}
-                className="w-[72vw] shrink-0 mr-4"
+                className="w-[55vw] shrink-0 mr-3"
                 aria-hidden={i >= cards.length ? "true" : undefined}
               />
             ))}
@@ -97,10 +97,10 @@ function FavoriteCard({ card, className = "", ...rest }) {
   return (
     <div
       {...rest}
-      className={`group rounded-3xl p-5 pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${className}`}
+      className={`group rounded-3xl p-4 pt-5 sm:p-5 sm:pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${className}`}
       style={{ background: CARD_BG }}
     >
-      <div className="w-[82%] mx-auto mb-5">
+      <div className="w-[82%] mx-auto mb-3 sm:mb-5">
         <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
           {card.image ? (
             <img
@@ -118,8 +118,8 @@ function FavoriteCard({ card, className = "", ...rest }) {
         </div>
       </div>
 
-      <h3 className="font-bubble text-[#E61F3F] text-xl md:text-2xl mb-1">{card.name}</h3>
-      <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
+      <h3 className="font-bubble text-[#E61F3F] text-lg sm:text-xl md:text-2xl mb-1">{card.name}</h3>
+      <p className="font-body text-xs sm:text-sm leading-relaxed line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
     </div>
   );
 }
