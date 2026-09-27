@@ -84,13 +84,13 @@ function PopupContent({ onOpenApp, onDismiss }) {
       <div className="flex flex-col gap-3">
         <button
           onClick={onOpenApp}
-          className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#5C0110] transition-colors active:scale-95"
+          className="w-full flex items-center justify-center gap-2 bg-[#E61F3F] text-white font-body font-bold text-sm py-3.5 rounded-full hover:bg-[#C4112F] transition-colors active:scale-95"
         >
           <Smartphone size={16} /> Open App
         </button>
         <button
           onClick={onDismiss}
-          className="w-full bg-white border border-[#E0A4B0] text-[#6b7280] font-body font-semibold text-sm py-3.5 rounded-full hover:bg-[#FBF1F3] transition-colors"
+          className="w-full bg-white border border-[#F4B3D0] text-[#6b7280] font-body font-semibold text-sm py-3.5 rounded-full hover:bg-[#FDEEF5] transition-colors"
         >
           Continue on Website
         </button>

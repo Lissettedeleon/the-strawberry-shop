@@ -12,10 +12,10 @@ export default function OpenClosedBadge({ className = "" }) {
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full font-body font-bold text-xs px-3 py-1 ${
-        status.isOpen ? "bg-green-100 text-green-700" : "bg-secondary text-primary"
+        status.isOpen ? "bg-[#B4C84C]/25 text-[#4F5F10]" : "bg-secondary text-primary"
       } ${className}`}
     >
-      <span className={`w-2 h-2 rounded-full ${status.isOpen ? "bg-green-500 animate-pulse" : "bg-primary"}`} />
+      <span className={`w-2 h-2 rounded-full ${status.isOpen ? "bg-[#B4C84C] animate-pulse" : "bg-primary"}`} />
       {status.isOpen ? "Open Now" : `Closed${status.opensAt ? ` · Opens ${status.opensAt}` : ""}`}
     </span>
   );

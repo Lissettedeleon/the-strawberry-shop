@@ -18,12 +18,12 @@ function CartButton({ className = "", iconSize = 20 }) {
   return (
     <button
       onClick={() => setCartOpen(true)}
-      className={`relative p-2 text-[#1a1a1a] flex items-center justify-center transition-colors hover:text-[#7C0116] ${className}`}
+      className={`relative p-2 text-[#1a1a1a] flex items-center justify-center transition-colors hover:text-[#E61F3F] ${className}`}
       aria-label="Cart">
       
       <ShoppingBag size={iconSize} />
       {itemCount > 0 &&
-      <span className="absolute top-0 right-0 min-w-[18px] h-[18px] px-1 rounded-full bg-[#7C0116] text-white text-[10px] font-body font-bold flex items-center justify-center">
+      <span className="absolute top-0 right-0 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E61F3F] text-white text-[10px] font-body font-bold flex items-center justify-center">
           {itemCount}
         </span>
       }
@@ -69,7 +69,7 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-[#7C0116] text-white text-center py-2 px-4 text-xs sm:text-sm font-body font-semibold">
+      <div className="bg-[#E61F3F] text-white text-center py-2 px-4 text-xs sm:text-sm font-body font-semibold">
         {announcementText}
         {announcement?.link_url && announcement?.link_text &&
         <a
@@ -96,7 +96,7 @@ export default function Navbar() {
 
       <nav
         className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
-        scrolled ? "shadow-md" : "border-b border-[#F6E3E7]"}`
+        scrolled ? "shadow-md" : "border-b border-[#F8CCE1]"}`
         }>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,7 +104,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 shrink-0 min-w-0">
               <Logo size="sm" />
-              <span className="font-display text-[#7C0116] text-sm sm:text-base whitespace-nowrap">
+              <span className="font-display text-[#E61F3F] text-sm sm:text-base whitespace-nowrap">
                 the strawberry shop
               </span>
             </Link>
@@ -117,8 +117,8 @@ export default function Navbar() {
                 to={link.to}
                 className={`relative py-1.5 font-body font-semibold text-sm transition-colors ${
                 location.pathname === link.to ?
-                "text-[#7C0116]" :
-                "text-[#6b7280] hover:text-[#7C0116]"}`
+                "text-[#E61F3F]" :
+                "text-[#6b7280] hover:text-[#E61F3F]"}`
                 }>
                 
                   {link.label}
@@ -126,7 +126,7 @@ export default function Navbar() {
                 <motion.span
                   layoutId="navActiveIndicator"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  className="absolute left-0 right-0 -bottom-0.5 h-[2px] rounded-full bg-[#7C0116]" />
+                  className="absolute left-0 right-0 -bottom-0.5 h-[2px] rounded-full bg-[#E61F3F]" />
 
                 }
                 </Link>
@@ -136,7 +136,7 @@ export default function Navbar() {
                 strength={0.3}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => setOrderChoiceOpen(true)}
-                className="flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#5C0110] transition-colors min-h-[40px]">
+                className="flex items-center gap-2 bg-[#E61F3F] text-white font-body font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#C4112F] transition-colors min-h-[40px]">
                 
                 <ShoppingBag size={16} /> Order Now
               </MagneticButton>
@@ -183,8 +183,8 @@ export default function Navbar() {
                   to={link.to}
                   className={`flex items-center px-4 py-3.5 rounded-xl font-body font-semibold text-lg transition-colors min-h-[52px] ${
                   location.pathname === link.to ?
-                  "bg-[#F6E3E7] text-[#7C0116]" :
-                  "text-[#1a1a1a] hover:bg-[#F6E3E7]"}`
+                  "bg-[#F8CCE1] text-[#E61F3F]" :
+                  "text-[#1a1a1a] hover:bg-[#F8CCE1]"}`
                   }>
                   
                       {link.label}
@@ -193,7 +193,7 @@ export default function Navbar() {
                   <div className="pt-3">
                     <button
                     onClick={() => {setMobileOpen(false);setOrderChoiceOpen(true);}}
-                    className="w-full flex items-center justify-center gap-2 bg-[#7C0116] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95">
+                    className="w-full flex items-center justify-center gap-2 bg-[#E61F3F] text-white font-body font-bold text-lg py-4 rounded-full min-h-[52px] active:scale-95">
                     
                       <ShoppingBag size={18} /> Order Now
                     </button>

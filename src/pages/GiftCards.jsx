@@ -10,7 +10,7 @@ import GiftCardVisual from "@/components/GiftCardVisual";
 
 const AMOUNTS = [25, 50, 75, 100];
 
-const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
+const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
 function generateCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -65,11 +65,11 @@ export default function GiftCards() {
 
   if (status === "done") {
     return (
-      <div className="min-h-screen" style={{ background: "#FBF1F3" }}>
+      <div className="min-h-screen" style={{ background: "#FDEEF5" }}>
         <Navbar />
         <div className="max-w-lg mx-auto px-4 py-16 text-center">
           <div className="flex justify-center mb-5">
-            <div className="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full bg-[#B4C84C] flex items-center justify-center">
               <Check className="w-10 h-10 text-white" strokeWidth={3} />
             </div>
           </div>
@@ -77,12 +77,12 @@ export default function GiftCards() {
           <p className="font-body text-[#6b7280] text-base mb-6">
             We'll follow up at <span className="font-semibold text-[#1a1a1a]">{form.sender_email}</span> to complete payment. Once confirmed, we'll send a ${finalAmount.toFixed(2)} gift card to {form.recipient_name} at {form.recipient_email}.
           </p>
-          <div className="inline-block bg-white border border-[#E0A4B0] rounded-2xl px-6 py-3 mb-6">
+          <div className="inline-block bg-white border border-[#F4B3D0] rounded-2xl px-6 py-3 mb-6">
             <p className="font-body text-[#6b7280] text-xs mb-1">Reference Code</p>
-            <p className="font-body font-bold text-[#7C0116] text-xl">{code}</p>
+            <p className="font-body font-bold text-[#E61F3F] text-xl">{code}</p>
           </div>
           <div>
-            <Link to="/" className="inline-block bg-[#7C0116] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors">
+            <Link to="/" className="inline-block bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors">
               Back to Home
             </Link>
           </div>
@@ -105,7 +105,7 @@ export default function GiftCards() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
+      <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative z-10 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -139,9 +139,9 @@ export default function GiftCards() {
         </div>
       </section>
 
-      <section style={{ background: "#FBF1F3" }} className="py-14 md:py-20">
+      <section style={{ background: "#FDEEF5" }} className="py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <form id="gift-card-form" onSubmit={handleSubmit} className="bg-white border border-[#E0A4B0] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm scroll-mt-24">
+          <form id="gift-card-form" onSubmit={handleSubmit} className="bg-white border border-[#F4B3D0] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm scroll-mt-24">
             <div>
               <label className="block font-body font-bold text-[#1a1a1a] text-sm mb-3">Choose an amount</label>
               <div className="grid grid-cols-4 gap-2 mb-3">
@@ -151,7 +151,7 @@ export default function GiftCards() {
                     type="button"
                     onClick={() => { setAmount(a); setCustomAmount(""); }}
                     className={`py-3 rounded-xl font-body font-extrabold text-sm border-2 transition-colors ${
-                      !customAmount && amount === a ? "bg-[#7C0116] border-[#7C0116] text-white" : "bg-white border-[#E0A4B0] text-[#1a1a1a] hover:bg-[#FBF1F3]"
+                      !customAmount && amount === a ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#FDEEF5]"
                     }`}
                   >
                     ${a}
@@ -201,22 +201,22 @@ export default function GiftCards() {
               <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Say something sweet..." rows={3} className={inputClass} style={{ minHeight: "unset" }} />
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-[#F6E3E7]">
+            <div className="flex items-center justify-between pt-2 border-t border-[#F8CCE1]">
               <span className="font-body font-bold text-[#1a1a1a]">Total</span>
-              <span className="font-body font-extrabold text-[#7C0116] text-xl">${finalAmount.toFixed(2)}</span>
+              <span className="font-body font-extrabold text-[#E61F3F] text-xl">${finalAmount.toFixed(2)}</span>
             </div>
             <p className="text-xs text-[#6b7280] font-body -mt-3">We'll follow up by email to collect payment before the gift card is sent.</p>
 
             {errorMsg && (
-              <div className="bg-[#F6E3E7] border border-[#E0A4B0] rounded-xl px-4 py-3">
-                <p className="text-[#5C0110] font-body text-sm">{errorMsg}</p>
+              <div className="bg-[#F8CCE1] border border-[#F4B3D0] rounded-xl px-4 py-3">
+                <p className="text-[#C4112F] font-body text-sm">{errorMsg}</p>
               </div>
             )}
 
             <button
               type="submit"
               disabled={status === "sending" || finalAmount <= 0}
-              className="w-full bg-[#7C0116] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#5C0110] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+              className="w-full bg-[#E61F3F] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#C4112F] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
             >
               <Gift size={16} />
               {status === "sending" ? "Sending..." : `Request $${finalAmount.toFixed(2)} Gift Card`}

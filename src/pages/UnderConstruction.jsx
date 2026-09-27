@@ -9,7 +9,7 @@ export default function UnderConstruction() {
       <div className="relative flex items-center justify-center mb-6">
         <motion.div
           className="absolute rounded-full"
-          style={{ width: 180, height: 180, background: "radial-gradient(circle, #E0A4B0 0%, transparent 70%)" }}
+          style={{ width: 180, height: 180, background: "radial-gradient(circle, #F4B3D0 0%, transparent 70%)" }}
           animate={{ opacity: [0.4, 0.8, 0.4], scale: [0.9, 1.05, 0.9] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -20,13 +20,13 @@ export default function UnderConstruction() {
           <Logo size="xl" className="relative" />
         </motion.div>
       </div>
-      <h1 className="font-bubble text-[#7C0116] text-2xl mb-2">Under construction</h1>
+      <h1 className="font-bubble text-[#E61F3F] text-2xl mb-2">Under construction</h1>
       <p className="font-body text-[#6b7280] text-base mb-8 max-w-sm">
         Our app is on its way. Check back soon
       </p>
       <Link
         to="/"
-        className="inline-block bg-[#7C0116] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors"
+        className="inline-block bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors"
       >
         Back to Website
       </Link>

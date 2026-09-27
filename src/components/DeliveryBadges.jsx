@@ -19,7 +19,7 @@ function DoorDashMark() {
   );
 }
 
-const badgeClass = "inline-flex items-center gap-2 bg-white border border-[#E0A4B0] text-[#1a1a1a] font-body font-semibold text-sm px-4 py-2.5 rounded-full hover:bg-[#F6E3E7] transition-colors shadow-sm";
+const badgeClass = "inline-flex items-center gap-2 bg-white border border-[#F4B3D0] text-[#1a1a1a] font-body font-semibold text-sm px-4 py-2.5 rounded-full hover:bg-[#F8CCE1] transition-colors shadow-sm";
 
 export function UberEatsBadge({ className = "" }) {
   return (

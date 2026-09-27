@@ -14,7 +14,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden" style={{ background: "#FBF1F3" }}>
+    <section className="relative overflow-hidden" style={{ background: "#FDEEF5" }}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -38,7 +38,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="font-bubble text-[#7C0116] text-3xl sm:text-4xl md:text-5xl leading-[1.05] mb-4"
+          className="font-bubble text-[#E61F3F] text-3xl sm:text-4xl md:text-5xl leading-[1.05] mb-4"
         >
           life is sweeter with strawberries
         </motion.h1>
@@ -47,13 +47,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-[#5C0110]/80 font-body text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+          className="text-[#C4112F]/80 font-body text-base md:text-lg max-w-xl mx-auto leading-relaxed"
         >
           Fresh strawberries, house made creams, premium chocolates, and delicious toppings made fresh daily
         </motion.p>
       </div>
 
-      <WaveDivider from="#FBF1F3" to="white" />
+      <WaveDivider from="#FDEEF5" to="white" />
     </section>
   );
 }

@@ -78,7 +78,7 @@ export function SocialIconsRow({ className = "", compact = false }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        className="w-11 h-11 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors"
+        className="w-11 h-11 rounded-full bg-white border border-[#F4B3D0] flex items-center justify-center hover:bg-[#F8CCE1] transition-colors"
         style={{ borderWidth: "0.5px" }}>
 
           {icon}
@@ -108,7 +108,7 @@ export function InstagramButton({ className = "" }) {
       href="https://www.instagram.com/thestrawberryshopp"
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 bg-[#F6E3E7] text-[#5C0110] font-body font-semibold text-sm px-5 py-3 rounded-full min-h-[44px] hover:opacity-90 transition-opacity ${className}`}>
+      className={`inline-flex items-center gap-2 bg-[#F8CCE1] text-[#C4112F] font-body font-semibold text-sm px-5 py-3 rounded-full min-h-[44px] hover:opacity-90 transition-opacity ${className}`}>
       
       Follow on Instagram
     </a>);
@@ -121,7 +121,7 @@ export function GoogleReviewButton({ className = "" }) {
       href="https://share.google/2h11qEjqljoOxwZsx"
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 bg-white border border-[#E0A4B0] rounded-full px-5 py-2.5 text-sm font-body font-semibold text-[#1a1a1a] hover:bg-[#FBF1F3] transition-colors shadow-sm ${className}`}
+      className={`inline-flex items-center gap-2 bg-white border border-[#F4B3D0] rounded-full px-5 py-2.5 text-sm font-body font-semibold text-[#1a1a1a] hover:bg-[#FDEEF5] transition-colors shadow-sm ${className}`}
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>

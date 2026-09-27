@@ -8,7 +8,7 @@ export default function ScrollProgressBar() {
   return (
     <motion.div
       style={{ scaleX, transformOrigin: "0%" }}
-      className="fixed top-0 left-0 right-0 h-[3px] bg-[#7C0116] z-[200] pointer-events-none"
+      className="fixed top-0 left-0 right-0 h-[3px] bg-[#E61F3F] z-[200] pointer-events-none"
     />
   );
 }

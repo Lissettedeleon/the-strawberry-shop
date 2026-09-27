@@ -58,7 +58,7 @@ function OrderOptions({ onClose }) {
       <Link
         to="/menu"
         onClick={onClose}
-        className="block bg-[#7C0116] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#5C0110] transition-colors active:scale-95"
+        className="block bg-[#E61F3F] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#C4112F] transition-colors active:scale-95"
       >
         <span className="flex items-center gap-4 w-full h-full">
           <Globe size={22} className="shrink-0" />

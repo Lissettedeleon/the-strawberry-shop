@@ -23,7 +23,7 @@ export default function About() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
+      <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export default function About() {
       </section>
 
       {/* Story */}
-      <section style={{ background: "#FBF1F3" }} className="py-12 md:py-20">
+      <section style={{ background: "#FDEEF5" }} className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -46,7 +46,7 @@ export default function About() {
               transition={{ duration: 0.6 }}
               className="flex justify-center"
             >
-              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#E0A4B0] rounded-3xl shadow-sm overflow-hidden">
+              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#F4B3D0] rounded-3xl shadow-sm overflow-hidden">
                 <video
                   ref={videoRef}
                   src={ABOUT_VIDEO}
@@ -77,9 +77,9 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="bg-white py-12 md:py-16 border-t border-[#F6E3E7]">
+      <section className="bg-white py-12 md:py-16 border-t border-[#F8CCE1]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-bubble text-[#5C0110] text-2xl text-center mb-10">Our Values</h2>
+          <h2 className="font-bubble text-[#C4112F] text-2xl text-center mb-10">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {VALUES.map((v, i) => (
               <motion.div
@@ -88,10 +88,10 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white border border-[#E0A4B0] rounded-2xl p-6 text-center shadow-sm hover:scale-[1.02] transition-transform"
+                className="bg-white border border-[#F4B3D0] rounded-2xl p-6 text-center shadow-sm hover:scale-[1.02] transition-transform"
               >
-                <div className="w-14 h-14 rounded-full bg-[#F6E3E7] flex items-center justify-center mx-auto mb-4">
-                  <v.icon className="text-[#7C0116]" size={24} />
+                <div className="w-14 h-14 rounded-full bg-[#F8CCE1] flex items-center justify-center mx-auto mb-4">
+                  <v.icon className="text-[#E61F3F]" size={24} />
                 </div>
                 <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-2">{v.title}</h3>
                 <p className="text-[#6b7280] font-body text-sm leading-relaxed">{v.text}</p>

@@ -35,7 +35,7 @@ export default function ProductPreview() {
     <section id="fresh-favorites" className="py-14 md:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="font-bubble text-[#7C0116] text-3xl md:text-4xl">Favorites</h2>
+          <h2 className="font-bubble text-[#E61F3F] text-3xl md:text-4xl">Favorites</h2>
           <p className="text-[#6b7280] font-body text-sm md:text-base mt-3 max-w-xl mx-auto">
             The ones everyone keeps coming back for
           </p>
@@ -51,7 +51,7 @@ export default function ProductPreview() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group text-center sm:text-left"
             >
-              <div className="relative aspect-square overflow-hidden rounded-3xl bg-[#F6E3E7] shadow-sm mb-2 sm:mb-4">
+              <div className="relative aspect-square overflow-hidden rounded-3xl bg-[#F8CCE1] shadow-sm mb-2 sm:mb-4">
                 {card.image ? (
                   <img
                     src={card.image}
@@ -61,14 +61,14 @@ export default function ProductPreview() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <ImageOff size={32} className="text-[#7C0116]/40" />
+                    <ImageOff size={32} className="text-[#E61F3F]/40" />
                   </div>
                 )}
               </div>
               <h3 className="font-bubble text-[#1a1a1a] text-sm sm:text-lg md:text-xl mb-0.5 sm:mb-1.5">{card.name}</h3>
               <p className="text-[#6b7280] font-body text-[11px] sm:text-sm leading-snug sm:leading-relaxed mb-1 sm:mb-2 line-clamp-2">{card.desc}</p>
               {card.price != null && (
-                <p className="text-[#7C0116] font-body font-extrabold text-xs sm:text-base">${card.price.toFixed(2)}</p>
+                <p className="text-[#E61F3F] font-body font-extrabold text-xs sm:text-base">${card.price.toFixed(2)}</p>
               )}
             </motion.div>
           ))}
@@ -77,7 +77,7 @@ export default function ProductPreview() {
         <div className="text-center mt-10 md:mt-14">
           <Link
             to="/menu"
-            className="inline-flex items-center gap-2 bg-white border-2 border-[#E0A4B0] text-[#7C0116] font-body font-bold text-sm px-8 py-3.5 rounded-full hover:bg-[#FBF1F3] transition-colors"
+            className="inline-flex items-center gap-2 bg-white border-2 border-[#F4B3D0] text-[#E61F3F] font-body font-bold text-sm px-8 py-3.5 rounded-full hover:bg-[#FDEEF5] transition-colors"
           >
             <ShoppingBag size={16} /> See Full Menu
           </Link>

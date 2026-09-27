@@ -63,7 +63,7 @@ function ToFromRow({ label, value }) {
       </p>
       <div className="mt-0.5 border-b" style={{ borderColor: "rgba(168, 34, 45, 0.35)" }} />
       {value && (
-        <p className="mt-0.5 font-body text-[10px] sm:text-[11px] text-[#5C0110] truncate">{value}</p>
+        <p className="mt-0.5 font-body text-[10px] sm:text-[11px] text-[#C4112F] truncate">{value}</p>
       )}
     </div>
   );

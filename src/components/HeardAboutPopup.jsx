@@ -70,7 +70,7 @@ function PopupContent({ showRating, rating, setRating, sources, toggleSource, ti
         <div className="flex items-center gap-1.5 mb-6">
           {[1, 2, 3, 4, 5].map((n) => (
             <button key={n} type="button" onClick={() => setRating(n)} aria-label={`${n} star`} className="p-0.5">
-              <Star size={30} className={n <= rating ? "text-[#7C0116] fill-[#7C0116]" : "text-[#E0A4B0]"} />
+              <Star size={30} className={n <= rating ? "text-[#E61F3F] fill-[#E61F3F]" : "text-[#F4B3D0]"} />
             </button>
           ))}
         </div>
@@ -86,7 +86,7 @@ function PopupContent({ showRating, rating, setRating, sources, toggleSource, ti
               type="button"
               onClick={() => toggleSource(s)}
               className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-body font-semibold text-sm border transition-colors ${
-                active ? "bg-[#7C0116] border-[#7C0116] text-white" : "bg-white border-[#E0A4B0] text-[#1a1a1a] hover:bg-[#FBF1F3]"
+                active ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#FDEEF5]"
               }`}
             >
               {active && <Check size={14} />}
@@ -100,14 +100,14 @@ function PopupContent({ showRating, rating, setRating, sources, toggleSource, ti
         <button
           type="button"
           onClick={onClose}
-          className="flex-1 bg-white border border-[#E0A4B0] text-[#6b7280] font-body font-semibold text-sm py-3 rounded-full hover:bg-[#FBF1F3] transition-colors"
+          className="flex-1 bg-white border border-[#F4B3D0] text-[#6b7280] font-body font-semibold text-sm py-3 rounded-full hover:bg-[#FDEEF5] transition-colors"
         >
           Skip
         </button>
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 bg-[#7C0116] text-white font-body font-bold text-sm py-3 rounded-full hover:bg-[#5C0110] transition-colors"
+          className="flex-1 bg-[#E61F3F] text-white font-body font-bold text-sm py-3 rounded-full hover:bg-[#C4112F] transition-colors"
         >
           Submit
         </button>

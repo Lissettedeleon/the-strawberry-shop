@@ -43,7 +43,7 @@ export default function Menu() {
   return (
     <div
       className="min-h-screen transition-colors duration-300"
-      style={{ backgroundColor: isDelivery ? "#F7E3E8" : "#E0A4B0" }}>
+      style={{ backgroundColor: isDelivery ? "#F8CCE1" : "#F4B3D0" }}>
       
       <Navbar />
 
@@ -55,7 +55,7 @@ export default function Menu() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-bubble text-[#7C0116] text-3xl sm:text-4xl mb-2">
+          className="font-bubble text-[#E61F3F] text-3xl sm:text-4xl mb-2">
 
           Choose Your Favorite, or Try Something New
         </motion.h1>
@@ -70,7 +70,7 @@ export default function Menu() {
           <button
             onClick={() => setFulfillmentType("pickup")}
             className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-extrabold text-sm transition-all ${
-            !isDelivery ? "bg-[#7C0116] text-white" : "text-[#7a6469]"}`
+            !isDelivery ? "bg-[#E61F3F] text-white" : "text-[#7a6469]"}`
             }>
             
             <Store size={15} /> Pickup
@@ -78,7 +78,7 @@ export default function Menu() {
           <button
             onClick={() => setFulfillmentType("delivery")}
             className={`flex items-center gap-1.5 px-6 py-2.5 rounded-full font-body font-extrabold text-sm transition-all ${
-            isDelivery ? "bg-[#7C0116] text-white" : "text-[#7a6469]"}`
+            isDelivery ? "bg-[#E61F3F] text-white" : "text-[#7a6469]"}`
             }>
             
             <Truck size={15} /> Delivery
@@ -92,20 +92,20 @@ export default function Menu() {
           className="w-full max-w-2xl flex flex-col items-center gap-3">
           
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 bg-white rounded-2xl px-6 py-3 shadow-sm">
-              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
                 Delivery fee: <span className="text-[#7a6469] font-bold">{DELIVERY_FEE}</span>
               </span>
-              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
                 Estimated time: <span className="text-[#7a6469] font-bold">{DELIVERY_TIME}</span>
               </span>
-              <span className="font-body font-extrabold text-[#7C0116] text-xs">
+              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
                 Minimum order: <span className="text-[#7a6469] font-bold">{DELIVERY_MINIMUM}</span>
               </span>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-2">
               <span className="font-body text-[#6b4a52] text-xs font-bold">Order delivery through:</span>
-              <span className="inline-flex items-center gap-1.5 bg-[#7C0116] text-white font-body font-bold text-xs px-3 py-1.5 rounded-full">
+              <span className="inline-flex items-center gap-1.5 bg-[#E61F3F] text-white font-body font-bold text-xs px-3 py-1.5 rounded-full">
                 <Globe size={13} /> Our Website
               </span>
               <UberEatsBadge className="!text-xs !px-3 !py-1.5" />
@@ -121,7 +121,7 @@ export default function Menu() {
         <BrandedLoader text="whipping up the menu..." /> :
         Object.keys(groupedByCategory).length === 0 ?
         <div className="text-center text-[#6b4a52] font-body font-bold py-16">
-            <SearchX size={40} className="mx-auto mb-3 text-[#7C0116]/50" />
+            <SearchX size={40} className="mx-auto mb-3 text-[#E61F3F]/50" />
             <p>No menu items yet. Check back soon!</p>
           </div> :
 

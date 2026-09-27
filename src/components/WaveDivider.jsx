@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { EASE_OUT_STRONG } from "@/lib/motion";
 
 const colorMap = {
-  blush: "#E0A4B0",
+  blush: "#F4B3D0",
   white: "#FFFFFF",
-  red: "#7C0116",
-  dark: "#5C0110",
+  red: "#E61F3F",
+  dark: "#C4112F",
 };
 
 export default function WaveDivider({ from = "white", to = "blush", flip = false }) {

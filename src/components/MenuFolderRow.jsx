@@ -30,13 +30,13 @@ export default function MenuFolderRow({ item }) {
     <>
       <div
         onClick={() => setShowModal(true)}
-        className="flex items-center gap-3.5 p-2 rounded-2xl hover:bg-[#F7E3E8] transition-colors cursor-pointer"
+        className="flex items-center gap-3.5 p-2 rounded-2xl hover:bg-[#F8CCE1] transition-colors cursor-pointer"
       >
-        <div className="w-14 h-14 rounded-2xl shrink-0 overflow-hidden bg-[#F7E3E8] flex items-center justify-center">
+        <div className="w-14 h-14 rounded-2xl shrink-0 overflow-hidden bg-[#F8CCE1] flex items-center justify-center">
           {item.image_url ? (
             <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
           ) : (
-            <ImageOff size={20} className="text-[#7C0116]/40" />
+            <ImageOff size={20} className="text-[#E61F3F]/40" />
           )}
         </div>
         <div className="flex-1 min-w-0">
@@ -48,7 +48,7 @@ export default function MenuFolderRow({ item }) {
             <span className="inline-block mt-1 bg-foreground/10 text-foreground/50 text-[10px] font-body font-bold px-2 py-0.5 rounded-full">Sold Out</span>
           )}
         </div>
-        <span className="text-[#7C0116] font-extrabold text-[13.5px] whitespace-nowrap bg-[#F7E3E8] px-2.5 py-1 rounded-full shrink-0">
+        <span className="text-[#E61F3F] font-extrabold text-[13.5px] whitespace-nowrap bg-[#F8CCE1] px-2.5 py-1 rounded-full shrink-0">
           ${item.price?.toFixed(2)}
         </span>
       </div>

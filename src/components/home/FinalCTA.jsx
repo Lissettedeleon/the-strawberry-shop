@@ -14,12 +14,12 @@ export default function FinalCTA() {
   return (
     <section
       className="relative overflow-hidden py-16 md:py-24"
-      style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}
+      style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}
     >
       <motion.div
         animate={{ opacity: [0.15, 0.3, 0.15] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-24 -right-20 w-72 h-72 rounded-full blur-3xl bg-[#E0A4B0] pointer-events-none"
+        className="absolute -top-24 -right-20 w-72 h-72 rounded-full blur-3xl bg-[#F4B3D0] pointer-events-none"
       />
       <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
         <motion.div
@@ -66,7 +66,7 @@ export default function FinalCTA() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => setOrderChoiceOpen(true)}
-            className="inline-flex items-center gap-2 bg-white text-[#7C0116] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F6E3E7] transition-colors shadow-xl"
+            className="inline-flex items-center gap-2 bg-white text-[#E61F3F] font-body font-bold text-base px-10 py-4 rounded-full min-h-[52px] hover:bg-[#F8CCE1] transition-colors shadow-xl"
           >
             <ShoppingBag size={18} /> Order Now
           </MagneticButton>

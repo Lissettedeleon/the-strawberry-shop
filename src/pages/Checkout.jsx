@@ -8,7 +8,7 @@ import { useCart } from "@/lib/CartContext";
 import { TAX_RATE } from "@/lib/itemConfigs";
 import { ArrowLeft, ChevronDown, ChevronUp, ShoppingBag, Store, Truck } from "lucide-react";
 
-const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
+const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
 export default function Checkout() {
   const { items, subtotal, clearCart, fulfillmentType, setFulfillmentType } = useCart();
@@ -60,9 +60,9 @@ export default function Checkout() {
       <div className="min-h-screen bg-white">
         <Navbar />
         <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-          <ShoppingBag size={40} className="mx-auto mb-4 text-[#7C0116]/40" />
+          <ShoppingBag size={40} className="mx-auto mb-4 text-[#E61F3F]/40" />
           <h1 className="font-body font-bold text-[#1a1a1a] text-2xl mb-3">Your cart is empty</h1>
-          <button onClick={() => navigate("/menu")} className="bg-[#7C0116] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors">
+          <button onClick={() => navigate("/menu")} className="bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors">
             Back to Menu
           </button>
         </div>
@@ -72,10 +72,10 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "#FBF1F3" }}>
+    <div className="min-h-screen" style={{ background: "#FDEEF5" }}>
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }}>
+      <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-bubble text-white text-3xl sm:text-4xl mb-1 drop-shadow-lg">
             Checkout
@@ -86,26 +86,26 @@ export default function Checkout() {
 
       <div className="max-w-lg mx-auto px-4 sm:px-6 py-8">
         {/* Collapsible Order Summary */}
-        <div className="bg-white border border-[#E0A4B0] rounded-2xl mb-4 overflow-hidden shadow-sm">
+        <div className="bg-white border border-[#F4B3D0] rounded-2xl mb-4 overflow-hidden shadow-sm">
           <button
             onClick={() => setSummaryOpen(!summaryOpen)}
             className="w-full flex items-center justify-between px-5 py-4 font-body font-bold text-[#1a1a1a] text-sm min-h-[52px]"
           >
             <span>Order Summary ({items.length} item{items.length !== 1 ? "s" : ""})</span>
             <div className="flex items-center gap-2">
-              <span className="text-[#7C0116] font-extrabold">${total.toFixed(2)}</span>
+              <span className="text-[#E61F3F] font-extrabold">${total.toFixed(2)}</span>
               {summaryOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </div>
           </button>
           {summaryOpen && (
-            <div className="px-5 pb-4 border-t border-[#F6E3E7]">
+            <div className="px-5 pb-4 border-t border-[#F8CCE1]">
               {items.map((item, idx) => {
                 const lineTotal = ((item.base_price || 0) + (item.extras_total || 0)) * (item.quantity || 1);
                 return (
-                  <div key={idx} className="py-2.5 border-b border-[#F6E3E7] last:border-0">
+                  <div key={idx} className="py-2.5 border-b border-[#F8CCE1] last:border-0">
                     <div className="flex justify-between">
                       <span className="font-body font-semibold text-[#1a1a1a] text-sm">{item.quantity}x {item.name}</span>
-                      <span className="font-body font-bold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
+                      <span className="font-body font-bold text-[#E61F3F] text-sm">${lineTotal.toFixed(2)}</span>
                     </div>
                     {item.ingredients?.length > 0 && (
                       <p className="text-xs text-[#6b7280] mt-0.5">
@@ -118,7 +118,7 @@ export default function Checkout() {
                     {item.selected_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>}
                     {item.selected_choc_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_choc_toppings.join(", ")}</p>}
                     {item.selected_sauces?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>}
-                    {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
+                    {item.extras?.length > 0 && <p className="text-xs text-[#E61F3F] mt-0.5">+ {item.extras.join(", ")}</p>}
                     {item.special_instructions && <p className="text-xs text-[#6b7280] mt-0.5 italic">"{item.special_instructions}"</p>}
                   </div>
                 );
@@ -128,13 +128,13 @@ export default function Checkout() {
         </div>
 
         {/* Fulfillment type */}
-        <div className="bg-white border border-[#E0A4B0] rounded-2xl p-5 shadow-sm mb-4">
+        <div className="bg-white border border-[#F4B3D0] rounded-2xl p-5 shadow-sm mb-4">
           <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-3">How would you like to get it?</h3>
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setFulfillmentType("pickup")}
               className={`flex items-center justify-center gap-2 py-3 rounded-xl font-body font-semibold text-sm border-2 transition-colors ${
-                fulfillmentType === "pickup" ? "bg-[#7C0116] border-[#7C0116] text-white" : "bg-white border-[#E0A4B0] text-[#1a1a1a] hover:bg-[#F6E3E7]"
+                fulfillmentType === "pickup" ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#F8CCE1]"
               }`}
             >
               <Store size={16} /> Pickup
@@ -142,7 +142,7 @@ export default function Checkout() {
             <button
               onClick={() => setFulfillmentType("delivery")}
               className={`flex items-center justify-center gap-2 py-3 rounded-xl font-body font-semibold text-sm border-2 transition-colors ${
-                fulfillmentType === "delivery" ? "bg-[#7C0116] border-[#7C0116] text-white" : "bg-white border-[#E0A4B0] text-[#1a1a1a] hover:bg-[#F6E3E7]"
+                fulfillmentType === "delivery" ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#F8CCE1]"
               }`}
             >
               <Truck size={16} /> Delivery
@@ -160,7 +160,7 @@ export default function Checkout() {
         </div>
 
         {/* Customer info */}
-        <div className="bg-white border border-[#E0A4B0] rounded-2xl p-5 shadow-sm space-y-4">
+        <div className="bg-white border border-[#F4B3D0] rounded-2xl p-5 shadow-sm space-y-4">
           <h3 className="font-body font-bold text-[#1a1a1a] text-base">Your Information</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -184,7 +184,7 @@ export default function Checkout() {
           </div>
 
           {/* Total */}
-          <div className="pt-3 border-t border-[#F6E3E7] space-y-1.5">
+          <div className="pt-3 border-t border-[#F8CCE1] space-y-1.5">
             <div className="flex justify-between items-center">
               <span className="font-body text-[#6b7280] text-sm">Subtotal</span>
               <span className="font-body font-semibold text-[#1a1a1a] text-sm">${subtotal.toFixed(2)}</span>
@@ -193,21 +193,21 @@ export default function Checkout() {
               <span className="font-body text-[#6b7280] text-sm">Tax</span>
               <span className="font-body font-semibold text-[#1a1a1a] text-sm">${tax.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between items-center pt-1.5 border-t border-[#F6E3E7]">
+            <div className="flex justify-between items-center pt-1.5 border-t border-[#F8CCE1]">
               <span className="font-body font-bold text-[#1a1a1a]">Total</span>
-              <span className="font-body font-extrabold text-[#7C0116] text-xl">${total.toFixed(2)}</span>
+              <span className="font-body font-extrabold text-[#E61F3F] text-xl">${total.toFixed(2)}</span>
             </div>
           </div>
 
           <button
             onClick={handlePlaceOrder}
             disabled={placing || !canPlaceOrder}
-            className="w-full bg-[#7C0116] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#5C0110] transition-colors disabled:opacity-50 active:scale-95 text-base"
+            className="w-full bg-[#E61F3F] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#C4112F] transition-colors disabled:opacity-50 active:scale-95 text-base"
           >
             {placing ? "Placing Order..." : `Place Order — $${total.toFixed(2)}`}
           </button>
 
-          <button onClick={() => navigate("/menu")} className="w-full text-center font-body text-sm text-[#6b7280] hover:text-[#7C0116] transition-colors flex items-center justify-center gap-1 py-1 min-h-[44px]">
+          <button onClick={() => navigate("/menu")} className="w-full text-center font-body text-sm text-[#6b7280] hover:text-[#E61F3F] transition-colors flex items-center justify-center gap-1 py-1 min-h-[44px]">
             <ArrowLeft size={14} /> Back to Menu
           </button>
         </div>

@@ -45,7 +45,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #5C0110 0%, #4A000D 100%)" }}>
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #C4112F 0%, #8A1024 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-bubble text-white text-3xl sm:text-4xl text-center drop-shadow-lg">
             Admin Dashboard
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
         <WaveDivider from="dark" to="blush" />
       </section>
 
-      <section style={{ backgroundColor: "#E0A4B0" }}>
+      <section style={{ backgroundColor: "#F4B3D0" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
           {/* Orders */}

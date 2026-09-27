@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import HeardAboutPopup from "@/components/HeardAboutPopup";
 import { Send, Check } from "lucide-react";
 
-const inputClass = "w-full bg-white border border-[#E0A4B0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#7C0116]/30 focus:border-[#7C0116] transition-all min-h-[48px]";
+const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
 export default function Catering() {
   const [form, setForm] = useState({
@@ -51,17 +51,17 @@ export default function Catering() {
 
   if (status === "done") {
     return (
-      <div className="min-h-screen" style={{ background: "#FBF1F3" }}>
+      <div className="min-h-screen" style={{ background: "#FDEEF5" }}>
         <Navbar />
         <div className="max-w-lg mx-auto px-4 py-16 text-center">
           <div className="flex justify-center mb-5">
-            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-[#B4C84C] flex items-center justify-center">
               <Check className="w-8 h-8 text-white" strokeWidth={3} />
             </div>
           </div>
           <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Request Sent!</h1>
           <p className="font-body text-[#6b7280] text-base mb-6">Your catering request has been sent. We'll be in touch with you shortly</p>
-          <Link to="/" className="inline-block bg-[#7C0116] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#5C0110] transition-colors">
+          <Link to="/" className="inline-block bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors">
             Back to Home
           </Link>
         </div>
@@ -82,15 +82,15 @@ export default function Catering() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
+      <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
           <h1 className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg">Let Us Be Part of Your Next Celebration</h1>
         </div>
       </section>
 
-      <section className="bg-white py-12 md:py-16 border-b border-[#F6E3E7]">
+      <section className="bg-white py-12 md:py-16 border-b border-[#F8CCE1]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mx-auto rounded-3xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-8">
+          <div className="max-w-xl mx-auto rounded-3xl overflow-hidden border border-[#F4B3D0] shadow-lg mb-8">
             <img
               src="/images/catering-display.jpg"
               alt="Strawberry cups displayed on a table at a catering event"
@@ -103,16 +103,16 @@ export default function Catering() {
         </div>
       </section>
 
-      <section style={{ background: "#FBF1F3" }} className="py-12 md:py-16">
+      <section style={{ background: "#FDEEF5" }} className="py-12 md:py-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="font-bubble text-[#5C0110] text-2xl mb-2">Request Catering</h2>
+            <h2 className="font-bubble text-[#C4112F] text-2xl mb-2">Request Catering</h2>
             <p className="text-[#6b7280] font-body text-sm max-w-md mx-auto">
               We'll follow up within 24–48 business hours with pricing tailored to your event
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-white border border-[#E0A4B0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <form onSubmit={handleSubmit} className="bg-white border border-[#F4B3D0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
             <div className="space-y-4">
               <p className="font-body font-bold text-[#1a1a1a] text-sm">Contact Information</p>
               <div>
@@ -131,7 +131,7 @@ export default function Catering() {
               </div>
             </div>
 
-            <div className="space-y-4 pt-2 border-t border-[#F6E3E7]">
+            <div className="space-y-4 pt-2 border-t border-[#F8CCE1]">
               <p className="font-body font-bold text-[#1a1a1a] text-sm pt-4">Event Details</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -162,7 +162,7 @@ export default function Catering() {
                       type="button"
                       onClick={() => setForm({ ...form, fulfillment_type: opt })}
                       className={`flex-1 py-3 rounded-xl font-body font-bold text-sm border-2 transition-colors ${
-                        form.fulfillment_type === opt ? "bg-[#7C0116] border-[#7C0116] text-white" : "bg-white border-[#E0A4B0] text-[#1a1a1a] hover:bg-[#FBF1F3]"
+                        form.fulfillment_type === opt ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#FDEEF5]"
                       }`}
                     >
                       {opt}
@@ -178,7 +178,7 @@ export default function Catering() {
               )}
             </div>
 
-            <div className="space-y-4 pt-2 border-t border-[#F6E3E7]">
+            <div className="space-y-4 pt-2 border-t border-[#F8CCE1]">
               <p className="font-body font-bold text-[#1a1a1a] text-sm pt-4">Additional Details</p>
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Tell us more about your event or any special requests</label>
@@ -187,15 +187,15 @@ export default function Catering() {
             </div>
 
             {errorMsg && (
-              <div className="bg-[#F6E3E7] border border-[#E0A4B0] rounded-xl px-4 py-3">
-                <p className="text-[#5C0110] font-body text-sm">{errorMsg}</p>
+              <div className="bg-[#F8CCE1] border border-[#F4B3D0] rounded-xl px-4 py-3">
+                <p className="text-[#C4112F] font-body text-sm">{errorMsg}</p>
               </div>
             )}
 
             <button
               type="submit"
               disabled={status === "sending"}
-              className="w-full bg-[#7C0116] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#5C0110] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+              className="w-full bg-[#E61F3F] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#C4112F] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
             >
               <Send size={16} />
               {status === "sending" ? "Sending..." : "Submit Catering Request"}

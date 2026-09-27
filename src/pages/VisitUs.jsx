@@ -26,11 +26,11 @@ export default function VisitUs() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "#FBF1F3" }} className="py-12 md:py-16">
+      <section style={{ background: "#FDEEF5" }} className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Location picture + directions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="rounded-3xl overflow-hidden border border-[#E0A4B0] shadow-lg">
+            <div className="rounded-3xl overflow-hidden border border-[#F4B3D0] shadow-lg">
               <img
                 src="/images/shop-location.jpg"
                 alt="The Strawberry Shop kiosk at Liberty Center, 7100 Foundry Row"
@@ -38,8 +38,8 @@ export default function VisitUs() {
               />
             </div>
             <div className="text-center mt-5">
-              <p className="flex items-center justify-center gap-1.5 font-body font-bold text-[#5C0110] text-xl mb-1">
-                <MapPin size={20} className="text-[#7C0116]" /> 7100 Foundry Row
+              <p className="flex items-center justify-center gap-1.5 font-body font-bold text-[#C4112F] text-xl mb-1">
+                <MapPin size={20} className="text-[#E61F3F]" /> 7100 Foundry Row
               </p>
               <p className="font-body text-[#6b7280] text-sm">Liberty Township, OH 45069</p>
             </div>
@@ -48,7 +48,7 @@ export default function VisitUs() {
                 href={DIRECTIONS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#7C0116] text-white font-body font-bold text-sm px-6 py-3 rounded-full min-h-[44px] hover:bg-[#5C0110] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#E61F3F] text-white font-body font-bold text-sm px-6 py-3 rounded-full min-h-[44px] hover:bg-[#C4112F] transition-colors"
               >
                 <Navigation size={16} /> Get Directions
               </a>
@@ -60,10 +60,10 @@ export default function VisitUs() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            className="bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm"
+            className="bg-white border border-[#F4B3D0] rounded-2xl p-6 shadow-sm"
           >
             <h3 className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base mb-3">
-              <Clock size={16} className="text-[#7C0116]" /> Hours
+              <Clock size={16} className="text-[#E61F3F]" /> Hours
             </h3>
             <div className="space-y-2">
               {weekRows.map(h => (
@@ -73,7 +73,7 @@ export default function VisitUs() {
                 </div>
               ))}
             </div>
-            <div className="border-t border-[#F6E3E7] my-5" />
+            <div className="border-t border-[#F8CCE1] my-5" />
             <h4 className="font-body font-bold text-[#1a1a1a] text-sm mb-3">Holiday hours</h4>
             <div className="space-y-2">
               {getUpcomingHolidays().map(h => {
@@ -81,7 +81,7 @@ export default function VisitUs() {
                 return (
                   <div key={h.label} className="flex justify-between gap-3 font-body text-sm">
                     <span className="text-[#6b7280]">{h.label}</span>
-                    <span className={`font-semibold whitespace-nowrap shrink-0 ${time === "Closed" ? "text-[#7C0116]" : "text-[#1a1a1a]"}`}>{time}</span>
+                    <span className={`font-semibold whitespace-nowrap shrink-0 ${time === "Closed" ? "text-[#E61F3F]" : "text-[#1a1a1a]"}`}>{time}</span>
                   </div>
                 );
               })}

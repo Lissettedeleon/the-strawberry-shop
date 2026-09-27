@@ -30,9 +30,9 @@ export default function CartDrawer() {
             className="fixed bottom-0 left-0 right-0 z-[70] bg-white rounded-t-[24px] max-h-[85vh] flex flex-col shadow-2xl md:hidden"
           >
             <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 mb-1 shrink-0" />
-            <div className="flex items-center justify-between px-5 py-3 border-b border-[#F6E3E7] shrink-0">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-[#F8CCE1] shrink-0">
               <h2 className="font-body font-bold text-[#1a1a1a] text-base">Your Cart</h2>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F6E3E7] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
+              <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F8CCE1] transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
                 <X size={18} className="text-[#6b7280]" />
               </button>
             </div>
@@ -48,9 +48,9 @@ export default function CartDrawer() {
             transition={SHEET_TRANSITION}
             className="fixed right-0 top-0 h-full w-full max-w-sm bg-white z-[70] shadow-2xl flex-col hidden md:flex"
           >
-            <div className="flex items-center justify-between p-5 border-b border-[#F6E3E7] shrink-0">
+            <div className="flex items-center justify-between p-5 border-b border-[#F8CCE1] shrink-0">
               <h2 className="font-body font-bold text-[#1a1a1a] text-lg">Your Cart</h2>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F6E3E7] transition-colors">
+              <button onClick={onClose} className="p-2 rounded-full hover:bg-[#F8CCE1] transition-colors">
                 <X size={18} className="text-[#6b7280]" />
               </button>
             </div>
@@ -70,7 +70,7 @@ function CartItems({ items, updateItem, removeItem }) {
         const extrasTotal = item.extras_total || 0;
         const lineTotal = ((item.base_price || 0) + extrasTotal) * (item.quantity || 1);
         return (
-          <div key={item.cartId} className="bg-[#FBF1F3] border border-[#E0A4B0] rounded-2xl p-4 space-y-2">
+          <div key={item.cartId} className="bg-[#FDEEF5] border border-[#F4B3D0] rounded-2xl p-4 space-y-2">
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <h4 className="font-body font-bold text-[#1a1a1a] text-sm">{item.name}</h4>
@@ -85,7 +85,7 @@ function CartItems({ items, updateItem, removeItem }) {
                 {item.selected_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_toppings.join(", ")}</p>}
                 {item.selected_choc_toppings?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Toppings: {item.selected_choc_toppings.join(", ")}</p>}
                 {item.selected_sauces?.length > 0 && <p className="text-xs text-[#6b7280] mt-0.5">Sauces: {item.selected_sauces.join(", ")}</p>}
-                {item.extras?.length > 0 && <p className="text-xs text-[#7C0116] mt-0.5">+ {item.extras.join(", ")}</p>}
+                {item.extras?.length > 0 && <p className="text-xs text-[#E61F3F] mt-0.5">+ {item.extras.join(", ")}</p>}
                 {item.special_instructions && <p className="text-xs text-[#6b7280] mt-0.5 italic">"{item.special_instructions}"</p>}
               </div>
               <button onClick={() => removeItem(item.cartId)} className="p-1 text-[#6b7280] hover:text-red-500 transition-colors shrink-0 ml-2 min-w-[32px] min-h-[32px] flex items-center justify-center">
@@ -97,25 +97,25 @@ function CartItems({ items, updateItem, removeItem }) {
                 <button onClick={() => {
                   if ((item.quantity || 1) <= 1) removeItem(item.cartId);
                   else updateItem(item.cartId, { quantity: (item.quantity || 1) - 1, item_total: ((item.base_price || 0) + extrasTotal) * ((item.quantity || 1) - 1) });
-                }} className="w-8 h-8 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors">
+                }} className="w-8 h-8 rounded-full bg-white border border-[#F4B3D0] flex items-center justify-center hover:bg-[#F8CCE1] transition-colors">
                   <Minus size={12} />
                 </button>
                 <span className="font-body font-bold text-sm w-5 text-center">{item.quantity || 1}</span>
                 <button onClick={() => {
                   const newQty = (item.quantity || 1) + 1;
                   updateItem(item.cartId, { quantity: newQty, item_total: ((item.base_price || 0) + extrasTotal) * newQty });
-                }} className="w-8 h-8 rounded-full bg-white border border-[#E0A4B0] flex items-center justify-center hover:bg-[#F6E3E7] transition-colors">
+                }} className="w-8 h-8 rounded-full bg-white border border-[#F4B3D0] flex items-center justify-center hover:bg-[#F8CCE1] transition-colors">
                   <Plus size={12} />
                 </button>
               </div>
-              <span className="font-body font-extrabold text-[#7C0116] text-sm">${lineTotal.toFixed(2)}</span>
+              <span className="font-body font-extrabold text-[#E61F3F] text-sm">${lineTotal.toFixed(2)}</span>
             </div>
           </div>
         );
       })}
       {items.length === 0 && (
         <div className="text-center py-12">
-          <ShoppingCart size={32} className="mx-auto mb-3 text-[#7C0116]/40" />
+          <ShoppingCart size={32} className="mx-auto mb-3 text-[#E61F3F]/40" />
           <p className="text-[#6b7280] font-body text-sm">Your cart is empty</p>
         </div>
       )}
@@ -126,15 +126,15 @@ function CartItems({ items, updateItem, removeItem }) {
 function CartFooter({ subtotal, items, onClose }) {
   if (items.length === 0) return null;
   return (
-    <div className="border-t border-[#F6E3E7] p-4 space-y-3 shrink-0">
+    <div className="border-t border-[#F8CCE1] p-4 space-y-3 shrink-0">
       <div className="flex items-center justify-between">
         <span className="font-body font-bold text-[#1a1a1a]">Subtotal</span>
-        <span className="font-body font-extrabold text-[#7C0116] text-lg">${subtotal.toFixed(2)}</span>
+        <span className="font-body font-extrabold text-[#E61F3F] text-lg">${subtotal.toFixed(2)}</span>
       </div>
       <Link
         to="/checkout"
         onClick={onClose}
-        className="block w-full bg-[#7C0116] text-white font-body font-bold text-sm py-4 rounded-full text-center leading-6 hover:bg-[#5C0110] transition-colors min-h-[52px] active:scale-95"
+        className="block w-full bg-[#E61F3F] text-white font-body font-bold text-sm py-4 rounded-full text-center leading-6 hover:bg-[#C4112F] transition-colors min-h-[52px] active:scale-95"
       >
         Checkout
       </Link>
