@@ -80,7 +80,7 @@ export default function ProductPreview() {
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="font-bubble text-[#1a1a1a] text-xl md:text-2xl mb-1">{card.name}</h3>
+                  <h3 className="font-bubble text-[#E61F3F] text-xl md:text-2xl mb-1">{card.name}</h3>
                   <p className="font-body text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
                 </div>
               </motion.div>
