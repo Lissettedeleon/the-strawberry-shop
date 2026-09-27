@@ -30,7 +30,7 @@ export default function Reviews() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            className="max-w-[280px] sm:max-w-xs mx-auto rounded-2xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-10 aspect-square">
+            className="max-w-[280px] sm:max-w-xs mx-auto rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden border border-[#E0A4B0] shadow-lg mb-10 aspect-square">
 
             <img
               src="/images/reviews-customer.jpg"
