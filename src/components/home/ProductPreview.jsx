@@ -12,12 +12,12 @@ const FALLBACK_CARDS = [
   { name: "Build Your Own Cup", desc: "Pick your base, toppings, and sauces — made exactly your way." },
 ];
 
-// Per-favorite look: card color, a short tag, and how far to zoom the photo
+// Per-favorite look: card colors and how far to zoom the photo
 // so the cups read at a similar size (the OG shot is framed much wider).
 const CARD_STYLES = {
-  og: { bg: "#F8CCE1", ink: "#1a1a1a", sub: "#6b4a52", tag: "Where it all started", tagBg: "#E61F3F", tagInk: "#fff", zoom: 1.45, tilt: "-rotate-6" },
-  dubai: { bg: "#E3EAB9", ink: "#1a1a1a", sub: "#4F5F10", tag: "Viral favorite", tagBg: "#4F5F10", tagInk: "#fff", zoom: 1.25, tilt: "rotate-6" },
-  "build your own cup": { bg: "#E61F3F", ink: "#fff", sub: "rgba(255,255,255,0.85)", tag: "Make it yours", tagBg: "#fff", tagInk: "#E61F3F", zoom: 1.05, tilt: "-rotate-3" },
+  og: { bg: "#F8CCE1", ink: "#1a1a1a", sub: "#6b4a52", zoom: 1.45 },
+  dubai: { bg: "#E3EAB9", ink: "#1a1a1a", sub: "#4F5F10", zoom: 1.25 },
+  "build your own cup": { bg: "#E61F3F", ink: "#fff", sub: "rgba(255,255,255,0.85)", zoom: 1.05 },
 };
 const DEFAULT_STYLE = CARD_STYLES.og;
 
@@ -61,17 +61,10 @@ export default function ProductPreview() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative shrink-0 w-[72%] sm:w-auto snap-center rounded-3xl p-5 md:p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                className="group relative shrink-0 w-[72%] sm:w-auto snap-center rounded-3xl p-5 pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 style={{ background: st.bg }}
               >
-                <span
-                  className="inline-block font-body font-bold text-[11px] md:text-xs uppercase tracking-wider rounded-full px-3 py-1 mb-4"
-                  style={{ background: st.tagBg, color: st.tagInk }}
-                >
-                  {st.tag}
-                </span>
-
-                <div className="relative w-[82%] mx-auto mb-5">
+                <div className="w-[82%] mx-auto mb-5">
                   <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
                     {card.image ? (
                       <img
@@ -87,14 +80,6 @@ export default function ProductPreview() {
                       </div>
                     )}
                   </div>
-                  {card.price != null && (
-                    <span
-                      className={`absolute -top-1 -right-2 md:-right-3 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-body font-extrabold text-sm md:text-base shadow-md ${st.tilt} group-hover:rotate-0 transition-transform duration-300`}
-                      style={{ background: st.tagBg, color: st.tagInk }}
-                    >
-                      ${card.price.toFixed(2)}
-                    </span>
-                  )}
                 </div>
 
                 <h3 className="font-bubble text-xl md:text-2xl mb-1.5" style={{ color: st.ink }}>{card.name}</h3>
