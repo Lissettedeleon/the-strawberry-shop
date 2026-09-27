@@ -1,5 +1,4 @@
-// Shared hours data + status logic, used by OpenClosedBadge, the Home
-// page hours strip, and the Hours page.
+// Shared hours data + status logic, used by the Visit Us page.
 
 export const WEEKLY_HOURS = [
   { day: 1, label: "Monday", open: 11, close: 20 },

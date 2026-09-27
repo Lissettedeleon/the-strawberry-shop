@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu as MenuIcon, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
-import OpenClosedBadge from "./OpenClosedBadge";
 import { SocialIconsRow } from "./SocialButtons";
 import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
@@ -142,9 +141,8 @@ export default function Navbar() {
               </MagneticButton>
             </div>
 
-            {/* Mobile: open badge + cart + hamburger */}
+            {/* Mobile: cart + hamburger */}
             <div className="md:hidden flex items-center gap-1">
-              <OpenClosedBadge />
               <CartButton />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
