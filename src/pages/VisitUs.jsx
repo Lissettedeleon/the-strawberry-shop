@@ -26,18 +26,6 @@ export default function VisitUs() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #7C0116 0%, #5C0110 100%)" }} className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg"
-          >
-            Liberty township, Ohio
-          </motion.h1>
-        </div>
-      </section>
-
       <section style={{ background: "#FBF1F3" }} className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Location picture + directions */}
