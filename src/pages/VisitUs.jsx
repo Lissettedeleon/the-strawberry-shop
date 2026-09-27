@@ -30,12 +30,18 @@ export default function VisitUs() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Location picture + directions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="rounded-2xl overflow-hidden border border-[#E0A4B0] h-72 shadow-sm bg-white flex items-center justify-center">
-              <div className="text-center p-8">
-                <MapPin size={48} className="mx-auto mb-3 text-[#7C0116]" />
-                <p className="font-body font-bold text-[#5C0110] text-xl mb-1">7100 Foundry Row</p>
-                <p className="font-body text-[#6b7280] text-sm">Liberty Township, OH 45069</p>
-              </div>
+            <div className="rounded-3xl overflow-hidden border border-[#E0A4B0] shadow-lg">
+              <img
+                src="/images/shop-location.jpg"
+                alt="The Strawberry Shop kiosk at Liberty Center, 7100 Foundry Row"
+                className="w-full h-auto"
+              />
+            </div>
+            <div className="text-center mt-5">
+              <p className="flex items-center justify-center gap-1.5 font-body font-bold text-[#5C0110] text-xl mb-1">
+                <MapPin size={20} className="text-[#7C0116]" /> 7100 Foundry Row
+              </p>
+              <p className="font-body text-[#6b7280] text-sm">Liberty Township, OH 45069</p>
             </div>
             <div className="flex justify-center mt-5">
               <a
