@@ -12,14 +12,11 @@ const FALLBACK_CARDS = [
   { name: "Build Your Own Cup", desc: "Pick your base, toppings, and sauces — made exactly your way." },
 ];
 
-// Per-favorite look: card colors and how far to zoom the photo
+// All favorites share the pistachio-green card; only the photo zoom differs
 // so the cups read at a similar size (the OG shot is framed much wider).
-const CARD_STYLES = {
-  og: { bg: "#F8CCE1", ink: "#1a1a1a", sub: "#6b4a52", zoom: 1.45 },
-  dubai: { bg: "#E3EAB9", ink: "#1a1a1a", sub: "#4F5F10", zoom: 1.25 },
-  "build your own cup": { bg: "#E61F3F", ink: "#fff", sub: "rgba(255,255,255,0.85)", zoom: 1.05 },
-};
-const DEFAULT_STYLE = CARD_STYLES.og;
+const CARD_BG = "#E3EAB9";
+const CARD_TEXT = "#4F5F10";
+const PHOTO_ZOOM = { og: 1.45, dubai: 1.25, "build your own cup": 1.05 };
 
 export default function ProductPreview() {
   const [items, setItems] = useState([]);
@@ -53,7 +50,7 @@ export default function ProductPreview() {
         {/* Swipeable row on phones, three across from tablet up */}
         <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2 sm:pb-0 scrollbar-hide">
           {cards.map((card, i) => {
-            const st = CARD_STYLES[card.name?.toLowerCase()] || DEFAULT_STYLE;
+            const zoom = PHOTO_ZOOM[card.name?.toLowerCase()] || 1;
             return (
               <motion.div
                 key={card.name}
@@ -62,7 +59,7 @@ export default function ProductPreview() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="group relative shrink-0 w-[72%] sm:w-auto snap-center rounded-3xl p-5 pt-6 md:p-6 md:pt-8 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                style={{ background: st.bg }}
+                style={{ background: CARD_BG }}
               >
                 <div className="w-[82%] mx-auto mb-5">
                   <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
@@ -72,7 +69,7 @@ export default function ProductPreview() {
                         alt={card.name}
                         loading="lazy"
                         className="w-full h-full object-cover"
-                        style={{ transform: `scale(${st.zoom})` }}
+                        style={{ transform: `scale(${zoom})` }}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
@@ -82,8 +79,8 @@ export default function ProductPreview() {
                   </div>
                 </div>
 
-                <h3 className="font-bubble text-xl md:text-2xl mb-1.5" style={{ color: st.ink }}>{card.name}</h3>
-                <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: st.sub }}>{card.desc}</p>
+                <h3 className="font-bubble text-[#1a1a1a] text-xl md:text-2xl mb-1.5">{card.name}</h3>
+                <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: CARD_TEXT }}>{card.desc}</p>
               </motion.div>
             );
           })}
