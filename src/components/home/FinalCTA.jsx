@@ -2,7 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 
-const CTA_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/b11b80d0c_HEIFImage.jpeg";
+// Background is pre-cut to transparent in the file itself, so the cup sits
+// on the red section the same way in every browser.
+const CTA_IMAGE = "/images/cta-cup.webp";
 import { useCart } from "@/lib/CartContext";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -27,29 +29,10 @@ export default function FinalCTA() {
           transition={{ duration: 0.6 }}
           className="max-w-[280px] sm:max-w-sm mx-auto mb-8"
         >
-          <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
-            <filter id="cta-dewhite" x="-5%" y="-5%" width="110%" height="110%">
-              {/* Keep RGB untouched; derive alpha from how close to pure white
-                  each pixel is (all three channels near 1), so off-white
-                  content like whipped cream stays opaque and only the flat
-                  white backdrop keys out. */}
-              <feColorMatrix
-                in="SourceGraphic"
-                type="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 0 3"
-                result="alphaRaw"
-              />
-              <feComponentTransfer in="alphaRaw" result="alphaKey">
-                <feFuncA type="gamma" amplitude="1" exponent="0.5" offset="0" />
-              </feComponentTransfer>
-              <feComposite in="SourceGraphic" in2="alphaKey" operator="in" />
-            </filter>
-          </svg>
           <img
             src={CTA_IMAGE}
             alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
             className="w-full h-auto"
-            style={{ filter: "url(#cta-dewhite)" }}
           />
         </motion.div>
 
