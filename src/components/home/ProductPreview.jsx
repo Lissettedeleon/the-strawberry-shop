@@ -12,6 +12,15 @@ const FALLBACK_CARDS = [
   { name: "Build Your Own Cup", desc: "Pick your base, toppings, and sauces — made exactly your way." },
 ];
 
+// Per-favorite look: card color, a short tag, and how far to zoom the photo
+// so the cups read at a similar size (the OG shot is framed much wider).
+const CARD_STYLES = {
+  og: { bg: "#F8CCE1", ink: "#1a1a1a", sub: "#6b4a52", tag: "Where it all started", tagBg: "#E61F3F", tagInk: "#fff", zoom: 1.45, tilt: "-rotate-6" },
+  dubai: { bg: "#E3EAB9", ink: "#1a1a1a", sub: "#4F5F10", tag: "Viral favorite", tagBg: "#4F5F10", tagInk: "#fff", zoom: 1.25, tilt: "rotate-6" },
+  "build your own cup": { bg: "#E61F3F", ink: "#fff", sub: "rgba(255,255,255,0.85)", tag: "Make it yours", tagBg: "#fff", tagInk: "#E61F3F", zoom: 1.05, tilt: "-rotate-3" },
+};
+const DEFAULT_STYLE = CARD_STYLES.og;
+
 export default function ProductPreview() {
   const [items, setItems] = useState([]);
 
@@ -41,37 +50,58 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8">
-          {cards.map((card, i) => (
-            <motion.div
-              key={card.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group text-center sm:text-left"
-            >
-              <div className="relative aspect-square overflow-hidden rounded-3xl bg-[#F8CCE1] shadow-sm mb-2 sm:mb-4">
-                {card.image ? (
-                  <img
-                    src={card.image}
-                    alt={card.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <ImageOff size={32} className="text-[#E61F3F]/40" />
+        {/* Swipeable row on phones, three across from tablet up */}
+        <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex sm:grid sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2 sm:pb-0 scrollbar-hide">
+          {cards.map((card, i) => {
+            const st = CARD_STYLES[card.name?.toLowerCase()] || DEFAULT_STYLE;
+            return (
+              <motion.div
+                key={card.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group relative shrink-0 w-[72%] sm:w-auto snap-center rounded-3xl p-5 md:p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                style={{ background: st.bg }}
+              >
+                <span
+                  className="inline-block font-body font-bold text-[11px] md:text-xs uppercase tracking-wider rounded-full px-3 py-1 mb-4"
+                  style={{ background: st.tagBg, color: st.tagInk }}
+                >
+                  {st.tag}
+                </span>
+
+                <div className="relative w-[82%] mx-auto mb-5">
+                  <div className="aspect-square rounded-full overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] group-hover:rotate-3 transition-transform duration-500 ease-out">
+                    {card.image ? (
+                      <img
+                        src={card.image}
+                        alt={card.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                        style={{ transform: `scale(${st.zoom})` }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <ImageOff size={32} className="text-[#E61F3F]/40" />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              <h3 className="font-bubble text-[#1a1a1a] text-sm sm:text-lg md:text-xl mb-0.5 sm:mb-1.5">{card.name}</h3>
-              <p className="text-[#6b7280] font-body text-[11px] sm:text-sm leading-snug sm:leading-relaxed mb-1 sm:mb-2 line-clamp-2">{card.desc}</p>
-              {card.price != null && (
-                <p className="text-[#E61F3F] font-body font-extrabold text-xs sm:text-base">${card.price.toFixed(2)}</p>
-              )}
-            </motion.div>
-          ))}
+                  {card.price != null && (
+                    <span
+                      className={`absolute -top-1 -right-2 md:-right-3 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center font-body font-extrabold text-sm md:text-base shadow-md ${st.tilt} group-hover:rotate-0 transition-transform duration-300`}
+                      style={{ background: st.tagBg, color: st.tagInk }}
+                    >
+                      ${card.price.toFixed(2)}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-bubble text-xl md:text-2xl mb-1.5" style={{ color: st.ink }}>{card.name}</h3>
+                <p className="font-body text-sm leading-relaxed line-clamp-2" style={{ color: st.sub }}>{card.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="text-center mt-10 md:mt-14">
