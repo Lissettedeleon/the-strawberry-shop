@@ -15,7 +15,7 @@ const FALLBACK_CARDS = [
 // All favorites share the pistachio-green card; only the photo zoom differs
 // so the cups read at a similar size (the OG shot is framed much wider).
 const CARD_BG = "#E3EAB9";
-const CARD_TEXT = "#4F5F10";
+const CARD_TEXT = "#C4112F"; // deeper brand red so small text stays readable on the green
 const PHOTO_ZOOM = { og: 1.45, dubai: 1.45, "build your own cup": 1.05 };
 
 export default function ProductPreview() {
@@ -42,7 +42,7 @@ export default function ProductPreview() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-12">
           <h2 className="font-bubble text-[#E61F3F] text-3xl md:text-4xl">Favorites</h2>
-          <p className="text-[#6b7280] font-body text-sm md:text-base mt-3 max-w-xl mx-auto">
+          <p className="text-[#E61F3F] font-body text-sm md:text-base mt-3 max-w-xl mx-auto">
             The ones everyone keeps coming back for
           </p>
         </div>
