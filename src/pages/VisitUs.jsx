@@ -73,16 +73,8 @@ export default function VisitUs() {
                 </div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Special hours */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            className="bg-white border border-[#E0A4B0] rounded-2xl p-6 shadow-sm"
-          >
-            <h3 className="font-body font-bold text-[#1a1a1a] text-base mb-3">Special hours</h3>
+            <div className="border-t border-[#F6E3E7] my-5" />
+            <h4 className="font-body font-bold text-[#1a1a1a] text-sm mb-3">Holiday hours</h4>
             <div className="space-y-2">
               {getUpcomingHolidays().map(h => {
                 const time = formatRange(h);
