@@ -38,10 +38,12 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
           </div>
         )}
 
-        {/* To/From text box, kept inside the red card; text-left overrides the
+        {/* To/From text box. It must fully cover the To/From box printed on the
+            card image (top edge at ~56%), so it's pinned top and bottom rather
+            than sized to its text. text-left overrides the
             page's centered text so the labels start at the box edge */}
         <div
-          className="absolute bottom-[6%] right-[10%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%] text-left"
+          className="absolute top-[54%] bottom-[6%] right-[9%] rounded-2xl px-3 py-2.5 w-[39%] sm:w-[41%] text-left flex flex-col justify-center"
           style={{ background: "#FCE4E6" }}
         >
           <ToFromRow label="TO" value={recipientName} />
