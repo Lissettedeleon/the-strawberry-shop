@@ -30,10 +30,10 @@ export default function Reviews() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            className="max-w-[280px] sm:max-w-xs mx-auto rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden border border-[#E0A4B0] shadow-lg mb-10 aspect-square">
+            className="max-w-[280px] sm:max-w-xs mx-auto rounded-3xl overflow-hidden border border-[#E0A4B0] shadow-lg mb-10 aspect-[4/5]">
 
             <img
-              src="/images/reviews-customer.jpg"
+              src="https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/1325aa9bf_IMG_0916.jpeg"
               alt="Customer holding a Strawberry Shop dessert cup"
               className="w-full h-full object-cover"
             />

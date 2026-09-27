@@ -51,7 +51,7 @@ export default function ProductPreview() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group text-center sm:text-left"
             >
-              <div className="relative aspect-square overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-[#F6E3E7] shadow-sm mb-2 sm:mb-4">
+              <div className="relative aspect-square overflow-hidden rounded-3xl bg-[#F6E3E7] shadow-sm mb-2 sm:mb-4">
                 {card.image ? (
                   <img
                     src={card.image}

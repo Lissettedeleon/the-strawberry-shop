@@ -46,7 +46,7 @@ export default function About() {
               transition={{ duration: 0.6 }}
               className="flex justify-center"
             >
-              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#E0A4B0] rounded-[1.75rem] sm:rounded-[2rem] shadow-sm overflow-hidden">
+              <div className="w-full max-w-sm aspect-[4/3] bg-white border border-[#E0A4B0] rounded-3xl shadow-sm overflow-hidden">
                 <video
                   ref={videoRef}
                   src={ABOUT_VIDEO}
