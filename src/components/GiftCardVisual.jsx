@@ -38,9 +38,10 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
           </div>
         )}
 
-        {/* To/From text box overlaid on bottom-right */}
+        {/* To/From text box, kept inside the red card; text-left overrides the
+            page's centered text so the labels start at the box edge */}
         <div
-          className="absolute bottom-[6%] right-[3%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
+          className="absolute bottom-[6%] right-[10%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%] text-left"
           style={{ background: "#FCE4E6" }}
         >
           <ToFromRow label="TO" value={recipientName} />
