@@ -14,32 +14,39 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
       className={`relative w-full max-w-md mx-auto rounded-[28px] overflow-hidden shadow-2xl ${className}`}
-      style={{ aspectRatio: "5 / 3" }}
+      style={{ aspectRatio: "3 / 2" }}
     >
-      {/* Exact reference image */}
-      <img
-        src={CARD_IMAGE}
-        alt="The Strawberry Shop gift card"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      {/* The reference image's white frame is thicker on the left/right than
+          on the top/bottom. Render the card at its original 5:3 size inside a
+          narrower 3:2 frame so the sides are trimmed and the white border is
+          even all the way around. Overlays stay positioned against the 5:3
+          card, so they line up exactly as before. */}
+      <div className="absolute inset-y-0 left-[-5.5556%] w-[111.1111%]">
+        {/* Exact reference image */}
+        <img
+          src={CARD_IMAGE}
+          alt="The Strawberry Shop gift card"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-      {/* Amount — centered on the thin line between "GIFT CARD" and the heart */}
-      {amount > 0 && (
-        <div className="absolute bottom-[16%] left-[36%] sm:left-[34%]">
-          <span className="font-bubble text-white text-sm sm:text-base drop-shadow-md">
-            ${amount.toFixed(0)}
-          </span>
+        {/* Amount — centered on the thin line between "GIFT CARD" and the heart */}
+        {amount > 0 && (
+          <div className="absolute bottom-[16%] left-[36%] sm:left-[34%]">
+            <span className="font-bubble text-white text-sm sm:text-base drop-shadow-md">
+              ${amount.toFixed(0)}
+            </span>
+          </div>
+        )}
+
+        {/* To/From text box overlaid on bottom-right */}
+        <div
+          className="absolute bottom-[6%] right-[3%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
+          style={{ background: "#FCE4E6" }}
+        >
+          <ToFromRow label="TO" value={recipientName} />
+          <div className="h-1.5" />
+          <ToFromRow label="FROM" value={senderName} />
         </div>
-      )}
-
-      {/* To/From text box overlaid on bottom-right */}
-      <div
-        className="absolute bottom-[6%] right-[3%] rounded-2xl px-3 py-2.5 w-[38%] sm:w-[40%]"
-        style={{ background: "#FCE4E6" }}
-      >
-        <ToFromRow label="TO" value={recipientName} />
-        <div className="h-1.5" />
-        <ToFromRow label="FROM" value={senderName} />
       </div>
     </motion.div>
   );
