@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import { SocialIconsRow } from "./SocialButtons";
 import { useCart } from "@/lib/CartContext";
+import { usesToastLink } from "@/lib/ordering";
 import { base44 } from "@/api/base44Client";
 import { SHEET_TRANSITION } from "@/lib/motion";
 import MagneticButton from "./MagneticButton";
@@ -14,6 +15,7 @@ const DEFAULT_ANNOUNCEMENT =
 
 function CartButton({ className = "", iconSize = 20 }) {
   const { itemCount, setCartOpen } = useCart();
+  if (usesToastLink) return null;
   return (
     <button
       onClick={() => setCartOpen(true)}
