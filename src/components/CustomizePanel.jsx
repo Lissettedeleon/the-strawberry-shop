@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import { usesToastLink, TOAST_ORDER_URL } from "@/lib/ordering";
 import {
   ITEM_CONFIGS,
   STANDARD_TOPPINGS,
@@ -168,16 +167,12 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
             <button onClick={() => setQuantity(quantity + 1)} className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"><Plus size={14} /></button>
           </div>
         </div>
-        {usesToastLink ? (
-          <OrderOnToastButton />
-        ) : (
-          <button
-            onClick={() => onAddSimple(item, quantity)}
-            className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm"
-          >
-            Add to Cart — ${(item.price * quantity).toFixed(2)}
-          </button>
-        )}
+        <button
+          onClick={() => onAddSimple(item, quantity)}
+          className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm"
+        >
+          Add to Cart — ${(item.price * quantity).toFixed(2)}
+        </button>
       </div>
     );
   }
@@ -299,30 +294,13 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
       </div>
 
       {/* Add to Cart */}
-      {usesToastLink ? (
-        <OrderOnToastButton />
-      ) : (
-        <button
-          onClick={handleAddToCart}
-          disabled={!canAddToCart()}
-          className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm disabled:opacity-50"
-        >
-          Add to Cart — ${itemTotal.toFixed(2)}
-        </button>
-      )}
+      <button
+        onClick={handleAddToCart}
+        disabled={!canAddToCart()}
+        className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm disabled:opacity-50"
+      >
+        Add to Cart — ${itemTotal.toFixed(2)}
+      </button>
     </div>
-  );
-}
-
-function OrderOnToastButton() {
-  return (
-    <a
-      href={TOAST_ORDER_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full text-center bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm"
-    >
-      Order Online
-    </a>
   );
 }

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight, Globe } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "./DeliveryBadges";
 import { SHEET_TRANSITION, EASE_OUT_STRONG } from "@/lib/motion";
-import { usesToastLink, TOAST_ORDER_URL } from "@/lib/ordering";
 
 export default function OrderChoiceModal({ open, onClose }) {
   return (
@@ -56,39 +55,20 @@ export default function OrderChoiceModal({ open, onClose }) {
 function OrderOptions({ onClose }) {
   return (
     <div className="space-y-3">
-      {usesToastLink ? (
-        <a
-          href={TOAST_ORDER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onClose}
-          className="block bg-[#E61F3F] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#C4112F] transition-colors active:scale-95"
-        >
-          <span className="flex items-center gap-4 w-full h-full">
-            <Globe size={22} className="shrink-0" />
-            <span className="flex-1">
-              <span className="block font-body font-bold text-base leading-tight">Order Online</span>
-              <span className="block font-body text-white/80 text-xs mt-0.5">Pickup · order & pay online</span>
-            </span>
-            <ChevronRight size={18} className="text-white/80 shrink-0" />
+      <Link
+        to="/menu"
+        onClick={onClose}
+        className="block bg-[#E61F3F] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#C4112F] transition-colors active:scale-95"
+      >
+        <span className="flex items-center gap-4 w-full h-full">
+          <Globe size={22} className="shrink-0" />
+          <span className="flex-1">
+            <span className="block font-body font-bold text-base leading-tight">Order Online</span>
+            <span className="block font-body text-white/80 text-xs mt-0.5">Pickup & Delivery</span>
           </span>
-        </a>
-      ) : (
-        <Link
-          to="/menu"
-          onClick={onClose}
-          className="block bg-[#E61F3F] text-white rounded-2xl px-5 py-4 min-h-[64px] hover:bg-[#C4112F] transition-colors active:scale-95"
-        >
-          <span className="flex items-center gap-4 w-full h-full">
-            <Globe size={22} className="shrink-0" />
-            <span className="flex-1">
-              <span className="block font-body font-bold text-base leading-tight">Order Online</span>
-              <span className="block font-body text-white/80 text-xs mt-0.5">Pickup & Delivery</span>
-            </span>
-            <ChevronRight size={18} className="text-white/80 shrink-0" />
-          </span>
-        </Link>
-      )}
+          <ChevronRight size={18} className="text-white/80 shrink-0" />
+        </span>
+      </Link>
 
       <UberEatsBadge className="!flex w-full justify-center py-4" />
       <DoorDashBadge className="!flex w-full justify-center py-4" />
