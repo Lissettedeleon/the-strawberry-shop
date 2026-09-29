@@ -14,29 +14,34 @@ export default function Hero() {
   }, []);
 
   return (
-    // Full-screen pour: the video runs edge to edge (most of the screen on
-    // phones) with nothing laid over it; the headline sits just below it.
-    <section className="relative overflow-hidden" style={{ background: "#FDEEF5" }}>
-      <motion.video
-        ref={videoRef}
-        src={HERO_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        className="block w-full h-[72svh] min-h-[420px] max-h-[760px] object-cover object-[center_35%]"
-      />
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="w-full h-[320px] sm:h-[600px] flex items-center justify-center pt-6 sm:pt-8"
+      >
+        <video
+          ref={videoRef}
+          src={HERO_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="h-full w-auto max-w-full object-contain rounded-3xl shadow-[0_16px_44px_rgba(60,0,10,0.35)]"
+        />
+      </motion.div>
 
-      <div className="max-w-3xl mx-auto px-5 sm:px-8 pt-8 pb-12 md:pt-12 md:pb-16 text-center">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="font-bubble text-[#E61F3F] text-4xl sm:text-5xl md:text-6xl leading-[1.05] mb-3"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="font-bubble text-white text-3xl sm:text-4xl md:text-5xl leading-[1.05] mb-4 drop-shadow-lg"
         >
           life is sweeter with strawberries
         </motion.h1>
@@ -44,14 +49,14 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="text-[#C4112F]/80 font-body text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="text-white/80 font-body text-base md:text-lg max-w-xl mx-auto leading-relaxed"
         >
           Fresh strawberries, house made creams, premium chocolates, and delicious toppings made fresh daily
         </motion.p>
       </div>
 
-      <WaveDivider from="#FDEEF5" to="white" />
+      <WaveDivider from="transparent" to="white" />
     </section>
   );
 }
