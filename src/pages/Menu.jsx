@@ -3,18 +3,24 @@ import { base44 } from "@/api/base44Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandedLoader from "@/components/BrandedLoader";
-import MenuFolder from "@/components/MenuFolder";
+import MenuFolder, { BuildYourOwnFeature } from "@/components/MenuFolder";
 import { motion } from "framer-motion";
 import { SearchX, Store, Truck, Globe } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "@/components/DeliveryBadges";
 import { useCart } from "@/lib/CartContext";
 
+// Display order. Menu items in Base44 use "Our Berry Best Cups" and
+// "Others"; the older names are kept in case any items still use them.
+// Any category not listed here is shown after these, so no item is hidden.
 const CATEGORIES = [
 "Specials",
+"Our Berry Best Cups",
 "Strawberries and Cream",
 "Chocolate Covered Strawberries",
-"Build Your Own Cup",
+"Others",
 "More to Enjoy"];
+
+const BUILD_YOUR_OWN = "Build Your Own Cup";
 
 
 const DELIVERY_FEE = "$3.99";
@@ -34,11 +40,15 @@ export default function Menu() {
     finally(() => setLoading(false));
   }, []);
 
-  const groupedByCategory = CATEGORIES.reduce((acc, cat) => {
+  const extraCategories = [...new Set(items.map((i) => i.category))].filter(
+    (c) => c && c !== BUILD_YOUR_OWN && !CATEGORIES.includes(c)
+  );
+  const groupedByCategory = [...CATEGORIES, ...extraCategories].reduce((acc, cat) => {
     const catItems = items.filter((i) => i.category === cat);
     if (catItems.length > 0) acc[cat] = catItems;
     return acc;
   }, {});
+  const buildYourOwnItems = items.filter((i) => i.category === BUILD_YOUR_OWN);
 
   return (
     <div
@@ -115,20 +125,27 @@ export default function Menu() {
         }
       </div>
 
-      {/* Menu folders */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-8 lg:px-14 pb-24 flex flex-col gap-10">
+      {/* Menu: every category in its own white section, Build Your Own last */}
+      <div style={{ backgroundColor: "#FDEEF5" }}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 flex flex-col gap-6 sm:gap-8">
         {loading ?
         <BrandedLoader text="whipping up the menu..." /> :
-        Object.keys(groupedByCategory).length === 0 ?
+        Object.keys(groupedByCategory).length === 0 && buildYourOwnItems.length === 0 ?
         <div className="text-center text-[#6b4a52] font-body font-bold py-16">
             <SearchX size={40} className="mx-auto mb-3 text-[#E61F3F]/50" />
             <p>No menu items yet. Check back soon!</p>
           </div> :
 
-        Object.entries(groupedByCategory).map(([cat, catItems]) =>
-        <MenuFolder key={cat} category={cat} items={catItems} />
-        )
+        <>
+            {Object.entries(groupedByCategory).map(([cat, catItems]) =>
+          <MenuFolder key={cat} category={cat} items={catItems} />
+          )}
+            {buildYourOwnItems.map((item) =>
+          <BuildYourOwnFeature key={item.id} item={item} />
+          )}
+          </>
         }
+      </div>
       </div>
 
       <Footer />
