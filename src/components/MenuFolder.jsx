@@ -3,15 +3,19 @@ import MenuFolderRow, { useItemModal, ItemPhoto } from "./MenuFolderRow";
 
 export default function MenuFolder({ category, items }) {
   return (
-    <section
-      className="bg-white rounded-3xl p-4 sm:p-6"
-      style={{ boxShadow: "0 14px 30px -18px rgba(44,35,37,0.28), 0 2px 6px rgba(44,35,37,0.06)" }}
-    >
-      <h2 className="font-bubble text-[#E61F3F] text-2xl sm:text-3xl mb-4 px-1">{category}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-        {items.map((item) => (
-          <MenuFolderRow key={item.id} item={item} />
-        ))}
+    <section className="relative">
+      <h2 className="font-bubble inline-flex items-center bg-[#E61F3F] text-white text-base sm:text-lg px-5 py-2.5 rounded-t-2xl ml-6 -mb-px relative z-10">
+        {category.toLowerCase()}
+      </h2>
+      <div
+        className="bg-white rounded-[20px_20px_26px_26px] p-4 sm:p-6"
+        style={{ boxShadow: "0 14px 30px -18px rgba(44,35,37,0.28), 0 2px 6px rgba(44,35,37,0.06)" }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+          {items.map((item) => (
+            <MenuFolderRow key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   );

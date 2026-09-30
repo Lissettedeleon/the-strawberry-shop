@@ -49,7 +49,7 @@ export function ItemPhoto({ item, className = "" }) {
   // white edges are trimmed, never the dessert.
   const [wide, setWide] = useState(false);
   return (
-    <div className={`rounded-2xl shrink-0 overflow-hidden flex items-center justify-center ${item.image_url ? "bg-white" : "bg-[#FDEEF5]"} ${className}`}>
+    <div className={`rounded-2xl shrink-0 overflow-hidden flex items-center justify-center bg-[#F8CCE1] ${className}`}>
       {item.image_url ? (
         <img
           src={item.image_url}
@@ -68,7 +68,7 @@ export function ItemPhoto({ item, className = "" }) {
 
 export function Price({ value }) {
   return (
-    <span className="text-[#E61F3F] font-body font-extrabold text-base sm:text-lg leading-snug whitespace-nowrap shrink-0">
+    <span className="text-[#E61F3F] font-body font-extrabold text-[13px] sm:text-base whitespace-nowrap bg-[#F8CCE1] px-2.5 sm:px-3 py-1 rounded-full shrink-0">
       ${value?.toFixed(2)}
     </span>
   );
@@ -82,12 +82,12 @@ export default function MenuFolderRow({ item }) {
       <button
         type="button"
         onClick={openModal}
-        className="w-full h-full text-left flex items-center gap-3.5 sm:gap-5 p-3 sm:p-4 bg-white border border-[#F6DCE6] rounded-2xl hover:border-[#F4B3D0] hover:shadow-md transition-all"
+        className="w-full h-full text-left flex items-center gap-3 sm:gap-5 p-3 sm:p-4 bg-white border border-[#F8CCE1] rounded-2xl hover:bg-[#F8CCE1]/40 transition-colors"
       >
-        <ItemPhoto item={item} className="w-28 h-28 sm:w-36 sm:h-36" />
+        <ItemPhoto item={item} className="w-20 h-20 min-[380px]:w-24 min-[380px]:h-24 sm:w-36 sm:h-36" />
         <div className="flex-1 min-w-0 pt-0.5">
-          <div className="flex items-start justify-between gap-3">
-            <h4 className="font-bubble text-[17px] sm:text-xl leading-snug text-[#2c2325] break-words min-w-0">{item.name}</h4>
+          <div className="flex max-[379px]:flex-wrap items-start justify-between gap-x-2 gap-y-1 sm:gap-3">
+            <h4 className="font-bubble text-base min-[380px]:text-[17px] sm:text-xl leading-snug text-[#2c2325] break-words min-w-0">{item.name}</h4>
             <Price value={item.price} />
           </div>
           {item.description && (

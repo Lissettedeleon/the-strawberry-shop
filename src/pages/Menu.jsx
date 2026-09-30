@@ -126,8 +126,7 @@ export default function Menu() {
       </div>
 
       {/* Menu: every category in its own white section, Build Your Own last */}
-      <div style={{ backgroundColor: "#FDEEF5" }}>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 flex flex-col gap-6 sm:gap-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-24 flex flex-col gap-8 sm:gap-10">
         {loading ?
         <BrandedLoader text="whipping up the menu..." /> :
         Object.keys(groupedByCategory).length === 0 && buildYourOwnItems.length === 0 ?
@@ -145,7 +144,6 @@ export default function Menu() {
           )}
           </>
         }
-      </div>
       </div>
 
       <Footer />
