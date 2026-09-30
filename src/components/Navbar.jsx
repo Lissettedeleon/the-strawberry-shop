@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu as MenuIcon, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
-import { SocialIconsRow } from "./SocialButtons";
 import { useCart } from "@/lib/CartContext";
 import { base44 } from "@/api/base44Client";
 import { SHEET_TRANSITION } from "@/lib/motion";

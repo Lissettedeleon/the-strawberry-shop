@@ -109,26 +109,6 @@
   height: 60px;
 }
 
-/* Cute animations */
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-}
-
-.animate-wiggle {
-  animation: wiggle 0.5s ease-in-out infinite;
-}
-
-@keyframes heroLogoBounce {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
-
-@keyframes heroLogoFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
-
 .font-bubble {
   font-family: 'Fredoka', sans-serif;
   font-weight: 600;
@@ -182,15 +162,6 @@ button:not(:disabled):active,
 a[class*="rounded-full"]:active,
 a[class*="rounded-2xl"]:active {
   transform: scale(0.95);
-}
-
-/* Smooth scrollbar for webkit */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReviewCarousel from "@/components/ReviewCarousel";
-import { SocialIconsRow, GoogleReviewButton } from "@/components/SocialButtons";
+import { GoogleReviewButton } from "@/components/SocialButtons";
 
 
 export default function Reviews() {
