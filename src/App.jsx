@@ -9,7 +9,6 @@ import ScrollToTop from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BrandedLoader from './components/BrandedLoader';
 import AdminRoute from '@/components/AdminRoute';
-import MobileOrderBar from '@/components/MobileOrderBar';
 import { EASE_OUT_STRONG } from '@/lib/motion';
 
 import Home from '@/pages/Home';
@@ -75,7 +74,6 @@ const GlobalOverlays = () => {
   return (
     <>
       <CartDrawer />
-      <MobileOrderBar />
       <OrderChoiceModal open={orderChoiceOpen} onClose={() => setOrderChoiceOpen(false)} />
       <AppDownloadPopup />
     </>
