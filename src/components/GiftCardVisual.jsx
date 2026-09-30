@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
 
 const CARD_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/ea78651e4_42414B76-286D-4573-A6F0-C3431FA0BA1D.png";
 
@@ -8,20 +8,35 @@ const CARD_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd837
  * To/From text box and amount overlaid on top.
  */
 export default function GiftCardVisual({ amount, recipientName, senderName, className = "" }) {
+  // Flip the card once whenever the amount changes or a name is first filled in.
+  const controls = useAnimationControls();
+  const reduce = useReducedMotion();
+  const key = `${amount}|${!!recipientName}|${!!senderName}`;
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    if (reduce) return;
+    controls.set({ rotateY: 0 });
+    controls.start({ rotateY: 360, transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } });
+  }, [key]);
+
   return (
+    <div style={{ perspective: 1200 }}>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={controls}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ delay: 0.1 }}
-      className={`relative w-full max-w-md mx-auto rounded-[28px] overflow-hidden ${className}`}
-      style={{ aspectRatio: "3 / 2" }}
+      className={`gift-shine relative w-full max-w-md mx-auto rounded-2xl overflow-hidden ${className}`}
+      style={{ aspectRatio: "1303 / 845" }}
     >
-      {/* The reference image's white frame is thicker on the left/right than
-          on the top/bottom. Render the card at its original 5:3 size inside a
-          narrower 3:2 frame so the sides are trimmed and the white border is
-          even all the way around. Overlays stay positioned against the 5:3
-          card, so they line up exactly as before. */}
-      <div className="absolute inset-y-0 left-[-5.5556%] w-[111.1111%]">
+      {/* The card image has a white frame around the red card (red spans
+          x 114-1417, y 83-928 of the 1535x1024 image). Size the frame to the
+          red card only and position the full image so the white frame falls
+          outside and gets clipped. Overlays stay positioned against the full
+          image, so they line up exactly as before. */}
+      <div className="absolute left-[-8.749%] top-[-9.822%] w-[117.805%] h-[121.183%]">
         {/* Exact reference image */}
         <img
           src={CARD_IMAGE}
@@ -31,7 +46,7 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
 
         {/* Amount — centered on the thin line between "GIFT CARD" and the heart */}
         {amount > 0 && (
-          <div className="absolute bottom-[16%] left-[36%] sm:left-[34%]">
+          <div className="absolute bottom-[19.4%] left-[36%] sm:left-[34%]">
             <span className="font-bubble text-white text-sm sm:text-base drop-shadow-md">
               ${amount.toFixed(0)}
             </span>
@@ -39,11 +54,11 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
         )}
 
         {/* To/From text box. It must fully cover the To/From box printed on the
-            card image (top edge at ~56%), so it's pinned top and bottom rather
+            card image (top edge at ~55% of the image), so it's pinned top and bottom rather
             than sized to its text. text-left overrides the
             page's centered text so the labels start at the box edge */}
         <div
-          className="absolute top-[54%] bottom-[6%] right-[9%] rounded-2xl px-3 py-2.5 w-[39%] sm:w-[41%] text-left flex flex-col justify-center"
+          className="absolute top-[53.6%] bottom-[10.4%] right-[9%] rounded-2xl px-3 py-2.5 w-[39%] sm:w-[41%] text-left flex flex-col justify-center"
           style={{ background: "#FCE4E6" }}
         >
           <ToFromRow label="TO" value={recipientName} />
@@ -52,6 +67,7 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
         </div>
       </div>
     </motion.div>
+    </div>
   );
 }
 
