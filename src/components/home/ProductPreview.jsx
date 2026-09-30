@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ShoppingBag, ImageOff } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
@@ -47,36 +46,22 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        {/* Phones: the cards glide slowly sideways in a loop (paused while
-            touched). The track holds two copies, each card spaced with a right
-            margin (not gap) so each copy is exactly half the track and the
-            -50% loop is seamless. */}
-        <div className="sm:hidden -mx-4 overflow-hidden fav-marquee">
+        {/* The cards glide slowly sideways in a loop (paused on hover or
+            touch). On computers exactly three cards fit in view at a time.
+            The track holds four copies, each card spaced with a right margin
+            (not gap), so half the track is exactly two copies and the -50%
+            loop is seamless. */}
+        <div className="-mx-4 sm:mx-0 overflow-hidden fav-marquee">
           <div className="fav-marquee-track flex w-max">
-            {[...cards, ...cards].map((card, i) => (
+            {[...cards, ...cards, ...cards, ...cards].map((card, i) => (
               <FavoriteCard
                 key={`${card.name}-${i}`}
                 card={card}
-                className="w-[55vw] shrink-0 mr-3"
+                className="w-[55vw] sm:w-[calc((100vw-7.5rem)/3)] lg:w-[min(21.33rem,calc((100vw-8.5rem)/3))] shrink-0 mr-3 sm:mr-6"
                 aria-hidden={i >= cards.length ? "true" : undefined}
               />
             ))}
           </div>
-        </div>
-
-        {/* Tablet and up: three across */}
-        <div className="hidden sm:grid grid-cols-3 gap-6 md:gap-8">
-          {cards.map((card, i) => (
-            <motion.div
-              key={card.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <FavoriteCard card={card} className="h-full" />
-            </motion.div>
-          ))}
         </div>
 
         <div className="text-center mt-10 md:mt-14">
