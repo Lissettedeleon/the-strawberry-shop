@@ -31,7 +31,13 @@ export default function Checkout() {
     try {
       // NOTE: No live payment processing yet — orders are recorded for pickup only.
       // This will connect to Toast Payments once that POS integration is approved and live.
-      const orderNumber = "ORD-" + Date.now().toString(36).toUpperCase();
+      // Cryptographically random so the order number in the confirmation URL
+      // can't be brute-forced (it's the proof-of-ownership for getOrderReceipt).
+      const randomHex = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("")
+        .toUpperCase();
+      const orderNumber = "ORD-" + randomHex;
       const customerName = `${firstName} ${lastName}`.trim();
       const order = await base44.entities.Order.create({
         customer_name: customerName,

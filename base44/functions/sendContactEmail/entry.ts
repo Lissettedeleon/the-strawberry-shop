@@ -16,12 +16,12 @@ Deno.serve(async (req) => {
       return Response.json({ error: "Input too long" }, { status: 400 });
     }
 
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
-      || req.headers.get("x-real-ip")
-      || "unknown";
+    // Use a single global rate key instead of the client-supplied
+    // x-forwarded-for header, which can be spoofed to bypass per-IP limits.
+    const rateKey = "global_contact_email";
 
     const now = new Date();
-    const recent = await base44.asServiceRole.entities.EmailRateLimit.filter({ rate_key: ip }, "-last_sent", 1);
+    const recent = await base44.asServiceRole.entities.EmailRateLimit.filter({ rate_key: rateKey }, "-last_sent", 1);
 
     if (recent.length > 0) {
       const lastSent = new Date(recent[0].last_sent);
@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
       }
       await base44.asServiceRole.entities.EmailRateLimit.update(recent[0].id, { last_sent: now.toISOString() });
     } else {
-      await base44.asServiceRole.entities.EmailRateLimit.create({ rate_key: ip, last_sent: now.toISOString() });
+      await base44.asServiceRole.entities.EmailRateLimit.create({ rate_key: rateKey, last_sent: now.toISOString() });
     }
 
     const label = type === "catering" ? "Catering Request" : "Contact Message";
