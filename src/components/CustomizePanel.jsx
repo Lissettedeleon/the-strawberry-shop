@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import CupStack from "@/components/CupStack";
 import {
   ITEM_CONFIGS,
   STANDARD_TOPPINGS,
@@ -244,7 +243,6 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
 
       {type === "build_your_own" && (
         <>
-          <CupStack base={baseCream} toppings={selectedToppings} sauces={selectedSauces} />
           <ChipPicker
             title="Base Cream (required, pick 1)"
             items={BYO_BASES.map((name) => ({ name, price: 0 }))}
