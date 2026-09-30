@@ -106,22 +106,28 @@ export default function GiftCards() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      {/* White header so the gift card's own white border blends into the page */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10 md:pt-16 md:pb-12 relative z-10 text-center">
+      {/* Red / white / red: the card sits on a white band between two waves
+          so its own white border blends in */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-6 md:pt-16 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-bubble text-[#E61F3F] text-4xl sm:text-5xl mb-6"
+            className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg"
           >
             A sweet gift
           </motion.h1>
+        </div>
+        <WaveDivider from="transparent" to="white" />
+      </section>
 
+      {/* -my-px + z-index covers the hairline seams where the waves meet */}
+      <section className="bg-white relative z-[1] -my-px">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-6"
           >
             <GiftCardVisual
               amount={finalAmount}
@@ -129,17 +135,21 @@ export default function GiftCards() {
               senderName={form.sender_name}
             />
           </motion.div>
+        </div>
+      </section>
 
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}>
+        <WaveDivider from="transparent" to="white" flip />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-14 md:pb-16 text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-[#C4112F]/80 font-body text-base sm:text-lg max-w-xl mx-auto"
+            className="text-white/85 font-body text-base sm:text-lg max-w-xl mx-auto"
           >
             Make someone's day a little sweeter with a gift card they can use toward their favorite strawberry desserts. The perfect gift for celebrations, special moments, or simply because
           </motion.p>
         </div>
-        <WaveDivider from="white" to="#FDEEF5" />
       </section>
 
       <section style={{ background: "#FDEEF5" }} className="py-14 md:py-20">
