@@ -156,6 +156,34 @@
   .fav-marquee-track { animation: none; }
 }
 
+/* Gift card: a soft shine sweeps across every few seconds */
+.gift-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: gift-shine 4.5s ease-in-out infinite;
+}
+@keyframes gift-shine {
+  0%, 55% { transform: translateX(-120%); }
+  85%, 100% { transform: translateX(120%); }
+}
+
+/* Buttons squish a little when pressed */
+button:not(:disabled),
+a[class*="rounded-full"],
+a[class*="rounded-2xl"] {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+}
+button:not(:disabled):active,
+a[class*="rounded-full"]:active,
+a[class*="rounded-2xl"]:active {
+  transform: scale(0.95);
+}
+
 /* Smooth scrollbar for webkit */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;

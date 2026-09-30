@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { flyToCart } from "@/lib/flyToCart";
+import CupStack from "@/components/CupStack";
 import {
   ITEM_CONFIGS,
   STANDARD_TOPPINGS,
@@ -168,7 +170,7 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
           </div>
         </div>
         <button
-          onClick={() => onAddSimple(item, quantity)}
+          onClick={(e) => { flyToCart(e.currentTarget); onAddSimple(item, quantity); }}
           className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm"
         >
           Add to Cart — ${(item.price * quantity).toFixed(2)}
@@ -243,6 +245,7 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
 
       {type === "build_your_own" && (
         <>
+          <CupStack base={baseCream} toppings={selectedToppings} sauces={selectedSauces} />
           <ChipPicker
             title="Base Cream (required, pick 1)"
             items={BYO_BASES.map((name) => ({ name, price: 0 }))}
@@ -295,7 +298,7 @@ export default function CustomizePanel({ item, onAddToCart, onAddSimple }) {
 
       {/* Add to Cart */}
       <button
-        onClick={handleAddToCart}
+        onClick={(e) => { flyToCart(e.currentTarget); handleAddToCart(); }}
         disabled={!canAddToCart()}
         className="w-full bg-primary text-white font-body font-bold py-3 rounded-full hover:bg-primary/90 transition-colors text-sm disabled:opacity-50"
       >
