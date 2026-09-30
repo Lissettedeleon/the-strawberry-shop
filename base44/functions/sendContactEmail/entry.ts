@@ -6,13 +6,22 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const body = await req.json();
-    const { name, email, phone, event_type, event_date, event_address, guest_count, quantity, items_of_interest, fulfillment_type, message, type } = body;
+    const { name, email, phone, event_type, event_date, event_address, guest_count, quantity, items_of_interest, fulfillment_type, message, type, company_website } = body;
+
+    // Hidden form field that people never see or fill in. Bots that fill
+    // every field get a normal-looking reply and no email is sent.
+    if (company_website) {
+      return Response.json({ success: true });
+    }
 
     // Catering requests don't require a message; contact messages do.
     if (!name || !email || (type !== "catering" && !message)) {
       return Response.json({ error: "name, email, and message are required" }, { status: 400 });
     }
-    if (String(name).length > 200 || String(email).length > 200 || String(message || "").length > 5000 || String(event_address || "").length > 500) {
+    const tooLong = (v, max) => String(v ?? "").length > max;
+    if (tooLong(name, 200) || tooLong(email, 200) || tooLong(message, 5000) || tooLong(event_address, 500)
+      || tooLong(phone, 50) || tooLong(event_type, 100) || tooLong(event_date, 50) || tooLong(guest_count ?? quantity, 20)
+      || tooLong(items_of_interest, 1000) || tooLong(fulfillment_type, 50)) {
       return Response.json({ error: "Input too long" }, { status: 400 });
     }
 

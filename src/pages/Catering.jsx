@@ -22,6 +22,7 @@ export default function Catering() {
     message: "",
   });
   const [status, setStatus] = useState("");
+  const [trap, setTrap] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
@@ -30,8 +31,12 @@ export default function Catering() {
     setStatus("sending");
     setErrorMsg("");
     try {
+      // Only bots fill the hidden field; skip saving and sending for them.
+      if (trap) { setStatus("done"); return; }
       await base44.entities.CateringRequest.create(form);
-      await base44.functions.invoke("sendContactEmail", { ...form, type: "catering" });
+      // The request is saved above. If the notification email is throttled
+      // or fails, the customer still gets a confirmation.
+      await base44.functions.invoke("sendContactEmail", { ...form, type: "catering", company_website: "" }).catch(() => {});
       setStatus("done");
       setFeedbackOpen(true);
     } catch {
@@ -113,6 +118,9 @@ export default function Catering() {
           </div>
 
           <form onSubmit={handleSubmit} className="bg-white border border-[#F4B3D0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+            <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+              <label>Company website<input type="text" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
+            </div>
             <div className="space-y-4">
               <p className="font-body font-bold text-[#1a1a1a] text-sm">Contact Information</p>
               <div>

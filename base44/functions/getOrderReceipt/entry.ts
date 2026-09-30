@@ -5,14 +5,18 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
     const { orderId, orderNumber } = await req.json();
 
-    if (!orderId || !orderNumber) {
+    if (typeof orderId !== "string" || typeof orderNumber !== "string" || !orderId || !orderNumber || orderId.length > 64 || orderNumber.length > 64) {
       return Response.json({ error: "orderId and orderNumber are required" }, { status: 400 });
     }
 
     const order = await base44.asServiceRole.entities.Order.get(orderId).catch(() => null);
 
-    // orderNumber acts as a proof-of-ownership check since Order.read is admin-only
-    if (!order || order.order_number !== orderNumber) {
+    // The order number is a random code only the customer who placed the
+    // order receives, so it acts as proof of ownership (Order.read is
+    // admin-only). Receipts are only served for recent orders.
+    const RECEIPT_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+    const tooOld = order && Date.now() - new Date(order.created_date).getTime() > RECEIPT_WINDOW_MS;
+    if (!order || order.order_number !== orderNumber || tooOld) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
 
