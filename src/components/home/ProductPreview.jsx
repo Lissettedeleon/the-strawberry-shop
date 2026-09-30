@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ShoppingBag, ImageOff } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
@@ -47,38 +46,26 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        {/* Phones: the cards glide slowly sideways in a loop (paused while
-            touched). The track holds two copies, each card spaced with a right
-            margin (not gap) so each copy is exactly half the track and the
-            -50% loop is seamless. */}
-        <div className="sm:hidden -mx-4 overflow-hidden fav-marquee">
-          <div className="fav-marquee-track flex w-max">
-            {[...cards, ...cards].map((card, i) => (
-              <FavoriteCard
-                key={`${card.name}-${i}`}
-                card={card}
-                className="w-[55vw] shrink-0 mr-3"
-                aria-hidden={i >= cards.length ? "true" : undefined}
-              />
-            ))}
-          </div>
-        </div>
+      </div>
 
-        {/* Tablet and up: three across */}
-        <div className="hidden sm:grid grid-cols-3 gap-6 md:gap-8">
-          {cards.map((card, i) => (
-            <motion.div
-              key={card.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <FavoriteCard card={card} className="h-full" />
-            </motion.div>
+      {/* The cards glide slowly sideways in a loop on every screen size
+          (paused on hover or touch). The track holds four copies, each card
+          spaced with a right margin (not gap), so half the track is exactly
+          two copies and the -50% loop is seamless even on wide screens. */}
+      <div className="overflow-hidden fav-marquee">
+        <div className="fav-marquee-track flex w-max">
+          {[...cards, ...cards, ...cards, ...cards].map((card, i) => (
+            <FavoriteCard
+              key={`${card.name}-${i}`}
+              card={card}
+              className="w-[55vw] sm:w-[300px] md:w-[320px] shrink-0 mr-3 sm:mr-6"
+              aria-hidden={i >= cards.length ? "true" : undefined}
+            />
           ))}
         </div>
+      </div>
 
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mt-10 md:mt-14">
           <Link
             to="/menu"
