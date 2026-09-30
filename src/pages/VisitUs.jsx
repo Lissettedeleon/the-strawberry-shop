@@ -60,33 +60,33 @@ export default function VisitUs() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            className="bg-white border border-[#F4B3D0] rounded-2xl p-6 shadow-sm"
+            className="bg-[#E3EAB9] border border-[#C9D68A] rounded-2xl p-6 shadow-sm"
           >
-            <h3 className="flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base mb-3">
-              <Clock size={16} className="text-[#E61F3F]" /> Hours
+            <h3 className="flex items-center gap-2 font-body font-bold text-[#2F3A05] text-base mb-3">
+              <Clock size={16} className="text-[#4F5F10]" /> Hours
             </h3>
             <div className="space-y-2">
               {weekRows.map(h => (
                 <div key={h.from} className="flex justify-between gap-3 font-body text-sm">
-                  <span className="text-[#6b7280]">{h.from === h.to ? h.from : `${h.from} – ${h.to}`}</span>
-                  <span className="text-[#1a1a1a] font-semibold whitespace-nowrap shrink-0">{formatRange(h)}</span>
+                  <span className="text-[#4F5F10]">{h.from === h.to ? h.from : `${h.from} – ${h.to}`}</span>
+                  <span className="text-[#2F3A05] font-semibold whitespace-nowrap shrink-0">{formatRange(h)}</span>
                 </div>
               ))}
             </div>
-            <div className="border-t border-[#F8CCE1] my-5" />
-            <h4 className="font-body font-bold text-[#1a1a1a] text-sm mb-3">Holiday hours</h4>
+            <div className="border-t border-[#C9D68A] my-5" />
+            <h4 className="font-body font-bold text-[#2F3A05] text-sm mb-3">Holiday hours</h4>
             <div className="space-y-2">
               {getUpcomingHolidays().map(h => {
                 const time = formatRange(h);
                 return (
                   <div key={h.label} className="flex justify-between gap-3 font-body text-sm">
-                    <span className="text-[#6b7280]">{h.label}</span>
-                    <span className={`font-semibold whitespace-nowrap shrink-0 ${time === "Closed" ? "text-[#E61F3F]" : "text-[#1a1a1a]"}`}>{time}</span>
+                    <span className="text-[#4F5F10]">{h.label}</span>
+                    <span className={`font-semibold whitespace-nowrap shrink-0 ${time === "Closed" ? "text-[#E61F3F]" : "text-[#2F3A05]"}`}>{time}</span>
                   </div>
                 );
               })}
             </div>
-            <p className="font-body text-xs text-[#6b7280] mt-4">Holiday hours are subject to change.</p>
+            <p className="font-body text-xs text-[#4F5F10] mt-4">Holiday hours are subject to change.</p>
           </motion.div>
         </div>
       </section>
