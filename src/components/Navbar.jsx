@@ -17,7 +17,6 @@ function CartButton({ className = "", iconSize = 20 }) {
   return (
     <button
       onClick={() => setCartOpen(true)}
-      data-cart-icon
       className={`relative p-2 text-[#1a1a1a] flex items-center justify-center transition-colors hover:text-[#E61F3F] ${className}`}
       aria-label="Cart">
       

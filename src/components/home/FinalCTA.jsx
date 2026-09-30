@@ -1,6 +1,5 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import ChocolateDrip from "@/components/ChocolateDrip";
 import { ShoppingBag } from "lucide-react";
 
 // Background is pre-cut to transparent in the file itself, so the cup sits
@@ -15,10 +14,9 @@ export default function FinalCTA() {
 
   return (
     <section
-      className="relative overflow-hidden pt-24 pb-16 md:pt-36 md:pb-24"
+      className="relative overflow-hidden py-16 md:py-24"
       style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }}
     >
-      <ChocolateDrip />
       <motion.div
         animate={{ opacity: [0.15, 0.3, 0.15] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
