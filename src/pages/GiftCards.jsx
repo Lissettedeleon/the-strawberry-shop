@@ -164,7 +164,7 @@ export default function GiftCards() {
                     type="button"
                     onClick={() => { setAmount(a); setCustomAmount(""); }}
                     className={`py-3 rounded-xl font-body font-extrabold text-sm border-2 transition-colors ${
-                      !customAmount && amount === a ? "bg-[#B4C84C] border-[#B4C84C] text-[#2F3A05]" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#EEF2D6] hover:border-[#C9D68A]"
+                      !customAmount && amount === a ? "bg-[#E61F3F] border-[#E61F3F] text-white" : "bg-white border-[#F4B3D0] text-[#1a1a1a] hover:bg-[#FDEEF5]"
                     }`}
                   >
                     ${a}
