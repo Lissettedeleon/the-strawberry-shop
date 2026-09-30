@@ -48,10 +48,15 @@ Deno.serve(async (req) => {
       message ? `Message: ${message}` : null,
     ].filter(Boolean).join("\n");
 
+    // Send as plain text (not html/body) so user-supplied content can't render
+    // as HTML in the shop owner's inbox. Strip angle brackets from the name
+    // used in the subject as a defense against any client that renders it.
+    const safeName = String(name).replace(/[<>]/g, "");
+
     await base44.asServiceRole.integrations.Core.SendEmail({
       to: "strawberryshopoh@gmail.com",
-      subject: `${label} — ${name}`,
-      body: bodyLines,
+      subject: `${label} — ${safeName}`,
+      text: bodyLines,
       from_name: "The Strawberry Shop Website",
     });
 
