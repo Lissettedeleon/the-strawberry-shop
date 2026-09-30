@@ -84,7 +84,7 @@ export default function Catering() {
 
       <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
-          <h1 className="font-bubble text-white text-3xl sm:text-4xl drop-shadow-lg">Let Us Be Part of Your Next Celebration</h1>
+          <h1 className="font-bubble text-white text-2xl sm:text-3xl drop-shadow-lg">Let Us Be Part of Your Next Celebration</h1>
         </div>
       </section>
 
