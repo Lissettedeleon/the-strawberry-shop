@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Gift, Check } from "lucide-react";
 import HeardAboutPopup from "@/components/HeardAboutPopup";
 import GiftCardVisual from "@/components/GiftCardVisual";
+import WaveDivider from "@/components/WaveDivider";
 
 const AMOUNTS = [25, 50, 75, 100];
 
@@ -105,12 +106,13 @@ export default function GiftCards() {
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative z-10 text-center">
+      {/* White header so the gift card's own white border blends into the page */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10 md:pt-16 md:pb-12 relative z-10 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg mb-6"
+            className="font-bubble text-[#E61F3F] text-4xl sm:text-5xl mb-6"
           >
             A sweet gift
           </motion.h1>
@@ -132,11 +134,12 @@ export default function GiftCards() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-white/80 font-body text-base sm:text-lg max-w-xl mx-auto"
+            className="text-[#C4112F]/80 font-body text-base sm:text-lg max-w-xl mx-auto"
           >
             Make someone's day a little sweeter with a gift card they can use toward their favorite strawberry desserts. The perfect gift for celebrations, special moments, or simply because
           </motion.p>
         </div>
+        <WaveDivider from="white" to="#FDEEF5" />
       </section>
 
       <section style={{ background: "#FDEEF5" }} className="py-14 md:py-20">

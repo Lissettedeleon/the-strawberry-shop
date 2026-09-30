@@ -6,12 +6,13 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const body = await req.json();
-    const { name, email, phone, event_date, quantity, items_of_interest, message, type } = body;
+    const { name, email, phone, event_type, event_date, event_address, guest_count, quantity, items_of_interest, fulfillment_type, message, type } = body;
 
-    if (!name || !email || !message) {
+    // Catering requests don't require a message; contact messages do.
+    if (!name || !email || (type !== "catering" && !message)) {
       return Response.json({ error: "name, email, and message are required" }, { status: 400 });
     }
-    if (String(name).length > 200 || String(email).length > 200 || String(message).length > 5000) {
+    if (String(name).length > 200 || String(email).length > 200 || String(message || "").length > 5000 || String(event_address || "").length > 500) {
       return Response.json({ error: "Input too long" }, { status: 400 });
     }
 
@@ -38,8 +39,11 @@ Deno.serve(async (req) => {
       `New ${label} from ${name}`,
       `Email: ${email}`,
       phone ? `Phone: ${phone}` : null,
+      event_type ? `Event Type: ${event_type}` : null,
       event_date ? `Event Date: ${event_date}` : null,
-      quantity ? `Guest Count / Quantity: ${quantity}` : null,
+      event_address ? `Event Location: ${event_address}` : null,
+      (guest_count || quantity) ? `Guest Count: ${guest_count || quantity}` : null,
+      fulfillment_type ? `Pickup or Delivery: ${fulfillment_type}` : null,
       items_of_interest ? `Items of Interest: ${items_of_interest}` : null,
       message ? `Message: ${message}` : null,
     ].filter(Boolean).join("\n");

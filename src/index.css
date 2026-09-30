@@ -31,7 +31,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 1rem;
-    --font-heading: 'Abril Fatface', serif;
+    --font-heading: 'Fredoka', sans-serif;
     --font-body: 'Quicksand', sans-serif;
     --font-display: 'Fredoka', sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -130,8 +130,8 @@
 }
 
 .font-bubble {
-  font-family: 'Abril Fatface', serif;
-  font-weight: 400;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
 }
 
 .font-cursive {

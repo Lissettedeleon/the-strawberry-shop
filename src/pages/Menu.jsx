@@ -55,7 +55,7 @@ export default function Menu() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-bubble text-[#E61F3F] text-3xl sm:text-4xl mb-2">
+          className="font-bubble text-white text-3xl sm:text-4xl mb-2 drop-shadow-md">
 
           Choose Your Favorite, or Try Something New
         </motion.h1>

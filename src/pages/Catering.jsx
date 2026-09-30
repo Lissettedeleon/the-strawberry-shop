@@ -143,6 +143,10 @@ export default function Catering() {
                   <input type="date" value={form.event_date} onChange={(e) => setForm({ ...form, event_date: e.target.value })} className={inputClass} required />
                 </div>
               </div>
+              <div>
+                <label className="block font-body text-xs text-[#6b7280] mb-1.5">Event Location *</label>
+                <input type="text" value={form.event_address} onChange={(e) => setForm({ ...form, event_address: e.target.value })} placeholder="Venue name or address" className={inputClass} required />
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-body text-xs text-[#6b7280] mb-1.5">Guest Count *</label>
@@ -170,12 +174,6 @@ export default function Catering() {
                   ))}
                 </div>
               </div>
-              {form.fulfillment_type === "Delivery" && (
-                <div>
-                  <label className="block font-body text-xs text-[#6b7280] mb-1.5">Event Address *</label>
-                  <input type="text" value={form.event_address} onChange={(e) => setForm({ ...form, event_address: e.target.value })} placeholder="Where should we deliver?" className={inputClass} required />
-                </div>
-              )}
             </div>
 
             <div className="space-y-4 pt-2 border-t border-[#F8CCE1]">

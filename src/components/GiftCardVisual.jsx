@@ -13,7 +13,7 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className={`relative w-full max-w-md mx-auto rounded-[28px] overflow-hidden shadow-2xl ${className}`}
+      className={`relative w-full max-w-md mx-auto rounded-[28px] overflow-hidden ${className}`}
       style={{ aspectRatio: "3 / 2" }}
     >
       {/* The reference image's white frame is thicker on the left/right than
