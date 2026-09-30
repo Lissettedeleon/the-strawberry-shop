@@ -84,7 +84,7 @@ export default function Catering() {
 
       <section style={{ background: "linear-gradient(135deg, #E61F3F 0%, #C4112F 100%)" }} className="relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center relative z-10">
-          <h1 className="font-bubble text-white text-4xl sm:text-5xl drop-shadow-lg">Let Us Be Part of Your Next Celebration</h1>
+          <h1 className="font-bubble text-white text-3xl sm:text-4xl drop-shadow-lg">Let Us Be Part of Your Next Celebration</h1>
         </div>
       </section>
 
@@ -145,7 +145,7 @@ export default function Catering() {
               </div>
               <div>
                 <label className="block font-body text-xs text-[#6b7280] mb-1.5">Event Location *</label>
-                <input type="text" value={form.event_address} onChange={(e) => setForm({ ...form, event_address: e.target.value })} placeholder="Venue name or address" className={inputClass} required />
+                <input type="text" value={form.event_address} onChange={(e) => setForm({ ...form, event_address: e.target.value })} placeholder="Address" className={inputClass} required />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>

@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Menu", to: "/menu" },
   { label: "Catering", to: "/catering" },
   { label: "Gift Cards", to: "/gift-cards" },
+  { label: "Rewards", to: "/rewards" },
   { label: "About Us", to: "/about" },
   { label: "Reviews", to: "/reviews" },
   { label: "Visit Us", to: "/visit-us" },
