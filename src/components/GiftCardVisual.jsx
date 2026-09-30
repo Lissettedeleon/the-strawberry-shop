@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 const CARD_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/ea78651e4_42414B76-286D-4573-A6F0-C3431FA0BA1D.png";
 
@@ -8,25 +8,10 @@ const CARD_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd837
  * To/From text box and amount overlaid on top.
  */
 export default function GiftCardVisual({ amount, recipientName, senderName, className = "" }) {
-  // Flip the card once whenever the amount changes or a name is first filled in.
-  const controls = useAnimationControls();
-  const reduce = useReducedMotion();
-  const key = `${amount}|${!!recipientName}|${!!senderName}`;
-  const first = useRef(true);
-  useEffect(() => {
-    if (first.current) { first.current = false; return; }
-    if (reduce) return;
-    controls.set({ rotateY: 0 });
-    controls.start({ rotateY: 360, transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } });
-  }, [key]);
-
   return (
-    <div style={{ perspective: 1200 }}>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={controls}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
       className={`gift-shine relative w-full max-w-md mx-auto rounded-2xl overflow-hidden ${className}`}
       style={{ aspectRatio: "1303 / 845" }}
@@ -67,7 +52,6 @@ export default function GiftCardVisual({ amount, recipientName, senderName, clas
         </div>
       </div>
     </motion.div>
-    </div>
   );
 }
 
