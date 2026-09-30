@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 
 // Background is pre-cut to transparent in the file itself, so the cup sits
@@ -10,7 +10,6 @@ import MagneticButton from "@/components/MagneticButton";
 
 export default function FinalCTA() {
   const { setOrderChoiceOpen } = useCart();
-  const reduceMotion = useReducedMotion();
 
   return (
     <section
@@ -30,14 +29,10 @@ export default function FinalCTA() {
           transition={{ duration: 0.6 }}
           className="max-w-[280px] sm:max-w-sm mx-auto mb-8"
         >
-          {/* Gentle tilt-and-float, like the cup is being held out to you */}
-          <motion.img
+          <img
             src={CTA_IMAGE}
             alt="The Strawberry Shop cup with strawberries, cream, and Biscoff"
             className="w-full h-auto"
-            style={{ transformOrigin: "50% 85%" }}
-            animate={reduceMotion ? undefined : { rotate: [-3, 3, -3], y: [0, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
 
