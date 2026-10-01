@@ -2,6 +2,17 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // one send per IP per minute
 
+// The email body is HTML, so anything a visitor typed is escaped before it
+// goes into it. Otherwise someone could put links or fake forms in the email.
+const escapeHtml = (v) => String(v ?? "")
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;")
+  .replace(/'/g, "&#39;");
+// Subjects are plain text: drop line breaks and angle brackets.
+const plainText = (v) => String(v ?? "").replace(/[\r\n<>]/g, " ").trim();
+
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
@@ -45,26 +56,26 @@ Deno.serve(async (req) => {
     const label = type === "catering" ? "Catering Request" : "Contact Message";
 
     const bodyLines = [
-      `New ${label} from ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : null,
-      event_type ? `Event Type: ${event_type}` : null,
-      event_date ? `Event Date: ${event_date}` : null,
-      event_address ? `Event Location: ${event_address}` : null,
-      (guest_count || quantity) ? `Guest Count: ${guest_count || quantity}` : null,
-      fulfillment_type ? `Pickup or Delivery: ${fulfillment_type}` : null,
-      items_of_interest ? `Items of Interest: ${items_of_interest}` : null,
-      message ? `Message: ${message}` : null,
-    ].filter(Boolean).join("\n");
+      `New ${label} from ${escapeHtml(name)}`,
+      `Email: ${escapeHtml(email)}`,
+      phone ? `Phone: ${escapeHtml(phone)}` : null,
+      event_type ? `Event Type: ${escapeHtml(event_type)}` : null,
+      event_date ? `Event Date: ${escapeHtml(event_date)}` : null,
+      event_address ? `Event Location: ${escapeHtml(event_address)}` : null,
+      (guest_count || quantity) ? `Guest Count: ${escapeHtml(guest_count || quantity)}` : null,
+      fulfillment_type ? `Pickup or Delivery: ${escapeHtml(fulfillment_type)}` : null,
+      items_of_interest ? `Items of Interest: ${escapeHtml(items_of_interest)}` : null,
+      message ? `Message: ${escapeHtml(message).replace(/\r?\n/g, "<br>")}` : null,
+    ].filter(Boolean).join("<br>");
 
     await base44.asServiceRole.integrations.Core.SendEmail({
       to: "strawberryshopoh@gmail.com",
-      subject: `${label} — ${name}`,
+      subject: `${label} — ${plainText(name)}`,
       body: bodyLines,
       from_name: "The Strawberry Shop Website",
     });
 
-    return Response.json({ success: true, message: `${label} from ${name} received` });
+    return Response.json({ success: true, message: `${label} received` });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
