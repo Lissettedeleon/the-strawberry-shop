@@ -31,11 +31,13 @@ export default function Checkout() {
     try {
       // NOTE: No live payment processing yet — orders are recorded for pickup only.
       // This will connect to Toast Payments once that POS integration is approved and live.
-      // Random, unguessable order number. Together with the order id it is
-      // what lets the confirmation page load the receipt without a login.
-      const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      const code = Array.from(crypto.getRandomValues(new Uint8Array(10)), (b) => alphabet[b % 32]).join("");
-      const orderNumber = `ORD-${code.slice(0, 5)}-${code.slice(5)}`;
+      // Cryptographically random so the order number in the confirmation URL
+      // can't be brute-forced (it's the proof-of-ownership for getOrderReceipt).
+      const randomHex = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("")
+        .toUpperCase();
+      const orderNumber = "ORD-" + randomHex;
       const customerName = `${firstName} ${lastName}`.trim();
       const order = await base44.entities.Order.create({
         customer_name: customerName,

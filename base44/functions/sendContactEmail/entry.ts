@@ -2,17 +2,6 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
 
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // one send per IP per minute
 
-// The email body is HTML, so anything a visitor typed is escaped before it
-// goes into it. Otherwise someone could put links or fake forms in the email.
-const escapeHtml = (v) => String(v ?? "")
-  .replace(/&/g, "&amp;")
-  .replace(/</g, "&lt;")
-  .replace(/>/g, "&gt;")
-  .replace(/"/g, "&quot;")
-  .replace(/'/g, "&#39;");
-// Subjects are plain text: drop line breaks and angle brackets.
-const plainText = (v) => String(v ?? "").replace(/[\r\n<>]/g, " ").trim();
-
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
@@ -36,12 +25,12 @@ Deno.serve(async (req) => {
       return Response.json({ error: "Input too long" }, { status: 400 });
     }
 
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
-      || req.headers.get("x-real-ip")
-      || "unknown";
+    // Use a single global rate key instead of the client-supplied
+    // x-forwarded-for header, which can be spoofed to bypass per-IP limits.
+    const rateKey = "global_contact_email";
 
     const now = new Date();
-    const recent = await base44.asServiceRole.entities.EmailRateLimit.filter({ rate_key: ip }, "-last_sent", 1);
+    const recent = await base44.asServiceRole.entities.EmailRateLimit.filter({ rate_key: rateKey }, "-last_sent", 1);
 
     if (recent.length > 0) {
       const lastSent = new Date(recent[0].last_sent);
@@ -50,32 +39,37 @@ Deno.serve(async (req) => {
       }
       await base44.asServiceRole.entities.EmailRateLimit.update(recent[0].id, { last_sent: now.toISOString() });
     } else {
-      await base44.asServiceRole.entities.EmailRateLimit.create({ rate_key: ip, last_sent: now.toISOString() });
+      await base44.asServiceRole.entities.EmailRateLimit.create({ rate_key: rateKey, last_sent: now.toISOString() });
     }
 
     const label = type === "catering" ? "Catering Request" : "Contact Message";
 
     const bodyLines = [
-      `New ${label} from ${escapeHtml(name)}`,
-      `Email: ${escapeHtml(email)}`,
-      phone ? `Phone: ${escapeHtml(phone)}` : null,
-      event_type ? `Event Type: ${escapeHtml(event_type)}` : null,
-      event_date ? `Event Date: ${escapeHtml(event_date)}` : null,
-      event_address ? `Event Location: ${escapeHtml(event_address)}` : null,
-      (guest_count || quantity) ? `Guest Count: ${escapeHtml(guest_count || quantity)}` : null,
-      fulfillment_type ? `Pickup or Delivery: ${escapeHtml(fulfillment_type)}` : null,
-      items_of_interest ? `Items of Interest: ${escapeHtml(items_of_interest)}` : null,
-      message ? `Message: ${escapeHtml(message).replace(/\r?\n/g, "<br>")}` : null,
-    ].filter(Boolean).join("<br>");
+      `New ${label} from ${name}`,
+      `Email: ${email}`,
+      phone ? `Phone: ${phone}` : null,
+      event_type ? `Event Type: ${event_type}` : null,
+      event_date ? `Event Date: ${event_date}` : null,
+      event_address ? `Event Location: ${event_address}` : null,
+      (guest_count || quantity) ? `Guest Count: ${guest_count || quantity}` : null,
+      fulfillment_type ? `Pickup or Delivery: ${fulfillment_type}` : null,
+      items_of_interest ? `Items of Interest: ${items_of_interest}` : null,
+      message ? `Message: ${message}` : null,
+    ].filter(Boolean).join("\n");
+
+    // Send as plain text (not html/body) so user-supplied content can't render
+    // as HTML in the shop owner's inbox. Strip angle brackets from the name
+    // used in the subject as a defense against any client that renders it.
+    const safeName = String(name).replace(/[\r\n<>]/g, " ").trim();
 
     await base44.asServiceRole.integrations.Core.SendEmail({
       to: "strawberryshopoh@gmail.com",
-      subject: `${label} — ${plainText(name)}`,
-      body: bodyLines,
+      subject: `${label} — ${safeName}`,
+      text: bodyLines,
       from_name: "The Strawberry Shop Website",
     });
 
-    return Response.json({ success: true, message: `${label} received` });
+    return Response.json({ success: true, message: `${label} from ${name} received` });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
