@@ -1,0 +1,31 @@
+{
+  "name": "CustomerFeedback",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["order", "catering", "gift_card"],
+      "description": "Where the feedback was given"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "Order id, catering email, or gift card code it relates to"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Star rating, when asked"
+    },
+    "sources": {
+      "type": "array",
+      "description": "How the customer heard about the shop",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["type"],
+  "rls": {
+    "create": true,
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

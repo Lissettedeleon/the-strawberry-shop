@@ -49,7 +49,6 @@ export default function Catering() {
     base44.entities.CustomerFeedback.create({
       type: "catering",
       reference_id: form.email,
-      rating: null,
       sources,
     }).catch(() => {});
   };

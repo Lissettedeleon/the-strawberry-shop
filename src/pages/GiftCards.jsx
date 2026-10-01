@@ -59,7 +59,7 @@ export default function GiftCards() {
     base44.entities.CustomerFeedback.create({
       type: "gift_card",
       reference_id: code,
-      rating,
+      ...(rating ? { rating } : {}),
       sources,
     }).catch(() => {});
   };

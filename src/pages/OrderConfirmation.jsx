@@ -34,7 +34,7 @@ export default function OrderConfirmation() {
     base44.entities.CustomerFeedback.create({
       type: "order",
       reference_id: orderId || orderNumber || "",
-      rating,
+      ...(rating ? { rating } : {}),
       sources,
     }).catch(() => {});
   };
