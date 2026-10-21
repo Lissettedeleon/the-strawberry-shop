@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import React from "react";
+import { menuItems as items } from "@/data/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BrandedLoader from "@/components/BrandedLoader";
 import MenuFolder, { BuildYourOwnFeature } from "@/components/MenuFolder";
 import { motion } from "framer-motion";
 import { SearchX, Store, Truck, Globe } from "lucide-react";
 import { DoorDashBadge, UberEatsBadge } from "@/components/DeliveryBadges";
 import { useCart } from "@/lib/CartContext";
 
-// Display order. Menu items in Base44 use "Our Berry Best Cups" and
+// Display order. Menu items use "Our Berry Best Cups" and
 // "Others"; the older names are kept in case any items still use them.
 // Any category not listed here is shown after these, so no item is hidden.
 const CATEGORIES = [
@@ -24,17 +23,8 @@ const BUILD_YOUR_OWN = "Build Your Own Cup";
 
 
 export default function Menu() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { fulfillmentType, setFulfillmentType } = useCart();
   const isDelivery = fulfillmentType === "delivery";
-
-  useEffect(() => {
-    base44.entities.MenuItem.list("sort_order", 50).
-    then(setItems).
-    catch(() => {}).
-    finally(() => setLoading(false));
-  }, []);
 
   const extraCategories = [...new Set(items.map((i) => i.category))].filter(
     (c) => c && c !== BUILD_YOUR_OWN && !CATEGORIES.includes(c)
@@ -111,9 +101,7 @@ export default function Menu() {
 
       {/* Menu: every category in its own white section, Build Your Own last */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-24 flex flex-col gap-8 sm:gap-10">
-        {loading ?
-        <BrandedLoader text="whipping up the menu..." /> :
-        Object.keys(groupedByCategory).length === 0 && buildYourOwnItems.length === 0 ?
+        {Object.keys(groupedByCategory).length === 0 && buildYourOwnItems.length === 0 ?
         <div className="text-center text-[#6b4a52] font-body font-bold py-16">
             <SearchX size={40} className="mx-auto mb-3 text-[#E61F3F]/50" />
             <p>No menu items yet. Check back soon!</p>

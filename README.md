@@ -19,31 +19,32 @@ Build for production with `npm run build`. The output goes to `dist/`.
 | --- | --- |
 | `/` | Home |
 | `/menu` | Menu, with pickup/delivery toggle, item customization and cart |
-| `/checkout`, `/order-confirmation` | Checkout and receipt |
-| `/catering` | Catering request form |
-| `/gift-cards` | Gift cards |
+| `/checkout` | Checkout (sends the order by email) |
+| `/catering` | Catering request form (sends by email) |
+| `/gift-cards` | Gift card request form (sends by email) |
+| `/privacy` | Privacy page |
 | `/rewards` | Rewards (content to come) |
 | `/about`, `/visit-us`, `/reviews` | About, location and hours, reviews |
-| `/admin` | Order dashboard for staff (admin login) |
 
 ## Where things live
 
 - `src/pages/` – one file per page; routes are in `src/App.jsx`.
 - `src/components/` – shared pieces (navbar, footer, menu sections, cart, gift card, item options).
-- `src/lib/` – cart state, login state, opening hours, item customization options.
+- `src/lib/` – cart state, opening hours, item customization options, the email helper.
+- `src/data/` – the menu, reviews and announcement bar as JSON files. Edit these to change the content.
 - `src/index.css`, `tailwind.config.js` – brand colors, fonts and animations.
-- `public/` – videos and photos served with the site, including the link-preview image.
-- `content-backup/` – a saved copy of the menu, reviews and other content, plus every photo, in case the original hosting goes away.
+- `public/` – videos and photos served with the site, including the link-preview image; `public/photos/` has the menu photos and logos.
 
-## Data and backend
+## No backend
 
-All data access goes through the client in `src/api/`. Data models (menu items, orders, catering requests, gift cards, reviews, feedback and so on) are defined in the `entities/` files of the backend folder. The server-side functions (order receipts, catering email, rewards codes, order history) are in its `functions/` folder.
+The site runs on any static web host (it builds to plain files in `dist/`). There is no database or server code:
 
-Moving to a new platform means replacing that client and recreating those data models and functions. Some photos and the logo are still loaded from the previous platform's media storage; copies of all of them are in `content-backup/photos/`.
+- The menu, reviews and announcement bar are read from `src/data/`.
+- Checkout, catering and gift card forms open the visitor's email app with the details filled in, addressed to the shop (`src/lib/emailShop.js`). Nothing is stored by the site.
+
+Because it's a single-page app, the host should send unknown paths to `index.html` so links like `/menu` work when opened directly.
 
 ### Notes for whoever takes this over
 
-- Online payments aren't connected yet. Orders are recorded for pickup without payment.
-- Order numbers are random codes, and the receipt page only works with the order number plus order ID.
-- The catering form has a hidden spam trap and length limits. Catering requests are saved and also emailed to the shop.
+- There are no online payments. Orders are paid at pickup; gift cards are paid after the shop replies to the email.
 - The rewards page is a placeholder until the program details are final.

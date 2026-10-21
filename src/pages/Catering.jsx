@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
+import { emailShop } from "@/lib/emailShop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HeardAboutPopup from "@/components/HeardAboutPopup";
-import { Send, Check } from "lucide-react";
+import { Send, Mail } from "lucide-react";
 
 const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
@@ -22,35 +21,23 @@ export default function Catering() {
     message: "",
   });
   const [status, setStatus] = useState("");
-  const [trap, setTrap] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
-  const handleSubmit = async (e) => {
+  // Opens the visitor's email app with the request filled in, addressed to the shop.
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("sending");
-    setErrorMsg("");
-    try {
-      // Only bots fill the hidden field; skip saving and sending for them.
-      if (trap) { setStatus("done"); return; }
-      await base44.entities.CateringRequest.create(form);
-      // The request is saved above. If the notification email is throttled
-      // or fails, the customer still gets a confirmation.
-      await base44.functions.invoke("sendContactEmail", { ...form, type: "catering", company_website: "" }).catch(() => {});
-      setStatus("done");
-      setFeedbackOpen(true);
-    } catch {
-      setStatus("");
-      setErrorMsg("Something went wrong. Please try again or contact us directly.");
-    }
-  };
-
-  const handleFeedback = ({ sources }) => {
-    base44.entities.CustomerFeedback.create({
-      type: "catering",
-      reference_id: form.email,
-      sources,
-    }).catch(() => {});
+    emailShop(`Catering Request - ${form.name}`, [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.phone && `Phone: ${form.phone}`,
+      form.event_type && `Event type: ${form.event_type}`,
+      form.event_date && `Event date: ${form.event_date}`,
+      form.event_address && `Event location: ${form.event_address}`,
+      form.guest_count && `Guest count: ${form.guest_count}`,
+      form.fulfillment_type && `Pickup or delivery: ${form.fulfillment_type}`,
+      form.items_of_interest && `Items of interest: ${form.items_of_interest}`,
+      form.message && `Message: ${form.message}`,
+    ]);
+    setStatus("done");
   };
 
   if (status === "done") {
@@ -60,24 +47,17 @@ export default function Catering() {
         <div className="max-w-lg mx-auto px-4 py-16 text-center">
           <div className="flex justify-center mb-5">
             <div className="w-16 h-16 rounded-full bg-[#B4C84C] flex items-center justify-center">
-              <Check className="w-8 h-8 text-white" strokeWidth={3} />
+              <Mail className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Request Sent!</h1>
-          <p className="font-body text-[#6b7280] text-base mb-6">Your catering request has been sent. We'll be in touch with you shortly</p>
+          <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-2">Almost done!</h1>
+          <p className="font-body text-[#6b7280] text-base mb-6">Your email app opened with your request filled in. Press send and we'll be in touch shortly.</p>
           <Link to="/" className="inline-block bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors">
             Back to Home
           </Link>
         </div>
         <Footer />
 
-        <HeardAboutPopup
-          open={feedbackOpen}
-          onClose={() => setFeedbackOpen(false)}
-          onSubmit={handleFeedback}
-          title="Thanks for your request"
-          subtitle="How did you hear about us?"
-        />
       </div>
     );
   }
@@ -117,9 +97,6 @@ export default function Catering() {
           </div>
 
           <form onSubmit={handleSubmit} className="bg-white border border-[#F4B3D0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
-            <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
-              <label>Company website<input type="text" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
-            </div>
             <div className="space-y-4">
               <p className="font-body font-bold text-[#1a1a1a] text-sm">Contact Information</p>
               <div>
@@ -191,20 +168,14 @@ export default function Catering() {
               </div>
             </div>
 
-            {errorMsg && (
-              <div className="bg-[#F8CCE1] border border-[#F4B3D0] rounded-xl px-4 py-3">
-                <p className="text-[#C4112F] font-body text-sm">{errorMsg}</p>
-              </div>
-            )}
-
             <button
               type="submit"
-              disabled={status === "sending"}
               className="w-full bg-[#E61F3F] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#C4112F] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
             >
               <Send size={16} />
-              {status === "sending" ? "Sending..." : "Submit Catering Request"}
+              Send Catering Request by Email
             </button>
+            <p className="text-center font-body text-xs text-[#6b7280] -mt-3">Opens your email app with your request filled in.</p>
           </form>
         </div>
       </section>

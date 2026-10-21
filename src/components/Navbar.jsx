@@ -4,7 +4,7 @@ import { Menu as MenuIcon, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import { useCart } from "@/lib/CartContext";
-import { base44 } from "@/api/base44Client";
+import { activeAnnouncement } from "@/data/content";
 import { SHEET_TRANSITION } from "@/lib/motion";
 import MagneticButton from "./MagneticButton";
 
@@ -43,7 +43,7 @@ const navLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [announcement, setAnnouncement] = useState(null);
+  const announcement = activeAnnouncement;
   const location = useLocation();
   const { setOrderChoiceOpen } = useCart();
 
@@ -51,12 +51,6 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    base44.entities.Announcement.filter({ is_active: true }, "-created_date", 1).
-    then((res) => {if (res.length > 0) setAnnouncement(res[0]);}).
-    catch(() => {});
   }, []);
 
   useEffect(() => {

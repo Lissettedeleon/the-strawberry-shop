@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const CARD_IMAGE = "https://media.base44.com/images/public/6a34ab1480a9a94dcd8377fa/ea78651e4_42414B76-286D-4573-A6F0-C3431FA0BA1D.png";
+const CARD_IMAGE = "/photos/ea78651e4_42414B76-286D-4573-A6F0-C3431FA0BA1D.png";
 
 /**
  * Gift card visual: the card design image on its own, with the shine effect.

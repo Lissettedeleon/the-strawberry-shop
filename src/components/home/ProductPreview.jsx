@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ShoppingBag, ImageOff } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { menuItems } from "@/data/content";
 
 const FAVORITE_NAMES = ["OG", "Dubai", "Build Your Own Cup"];
 
@@ -19,18 +19,9 @@ const CARD_TEXT = "#C4112F"; // deeper brand red so small text stays readable on
 const PHOTO_ZOOM = { og: 1.45, dubai: 1.45, "build your own cup": 1.05 };
 
 export default function ProductPreview() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    base44.entities.MenuItem.list("sort_order", 100)
-      .then((all) => {
-        const matched = FAVORITE_NAMES.map((name) =>
-          all.find((it) => it.name?.toLowerCase() === name.toLowerCase())
-        ).filter(Boolean);
-        setItems(matched);
-      })
-      .catch(() => {});
-  }, []);
+  const items = FAVORITE_NAMES.map((name) =>
+    menuItems.find((it) => it.name?.toLowerCase() === name.toLowerCase())
+  ).filter(Boolean);
 
   const cards =
     items.length > 0

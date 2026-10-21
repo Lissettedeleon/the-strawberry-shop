@@ -1,14 +1,9 @@
 import { Toaster } from "@/components/ui/toaster"
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
-import BrandedLoader from './components/BrandedLoader';
-import AdminRoute from '@/components/AdminRoute';
 import { EASE_OUT_STRONG } from '@/lib/motion';
 
 import Home from '@/pages/Home';
@@ -22,9 +17,6 @@ import Rewards from '@/pages/Rewards';
 import Privacy from '@/pages/Privacy';
 import UnderConstruction from '@/pages/UnderConstruction';
 import Checkout from '@/pages/Checkout';
-import OrderConfirmation from '@/pages/OrderConfirmation';
-import AdminDashboard from '@/pages/AdminDashboard';
-import Login from '@/pages/Login';
 
 import { CartProvider, useCart } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
@@ -59,13 +51,6 @@ const PublicRoutes = () => {
           <Route path="/faq" element={<Navigate to="/" replace />} />
           <Route path="/app" element={<UnderConstruction />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          {/* Admin login (for staff only) — customers never need to authenticate */}
-          <Route path="/login" element={<Login />} />
-          {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
-          <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </motion.div>
@@ -84,43 +69,19 @@ const GlobalOverlays = () => {
   );
 };
 
-const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError } = useAuth();
-
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return <BrandedLoader text="loading something sweet..." />;
-  }
-
-  // Site is publicly accessible — only block for critical non-auth errors
-  if (authError && authError.type !== 'auth_required') {
-    return (
-      <CartProvider>
-        <PublicRoutes />
-        <GlobalOverlays />
-      </CartProvider>
-    );
-  }
-
-  return (
-    <CartProvider>
-      <PublicRoutes />
-      <GlobalOverlays />
-    </CartProvider>
-  );
-};
-
 function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <ScrollProgressBar />
-          <ScrollToTop />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
+    <>
+      <Router>
+        <ScrollProgressBar />
+        <ScrollToTop />
+        <CartProvider>
+          <PublicRoutes />
+          <GlobalOverlays />
+        </CartProvider>
+      </Router>
+      <Toaster />
+    </>
   )
 }
 

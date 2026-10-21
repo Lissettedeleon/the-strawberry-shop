@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { base44 } from "@/api/base44Client";
+import { emailShop } from "@/lib/emailShop";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/lib/CartContext";
 import { TAX_RATE } from "@/lib/itemConfigs";
-import { ArrowLeft, ChevronDown, ChevronUp, ShoppingBag, Store, Truck } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Mail, ShoppingBag, Store, Truck } from "lucide-react";
 
 const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
 export default function Checkout() {
   const { items, subtotal, clearCart, fulfillmentType, setFulfillmentType } = useCart();
   const navigate = useNavigate();
-  const [placing, setPlacing] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,40 +25,63 @@ export default function Checkout() {
   const isDelivery = fulfillmentType === "delivery";
   const canPlaceOrder = firstName && lastName && email && (!isDelivery || deliveryAddress.street);
 
-  const handlePlaceOrder = async () => {
-    setPlacing(true);
-    try {
-      // NOTE: No live payment processing yet — orders are recorded for pickup only.
-      // This will connect to Toast Payments once that POS integration is approved and live.
-      // Cryptographically random so the order number in the confirmation URL
-      // can't be brute-forced (it's the proof-of-ownership for getOrderReceipt).
-      const randomHex = Array.from(crypto.getRandomValues(new Uint8Array(8)))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("")
-        .toUpperCase();
-      const orderNumber = "ORD-" + randomHex;
-      const customerName = `${firstName} ${lastName}`.trim();
-      const order = await base44.entities.Order.create({
-        customer_name: customerName,
-        customer_email: email,
-        customer_phone: phone,
-        fulfillment_type: fulfillmentType,
-        delivery_address: isDelivery ? deliveryAddress : undefined,
-        items,
-        subtotal,
-        tax,
-        total,
-        reward_applied: false,
-        reward_discount: 0,
-        order_number: orderNumber,
-      });
-      clearCart();
-      navigate(`/order-confirmation?order=${order.id}&number=${orderNumber}`);
-    } catch {
-      // silent
-    }
-    setPlacing(false);
+  const [sent, setSent] = useState(false);
+
+  // No online payments or order database: the order is sent to the shop by
+  // email from the customer's own email app, and paid at pickup.
+  const handlePlaceOrder = () => {
+    const itemLines = items.flatMap((item) => {
+      const qty = item.quantity || 1;
+      const lineTotal = ((item.base_price || 0) + (item.extras_total || 0)) * qty;
+      return [
+        `${qty} x ${item.name} - $${lineTotal.toFixed(2)}`,
+        item.removed_ingredients?.length > 0 && `   No: ${item.removed_ingredients.join(", ")}`,
+        item.base_selection && `   Base: ${item.base_selection}`,
+        item.chocolate_selections?.length > 0 && `   Chocolates: ${item.chocolate_selections.join(", ")}`,
+        item.selected_toppings?.length > 0 && `   Toppings: ${item.selected_toppings.join(", ")}`,
+        item.selected_choc_toppings?.length > 0 && `   Toppings: ${item.selected_choc_toppings.join(", ")}`,
+        item.selected_sauces?.length > 0 && `   Sauces: ${item.selected_sauces.join(", ")}`,
+        item.extras?.length > 0 && `   Extras: ${item.extras.join(", ")}`,
+        item.special_instructions && `   Note: ${item.special_instructions}`,
+      ];
+    });
+    emailShop(`Order request - ${firstName} ${lastName}`.trim(), [
+      `Name: ${firstName} ${lastName}`.trim(),
+      `Email: ${email}`,
+      phone && `Phone: ${phone}`,
+      `Pickup or delivery: ${isDelivery ? "Delivery" : "Pickup"}`,
+      isDelivery && `Address: ${[deliveryAddress.street, deliveryAddress.city, deliveryAddress.zip].filter(Boolean).join(", ")}`,
+      "",
+      ...itemLines,
+      "",
+      `Subtotal: $${subtotal.toFixed(2)}`,
+      `Tax: $${tax.toFixed(2)}`,
+      `Total: $${total.toFixed(2)}`,
+    ]);
+    clearCart();
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="min-h-screen" style={{ background: "#FDEEF5" }}>
+        <Navbar />
+        <div className="max-w-lg mx-auto px-4 py-20 text-center">
+          <div className="w-20 h-20 rounded-full bg-[#B4C84C] flex items-center justify-center mx-auto mb-5">
+            <Mail className="w-9 h-9 text-white" />
+          </div>
+          <h1 className="font-body font-bold text-[#1a1a1a] text-3xl mb-3">Almost done!</h1>
+          <p className="font-body text-[#6b4a52] text-base leading-relaxed mb-8">
+            Your email app opened with your order filled in. Press <strong>send</strong> and we'll reply to confirm it. You'll pay when you pick it up.
+          </p>
+          <button onClick={() => navigate("/menu")} className="bg-[#E61F3F] text-white font-body font-bold px-8 py-3.5 rounded-full min-h-[48px] hover:bg-[#C4112F] transition-colors">
+            Back to Menu
+          </button>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -207,11 +229,14 @@ export default function Checkout() {
 
           <button
             onClick={handlePlaceOrder}
-            disabled={placing || !canPlaceOrder}
+            disabled={!canPlaceOrder}
             className="w-full bg-[#E61F3F] text-white font-body font-bold py-4 rounded-full min-h-[52px] hover:bg-[#C4112F] transition-colors disabled:opacity-50 active:scale-95 text-base"
           >
-            {placing ? "Placing Order..." : `Place Order — $${total.toFixed(2)}`}
+            Send Order by Email — ${total.toFixed(2)}
           </button>
+          <p className="text-center font-body text-xs text-[#6b7280] -mt-1">
+            Opens your email app. No payment is taken online; you pay at pickup.
+          </p>
 
           <button onClick={() => navigate("/menu")} className="w-full text-center font-body text-sm text-[#6b7280] hover:text-[#E61F3F] transition-colors flex items-center justify-center gap-1 py-1 min-h-[44px]">
             <ArrowLeft size={14} /> Back to Menu

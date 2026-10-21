@@ -1,24 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { base44 } from "@/api/base44Client";
+import { reviews as savedReviews } from "@/data/content";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const FALLBACK = [
-  { name: "Sarah M.", rating: 5, quote: "Best strawberry dessert I've ever had! The OG cup is perfection — simple but you can taste the quality." },
-  { name: "Marcus T.", rating: 5, quote: "The Dubai cup is worth every penny. The pistachio cream with chocolate drizzle is INSANE. Already ordered twice this week." },
-  { name: "Priya K.", rating: 5, quote: "Finally a dessert spot that delivers on the hype! Fresh berries, real cream, and the Biscoff cup is addictive." },
-];
-
 export default function ReviewCarousel() {
-  const [reviews, setReviews] = useState(FALLBACK);
+  const reviews = savedReviews;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    base44.entities.Review.filter({ is_active: true }, "sort_order", 30)
-      .then(res => { if (res.length > 0) setReviews(res); })
-      .catch(() => {});
-  }, []);
 
   const next = useCallback(() => setIndex(i => (i + 1) % reviews.length), [reviews.length]);
   const prev = () => setIndex(i => (i - 1 + reviews.length) % reviews.length);

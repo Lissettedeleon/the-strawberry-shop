@@ -10,19 +10,18 @@ const SECTIONS = [
   {
     title: "What we collect",
     body: [
-      "We only collect what you choose to give us through this website:",
+      "This website doesn't keep a database. When you send an order or a request, it goes to us as an email from your own email app, and it includes only what you typed:",
     ],
     list: [
       "Orders: your name, email, phone number (optional), what you ordered and, for delivery, your address.",
       "Catering requests: your name, email, phone number, event details and event address.",
       "Gift cards: your name and email, and the recipient's name and email.",
-      "Feedback: how you heard about us and any rating you give.",
     ],
   },
   {
     title: "How we use it",
     body: [
-      "We use your information to prepare your order, reply to your catering request, send gift cards, and contact you about any of these. We read feedback to improve the shop.",
+      "We use your information to prepare your order, reply to your catering request, send gift cards, and contact you about any of these.",
       "We do not sell your information, and we don't use it for advertising.",
     ],
   },
@@ -35,7 +34,7 @@ const SECTIONS = [
   {
     title: "Who else sees it",
     body: [
-      "Your information is stored with the companies that host this website and send its emails, only so the site can work. We may also share it if the law requires us to.",
+      "Your email reaches us through your email provider and ours. We don't share it with anyone else unless the law requires us to.",
     ],
   },
   {
