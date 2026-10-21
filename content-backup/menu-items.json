@@ -1,0 +1,260 @@
+[
+  {
+    "name": "The St. Pete's",
+    "price": 12.5,
+    "category": "Specials",
+    "description": "Crunchy pretzels, brownie bites, Nutella, dulce de leche, our house cream & fresh strawberries",
+    "photo": "photos/bbaecdb07_01_The_St_Petes.jpg",
+    "sort_order": 1,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Gluten-Containing",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Biscoff",
+    "price": 12.5,
+    "category": "Specials",
+    "description": "Fresh strawberries and cream topped with crunchy Biscoff cookie crumbs and drizzled with creamy Biscoff sauce",
+    "photo": "photos/6ee9f8121_02_Biscoff.jpg",
+    "sort_order": 2,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Gluten-Containing",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Summer Peach",
+    "price": 12.75,
+    "category": "Specials",
+    "description": "",
+    "photo": "photos/f55ac3f24_item-1600000004069624317_1782862471.jpg",
+    "sort_order": 3,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": []
+  },
+  {
+    "name": "OG",
+    "price": 8.75,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries layered with our signature house cream",
+    "photo": "photos/ef2533429_03_OG.jpg",
+    "sort_order": 1,
+    "is_featured": true,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Matcha",
+    "price": 9.5,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries with house matcha cream and house cream, topped with matcha powder",
+    "photo": "photos/afdcee50d_04_Matcha.jpg",
+    "sort_order": 2,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Tres Leches",
+    "price": 12.75,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries with house cream, tres leches cake bites, and a drizzle of Nutella",
+    "photo": "photos/823d4c2f1_05_Tres_Leches.jpg",
+    "sort_order": 3,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Gluten-Containing",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Brownie",
+    "price": 11.99,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries with house cream, Nutella, dulce de leche, and brownie bites",
+    "photo": "photos/5c911c51f_06_Brownie.jpg",
+    "sort_order": 4,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Gluten-Containing",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Oreo",
+    "price": 10.99,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries with house cream, Nutella, Oreo bites, topped with crushed Oreos",
+    "photo": "photos/80ff08aee_07_Oreo.jpg",
+    "sort_order": 5,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Gluten-Containing",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Dubai",
+    "price": 14.5,
+    "category": "Our Berry Best Cups",
+    "description": "Fresh strawberries with crunchy pistachio cream, kataifi, Nutella, and chocolate sauce",
+    "photo": "photos/1a16d72f1_08_Dubai.jpg",
+    "sort_order": 6,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Belgian Milk Chocolate",
+    "price": 11.5,
+    "category": "Chocolate Covered Strawberries",
+    "description": "Fresh strawberries bathed in warm Belgian chocolate that stays soft",
+    "photo": "photos/35e933e09_09_Belgian_Milk_Chocolate_Strawberries.jpg",
+    "sort_order": 1,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Belgian White Chocolate",
+    "price": 11.5,
+    "category": "Chocolate Covered Strawberries",
+    "description": "Fresh strawberries bathed in warm Belgian chocolate that stays soft",
+    "photo": "photos/64ef269d0_10_Belgian_White_Chocolate_Strawberries.jpg",
+    "sort_order": 2,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Belgian Dark Chocolate",
+    "price": 11.5,
+    "category": "Chocolate Covered Strawberries",
+    "description": "",
+    "photo": "photos/b9144375d_11_Belgian_Dark_Chocolate_Strawberries.jpg",
+    "sort_order": 3,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Half & Half",
+    "price": 11.5,
+    "category": "Chocolate Covered Strawberries",
+    "description": "Fresh strawberries bathed in two warm chocolates of your choice, that stays soft",
+    "photo": "photos/4fd571d31_12_Half_and_Half_Chocolate_Strawberries.jpg",
+    "sort_order": 4,
+    "is_featured": true,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Cup of Strawberries",
+    "price": 6,
+    "category": "Others",
+    "description": "",
+    "photo": "photos/0225239fd_13_Cup_of_Strawberries.jpg",
+    "sort_order": 1,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Strawberries & Nutella",
+    "price": 7.75,
+    "category": "Others",
+    "description": "",
+    "photo": "photos/0343af6e6_14_Strawberries_and_Nutella.jpg",
+    "sort_order": 2,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Nuts",
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  },
+  {
+    "name": "Water",
+    "price": 2,
+    "category": "Others",
+    "description": "",
+    "photo": null,
+    "sort_order": 3,
+    "is_featured": false,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": []
+  },
+  {
+    "name": "Build Your Own Cup",
+    "price": 12.5,
+    "category": "Build Your Own Cup",
+    "description": "Create your perfect cup! Start with your favorite base, choose up to 2 toppings and 2 sauces to finish it off",
+    "photo": "photos/b957bf6c3_image.png",
+    "sort_order": 1,
+    "is_featured": true,
+    "is_sold_out": false,
+    "is_seasonal": false,
+    "allergens": [
+      "Contains Dairy",
+      "Vegetarian"
+    ]
+  }
+]

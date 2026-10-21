@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Do you offer catering and what's the minimum?",
+    "answer": "Yes! We love catering events of all sizes. We ask for at least 48 hours notice, with a minimum of 20 cups or 3 dozen chocolate-covered strawberries. Head to our Contact page and fill out the catering form to get started.",
+    "sort_order": 1
+  },
+  {
+    "question": "What payment types do you accept?",
+    "answer": "We accept all major credit and debit cards, Apple Pay, Google Pay, and cash in-store. Online orders through Toast, Uber Eats, and DoorDash accept their supported payment methods.",
+    "sort_order": 2
+  },
+  {
+    "question": "How long do pickup orders take?",
+    "answer": "Most orders are made fresh and ready in 15–20 minutes. During busy weekends it may take a little longer — we'll always have it ready as fast as we can!",
+    "sort_order": 3
+  },
+  {
+    "question": "Do your products contain allergens?",
+    "answer": "Many of our items contain dairy, nuts, and gluten. Each menu item is labeled with allergen tags, but please let us know about any allergies when ordering. Our items are prepared in a shared kitchen, so we can't guarantee against cross-contact.",
+    "sort_order": 4
+  },
+  {
+    "question": "What is your cancellation and refund policy?",
+    "answer": "Because everything is made fresh to order, we can only cancel or adjust orders before preparation begins. For catering, cancellations made at least 24 hours in advance are fully refundable. Reach out right away if something needs to change.",
+    "sort_order": 5
+  }
+]

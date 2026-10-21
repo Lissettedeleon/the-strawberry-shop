@@ -1,0 +1,42 @@
+[
+  {
+    "photo": "photos/bbaecdb07_01_The_St_Petes.jpg",
+    "caption": "The St. Pete's",
+    "sort_order": 1
+  },
+  {
+    "photo": "photos/6ee9f8121_02_Biscoff.jpg",
+    "caption": "Biscoff cup",
+    "sort_order": 2
+  },
+  {
+    "photo": "photos/1a16d72f1_08_Dubai.jpg",
+    "caption": "The Dubai",
+    "sort_order": 3
+  },
+  {
+    "photo": "photos/80ff08aee_07_Oreo.jpg",
+    "caption": "Oreo cup",
+    "sort_order": 4
+  },
+  {
+    "photo": "photos/35e933e09_09_Belgian_Milk_Chocolate_Strawberries.jpg",
+    "caption": "Belgian milk chocolate strawberries",
+    "sort_order": 5
+  },
+  {
+    "photo": "photos/823d4c2f1_05_Tres_Leches.jpg",
+    "caption": "Tres leches cup",
+    "sort_order": 6
+  },
+  {
+    "photo": "photos/0343af6e6_14_Strawberries_and_Nutella.jpg",
+    "caption": "Strawberries & Nutella",
+    "sort_order": 7
+  },
+  {
+    "photo": "photos/0225239fd_13_Cup_of_Strawberries.jpg",
+    "caption": "Fresh cup of strawberries",
+    "sort_order": 8
+  }
+]
