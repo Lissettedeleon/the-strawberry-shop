@@ -44,6 +44,8 @@ export default function Footer() {
         <div className="mt-8 pt-6 border-t border-[#F8CCE1] text-center">
           <p className="text-[11px] text-[#6b7280] font-body">
             © {new Date().getFullYear()} The Strawberry Shop. All rights reserved.
+            {" · "}
+            <Link to="/privacy" className="hover:text-[#E61F3F] underline-offset-2 hover:underline">Privacy</Link>
           </p>
         </div>
       </div>

@@ -19,6 +19,7 @@ import Reviews from '@/pages/Reviews';
 import GiftCards from '@/pages/GiftCards';
 import Catering from '@/pages/Catering';
 import Rewards from '@/pages/Rewards';
+import Privacy from '@/pages/Privacy';
 import UnderConstruction from '@/pages/UnderConstruction';
 import Checkout from '@/pages/Checkout';
 import OrderConfirmation from '@/pages/OrderConfirmation';
@@ -53,6 +54,7 @@ const PublicRoutes = () => {
           <Route path="/gift-cards" element={<GiftCards />} />
           <Route path="/catering" element={<Catering />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/contact" element={<Navigate to="/catering" replace />} />
           <Route path="/faq" element={<Navigate to="/" replace />} />
           <Route path="/app" element={<UnderConstruction />} />

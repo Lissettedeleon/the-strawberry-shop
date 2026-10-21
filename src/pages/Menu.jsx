@@ -23,10 +23,6 @@ const CATEGORIES = [
 const BUILD_YOUR_OWN = "Build Your Own Cup";
 
 
-const DELIVERY_FEE = "$3.99";
-const DELIVERY_TIME = "35–45 min";
-const DELIVERY_MINIMUM = "$15.00";
-
 export default function Menu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,18 +97,6 @@ export default function Menu() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-2xl flex flex-col items-center gap-3">
           
-            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 bg-white rounded-2xl px-6 py-3 shadow-sm">
-              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
-                Delivery fee: <span className="text-[#7a6469] font-bold">{DELIVERY_FEE}</span>
-              </span>
-              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
-                Estimated time: <span className="text-[#7a6469] font-bold">{DELIVERY_TIME}</span>
-              </span>
-              <span className="font-body font-extrabold text-[#E61F3F] text-xs">
-                Minimum order: <span className="text-[#7a6469] font-bold">{DELIVERY_MINIMUM}</span>
-              </span>
-            </div>
-
             <div className="flex flex-wrap items-center justify-center gap-2">
               <span className="font-body text-[#6b4a52] text-xs font-bold">Order delivery through:</span>
               <span className="inline-flex items-center gap-1.5 bg-[#E61F3F] text-white font-body font-bold text-xs px-3 py-1.5 rounded-full">
