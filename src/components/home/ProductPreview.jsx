@@ -47,21 +47,11 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        {/* Phones: the cards glide slowly sideways in a loop (paused while
-            touched). The track holds two copies, each card spaced with a right
-            margin (not gap) so each copy is exactly half the track and the
-            -50% loop is seamless. */}
-        <div className="sm:hidden -mx-4 overflow-hidden fav-marquee">
-          <div className="fav-marquee-track flex w-max">
-            {[...cards, ...cards].map((card, i) => (
-              <FavoriteCard
-                key={`${card.name}-${i}`}
-                card={card}
-                className="w-[55vw] shrink-0 mr-3"
-                aria-hidden={i >= cards.length ? "true" : undefined}
-              />
-            ))}
-          </div>
+        {/* Phones: the cards sit still in a row you can swipe through */}
+        <div className="sm:hidden -mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {cards.map((card) => (
+            <FavoriteCard key={card.name} card={card} className="w-[62vw] shrink-0 snap-center" />
+          ))}
         </div>
 
         {/* Tablet and up: three across */}

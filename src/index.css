@@ -119,23 +119,6 @@
   font-weight: 400;
 }
 
-/* Home Favorites: slow sideways loop on phones */
-@keyframes fav-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.fav-marquee-track {
-  animation: fav-marquee 28s linear infinite;
-}
-.fav-marquee:hover .fav-marquee-track,
-.fav-marquee:active .fav-marquee-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .fav-marquee { overflow-x: auto; }
-  .fav-marquee-track { animation: none; }
-}
-
 /* Gift card: a soft shine sweeps across every few seconds */
 .gift-shine::after {
   content: "";

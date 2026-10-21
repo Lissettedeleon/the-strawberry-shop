@@ -129,11 +129,7 @@ export default function GiftCards() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <GiftCardVisual
-              amount={finalAmount}
-              recipientName={form.recipient_name}
-              senderName={form.sender_name}
-            />
+            <GiftCardVisual />
           </motion.div>
         </div>
       </section>
