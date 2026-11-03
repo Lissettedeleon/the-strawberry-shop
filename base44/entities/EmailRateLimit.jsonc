@@ -4,15 +4,28 @@
   "properties": {
     "rate_key": {
       "type": "string",
-      "description": "IP address used as the rate-limit key"
+      "description": "Key the attempts are counted against (IP, email, user id or a global key)"
     },
     "last_sent": {
       "type": "string",
       "format": "date-time",
-      "description": "Timestamp of the last email sent for this key"
+      "description": "Timestamp of the last action for this key"
+    },
+    "attempts": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of actions counted in the current window"
+    },
+    "window_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the current counting window started"
     }
   },
-  "required": ["rate_key", "last_sent"],
+  "required": [
+    "rate_key",
+    "last_sent"
+  ],
   "rls": {
     "create": {
       "user_condition": {
