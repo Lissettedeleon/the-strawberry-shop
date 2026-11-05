@@ -1,6 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
-
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // one send per IP per minute
+import { checkRateLimit } from '../../shared/rateLimit.ts';
 
 Deno.serve(async (req) => {
   try {
@@ -25,21 +24,18 @@ Deno.serve(async (req) => {
       return Response.json({ error: "Input too long" }, { status: 400 });
     }
 
-    // Use a single global rate key instead of the client-supplied
-    // x-forwarded-for header, which can be spoofed to bypass per-IP limits.
-    const rateKey = "global_contact_email";
+    // Throttle per sender address (so one person can't flood the shop) plus a
+    // looser global hourly cap. The client-supplied x-forwarded-for header is
+    // not used because it can be spoofed to bypass per-IP limits.
+    const senderKey = `contact:${String(email).trim().toLowerCase()}`;
+    const senderAllowed = await checkRateLimit(base44, senderKey, 2, 10 * 60 * 1000);
+    if (!senderAllowed) {
+      return Response.json({ error: "Too many requests. Please wait a moment and try again." }, { status: 429 });
+    }
 
-    const now = new Date();
-    const recent = await base44.asServiceRole.entities.EmailRateLimit.filter({ rate_key: rateKey }, "-last_sent", 1);
-
-    if (recent.length > 0) {
-      const lastSent = new Date(recent[0].last_sent);
-      if (now.getTime() - lastSent.getTime() < RATE_LIMIT_WINDOW_MS) {
-        return Response.json({ error: "Too many requests. Please wait a moment and try again." }, { status: 429 });
-      }
-      await base44.asServiceRole.entities.EmailRateLimit.update(recent[0].id, { last_sent: now.toISOString() });
-    } else {
-      await base44.asServiceRole.entities.EmailRateLimit.create({ rate_key: rateKey, last_sent: now.toISOString() });
+    const globalAllowed = await checkRateLimit(base44, "global_contact_email", 20, 60 * 60 * 1000);
+    if (!globalAllowed) {
+      return Response.json({ error: "Too many requests. Please wait a moment and try again." }, { status: 429 });
     }
 
     const label = type === "catering" ? "Catering Request" : "Contact Message";

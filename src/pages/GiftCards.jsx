@@ -13,13 +13,6 @@ const AMOUNTS = [25, 50, 75, 100];
 
 const inputClass = "w-full bg-white border border-[#F4B3D0] rounded-2xl px-4 py-3 font-body text-[15px] text-[#1a1a1a] placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#E61F3F]/30 focus:border-[#E61F3F] transition-all min-h-[48px]";
 
-function generateCode() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "SB-";
-  for (let i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
-  return code;
-}
-
 export default function GiftCards() {
   const [amount, setAmount] = useState(50);
   const [customAmount, setCustomAmount] = useState("");
@@ -38,15 +31,12 @@ export default function GiftCards() {
     setStatus("sending");
     setErrorMsg("");
     try {
-      const newCode = generateCode();
-      await base44.entities.GiftCard.create({
+      // The code, amount and pending status are set by the server, not here.
+      const response = await base44.functions.invoke("createGiftCard", {
         ...form,
         amount: finalAmount,
-        balance: finalAmount,
-        code: newCode,
-        status: "Pending Payment",
       });
-      setCode(newCode);
+      setCode(response.data.code);
       setStatus("done");
       setFeedbackOpen(true);
     } catch {

@@ -20,6 +20,7 @@ export default function Checkout() {
   const [phone, setPhone] = useState("");
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState({ street: "", city: "", zip: "" });
+  const [orderError, setOrderError] = useState("");
 
   const tax = subtotal * TAX_RATE;
   const total = subtotal + tax;
@@ -28,35 +29,24 @@ export default function Checkout() {
 
   const handlePlaceOrder = async () => {
     setPlacing(true);
+    setOrderError("");
     try {
       // NOTE: No live payment processing yet — orders are recorded for pickup only.
       // This will connect to Toast Payments once that POS integration is approved and live.
-      // Cryptographically random so the order number in the confirmation URL
-      // can't be brute-forced (it's the proof-of-ownership for getOrderReceipt).
-      const randomHex = Array.from(crypto.getRandomValues(new Uint8Array(8)))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("")
-        .toUpperCase();
-      const orderNumber = "ORD-" + randomHex;
-      const customerName = `${firstName} ${lastName}`.trim();
-      const order = await base44.entities.Order.create({
-        customer_name: customerName,
+      // The server re-prices the cart from the menu and creates the order number.
+      const response = await base44.functions.invoke("createOrder", {
+        customer_name: `${firstName} ${lastName}`.trim(),
         customer_email: email,
         customer_phone: phone,
         fulfillment_type: fulfillmentType,
-        delivery_address: isDelivery ? deliveryAddress : undefined,
+        delivery_address: isDelivery ? deliveryAddress : null,
         items,
-        subtotal,
-        tax,
-        total,
-        reward_applied: false,
-        reward_discount: 0,
-        order_number: orderNumber,
       });
+      const order = response.data;
       clearCart();
-      navigate(`/order-confirmation?order=${order.id}&number=${orderNumber}`);
+      navigate(`/order-confirmation?order=${order.id}&number=${order.order_number}`);
     } catch {
-      // silent
+      setOrderError("We couldn't place your order. Please check your items and try again.");
     }
     setPlacing(false);
   };
@@ -204,6 +194,12 @@ export default function Checkout() {
               <span className="font-body font-extrabold text-[#E61F3F] text-xl">${total.toFixed(2)}</span>
             </div>
           </div>
+
+          {orderError && (
+            <div className="bg-[#F8CCE1] border border-[#F4B3D0] rounded-xl px-4 py-3">
+              <p className="text-[#C4112F] font-body text-sm">{orderError}</p>
+            </div>
+          )}
 
           <button
             onClick={handlePlaceOrder}

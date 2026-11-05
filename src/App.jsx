@@ -24,7 +24,6 @@ import UnderConstruction from '@/pages/UnderConstruction';
 import Checkout from '@/pages/Checkout';
 import OrderConfirmation from '@/pages/OrderConfirmation';
 import AdminDashboard from '@/pages/AdminDashboard';
-import Login from '@/pages/Login';
 
 import { CartProvider, useCart } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
@@ -60,8 +59,6 @@ const PublicRoutes = () => {
           <Route path="/app" element={<UnderConstruction />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          {/* Admin login (for staff only) — customers never need to authenticate */}
-          <Route path="/login" element={<Login />} />
           {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />

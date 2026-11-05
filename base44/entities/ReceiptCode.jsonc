@@ -23,6 +23,10 @@
       "type": "string",
       "description": "User ID of who claimed it"
     },
+    "claim_token": {
+      "type": "string",
+      "description": "Random token written by the request that won the claim, used to verify the code was claimed exactly once"
+    },
     "expires_at": {
       "type": "string",
       "format": "date",

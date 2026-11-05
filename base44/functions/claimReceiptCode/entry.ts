@@ -1,25 +1,36 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.31';
+import { checkRateLimit } from '../../shared/rateLimit.ts';
 
-Deno.serve(async (req) => {
+const MAX_ATTEMPTS = 10;
+const WINDOW_MS = 10 * 60 * 1000;
+
+export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
 
     // Require login before touching any receipt code data
-    const user = await base44.auth.me().catch(() => null);
+    const user = await base44.auth.me().catch((e) => (e.status === 401 ? null : Promise.reject(e)));
     if (!user) {
       return Response.json({ success: false, error: "not_authenticated" }, { status: 401 });
     }
 
-    const { code } = await req.json();
+    // Throttle attempts per account so receipt codes can't be brute-forced.
+    const allowed = await checkRateLimit(base44, `claim:${user.id}`, MAX_ATTEMPTS, WINDOW_MS);
+    if (!allowed) {
+      return Response.json({ success: false, error: "too_many_attempts" }, { status: 429 });
+    }
 
-    if (!code) {
+    const body = await req.json().catch(() => ({}));
+    const code = typeof body.code === "string" ? body.code.trim() : "";
+
+    if (!code || code.length > 40 || !/^[A-Za-z0-9-]+$/.test(code)) {
       return Response.json({ success: false }, { status: 400 });
     }
 
     // Find active, unexpired code
-    const codes = await base44.asServiceRole.entities.ReceiptCode.filter({ code, status: "Active" }, "", 1);
+    const codes = await base44.asServiceRole.entities.ReceiptCode.filter({ code, status: "Active" }, "-created_date", 1);
 
-    if (codes.length === 0) {
+    if (!codes || codes.length === 0) {
       return Response.json({ success: false });
     }
 
@@ -28,15 +39,26 @@ Deno.serve(async (req) => {
     const expiresAt = found.expires_at ? new Date(found.expires_at) : null;
 
     if (expiresAt && now > expiresAt) {
-      await base44.asServiceRole.entities.ReceiptCode.update(found.id, { status: "Expired" });
+      await base44.asServiceRole.entities.ReceiptCode.updateMany(
+        { id: found.id, status: "Active" },
+        { $set: { status: "Expired" } }
+      );
       return Response.json({ success: false });
     }
 
-    // Mark as claimed
-    await base44.asServiceRole.entities.ReceiptCode.update(found.id, {
-      status: "Claimed",
-      claimed_by: user.id,
-    });
+    // Claim atomically: the update only matches while the code is still Active,
+    // and this request writes its own random token. Reading the token back proves
+    // this request won the race, so simultaneous duplicates can't each earn points.
+    const claimToken = crypto.randomUUID();
+    await base44.asServiceRole.entities.ReceiptCode.updateMany(
+      { id: found.id, status: "Active" },
+      { $set: { status: "Claimed", claimed_by: user.id, claim_token: claimToken } }
+    );
+
+    const claimed = await base44.asServiceRole.entities.ReceiptCode.get(found.id).catch(() => null);
+    if (!claimed || claimed.claim_token !== claimToken) {
+      return Response.json({ success: false, error: "already_claimed" });
+    }
 
     // Points = 1 point per $1
     const points = Math.floor(found.amount);
@@ -57,4 +79,4 @@ Deno.serve(async (req) => {
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
-});
+}
