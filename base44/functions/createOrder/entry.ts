@@ -75,6 +75,7 @@ export default async function (req) {
       total: priced.total,
     });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return Response.json({ error: "server_error" }, { status: 500 });
   }
 }

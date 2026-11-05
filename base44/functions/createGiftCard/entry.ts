@@ -55,6 +55,7 @@ export default async function (req) {
 
     return Response.json({ code: card.code, amount: giftAmount });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return Response.json({ error: "server_error" }, { status: 500 });
   }
 }

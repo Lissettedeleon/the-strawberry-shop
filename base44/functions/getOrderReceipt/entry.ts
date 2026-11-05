@@ -22,6 +22,7 @@ Deno.serve(async (req) => {
 
     return Response.json({ order });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return Response.json({ error: "server_error" }, { status: 500 });
   }
 });

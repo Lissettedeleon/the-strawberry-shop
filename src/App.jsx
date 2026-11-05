@@ -8,7 +8,6 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import BrandedLoader from './components/BrandedLoader';
-import AdminRoute from '@/components/AdminRoute';
 import { EASE_OUT_STRONG } from '@/lib/motion';
 
 import Home from '@/pages/Home';
@@ -23,7 +22,6 @@ import Privacy from '@/pages/Privacy';
 import UnderConstruction from '@/pages/UnderConstruction';
 import Checkout from '@/pages/Checkout';
 import OrderConfirmation from '@/pages/OrderConfirmation';
-import AdminDashboard from '@/pages/AdminDashboard';
 
 import { CartProvider, useCart } from '@/lib/CartContext';
 import CartDrawer from '@/components/CartDrawer';
@@ -59,10 +57,6 @@ const PublicRoutes = () => {
           <Route path="/app" element={<UnderConstruction />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          {/* Admin dashboard — admin-only, guarded at the route level + RLS server-side */}
-          <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </motion.div>
